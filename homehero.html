@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPÒK | Enter Your Era</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #000;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-family: Arial, sans-serif;
+        }
+
+        /* CREST */
+        #intro-crest {
+            width: 220px;
+            max-width: 60vw;
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.8));
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            position: absolute;
+        }
+
+        /* CLICK HERE text */
+        #click-here {
+            position: absolute;
+            top: calc(50% + 150px);
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1rem;
+            letter-spacing: 0.25em;
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Heartbeat pulse */
+        .heartbeat {
+            animation: heartbeatPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes heartbeatPulse {
+            0%   { transform: translate(-50%, -50%) scale(1.0); }
+            30%  { transform: translate(-50%, -50%) scale(1.18); }
+            60%  { transform: translate(-50%, -50%) scale(1.02); }
+            100% { transform: translate(-50%, -50%) scale(1.0); }
+        }
+
+        /* Black fade after heartbeat */
+        #fade-screen {
+            position: fixed;
+            inset: 0;
+            background: black;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s ease;
+            z-index: 50;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Crest -->
+    <img id="intro-crest" src="assets/images/crest1.png" alt="EPÒK Crest">
+
+    <!-- CLICK HERE -->
+    <div id="click-here">CLICK HERE</div>
+
+    <!-- Fade overlay -->
+    <div id="fade-screen"></div>
+
+    <!-- Heartbeat Audio -->
+    <audio id="heartbeat-audio" src="assets/images/Heartbeat.mp3"></audio>
+
+<script>
+    const crest = document.getElementById("intro-crest");
+    const clickHere = document.getElementById("click-here");
+    const fadeScreen = document.getElementById("fade-screen");
+    const heartbeat = document.getElementById("heartbeat-audio");
+
+    let started = false;
+
+    function startIntro() {
+        if (started) return;
+        started = true;
+
+        clickHere.style.opacity = 0;
+
+        // Add heartbeat pulse
+        crest.classList.add("heartbeat");
+
+        // Play heartbeat sound
+        heartbeat.currentTime = 0;
+        heartbeat.play().catch(()=>{});
+
+        // After 5 seconds fade out and switch page
+        setTimeout(() => {
+            crest.style.opacity = 0;
+
+            fadeScreen.style.opacity = 1;  // smooth fade to black
+
+            setTimeout(() => {
+                window.location.href = "homehero.html"; 
+            }, 1200);
+
+        }, 5000);
+    }
+
+    crest.addEventListener("click", startIntro);
+    clickHere.addEventListener("click", startIntro);
+</script>
+
+</body>
+</html>
