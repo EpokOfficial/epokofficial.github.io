@@ -22,6 +22,27 @@
         z-index:1;
     }
 
+    /* ===== HERO CHARACTER (transparent PNG) ===== */
+    #hero-character {
+        position:fixed;
+        bottom:0;
+        right:0;
+        width:45vw;   /* responsive */
+        max-width:500px;
+        opacity:0;
+        pointer-events:none;
+        z-index:3;
+        transition:opacity 1.6s ease;
+        animation:charDrift 18s ease-in-out infinite alternate;
+    }
+
+    /* cinematic drift motion */
+    @keyframes charDrift {
+        0%   { transform:translate(0, 0) scale(1); }
+        50%  { transform:translate(-8px, -6px) scale(1.03); }
+        100% { transform:translate(5px, 4px) scale(1.02); }
+    }
+
     /* ===== INTRO CREST ===== */
     #intro-crest {
         position:fixed;
@@ -66,16 +87,16 @@
     /* ===== ENTER BUTTON ===== */
     #enter-wrap {
         position:fixed;
-        bottom:15px;
-        right:15px;
+        bottom:20px;
+        right:20px;
         text-align:center;
         opacity:0;
         transition:opacity 1s ease;
-        z-index:6;
+        z-index:10;
     }
 
     #enter-button {
-        width:120px;
+        width:130px;
         cursor:pointer;
         transition:transform .3s ease;
         filter:drop-shadow(0 0 12px rgba(0,0,0,.8));
@@ -99,6 +120,9 @@
 <!-- ===== HERO BACKGROUND ===== -->
 <div id="hero-bg"></div>
 
+<!-- ===== HERO CHARACTER (NEW) ===== -->
+<img id="hero-character" src="./images/herocharacter.png">
+
 <!-- ===== CREST ENTRY ===== -->
 <img id="intro-crest" src="./images/crest1.png">
 <div id="click-here">CLICK HERE</div>
@@ -110,12 +134,13 @@
 </div>
 
 <!-- ===== AUDIO ===== -->
-<audio id="heartbeat-audio" src="./music/Heartbeat.mp3">
+<audio id="heartbeat-audio" src="./music/Heartbeat.mp3"></audio>
 
 <script>
 const crest = document.getElementById("intro-crest");
 const clickHere = document.getElementById("click-here");
 const heroBG = document.getElementById("hero-bg");
+const heroChar = document.getElementById("hero-character");
 const enterWrap = document.getElementById("enter-wrap");
 const heartbeat = document.getElementById("heartbeat-audio");
 
@@ -139,6 +164,7 @@ function startSequence() {
         heartbeat.currentTime = 0;
 
         heroBG.style.opacity = "1";
+        heroChar.style.opacity = "1";   // <-- SHOW HERO CHARACTER
 
         setTimeout(() => {
             enterWrap.classList.add("enter-visible");
