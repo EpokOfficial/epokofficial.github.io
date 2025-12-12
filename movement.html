@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPÒK | Movement</title>
+<title>EPòK | Movement</title>
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -11,25 +11,25 @@
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background:#000;
-    color:#f2f2f2;
+    color:#e8e6df;
     overflow-x:hidden;
 }
 
-/* ============ DOUBLE ROYAL FRAME (FULL PAGE) ============ */
+/* ========== DOUBLE ROYAL GOLD FRAME (FULL PAGE) ========== */
 .page-frame-outer {
     min-height:100vh;
-    padding:18px;
+    padding:20px;
     background:#000;
-    border:2px solid rgba(212,175,55,0.65);
+    border:2px solid rgba(212,175,55,0.75);
 }
 
 .page-frame-inner {
     min-height:100vh;
-    padding:60px 6vw 120px;
+    padding:120px 7vw 160px;
     border:1px solid rgba(212,175,55,0.35);
     box-shadow:
         inset 0 0 0 1px rgba(212,175,55,0.18),
-        0 40px 120px rgba(0,0,0,0.95);
+        0 50px 140px rgba(0,0,0,0.98);
     background:#000;
 }
 
@@ -44,10 +44,10 @@ body {
     align-items:center;
     justify-content:space-between;
     padding:0 6vw;
-    background:rgba(0,0,0,0.88);
+    background:rgba(0,0,0,0.92);
     backdrop-filter:blur(10px);
     z-index:1000;
-    border-bottom:1px solid rgba(212,175,55,0.25);
+    border-bottom:1px solid rgba(212,175,55,0.35);
 }
 
 .nav-links {
@@ -69,58 +69,52 @@ body {
 
 /* ================= MANIFESTO ================= */
 .manifesto {
-    max-width:1200px;
+    max-width:1250px;
     margin:0 auto;
-    padding-top:120px;
 }
 
 .manifesto h1 {
-    font-size:2.4rem;
-    letter-spacing:0.16em;
+    font-size:2.6rem;
+    letter-spacing:0.18em;
     text-transform:uppercase;
-    margin-bottom:40px;
-    color:#f5f1e6;
+    margin-bottom:48px;
+    color:#f5f2e8;
 }
 
-/* INLINE, LARGE, WRAPPED ART */
-.manifesto-art {
+/* === INLINE EDITORIAL ART (CORRECT IMPLEMENTATION) === */
+.manifesto img.inline-art {
     float:right;
-    width:560px;
-    max-width:52%;
-    margin:10px 0 32px 48px;
-}
-
-.manifesto-art img {
-    width:100%;
-    height:auto;
-    filter:drop-shadow(0 40px 90px rgba(0,0,0,0.95));
+    width:620px;              /* LARGE */
+    max-width:58%;
+    margin:12px 0 36px 56px;  /* wrap spacing */
+    filter:drop-shadow(0 45px 100px rgba(0,0,0,0.95));
 }
 
 /* TEXT */
 .manifesto p {
     font-size:1rem;
-    line-height:1.8;
-    color:#e1dfd8;
+    line-height:1.9;
+    color:#e3e1da;
     margin-bottom:18px;
 }
 
 /* ================= PHILOSOPHY ================= */
 .philosophy {
-    max-width:900px;
-    margin:140px auto 0;
+    max-width:950px;
+    margin:160px auto 0;
     text-align:center;
 }
 
 .philosophy h2 {
-    font-size:2rem;
-    letter-spacing:0.26em;
+    font-size:2.1rem;
+    letter-spacing:0.28em;
     text-transform:uppercase;
-    margin-bottom:30px;
+    margin-bottom:34px;
     color:#f3d688;
 }
 
 .philosophy p {
-    font-size:0.96rem;
+    font-size:0.97rem;
     line-height:1.7;
     margin-bottom:16px;
     color:#dedad0;
@@ -128,33 +122,33 @@ body {
 
 /* ================= ALBUM ================= */
 .album-section {
-    max-width:900px;
-    margin:150px auto 0;
+    max-width:950px;
+    margin:170px auto 0;
     text-align:center;
 }
 
 .album-section h3 {
     font-size:1.6rem;
-    letter-spacing:0.24em;
+    letter-spacing:0.26em;
     text-transform:uppercase;
-    margin-bottom:28px;
+    margin-bottom:32px;
     color:#f3d688;
 }
 
 .album-cover {
-    max-width:320px;
-    margin:0 auto 30px;
+    max-width:340px;
+    margin:0 auto 34px;
 }
 
 .album-cover img {
     width:100%;
     border-radius:18px;
-    box-shadow:0 28px 70px rgba(0,0,0,0.95);
+    box-shadow:0 32px 80px rgba(0,0,0,0.95);
 }
 
 .album-download {
     display:inline-block;
-    margin-top:12px;
+    margin-top:14px;
     font-size:0.85rem;
     letter-spacing:0.25em;
     text-transform:uppercase;
@@ -166,7 +160,7 @@ body {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width:1000px) {
-    .manifesto-art {
+    .manifesto img.inline-art {
         float:none;
         width:100%;
         max-width:100%;
@@ -198,9 +192,8 @@ body {
 
 <h1>STEP INTO YOUR EPòK</h1>
 
-<div class="manifesto-art">
-    <img src="images/baby.png" alt="EPÒK Movement Art">
-</div>
+<!-- INLINE ART — SAME LAYER AS TEXT -->
+<img src="images/baby.png" alt="EPÒK Movement Art" class="inline-art">
 
 <p>Every era of your life is built on a decision.</p>
 <p>Not every decision is loud.</p>
@@ -289,7 +282,7 @@ body {
 </section>
 
 <section class="album-section" id="epok-album">
-    <h3>THE SOUND OF EPÒK</h3>
+    <h3>THE SOUND OF EPòK</h3>
     <div class="album-cover">
         <img src="images/album.png" alt="EPÒK Album Cover">
     </div>
