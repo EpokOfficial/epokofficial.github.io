@@ -194,7 +194,7 @@ function startSequence() {
     heartbeat.currentTime = 0;
     heartbeat.play().catch(()=>{});
 
-   setTimeout(() => {
+ setTimeout(() => {
     // Stop crest heartbeat + fade away
     crest.classList.remove("heartbeat");
     crest.classList.add("fade-out");
@@ -210,12 +210,7 @@ function startSequence() {
         enterWrap.classList.add("enter-visible");
     }, 1000); // EXACTLY 1 sec after hero appears
 
-}, 5000); // 5 sec heartbeat time
-}
-
-crest.addEventListener("click", startSequence);
-clickHere.addEventListener("click", startSequence);
-
+}, 5000); // 6 sec heartbeat time
 document.getElementById("enter-button").addEventListener("click", () => {
     window.location.href = "index.html";
 });
