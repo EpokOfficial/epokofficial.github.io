@@ -25,7 +25,7 @@ body {
 
 .page-frame-inner {
     min-height:100vh;
-    padding:60px 6vw 120px;
+    padding:80px 6vw 120px;
     border:1px solid rgba(212,175,55,0.35);
     box-shadow:
         inset 0 0 0 1px rgba(212,175,55,0.18),
@@ -67,11 +67,18 @@ body {
     color:#f3d688;
 }
 
-/* ================= MANIFESTO (EMPTY BY DESIGN) ================= */
-.manifesto {
-    max-width:1200px;
+/* ================= EPÒK MESSAGE ART ================= */
+.epok-message {
+    max-width:1100px;          /* large, dominant */
+    margin:140px auto 0;
+    text-align:center;
+}
+
+.epok-message img {
+    width:100%;
+    height:auto;              /* no distortion */
+    display:block;
     margin:0 auto;
-    padding-top:120px;
 }
 
 /* ================= PHILOSOPHY ================= */
@@ -154,18 +161,11 @@ body {
 <div class="page-frame-outer">
 <div class="page-frame-inner">
 
-<section class="manifesto">
-    <!-- STEP INTO YOUR EPÒK CONTENT REMOVED -->
+<!-- UNIFIED EPÒK MESSAGE ART -->
+<section class="epok-message">
+    <img src="images/epokmessage.png" alt="STEP INTO YOUR EPÒK Manifesto">
 </section>
 
-<section class="philosophy">
-    <h2>SURVIVE. RISE. BECOME.</h2>
-    <p><strong>Survive</strong> — because you made it through what was meant to break you.</p>
-    <p><strong>Rise</strong> — because staying down was never an option forever.</p>
-    <p><strong>Become</strong> — because the best version of you is still unfolding.</p>
-    <p>This is EPòK.</p>
-    <p>And this is only the beginning.</p>
-</section>
 
 <section class="album-section" id="epok-album">
     <h3>THE SOUND OF EPÒK</h3>
@@ -182,3 +182,4 @@ body {
 
 </body>
 </html>
+
