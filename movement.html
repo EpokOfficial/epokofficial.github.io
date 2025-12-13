@@ -22,7 +22,7 @@ body {
     background:#000;
     border:2px solid rgba(212,175,55,0.65);
     position:relative;
-    overflow:hidden; /* CLIPS BORDER TEXT */
+    overflow:hidden;
 }
 
 /* LEFT & RIGHT VERTICAL INSCRIPTION */
@@ -40,29 +40,31 @@ body {
     color:#ffffff;
     pointer-events:none;
     white-space:nowrap;
-    overflow:hidden; /* PREVENTS LEAKING */
+    overflow:hidden;
 }
 
-/* LEFT SIDE — PERFECTLY CENTERED + SLOWER */
+/* LEFT SIDE — BOTTOM → TOP (CENTERED + SLOWER) */
 .page-frame-outer::before {
-    left:22px; /* CENTER BETWEEN BORDERS */
-    animation:leftScroll 36s linear infinite;
+    left:50%;
+    transform:translateX(-50%);
+    animation:leftScroll 46s linear infinite;
 }
 
 @keyframes leftScroll {
-    from { transform:translateY(100%); }
-    to   { transform:translateY(-100%); }
+    from { transform:translate(-50%, 100%); }
+    to   { transform:translate(-50%, -100%); }
 }
 
-/* RIGHT SIDE — PERFECTLY CENTERED + SLOWER */
+/* RIGHT SIDE — TOP → BOTTOM (CENTERED + SLOWER) */
 .page-frame-outer::after {
-    right:22px; /* CENTER BETWEEN BORDERS */
-    animation:rightScroll 36s linear infinite;
+    right:50%;
+    transform:translateX(50%);
+    animation:rightScroll 46s linear infinite;
 }
 
 @keyframes rightScroll {
-    from { transform:translateY(-100%); }
-    to   { transform:translateY(100%); }
+    from { transform:translate(50%, -100%); }
+    to   { transform:translate(50%, 100%); }
 }
 
 /* BOTTOM ARABIC INSCRIPTION */
@@ -305,6 +307,7 @@ body {
 
 </body>
 </html>
+
 
 
 </html>
