@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@ body {
 
 .page-frame-inner {
     min-height:100vh;
-    padding:80px 6vw 120px;
+    padding:0 6vw 120px; /* TOP PADDING REMOVED */
     border:1px solid rgba(212,175,55,0.35);
     box-shadow:
         inset 0 0 0 1px rgba(212,175,55,0.18),
@@ -70,24 +72,25 @@ body {
 /* ================= EPÒK MESSAGE PANELS ================= */
 .epok-panel {
     max-width:1600px;
-    margin:60px auto 0; /* REDUCED spacing */
+    margin:0 auto;            /* NO vertical margin */
+    padding-top:32px;         /* controlled spacing */
 }
 
 .epok-panel:first-of-type {
-    margin-top:140px; /* keeps space below nav for first panel */
+    padding-top:120px;        /* ONLY space below nav */
 }
 
 .epok-panel img {
     width:100%;
     height:auto;
-    display:block;
-    margin:0 auto;
+    display:block;            /* removes image gaps */
+    margin:0;
 }
 
 /* ================= PHILOSOPHY ================= */
 .philosophy {
     max-width:900px;
-    margin:160px auto 0;
+    margin:120px auto 0;
     text-align:center;
 }
 
@@ -109,7 +112,7 @@ body {
 /* ================= ALBUM ================= */
 .album-section {
     max-width:900px;
-    margin:150px auto 0;
+    margin:120px auto 0;
     text-align:center;
 }
 
@@ -145,29 +148,25 @@ body {
 }
 
 /* ================= MOBILE OPTIMIZATION ================= */
-@media (max-width: 768px) {
+@media (max-width:768px) {
 
     .page-frame-inner {
-        padding:80px 3vw 100px;
+        padding:0 3vw 100px;
     }
 
     .epok-panel {
         max-width:100%;
-        margin:40px auto 0; /* tighter on mobile */
+        padding-top:24px;
     }
 
     .epok-panel:first-of-type {
-        margin-top:100px;
+        padding-top:96px;
     }
 
-    .philosophy {
-        margin:120px auto 0;
-        padding:0 4vw;
-    }
-
+    .philosophy,
     .album-section {
-        margin:120px auto 0;
         padding:0 4vw;
+        margin-top:100px;
     }
 }
 </style>
@@ -191,7 +190,7 @@ body {
 <div class="page-frame-outer">
 <div class="page-frame-inner">
 
-<!-- EPÒK MESSAGE PANELS (CONTINUOUS READ) -->
+<!-- CONTINUOUS EPÒK MANIFESTO -->
 <section class="epok-panel">
     <img src="images/epokmessage1.png" alt="EPÒK Manifesto Panel 1">
 </section>
@@ -206,15 +205,6 @@ body {
 
 <section class="epok-panel">
     <img src="images/epokmessage4.png" alt="EPÒK Manifesto Panel 4">
-</section>
-
-<section class="philosophy">
-    <h2>SURVIVE. RISE. BECOME.</h2>
-    <p><strong>Survive</strong> — because you made it through what was meant to break you.</p>
-    <p><strong>Rise</strong> — because staying down was never an option forever.</p>
-    <p><strong>Become</strong> — because the best version of you is still unfolding.</p>
-    <p>This is EPÒK.</p>
-    <p>And this is only the beginning.</p>
 </section>
 
 <section class="album-section" id="epok-album">
