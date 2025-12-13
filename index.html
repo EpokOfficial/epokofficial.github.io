@@ -6,246 +6,20 @@
 <title>EPòꓘ | Enter Your Era</title>
 
 <style>
-
-}
-
-   
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { width:100%; height:100%; background:#000; overflow:hidden; }
-
-    /* ------------------------------ */
-    /*   FULLSCREEN BACKGROUND LAYER  */
-    /* ------------------------------ */
-    #hero-bg {
-        position:fixed;
-        top:0;
-        left:0;
-        width:100vw;
-        height:100vh;
-        background-image:url("./images/9378.png");
-        background-size:100% 100%;
-        background-repeat:no-repeat;
-        background-position:center;
-        opacity:0;
-        transition:opacity 1.4s ease;
-        z-index:1;
-    }
-
-    /* ------------------------------ */
-    /*   HERO CHARACTER (MOVES ONLY)  */
-    /* ------------------------------ */
-    #hero-character {
-        position:fixed;
-        top:0;
-        left:0;
-        width:100vw;
-        height:100vh;
-        object-fit:fill;
-        opacity:0;
-        transition:opacity 1.4s ease;
-        z-index:2;
-        pointer-events:none;
-
-        animation:cameraMove 14s ease-in-out infinite alternate;
-    }
-
-    @keyframes cameraMove {
-        0%   { transform:translate(0px, 0px) scale(1.00); }
-        50%  { transform:translate(-12px, -8px) scale(1.03); }
-        100% { transform:translate(10px, 6px) scale(1.01); }
-    }
-
-    /* ------------------------------ */
-    /*       CREST INTRO ELEMENT      */
-    /* ------------------------------ */
-    #intro-crest {
-        position:fixed;
-        top:50%;
-        left:50%;
-        width:220px;
-        transform:translate(-50%, -50%);
-        filter:drop-shadow(0 0 20px #ffda44);
-        z-index:10;
-        cursor:pointer;
-    }
-
-    #click-here {
-        position:fixed;
-        top:calc(50% + 150px);
-        left:50%;
-        transform:translateX(-50%);
-        color:#fff;
-        font-size:1rem;
-        letter-spacing:0.2em;
-        text-shadow:0 0 10px #000;
-        cursor:pointer;
-        z-index:10;
-    }
-
-    /* Heartbeat animation */
-    .heartbeat { animation:beat 1s ease-in-out infinite; }
-
-    @keyframes beat {
-        0% { transform:translate(-50%, -50%) scale(1); }
-        30% { transform:translate(-50%, -50%) scale(1.22); }
-        60% { transform:translate(-50%, -50%) scale(1.05); }
-        100% { transform:translate(-50%, -50%) scale(1); }
-    }
-
-    /* Crest fade */
-    .fade-out {
-        animation:fadeOut .9s forwards;
-    }
-    @keyframes fadeOut {
-        from { opacity:1; }
-        to   { opacity:0; }
-    }
-
-    /* ------------------------------ */
-    /*       EPòꓘ ENTER BUTTON        */
-    /* ------------------------------ */
-    #enter-wrap {
-        position:fixed;
-        bottom:20px;
-        right:20px;
-        text-align:center;
-        opacity:1;
-        transition:opacity 6s ease;
-        z-index:20;
-    }
-
-    #enter-button {
-        width:130px;
-        cursor:pointer;
-        transition:transform 6s ease;
-        filter:drop-shadow(0 0 12px rgba(0,0,0,.9));
-    }
-
-    #enter-label {
-        color:#fff;
-        font-size:.75rem;
-        letter-spacing:.25em;
-        margin-top:4px;
-        text-shadow:0 0 8px #000;
-    }
-
-    .enter-visible { opacity:1; }
-
-    /* ------------------------------ */
-    /*         MOBILE FIXES           */
-    /* ------------------------------ */
-    @media(max-width:700px) {
-
-        #enter-button {
-            width:90px; /* smaller for mobile */
-        }
-
-        #enter-wrap {
-            bottom:12px;
-            right:12px;
-        }
-
-        #click-here {
-            top:calc(50% + 110px);
-            font-size:.85rem;
-        }
-
-        #intro-crest {
-            width:180px;
-        }
-    }
-</style>
-</head>
-
-<body>
-
-   
-<!-- BACKGROUND -->
-<div id="hero-bg"></div>
-
-<!-- CHARACTER -->
-<img id="hero-character" src="./images/herocharacter.png">
-
-<!-- CENTER CREST -->
-<img id="intro-crest" src="./images/crest1.png">
-<div id="click-here">CLICK HERE</div>
-
-<!-- ENTER BUTTON -->
-<div id="enter-wrap">
-    <img id="enter-button" src="./images/8187.png">
-    <div id="enter-label">ENTER HERE</div>
-</div>
-
-<!-- AUDIO -->
-<audio id="heartbeat-audio" src="./music/Heartbeat.mp3"></audio>
-
-<script>
-const crest = document.getElementById("intro-crest");
-const clickHere = document.getElementById("click-here");
-const heroBG = document.getElementById("hero-bg");
-const heroChar = document.getElementById("hero-character");
-const enterWrap = document.getElementById("enter-wrap");
-const heartbeat = document.getElementById("heartbeat-audio");
-
-let started = false;
-
-function startSequence() {
-    if (started) return;
-    started = true;
-
-    clickHere.style.display = "none";
-    crest.classList.add("heartbeat");
-
-    heartbeat.currentTime = 0;
-    heartbeat.play().catch(()=>{});
-
-    setTimeout(() => {
-        crest.classList.remove("heartbeat");
-        crest.classList.add("fade-out");
-
-        heartbeat.pause();
-        heartbeat.currentTime = 0;
-
-        heroBG.style.opacity = "1";
-        heroChar.style.opacity = "1";
-
-        setTimeout(() => {
-            enterWrap.classList.add("enter-visible");
-        }, 1000);
-
-    }, 5000);
-}
-
-crest.addEventListener("click", startSequence);
-clickHere.addEventListener("click", startSequence);
-
-document.getElementById("enter-button").addEventListener("click", () => {
-    window.location.href = "home.html";
-});
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPòꓘ | Enter Your Era</title>
-
-<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; background:#000; overflow:hidden; }
 
 /* ============ DOUBLE ROYAL FRAME (FULL PAGE) ============ */
 .page-frame-outer {
-    min-height:100vh;
+    position:fixed;
+    inset:0;
     padding:22px;
-    background:#000;
     border:2px solid rgba(212,175,55,0.65);
-    position:relative;
-    overflow:hidden; /* CLIPS BORDER TEXT */
+    overflow:hidden;
+    pointer-events:none;
+    z-index:50;
 }
 
-/* LEFT & RIGHT VERTICAL INSCRIPTION */
 .page-frame-outer::before,
 .page-frame-outer::after {
     content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
@@ -254,19 +28,20 @@ document.getElementById("enter-button").addEventListener("click", () => {
     bottom:22px;
     width:22px;
     writing-mode:vertical-rl;
-    text-orientation:mixed;
     font-size:0.65rem;
     letter-spacing:0.35em;
     color:#ffffff;
-    pointer-events:none;
     white-space:nowrap;
-    overflow:hidden;
 }
 
-/* LEFT SIDE — CENTERED BETWEEN BORDERS */
 .page-frame-outer::before {
     left:1px;
     animation:leftScroll 45s linear infinite;
+}
+
+.page-frame-outer::after {
+    right:9px;
+    animation:rightScroll 45s linear infinite;
 }
 
 @keyframes leftScroll {
@@ -274,33 +49,24 @@ document.getElementById("enter-button").addEventListener("click", () => {
     to   { transform:translateY(-100%); }
 }
 
-/* RIGHT SIDE — CENTERED BETWEEN BORDERS */
-.page-frame-outer::after {
-    right:9px;
-    animation:rightScroll 45s linear infinite;
-}
-
 @keyframes rightScroll {
     from { transform:translateY(-100%); }
     to   { transform:translateY(100%); }
 }
 
-/* BOTTOM ARABIC INSCRIPTION */
-.page-frame-outer .arabic-border {
+.arabic-border {
     position:absolute;
     bottom:6px;
     left:0;
     right:0;
-    text-align:center;
     font-size:0.7rem;
     letter-spacing:0.45em;
     color:#ffffff;
-    pointer-events:none;
     white-space:nowrap;
     overflow:hidden;
 }
 
-.page-frame-outer .arabic-border span {
+.arabic-border span {
     display:inline-block;
     padding-left:100%;
     animation:arabic-scroll 18s linear infinite;
@@ -311,182 +77,117 @@ document.getElementById("enter-button").addEventListener("click", () => {
     to { transform:translateX(-100%); }
 }
 
-   
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { width:100%; height:100%; background:#000; overflow:hidden; }
+/* BACKGROUND */
+#hero-bg {
+    position:fixed;
+    inset:0;
+    background:url("./images/9378.png") center/100% 100% no-repeat;
+    opacity:0;
+    transition:opacity 1.4s ease;
+    z-index:1;
+}
 
-    /* ------------------------------ */
-    /*   FULLSCREEN BACKGROUND LAYER  */
-    /* ------------------------------ */
-    #hero-bg {
-        position:fixed;
-        top:0;
-        left:0;
-        width:100vw;
-        height:100vh;
-        background-image:url("./images/9378.png");
-        background-size:100% 100%;
-        background-repeat:no-repeat;
-        background-position:center;
-        opacity:0;
-        transition:opacity 1.4s ease;
-        z-index:1;
-    }
+/* CHARACTER */
+#hero-character {
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:fill;
+    opacity:0;
+    transition:opacity 1.4s ease;
+    z-index:2;
+    pointer-events:none;
+    animation:cameraMove 14s ease-in-out infinite alternate;
+}
 
-    /* ------------------------------ */
-    /*   HERO CHARACTER (MOVES ONLY)  */
-    /* ------------------------------ */
-    #hero-character {
-        position:fixed;
-        top:0;
-        left:0;
-        width:100vw;
-        height:100vh;
-        object-fit:fill;
-        opacity:0;
-        transition:opacity 1.4s ease;
-        z-index:2;
-        pointer-events:none;
+@keyframes cameraMove {
+    0% { transform:translate(0,0) scale(1); }
+    50% { transform:translate(-12px,-8px) scale(1.03); }
+    100% { transform:translate(10px,6px) scale(1.01); }
+}
 
-        animation:cameraMove 14s ease-in-out infinite alternate;
-    }
+/* CREST */
+#intro-crest {
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:220px;
+    transform:translate(-50%,-50%);
+    filter:drop-shadow(0 0 20px #ffda44);
+    z-index:10;
+    cursor:pointer;
+}
 
-    @keyframes cameraMove {
-        0%   { transform:translate(0px, 0px) scale(1.00); }
-        50%  { transform:translate(-12px, -8px) scale(1.03); }
-        100% { transform:translate(10px, 6px) scale(1.01); }
-    }
+#click-here {
+    position:fixed;
+    top:calc(50% + 150px);
+    left:50%;
+    transform:translateX(-50%);
+    color:#fff;
+    letter-spacing:.2em;
+    z-index:10;
+    cursor:pointer;
+}
 
-    /* ------------------------------ */
-    /*       CREST INTRO ELEMENT      */
-    /* ------------------------------ */
-    #intro-crest {
-        position:fixed;
-        top:50%;
-        left:50%;
-        width:220px;
-        transform:translate(-50%, -50%);
-        filter:drop-shadow(0 0 20px #ffda44);
-        z-index:10;
-        cursor:pointer;
-    }
+.heartbeat {
+    animation:beat 1s ease-in-out infinite;
+}
 
-    #click-here {
-        position:fixed;
-        top:calc(50% + 150px);
-        left:50%;
-        transform:translateX(-50%);
-        color:#fff;
-        font-size:1rem;
-        letter-spacing:0.2em;
-        text-shadow:0 0 10px #000;
-        cursor:pointer;
-        z-index:10;
-    }
+@keyframes beat {
+    0% { transform:translate(-50%,-50%) scale(1); }
+    30% { transform:translate(-50%,-50%) scale(1.22); }
+    60% { transform:translate(-50%,-50%) scale(1.05); }
+    100% { transform:translate(-50%,-50%) scale(1); }
+}
 
-    /* Heartbeat animation */
-    .heartbeat { animation:beat 1s ease-in-out infinite; }
+.fade-out { animation:fadeOut .9s forwards; }
 
-    @keyframes beat {
-        0% { transform:translate(-50%, -50%) scale(1); }
-        30% { transform:translate(-50%, -50%) scale(1.22); }
-        60% { transform:translate(-50%, -50%) scale(1.05); }
-        100% { transform:translate(-50%, -50%) scale(1); }
-    }
+@keyframes fadeOut {
+    from { opacity:1; }
+    to { opacity:0; }
+}
 
-    /* Crest fade */
-    .fade-out {
-        animation:fadeOut .9s forwards;
-    }
-    @keyframes fadeOut {
-        from { opacity:1; }
-        to   { opacity:0; }
-    }
+/* ENTER */
+#enter-wrap {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    z-index:20;
+}
 
-    /* ------------------------------ */
-    /*       EPòꓘ ENTER BUTTON        */
-    /* ------------------------------ */
-    #enter-wrap {
-        position:fixed;
-        bottom:20px;
-        right:20px;
-        text-align:center;
-        opacity:1;
-        transition:opacity 6s ease;
-        z-index:20;
-    }
+#enter-button { width:130px; cursor:pointer; }
+#enter-label { color:#fff; letter-spacing:.25em; text-align:center; }
 
-    #enter-button {
-        width:130px;
-        cursor:pointer;
-        transition:transform 6s ease;
-        filter:drop-shadow(0 0 12px rgba(0,0,0,.9));
-    }
-
-    #enter-label {
-        color:#fff;
-        font-size:.75rem;
-        letter-spacing:.25em;
-        margin-top:4px;
-        text-shadow:0 0 8px #000;
-    }
-
-    .enter-visible { opacity:1; }
-
-    /* ------------------------------ */
-    /*         MOBILE FIXES           */
-    /* ------------------------------ */
-    @media(max-width:700px) {
-
-        #enter-button {
-            width:90px; /* smaller for mobile */
-        }
-
-        #enter-wrap {
-            bottom:12px;
-            right:12px;
-        }
-
-        #click-here {
-            top:calc(50% + 110px);
-            font-size:.85rem;
-        }
-
-        #intro-crest {
-            width:180px;
-        }
-    }
 </style>
 </head>
 
 <body>
 
-   
-<!-- BACKGROUND -->
 <div id="hero-bg"></div>
-
-<!-- CHARACTER -->
 <img id="hero-character" src="./images/herocharacter.png">
 
-<!-- CENTER CREST -->
 <img id="intro-crest" src="./images/crest1.png">
 <div id="click-here">CLICK HERE</div>
 
-<!-- ENTER BUTTON -->
 <div id="enter-wrap">
     <img id="enter-button" src="./images/8187.png">
     <div id="enter-label">ENTER HERE</div>
 </div>
 
-<!-- AUDIO -->
 <audio id="heartbeat-audio" src="./music/Heartbeat.mp3"></audio>
+
+<div class="page-frame-outer">
+    <div class="arabic-border">
+        <span>قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك • قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك •</span>
+    </div>
+</div>
 
 <script>
 const crest = document.getElementById("intro-crest");
 const clickHere = document.getElementById("click-here");
 const heroBG = document.getElementById("hero-bg");
 const heroChar = document.getElementById("hero-character");
-const enterWrap = document.getElementById("enter-wrap");
 const heartbeat = document.getElementById("heartbeat-audio");
 
 let started = false;
@@ -510,20 +211,15 @@ function startSequence() {
 
         heroBG.style.opacity = "1";
         heroChar.style.opacity = "1";
-
-        setTimeout(() => {
-            enterWrap.classList.add("enter-visible");
-        }, 1000);
-
     }, 5000);
 }
 
 crest.addEventListener("click", startSequence);
 clickHere.addEventListener("click", startSequence);
 
-document.getElementById("enter-button").addEventListener("click", () => {
+document.getElementById("enter-button").onclick = () => {
     window.location.href = "home.html";
-});
+};
 </script>
 
 </body>
