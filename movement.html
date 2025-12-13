@@ -22,7 +22,7 @@ body {
     background:#000;
     border:2px solid rgba(212,175,55,0.65);
     position:relative;
-    overflow:hidden; /* CLIPS BORDER TEXT */
+    overflow:hidden;
 }
 
 /* LEFT & RIGHT VERTICAL INSCRIPTION */
@@ -43,9 +43,8 @@ body {
     overflow:hidden;
 }
 
-/* LEFT SIDE — CENTERED BETWEEN BORDERS */
 .page-frame-outer::before {
-    left:1px; /* TRUE CENTER OF BORDER CHANNEL */
+    left:1px;
     animation:leftScroll 45s linear infinite;
 }
 
@@ -54,9 +53,8 @@ body {
     to   { transform:translateY(-100%); }
 }
 
-/* RIGHT SIDE — CENTERED BETWEEN BORDERS */
 .page-frame-outer::after {
-    right:9px; /* TRUE CENTER OF BORDER CHANNEL */
+    right:9px;
     animation:rightScroll 45s linear infinite;
 }
 
@@ -101,7 +99,7 @@ body {
     background:#000;
 }
 
-/* ================= TOP NAV ================= */
+/* ================= TOP NAV (UPDATED) ================= */
 .top-nav {
     position:fixed;
     top:0;
@@ -110,17 +108,30 @@ body {
     height:64px;
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    padding:0 6vw;
     background:rgba(0,0,0,0.88);
     backdrop-filter:blur(10px);
     z-index:1000;
     border-bottom:1px solid rgba(212,175,55,0.25);
 }
 
+/* SCROLL CONTAINER */
+.nav-scroll {
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    white-space:nowrap;
+    padding:0 6vw;
+}
+
+/* Hide scrollbar */
+.nav-scroll::-webkit-scrollbar { height:0px; }
+.nav-scroll { scrollbar-width:none; }
+
 .nav-links {
-    display:flex;
+    display:inline-flex;
     gap:26px;
+    align-items:center;
 }
 
 .nav-links a {
@@ -129,9 +140,20 @@ body {
     font-size:0.82rem;
     letter-spacing:0.22em;
     text-transform:uppercase;
+    padding:8px 4px;
+    opacity:0.85;
 }
 
 .nav-links a:hover {
+    color:#f3d688;
+    opacity:1;
+}
+
+/* FEATURED TAB */
+.nav-links a.featured {
+    opacity:1;
+    border:1px solid rgba(212,175,55,0.85);
+    padding:8px 12px;
     color:#f3d688;
 }
 
@@ -245,15 +267,17 @@ body {
 <body>
 
 <nav class="top-nav">
-    <div></div>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="movement.html">Movement</a>
-        <a href="patchbaby.html">Patch Baby</a>
-        <a href="book.html">The Book</a>
-        <a href="store.html">Store</a>
-        <a href="checkout.html">Checkout</a>
-        <a href="about.html">About</a>
+    <div class="nav-scroll">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="movement.html">Movement</a>
+            <a href="patchbaby.html">Patch Baby</a>
+            <a href="book.html">The Book</a>
+            <a href="store.html">Store</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="about.html">About</a>
+            <a class="featured" href="signature-apparel-premiere.html">Signature Apparel Premiere</a>
+        </div>
     </div>
 </nav>
 
@@ -293,6 +317,10 @@ body {
 
 </div>
 </div>
+
+</body>
+</html>
+
 
 </body>
 </html>
