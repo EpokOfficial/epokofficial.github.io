@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPÒK | Model 1 — Patch Baby Jogger Set</title>
+<title>EPÒK | Signature Apparel Premiere</title>
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -16,6 +15,62 @@ html, body {
     color:#f2f2f2;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     overflow:hidden;
+}
+
+/* ================= TOP NAV (ADDED) ================= */
+.top-nav {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:64px;
+    background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    border-bottom:1px solid rgba(212,175,55,0.25);
+}
+
+.nav-scroll {
+    width:100%;
+    height:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+    padding:0 6vw;
+    display:flex;
+    align-items:center;
+}
+
+.nav-scroll::-webkit-scrollbar { height:0px; }
+.nav-scroll { scrollbar-width:none; }
+
+.nav-links {
+    display:inline-flex;
+    gap:26px;
+    align-items:center;
+}
+
+.nav-links a {
+    text-decoration:none;
+    color:#e8e4d8;
+    font-size:0.82rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    padding:8px 4px;
+    opacity:0.85;
+}
+
+.nav-links a:hover {
+    color:#f3d688;
+    opacity:1;
+}
+
+.nav-links a.featured {
+    opacity:1;
+    border:1px solid rgba(212,175,55,0.85);
+    padding:8px 12px;
+    color:#f3d688;
 }
 
 /* ============ DOUBLE ROYAL FRAME (LOCKED) ============ */
@@ -112,7 +167,7 @@ html, body {
 /* ============ HEADER MINIMAL UI ============ */
 .model-header {
     position:sticky;
-    top:0;
+    top:64px;
     z-index:20;
     padding:14px 0 18px;
     background:linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.25), rgba(0,0,0,0));
@@ -208,7 +263,6 @@ html, body {
     background:#000;
 }
 
-/* HERO IMAGE (paired look visual) */
 .hero-img {
     width:100%;
     height:auto;
@@ -218,7 +272,6 @@ html, body {
     transition:opacity 1.25s ease, transform 1.25s ease;
 }
 
-/* subtle drift (camera) */
 .hero-drift {
     animation:cameraDrift 14s ease-in-out infinite alternate;
 }
@@ -229,7 +282,6 @@ html, body {
     100% { transform:translate(10px,6px) scale(1.01); }
 }
 
-/* interaction overlay */
 .hero-hit {
     position:absolute;
     inset:0;
@@ -237,7 +289,6 @@ html, body {
     cursor:pointer;
 }
 
-/* cue that fades in after 3–5 seconds */
 .cue {
     position:absolute;
     left:50%;
@@ -411,7 +462,6 @@ html, body {
     border-color:rgba(212,175,55,0.55);
 }
 
-/* GIRL/BOY toggle inside modal (kept minimal) */
 .modal-tabs {
     padding:14px 18px 0;
     display:flex;
@@ -445,7 +495,6 @@ html, body {
     gap:14px;
 }
 
-/* horizontal scroll strip */
 .gallery-strip {
     display:flex;
     gap:14px;
@@ -465,6 +514,22 @@ html, body {
     overflow:hidden;
     scroll-snap-align:start;
     box-shadow:0 22px 70px rgba(0,0,0,0.85);
+    position:relative;
+}
+
+.badge {
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:10;
+    padding:8px 10px;
+    border-radius:999px;
+    border:1px solid rgba(212,175,55,0.35);
+    background:rgba(0,0,0,0.65);
+    color:#f3d688;
+    font-size:0.62rem;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
 }
 
 .gallery-card img {
@@ -508,7 +573,6 @@ html, body {
     opacity:0.7;
 }
 
-/* Quick Buy (disabled until Jan 15, 2026) */
 .buy-row {
     margin-top:10px;
     display:flex;
@@ -618,13 +682,27 @@ html, body {
 
 <body>
 
+<nav class="top-nav">
+    <div class="nav-scroll">
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="movement.html">Movement</a>
+            <a href="patchbaby.html">Patch Baby</a>
+            <a href="book.html">The Book</a>
+            <a href="store.html">Store</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="about.html">About</a>
+            <a class="featured" href="signature-apparel-premiere.html">Featured Apparel · Premiere</a>
+        </div>
+    </div>
+</nav>
+
 <!-- OPTIONAL: quiet “VIEW ALL LOOKS” control (not default navigation) -->
 <div class="view-all">
     <button id="viewAllBtn">VIEW ALL LOOKS</button>
 </div>
 
-<!-- RUNWAY TRACK (Brain: Model Pages Track 3) -->
-<!-- IMPORTANT: you said you will load MP3s. Put your runway MP3 here: ./assets/music/runway_track.mp3 -->
+<!-- RUNWAY TRACK -->
 <audio id="runwayAudio" src="./assets/music/runway_track.mp3" loop></audio>
 
 <!-- AUDIO TOGGLE -->
@@ -643,7 +721,6 @@ html, body {
                 <div class="look-title">PATCH BABY JOGGER SET</div>
 
                 <div class="nav-arrows">
-                    <!-- UPDATE THESE FILES LATER WHEN LOOK 2/3/4 EXIST -->
                     <a class="nav-link" href="Model0.html">← PREVIOUS LOOK</a>
                     <a class="nav-link" href="Model2.html">NEXT LOOK →</a>
                 </div>
@@ -656,7 +733,6 @@ html, body {
             <div class="cue" id="cue"><strong>TAP</strong> TO VIEW MOCKUPS</div>
         </div>
 
-        <!-- GIRL LEFT / BOY RIGHT (LOCKED PER YOUR INSTRUCTION) -->
         <div class="split-info">
             <div class="panel">
                 <h3>GIRL LOOK</h3>
@@ -688,13 +764,13 @@ html, body {
     </div>
 </div>
 
-<!-- MODAL GALLERY (blur bg, click outside closes) -->
+<!-- MODAL GALLERY -->
 <div class="modal" id="mockupModal">
     <div class="modal-backdrop" id="modalBackdrop"></div>
 
     <div class="modal-shell" role="dialog" aria-modal="true">
         <div class="modal-top">
-            <div class="modal-title">PATCH BABY JOGGER SET — MOCKUP GALLERY</div>
+            <div class="modal-title" id="modalTitle">PATCH BABY JOGGER SET — GIRL LOOK</div>
             <button class="modal-close" id="modalClose">CLOSE</button>
         </div>
 
@@ -709,6 +785,7 @@ html, body {
             <div class="gallery-strip" id="girlStrip">
 
                 <div class="gallery-card">
+                    <div class="badge">GIRL</div>
                     <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="">
                     <div class="card-meta">
                         <h4>POM POM BEANIE</h4>
@@ -724,6 +801,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">GIRL</div>
                     <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="">
                     <div class="card-meta">
                         <h4>SWEATSHIRT — FRONT</h4>
@@ -739,6 +817,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">GIRL</div>
                     <img src="ModelPictures/patchbabysjogger/sweatshirtback.png" alt="">
                     <div class="card-meta">
                         <h4>SWEATSHIRT — BACK</h4>
@@ -754,6 +833,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">GIRL</div>
                     <img src="ModelPictures/patchbabysjogger/sweatshirtside.png" alt="">
                     <div class="card-meta">
                         <h4>SWEATSHIRT — SIDE</h4>
@@ -769,6 +849,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">GIRL</div>
                     <img src="ModelPictures/patchbabysjogger/joggerpantsfront.png" alt="">
                     <div class="card-meta">
                         <h4>JOGGER PANTS — FRONT</h4>
@@ -784,6 +865,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">GIRL</div>
                     <img src="ModelPictures/patchbabysjogger/joggerpantsback.png" alt="">
                     <div class="card-meta">
                         <h4>JOGGER PANTS — BACK</h4>
@@ -804,6 +886,7 @@ html, body {
             <div class="gallery-strip" id="boyStrip" style="display:none;">
 
                 <div class="gallery-card">
+                    <div class="badge">BOY</div>
                     <img src="ModelPictures/patchbabysjogger/beanie.png" alt="">
                     <div class="card-meta">
                         <h4>BEANIE</h4>
@@ -819,6 +902,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">BOY</div>
                     <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="">
                     <div class="card-meta">
                         <h4>SWEATSHIRT — FRONT</h4>
@@ -834,6 +918,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">BOY</div>
                     <img src="ModelPictures/patchbabysjogger/sweatshirtback.png" alt="">
                     <div class="card-meta">
                         <h4>SWEATSHIRT — BACK</h4>
@@ -849,6 +934,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">BOY</div>
                     <img src="ModelPictures/patchbabysjogger/sweatshirtside.png" alt="">
                     <div class="card-meta">
                         <h4>SWEATSHIRT — SIDE</h4>
@@ -864,6 +950,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">BOY</div>
                     <img src="ModelPictures/patchbabysjogger/joggerpantsfront.png" alt="">
                     <div class="card-meta">
                         <h4>JOGGER PANTS — FRONT</h4>
@@ -879,6 +966,7 @@ html, body {
                 </div>
 
                 <div class="gallery-card">
+                    <div class="badge">BOY</div>
                     <img src="ModelPictures/patchbabysjogger/joggerpantsback.png" alt="">
                     <div class="card-meta">
                         <h4>JOGGER PANTS — BACK</h4>
@@ -901,13 +989,14 @@ html, body {
 
 <script>
 const heroStage = document.getElementById("heroStage");
-const heroImg = document.getElementById("heroImg");
 const cue = document.getElementById("cue");
 const heroHit = document.getElementById("heroHit");
 
 const modal = document.getElementById("mockupModal");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const modalClose = document.getElementById("modalClose");
+
+const modalTitle = document.getElementById("modalTitle");
 
 const tabGirl = document.getElementById("tabGirl");
 const tabBoy = document.getElementById("tabBoy");
@@ -921,20 +1010,16 @@ const viewAllBtn = document.getElementById("viewAllBtn");
 
 let audioOn = false;
 
-/* HERO load + cinematic cue timing */
 window.addEventListener("load", () => {
     heroStage.classList.add("ready");
-
-    // cue appears after 4 seconds (inside the 3–5s window)
     setTimeout(() => {
         cue.classList.add("show");
     }, 4000);
 });
 
-/* AUDIO RULE (Brain): click anywhere starts audio (low volume), toggle available */
 function tryStartAudio() {
     if (audioOn) return;
-    runwayAudio.volume = 0.18;  // low runway volume (Brain)
+    runwayAudio.volume = 0.18;
     runwayAudio.play().then(() => {
         audioOn = true;
         audioToggle.textContent = "SOUND: ON";
@@ -942,7 +1027,6 @@ function tryStartAudio() {
 }
 
 document.addEventListener("pointerdown", () => {
-    // first user interaction is enough to start audio on mobile/desktop
     tryStartAudio();
 }, { once:true });
 
@@ -961,42 +1045,39 @@ audioToggle.addEventListener("click", (e) => {
     }
 });
 
-/* OPEN MODAL */
 function openModal() {
     modal.classList.add("open");
-    document.body.style.overflow = "hidden";
 }
 
-/* CLOSE MODAL */
 function closeModal() {
     modal.classList.remove("open");
-    document.body.style.overflow = "hidden"; // body is already overflow hidden; keeps consistent
 }
 
-/* click/tap model opens gallery */
 heroHit.addEventListener("click", openModal);
-cue.addEventListener("click", openModal);
 
-/* click outside closes */
 modalBackdrop.addEventListener("click", closeModal);
 modalClose.addEventListener("click", closeModal);
 
-/* GIRL/BOY tabs */
 tabGirl.addEventListener("click", () => {
     tabGirl.classList.add("active");
     tabBoy.classList.remove("active");
+
     girlStrip.style.display = "flex";
     boyStrip.style.display = "none";
+
+    modalTitle.textContent = "PATCH BABY JOGGER SET — GIRL LOOK";
 });
 
 tabBoy.addEventListener("click", () => {
     tabBoy.classList.add("active");
     tabGirl.classList.remove("active");
+
     boyStrip.style.display = "flex";
     girlStrip.style.display = "none";
+
+    modalTitle.textContent = "PATCH BABY JOGGER SET — BOY LOOK";
 });
 
-/* DISABLED BUY: hover (desktop) + tap (mobile) shows message */
 function wireDisabledBuyButtons() {
     const buttons = document.querySelectorAll(".buy-btn");
     buttons.forEach(btn => {
@@ -1025,9 +1106,6 @@ function wireDisabledBuyButtons() {
 }
 wireDisabledBuyButtons();
 
-/* VIEW ALL LOOKS (Optional mode; kept quiet). For now, it just opens a placeholder overlay behavior using the same modal.
-   When Model2/3/4 exist, we’ll replace this with a true “All 4 Looks” overlay jump list.
-*/
 viewAllBtn.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -1036,4 +1114,6 @@ viewAllBtn.addEventListener("click", (e) => {
 </script>
 
 </body>
+</html>
+
 </html>
