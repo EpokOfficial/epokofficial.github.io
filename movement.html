@@ -70,7 +70,11 @@ body {
 /* ================= EPÒK MESSAGE PANELS ================= */
 .epok-panel {
     max-width:1600px;
-    margin:140px auto 0;
+    margin:60px auto 0; /* REDUCED spacing */
+}
+
+.epok-panel:first-of-type {
+    margin-top:140px; /* keeps space below nav for first panel */
 }
 
 .epok-panel img {
@@ -149,11 +153,11 @@ body {
 
     .epok-panel {
         max-width:100%;
-        margin:100px auto 0;
+        margin:40px auto 0; /* tighter on mobile */
     }
 
-    .epok-panel img {
-        width:100%;
+    .epok-panel:first-of-type {
+        margin-top:100px;
     }
 
     .philosophy {
@@ -187,7 +191,7 @@ body {
 <div class="page-frame-outer">
 <div class="page-frame-inner">
 
-<!-- EPÒK MESSAGE PANELS -->
+<!-- EPÒK MESSAGE PANELS (CONTINUOUS READ) -->
 <section class="epok-panel">
     <img src="images/epokmessage1.png" alt="EPÒK Manifesto Panel 1">
 </section>
@@ -202,6 +206,17 @@ body {
 
 <section class="epok-panel">
     <img src="images/epokmessage4.png" alt="EPÒK Manifesto Panel 4">
+</section>
+
+<section class="philosophy">
+    <h2>SURVIVE. RISE. BECOME.</h2>
+    <p><strong>Survive</strong> — because you made it through what was meant to break you.</p>
+    <p><strong>Rise</strong> — because staying down was never an option forever.</p>
+    <p><strong>Become</strong> — because the best version of you is still unfolding.</p>
+    <p>This is EPÒK.</p>
+    <p>And this is only the beginning.</p>
+</section>
+
 <section class="album-section" id="epok-album">
     <h3>THE SOUND OF EPÒK</h3>
     <div class="album-cover">
