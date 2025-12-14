@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPÒK | Signature Apparel Premiere 2</title>
+<title>EPÒK | Signature Apparel Premiere</title>
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -14,31 +14,31 @@ html, body {
     background:#000;
     color:#f2f2f2;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow:hidden;
 }
 
-/* ================= TOP NAV (SCROLLABLE MOBILE) ================= */
+/* ================= TOP NAV ================= */
 .top-nav {
     position:fixed;
     top:0;
     left:0;
     width:100%;
     height:64px;
-    background:rgba(0,0,0,0.88);
+    background:rgba(0,0,0,0.85);
     backdrop-filter:blur(10px);
     z-index:1000;
     border-bottom:1px solid rgba(212,175,55,0.25);
 }
 
 .nav-scroll {
+    width:100%;
     height:100%;
     overflow-x:auto;
     white-space:nowrap;
+    padding:0 6vw;
     display:flex;
     align-items:center;
-    padding:0 6vw;
 }
-
-.nav-scroll::-webkit-scrollbar { display:none; }
 
 .nav-links {
     display:inline-flex;
@@ -48,18 +48,20 @@ html, body {
 .nav-links a {
     text-decoration:none;
     color:#e8e4d8;
-    font-size:0.8rem;
+    font-size:0.82rem;
     letter-spacing:0.22em;
     text-transform:uppercase;
+    opacity:0.85;
 }
 
 .nav-links a.featured {
+    opacity:1;
+    border:1px solid rgba(212,175,55,0.85);
+    padding:8px 12px;
     color:#f3d688;
-    border:1px solid rgba(212,175,55,0.75);
-    padding:8px 14px;
 }
 
-/* ================= DOUBLE ROYAL FRAME ================= */
+/* ============ DOUBLE ROYAL FRAME ============ */
 .page-frame-outer {
     position:fixed;
     inset:0;
@@ -79,7 +81,7 @@ html, body {
     writing-mode:vertical-rl;
     font-size:0.65rem;
     letter-spacing:0.35em;
-    color:#fff;
+    color:#ffffff;
 }
 
 .page-frame-outer::before { left:1px; }
@@ -93,105 +95,141 @@ html, body {
     text-align:center;
     font-size:0.7rem;
     letter-spacing:0.45em;
-    color:#fff;
+    color:#ffffff;
 }
 
-/* ================= PAGE CONTENT ================= */
-.page-wrap {
-    padding-top:88px;
-    padding-bottom:120px;
-    max-width:1600px;
-    margin:0 auto;
+/* ============ PAGE SCROLLER ============ */
+.page-scroll {
+    position:fixed;
+    inset:0;
+    overflow-y:auto;
+    z-index:1;
+    padding:22px;
 }
 
-.hero {
-    width:100%;
-    border-radius:22px;
-    overflow:hidden;
+.page-inner {
+    min-height:100vh;
+    padding:88px 6vw 120px;
     border:1px solid rgba(212,175,55,0.35);
-    box-shadow:0 40px 120px rgba(0,0,0,0.9);
-}
-
-.hero img {
-    width:100%;
-    display:block;
-}
-
-/* ================= GALLERY ================= */
-.section {
-    margin-top:48px;
-}
-
-.section h2 {
-    text-align:center;
-    font-size:1rem;
-    letter-spacing:0.35em;
-    text-transform:uppercase;
-    color:#f3d688;
-    margin-bottom:24px;
-}
-
-.gallery {
-    display:flex;
-    gap:18px;
-    overflow-x:auto;
-    padding:10px;
-}
-
-.gallery::-webkit-scrollbar { display:none; }
-
-.card {
-    flex:0 0 auto;
-    width:320px;
-    border:1px solid rgba(212,175,55,0.25);
-    border-radius:18px;
     background:#000;
 }
 
-.card img {
-    width:100%;
-    display:block;
+/* ============ HEADER ============ */
+.model-header {
+    position:sticky;
+    top:64px;
+    z-index:20;
+    padding:14px 0 18px;
 }
 
-.card-info {
-    padding:14px;
+.model-header-row {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.card-info h4 {
-    font-size:0.8rem;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
+.progress {
+    font-size:0.72rem;
+    letter-spacing:0.34em;
 }
 
-.price {
+.look-title {
+    font-size:0.92rem;
+    letter-spacing:0.28em;
     color:#f3d688;
-    margin-top:6px;
 }
 
-.buy {
-    margin-top:10px;
+.nav-link {
+    text-decoration:none;
+    color:#e8e4d8;
     font-size:0.7rem;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    padding:10px;
+    letter-spacing:0.26em;
+    padding:10px 12px;
+    border:1px solid rgba(212,175,55,0.25);
     border-radius:999px;
-    border:1px solid rgba(212,175,55,0.4);
-    background:rgba(212,175,55,0.15);
+}
+
+/* ============ HERO ============ */
+.hero-stage {
+    max-width:1600px;
+    margin:0 auto;
+    border-radius:22px;
+    overflow:hidden;
+}
+
+.hero-img {
+    width:100%;
+    opacity:0;
+    transition:opacity 1.25s ease;
+}
+
+.hero-stage.ready .hero-img {
+    opacity:1;
+}
+
+.hero-hit {
+    position:absolute;
+    inset:0;
+    cursor:pointer;
+}
+
+.cue {
+    position:absolute;
+    bottom:26px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:0.72rem;
+    letter-spacing:0.32em;
+    opacity:0;
+}
+
+.hero-stage.ready .cue {
+    opacity:1;
+}
+
+/* ============ SPLIT ============ */
+.split-info {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:34px;
+}
+
+.panel {
+    border:1px solid rgba(212,175,55,0.18);
+    padding:18px;
+}
+
+.panel h3 {
+    font-size:0.86rem;
+    letter-spacing:0.28em;
     color:#f3d688;
-    cursor:not-allowed;
 }
 
-.note {
-    margin-top:6px;
-    font-size:0.65rem;
-    letter-spacing:0.2em;
-    opacity:0.7;
+/* ============ MODAL ============ */
+.modal {
+    position:fixed;
+    inset:0;
+    display:none;
 }
 
-/* ================= MOBILE ================= */
+.modal.open {
+    display:flex;
+}
+
+.modal-shell {
+    background:#000;
+    margin:auto;
+    width:90%;
+}
+
+.tab.active {
+    color:#f3d688;
+}
+
+/* ============ MOBILE ============ */
 @media(max-width:768px){
-    .page-frame-outer { padding:14px; }
-    .gallery { padding-left:6vw; }
+    .split-info { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -208,102 +246,51 @@ html, body {
             <a href="store.html">Store</a>
             <a href="checkout.html">Checkout</a>
             <a href="about.html">About</a>
-            <a class="featured" href="signature-apparel-premiere.html">SIGNATURE APPAREL PREMIERE</a>
+            <a class="featured" href="signature-apparel-premiere.html">Featured Apparel · Premiere</a>
         </div>
     </div>
 </nav>
 
-<div class="page-frame-outer">
-    <div class="arabic-border">
-        قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك •
-    </div>
+<div class="page-scroll">
+<div class="page-inner">
+
+<div class="model-header">
+<div class="model-header-row">
+<div class="progress">LOOK 2 OF 4</div>
+<div class="look-title">PATCH BABY STREETWEAR SET</div>
+<div>
+<a class="nav-link" href="signature-apparel-premiere.html">← PREVIOUS LOOK</a>
+<a class="nav-link" href="signature-apparel-premiere3.html">NEXT LOOK →</a>
+</div>
+</div>
 </div>
 
-<div class="page-wrap">
+<div class="hero-stage ready">
+<img class="hero-img" src="ModelPictures/patchbabystreetwear.png">
+<div class="hero-hit"></div>
+<div class="cue"><strong>TAP</strong> TO VIEW MOCKUPS</div>
+</div>
 
-    <!-- MODEL ART -->
-    <div class="hero">
-        <img src="ModelPictures/patchbabystreetwear.png" alt="">
-    </div>
+<div class="split-info">
+<div class="panel">
+<h3>GIRL LOOK</h3>
+<p>Fitted Cap • Crop Hoodie • Yoga Pants</p>
+</div>
 
-    <!-- GIRL LOOK -->
-    <div class="section">
-        <h2>Girl Look</h2>
-        <div class="gallery">
+<div class="panel">
+<h3>BOY LOOK</h3>
+<p>Snapback • Hoodie • Sweat Shorts</p>
+</div>
+</div>
 
-            <div class="card">
-                <img src="ModelPictures/patchbabysstreetwear/pbfittedcap1.png">
-                <div class="card-info">
-                    <h4>Fitted Cap</h4>
-                    <div class="price">$65.00</div>
-                    <button class="buy">BUY (DISABLED)</button>
-                    <div class="note">Available Jan 15, 2026</div>
-                </div>
-            </div>
+</div>
+</div>
 
-            <div class="card">
-                <img src="ModelPictures/patchbabysstreetwear/Pbwomanscrophoodiefront.png">
-                <div class="card-info">
-                    <h4>Crop Hoodie</h4>
-                    <div class="price">$110.00</div>
-                    <button class="buy">BUY (DISABLED)</button>
-                    <div class="note">Available Jan 15, 2026</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="ModelPictures/patchbabysstreetwear/Pbwomansyogafront.png">
-                <div class="card-info">
-                    <h4>Yoga Pants</h4>
-                    <div class="price">$80.00</div>
-                    <button class="buy">BUY (DISABLED)</button>
-                    <div class="note">Available Jan 15, 2026</div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- BOY LOOK -->
-    <div class="section">
-        <h2>Boy Look</h2>
-        <div class="gallery">
-
-            <div class="card">
-                <img src="ModelPictures/patchbabysstreetwear/Pbsnapback1.png">
-                <div class="card-info">
-                    <h4>Snapback</h4>
-                    <div class="price">$65.00</div>
-                    <button class="buy">BUY (DISABLED)</button>
-                    <div class="note">Available Jan 15, 2026</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="ModelPictures/patchbabysstreetwear/Pbmenshoodiefront.png">
-                <div class="card-info">
-                    <h4>Hoodie</h4>
-                    <div class="price">$110.00</div>
-                    <button class="buy">BUY (DISABLED)</button>
-                    <div class="note">Available Jan 15, 2026</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="ModelPictures/patchbabysstreetwear/Pbmensshortsfront.png">
-                <div class="card-info">
-                    <h4>Sweat Shorts</h4>
-                    <div class="price">$80.00</div>
-                    <button class="buy">BUY (DISABLED)</button>
-                    <div class="note">Available Jan 15, 2026</div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
+<div class="page-frame-outer">
+<div class="arabic-border">
+قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك •
+</div>
 </div>
 
 </body>
 </html>
-
