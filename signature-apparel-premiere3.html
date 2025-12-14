@@ -618,16 +618,18 @@ html, body {
 /* ============ P&V BANNER + BOOK (ADDED) ============ */
 .pv-banner {
     max-width:1600px;
-    margin:18px auto 26px;
-    border-radius:22px;
+    margin:18px auto 22px;
+    border-radius:18px;
     overflow:hidden;
     border:1px solid rgba(212,175,55,0.22);
-    box-shadow:0 28px 90px rgba(0,0,0,0.9);
+    box-shadow:0 22px 70px rgba(0,0,0,0.85);
+    max-height:180px;
 }
 
 .pv-banner img {
     width:100%;
-    height:auto;
+    height:180px;
+    object-fit:cover;
     display:block;
 }
 
@@ -695,6 +697,14 @@ html, body {
         font-size:0.55rem;
         letter-spacing:0.30em;
     }
+    
+    .pv-banner {
+    max-height:120px;
+}
+
+.pv-banner img {
+    height:120px;
+}
 
     .arabic-border {
         font-size:0.6rem;
