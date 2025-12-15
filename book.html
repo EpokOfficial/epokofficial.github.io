@@ -1199,7 +1199,8 @@ readerImg.addEventListener('click', () => {
   render();
 });
 
-
+let lastTap = 0;
+    
 readerImg.addEventListener('touchend', () => {
   const now = Date.now();
   if (now - lastTap < 300) {
