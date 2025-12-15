@@ -1125,9 +1125,7 @@
 
     document.addEventListener('keydown', (e) => {
       if(e.key === 'Escape') closeAllModals();
-    });
-
-    /* ===== SECTION 5: Preview reader (LOCKED: cover first + keep exact filenames + folder path) ===== */
+/* ===== SECTION 5: Preview reader (LOCKED: cover first + keep exact filenames + folder path) ===== */
     const pages = [
       // Cover FIRST (locked)
       'bookart/thebookcover.png',
@@ -1154,139 +1152,67 @@ pages.forEach(src => {
   const img = new Image();
   img.src = safeSrc(src);
 });
+      
+    });
 
-    const readerImg = document.getElementById('readerImg');
-readerImg.addEventListener('click', (e) => {
-  e.stopPropagation();
+      
+// ===== BOOK CORE (STEP 4A — BASELINE) =====
 
-  if (window.innerWidth <= 768) {
-    reader.classList.add('fullscreen');
-    document.body.style.overflow = 'hidden';
-  } else {
-    reader.classList.add('popup');
-    document.body.style.overflow = 'hidden';
-  }
+const reader = document.querySelector('.reader');
+const readerImg = document.getElementById('readerImg');
 
+let idx = 0;
+
+function render() {
+  const img = new Image();
+  img.onload = () => {
+    readerImg.src = img.src;
+  };
+  img.src = safeSrc(pages[idx]);
+}
+
+// TAP = NEXT PAGE ONLY
+readerImg.addEventListener('click', () => {
   if (idx < pages.length - 1) {
     idx++;
   } else {
     idx = 0;
   }
-
   render();
 });
 
+// INIT
+render();
 
-    const reader = document.querySelector('.reader');
-let lastTap = 0;
+   // BOOK CORE — STEP 4A ONLY
 
-readerImg.addEventListener('touchend', () => {
-  const now = Date.now();
+const reader = document.querySelector('.reader');
+const readerImg = document.getElementById('readerImg');
 
-  if (now - lastTap < 300) {
-    reader.classList.remove('fullscreen');
-    document.body.style.overflow = '';
-  }
+let idx = 0;
 
-  lastTap = now;
-});
+function render() {
+  const img = new Image();
+  img.onload = () => {
+    readerImg.src = img.src;
+  };
+  img.src = safeSrc(pages[idx]);
 
-    
-    reader.addEventListener('click', (e) => {
-  if (window.innerWidth > 768 && e.target === reader) {
-    reader.classList.remove('popup');
-    document.body.style.overflow = '';
-  }
-});
- 
-
-    
-readerImg.addEventListener('touchend', () => {
-  const now = Date.now();
-  if (now - lastTap < 300) {
-  reader.classList.toggle('fullscreen');
-  document.body.style.overflow = reader.classList.contains('fullscreen') ? 'hidden' : '';
+  readerImg.alt = 'Preview page ' + (idx + 1);
 }
-  lastTap = now;
-});
 
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const pageCount = document.getElementById('pageCount');
-    const pageSelect = document.getElementById('pageSelect');
-
-    let idx = 0;
-
-    function render(){
-    
-
-      const img = new Image();
-img.onload = () => {
-  readerImg.src = img.src;
-    
-};
-    
-img.src = safeSrc(pages[idx]);
-
-      readerImg.alt = 'Preview page ' + (idx + 1);
-      pageCount.textContent = 'Page ' + (idx + 1) + ' / ' + pages.length;
-
-      prevBtn.disabled = idx === 0;
-      nextBtn.disabled = idx === pages.length - 1;
-readerImg.setAttribute('aria-label', 'Page ' + (idx + 1) + ' of ' + pages.length);
-
-      if(pageSelect.value !== String(idx)){
-        pageSelect.value = String(idx);
-        
-      }
-    }
-        render();
-    function buildSelect(){
-      pageSelect.innerHTML = '';
-      pages.forEach((p, i) => {
-        const opt = document.createElement('option');
-        opt.value = String(i);
-        opt.textContent = 'Page ' + (i + 1);
-        pageSelect.appendChild(opt);
-      });
-    }
-
-    prevBtn.addEventListener('click', () => {
-      if(idx > 0){ idx--; render(); }
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if(idx < pages.length - 1){ idx++; render(); }
-    });
-
-    pageSelect.addEventListener('change', () => {
-      const v = Number(pageSelect.value);
-      if(!Number.isNaN(v)){
-        idx = Math.max(0, Math.min(pages.length - 1, v));
-        render();
-      }
-    });
-
-    // init
-    buildSelect();
-    render();
-    document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    reader.classList.remove('popup');
+// TAP = NEXT PAGE ONLY
+readerImg.addEventListener('click', () => {
+  if (idx < pages.length - 1) {
+    idx++;
+  } else {
+    idx = 0;
   }
+  render();
 });
-    document.addEventListener('keydown', (e) => {
-  if (reader.classList.contains('popup') || reader.classList.contains('fullscreen')) {
-    if (e.key === 'ArrowRight') {
-      if (idx < pages.length - 1) idx++;
-      render();
-    }
-    if (e.key === 'ArrowLeft') {
-      if (idx > 0) idx--;
-      render();
-    }
-  }
-});
+
+// INIT
+render();
 
 });
   </script>
