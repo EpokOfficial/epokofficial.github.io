@@ -1248,41 +1248,6 @@ readerImg.addEventListener('touchend', (e) => {
 render();
 
 
-
-// INIT
-render();
-
-   // BOOK CORE — STEP 4A ONLY
-
-const reader = document.querySelector('.reader');
-
-
-let idx = 0;
-
-function render() {
-  const img = new Image();
-  img.onload = () => {
-    readerImg.src = img.src;
-  };
-  img.src = safeSrc(pages[idx]);
-
-  readerImg.alt = 'Preview page ' + (idx + 1);
-}
-
-// TAP = NEXT PAGE ONLY
-readerImg.addEventListener('click', () => {
-  if (idx < pages.length - 1) {
-    idx++;
-  } else {
-    idx = 0;
-  }
-  render();
-});
-
-// INIT
-render();
-
-
   </script>
 </body>
 </html>
