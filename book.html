@@ -1093,7 +1093,6 @@
   </div>
 
   <script>
-    </div>
     /* ===== Utility: encode spaces safely in filenames ===== */
     function safeSrc(path){
       // preserves special chars but encodes spaces
@@ -1163,15 +1162,6 @@ pages.forEach(src => {
 });
 
     const readerImg = document.getElementById('readerImg');
-    readerImg.addEventListener('click', (e) => {
-  e.stopPropagation(); // prevents popup from closing
-  if (idx < pages.length - 1) {
-    idx++;
-  } else {
-    idx = 0;
-  }
-  render();
-});
 
     const reader = document.querySelector('.reader');
     reader.addEventListener('click', (e) => {
@@ -1181,15 +1171,26 @@ pages.forEach(src => {
   }
 });
 
-readerImg.addEventListener('click', () => {
+readerImg.addEventListener('click', (e) => {
+  e.stopPropagation();
 
   if (window.innerWidth <= 768) {
     reader.classList.add('fullscreen');
+    document.body.style.overflow = 'hidden';
   } else {
     reader.classList.add('popup');
     document.body.style.overflow = 'hidden';
-
   }
+
+  if (idx < pages.length - 1) {
+    idx++;
+  } else {
+    idx = 0;
+  }
+
+  render();
+});
+
 
   if (idx < pages.length - 1) {
     idx++;
