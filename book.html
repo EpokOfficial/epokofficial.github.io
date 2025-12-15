@@ -1205,7 +1205,7 @@ readerImg.addEventListener('touchend', () => {
   }
 });
  
-  render();
+
     
 readerImg.addEventListener('touchend', () => {
   const now = Date.now();
@@ -1224,10 +1224,14 @@ readerImg.addEventListener('touchend', () => {
     let idx = 0;
 
     function render(){
+    
+
       const img = new Image();
 img.onload = () => {
   readerImg.src = img.src;
+    
 };
+    
 img.src = safeSrc(pages[idx]);
 
       readerImg.alt = 'Preview page ' + (idx + 1);
@@ -1242,7 +1246,7 @@ readerImg.setAttribute('aria-label', 'Page ' + (idx + 1) + ' of ' + pages.length
         
       }
     }
-
+        render();
     function buildSelect(){
       pageSelect.innerHTML = '';
       pages.forEach((p, i) => {
