@@ -382,6 +382,58 @@
   border: 1px solid rgba(212,175,55,0.18);
   box-shadow: 0 34px 120px rgba(0,0,0,0.82);
 }
+.reader-view img {
+  /* existing styles */
+}
+
+/* ===== BOOK FULLSCREEN (MOBILE) ===== */
+.reader.fullscreen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reader.fullscreen img {
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+}
+
+.reader-hint-top,
+.reader-hint-bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 22px;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-align: center;
+  color: rgba(255,255,255,.7);
+  background: rgba(0,0,0,.35);
+  z-index: 10000;
+  display: none;
+}
+@media (min-width: 769px){
+  .reader.fullscreen {
+    display: none;
+  }
+}
+
+.reader-hint-top { top: 0; }
+.reader-hint-bottom { bottom: 0; }
+
+.reader.fullscreen .reader-hint-top,
+.reader.fullscreen .reader-hint-bottom {
+  display: block;
+}
+
+@media (min-width: 769px){
+  .reader.fullscreen { display: none; }
+}
 
     .reader-bottom{
       padding: 14px;
@@ -963,10 +1015,17 @@
    
 
         <div class="reader">
-          <div class="reader-view">
-            <img id="readerImg" src="bookart/thebookcover.png" alt="Preview page" />
-            <div class="preview-hint">DOUBLE TAP TO PREVIEW</div>
-         </div>
+
+  <div class="reader-hint-top">DOUBLE TAP TO EXIT</div>
+
+  <div class="reader-view">
+    <img id="readerImg" src="bookart/thebookcover.png" alt="Preview page" />
+    <div class="preview-hint">DOUBLE TAP TO PREVIEW</div>
+  </div>
+
+  <div class="reader-hint-bottom">TAP TO CHANGE PAGE</div>
+
+</div>
          <div class="reader-bottom"></div>
        </div>
     </section>
