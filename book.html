@@ -1212,27 +1212,30 @@
     img.src = safeSrc(src);
   });
 
-  /* ================== BOOK CORE (BASELINE) ================== */
-  const readerImg = document.getElementById('readerImg');
-  let idx = 0;
+// ===== BOOK CORE (STEP 4A – BASELINE) =====
+const reader = document.querySelector('.reader');
+const readerImg = document.getElementById('readerImg');
 
-  function render(){
-    const img = new Image();
-    img.onload = () => {
-      readerImg.src = img.src;
-    };
-    img.src = safeSrc(pages[idx]);
-  }
+let idx = 0;
 
- readerImg.addEventListener('click', () => {
+function render() {
+  const img = new Image();
+  img.onload = () => {
+    readerImg.src = img.src;
+  };
+  img.src = safeSrc(pages[idx]);
+  readerImg.alt = 'Preview page ' + (idx + 1);
+}
+
+// single tap = next page
+readerImg.addEventListener('click', () => {
   idx = (idx + 1) % pages.length;
   render();
 });
 
-// ===== DOUBLE TAP FULLSCREEN (MOBILE ONLY) =====
+// double tap = fullscreen (mobile only)
 let lastTap = 0;
-
-readerImg.addEventListener('touchend', (e) => {
+readerImg.addEventListener('touchend', () => {
   if (window.innerWidth > 768) return;
 
   const now = Date.now();
@@ -1243,8 +1246,8 @@ readerImg.addEventListener('touchend', (e) => {
   }
   lastTap = now;
 });
-     
-// INIT
+
+// init
 render();
 });
 
