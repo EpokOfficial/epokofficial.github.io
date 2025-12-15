@@ -1224,14 +1224,29 @@
     img.src = safeSrc(pages[idx]);
   }
 
-  readerImg.addEventListener('click', () => {
-    idx = (idx + 1) % pages.length;
-    render();
-  });
-
+ readerImg.addEventListener('click', () => {
+  idx = (idx + 1) % pages.length;
   render();
-
 });
+
+// ===== DOUBLE TAP FULLSCREEN (MOBILE ONLY) =====
+let lastTap = 0;
+
+readerImg.addEventListener('touchend', (e) => {
+  if (window.innerWidth > 768) return;
+
+  const now = Date.now();
+  if (now - lastTap < 300) {
+    reader.classList.toggle('fullscreen');
+    document.body.style.overflow =
+      reader.classList.contains('fullscreen') ? 'hidden' : '';
+  }
+  lastTap = now;
+});
+
+// INIT
+render();
+
 
 
 // INIT
