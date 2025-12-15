@@ -6,6 +6,28 @@
   <title>Panthers & Vampires: Blue Moon | EPÒK</title>
 
   <style>
+    
+.reader-exit-hint{
+  display:none;
+  position:absolute;
+  top:6px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:0.55rem;
+  letter-spacing:0.22em;
+  opacity:0.75;
+  pointer-events:none;
+}
+
+.reader-view img{
+  transition: opacity 180ms ease;
+}
+
+.reader.fullscreen .reader-exit-hint{
+  display:block;
+}
+
+    
     :root{
       --gold: rgba(212,175,55,1);
       --goldSoft: rgba(212,175,55,0.55);
@@ -340,6 +362,12 @@
       align-items:center;
     }
     .reader-view img{
+      /* DESKTOP NORMAL VIEW (NOT POPUP) */
+.reader:not(.popup):not(.fullscreen) .reader-view img{
+  max-width: 640px;
+  margin: 0 auto;
+}
+
       width: 85%;
       max-height: 70vh;
 
@@ -654,6 +682,48 @@
   width: 100%;
   height: 100vh;
   object-fit: contain;
+}
+.reader.popup {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.reader.popup .reader-view img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+.reader.fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.reader.fullscreen .reader-view {
+  padding: 0;
+}
+
+.reader.fullscreen .reader-view img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+}
+.reader.popup .reader-exit-hint{
+  display:block;
+}
+
+.reader.popup .reader-exit-hint::before{
+  content: "CLICK OUTSIDE OR ESC TO CLOSE";
 }
 
   </style>
@@ -1087,13 +1157,38 @@
       'PanthersBookPreview/fore websited-images-14.jpg',
       'PanthersBookPreview/fore websited-images-15.jpg'
     ];
+pages.forEach(src => {
+  const img = new Image();
+  img.src = safeSrc(src);
+});
 
     const readerImg = document.getElementById('readerImg');
+    readerImg.addEventListener('click', (e) => {
+  e.stopPropagation(); // prevents popup from closing
+  if (idx < pages.length - 1) {
+    idx++;
+  } else {
+    idx = 0;
+  }
+  render();
+});
+
     const reader = document.querySelector('.reader');
-    
+    reader.addEventListener('click', (e) => {
+  if (window.innerWidth > 768 && e.target === reader) {
+    reader.classList.remove('popup');
+    document.body.style.overflow = '';
+  }
+});
+
 readerImg.addEventListener('click', () => {
+
   if (window.innerWidth <= 768) {
     reader.classList.add('fullscreen');
+  } else {
+    reader.classList.add('popup');
+    document.body.style.overflow = 'hidden';
+
   }
 
   if (idx < pages.length - 1) {
@@ -1104,11 +1199,13 @@ readerImg.addEventListener('click', () => {
   render();
 });
 
+
 readerImg.addEventListener('touchend', () => {
   const now = Date.now();
   if (now - lastTap < 300) {
-    document.querySelector('.reader').classList.toggle('fullscreen');
-  }
+  reader.classList.toggle('fullscreen');
+  document.body.style.overflow = reader.classList.contains('fullscreen') ? 'hidden' : '';
+}
   lastTap = now;
 });
 
@@ -1120,15 +1217,22 @@ readerImg.addEventListener('touchend', () => {
     let idx = 0;
 
     function render(){
-      readerImg.src = safeSrc(pages[idx]);
+      const img = new Image();
+img.onload = () => {
+  readerImg.src = img.src;
+};
+img.src = safeSrc(pages[idx]);
+
       readerImg.alt = 'Preview page ' + (idx + 1);
       pageCount.textContent = 'Page ' + (idx + 1) + ' / ' + pages.length;
 
       prevBtn.disabled = idx === 0;
       nextBtn.disabled = idx === pages.length - 1;
+readerImg.setAttribute('aria-label', 'Page ' + (idx + 1) + ' of ' + pages.length);
 
       if(pageSelect.value !== String(idx)){
         pageSelect.value = String(idx);
+        
       }
     }
 
@@ -1161,6 +1265,24 @@ readerImg.addEventListener('touchend', () => {
     // init
     buildSelect();
     render();
+    document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    reader.classList.remove('popup');
+  }
+});
+    document.addEventListener('keydown', (e) => {
+  if (reader.classList.contains('popup') || reader.classList.contains('fullscreen')) {
+    if (e.key === 'ArrowRight') {
+      if (idx < pages.length - 1) idx++;
+      render();
+    }
+    if (e.key === 'ArrowLeft') {
+      if (idx > 0) idx--;
+      render();
+    }
+  }
+});
+
   </script>
 </body>
 </html>
