@@ -22,6 +22,17 @@
 .reader-view img{
   transition: opacity 180ms ease;
 }
+.preview-hint{
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  opacity: 0.65;
+}
+
+.reader.fullscreen .preview-hint{
+  display: none;
+}
 
 .reader.fullscreen .reader-exit-hint{
   display:block;
@@ -946,39 +957,18 @@
     <!-- SECTION 5 — BOOK PREVIEW (LOCKED: cover first + keep exact filenames + folder path) -->
     <section id="book-preview">
       <div class="section-title">Book Preview — Prologue &amp; Chapter One</div>
-      <div class="section-subtitle">
-        Use Next/Previous to page through. Cover is first page. Filenames are kept exactly as-is.
-      </div>
+    
+        
 
-      <div class="reader" aria-label="Book preview reader">
-        <div class="reader-top">
-          <div class="reader-exit-hint">DOUBLE TAP TO EXIT</div>
-          <div class="reader-title">Panthers &amp; Vampires: Blue Moon — Preview</div>
-          <div class="reader-controls">
-            <button class="reader-btn" id="prevBtn" type="button">Previous</button>
-            <div class="reader-count" id="pageCount">Page 1 / 17</div>
-            <button class="reader-btn" id="nextBtn" type="button">Next</button>
-          </div>
-        </div>
+   
 
-        <div class="reader-view">
-          <img id="readerImg" src="bookart/thebookcover.png" alt="Preview page" />
-          <div style="margin-top:10px;font-size:0.7rem;letter-spacing:0.2em;opacity:0.7;">
-          TAP / CLICK TO PREVIEW
-            </div>
-
-        </div>
-
-        <div class="reader-bottom">
-          <div class="reader-jump">
-            <div class="reader-label">Jump to page</div>
-            <select class="reader-select" id="pageSelect" aria-label="Select preview page"></select>
-          </div>
-
-          <!-- LOCKED: preview ends with CTA to buy (internal) -->
-          <a class="btn btn-primary" href="#purchase">ORDER NOW</a>
-        </div>
-      </div>
+        <div class="reader">
+          <div class="reader-view">
+            <img id="readerImg" src="bookart/thebookcover.png" alt="Preview page" />
+            <div class="preview-hint">DOUBLE TAP TO PREVIEW</div>
+         </div>
+         <div class="reader-bottom"></div>
+       </div>
     </section>
 
     <!-- SECTION 6 — PURCHASE (LOCKED PRODUCTS + PRICING + RULES + AUDIO COMING SOON) -->
