@@ -1,1 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EPÒK | Store</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:#000;
+    color:#f2f2f2;
+    overflow-x:hidden;
+}
+
+/* ================= GLOBAL FRAME ================= */
+.page-frame-outer{
+    min-height:100vh;
+    padding:22px;
+    border:2px solid rgba(212,175,55,.65);
+    position:relative;
+    overflow:hidden;
+}
+
+.page-frame-outer::before,
+.page-frame-outer::after{
+    content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
+    position:absolute;
+    top:22px;
+    bottom:22px;
+    width:22px;
+    writing-mode:vertical-rl;
+    font-size:.65rem;
+    letter-spacing:.35em;
+    color:#fff;
+    pointer-events:none;
+}
+
+.page-frame-outer::before{left:1px;animation:leftScroll 45s linear infinite}
+.page-frame-outer::after{right:9px;animation:rightScroll 45s linear infinite}
+
+@keyframes leftScroll{from{transform:translateY(100%)}to{transform:translateY(-100%)}}
+@keyframes rightScroll{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
+
+/* Arabic border */
+.arabic-border{
+    position:absolute;
+    bottom:6px;
+    left:0;right:0;
+    text-align:center;
+    font-size:.7rem;
+    letter-spacing:.45em;
+    color:#fff;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+.arabic-border span{
+    display:inline-block;
+    padding-left:100%;
+    animation:arabicScroll 18s linear infinite;
+}
+
+@keyframes arabicScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* ================= INNER FRAME ================= */
+.page-frame-inner{
+    min-height:100vh;
+    padding:0 6vw 180px;
+    border:1px solid rgba(212,175,55,.35);
+    box-shadow:
+        inset 0 0 0 1px rgba(212,175,55,.18),
+        0 40px 120px rgba(0,0,0,.95);
+}
+
+/* ================= NAV ================= */
+.top-nav{
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:64px;
+    display:flex;
+    align-items:center;
+    background:rgba(0,0,0,.88);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    border-bottom:1px solid rgba(212,175,55,.25);
+}
+
+.nav-scroll{width:100%;overflow-x:auto;padding:0 6vw;white-space:nowrap}
+.nav-scroll::-webkit-scrollbar{height:0}
+
+.nav-links{display:inline-flex;gap:26px}
+.nav-links a{
+    text-decoration:none;
+    color:#e8e4d8;
+    font-size:.82rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    opacity:.85;
+}
+.nav-links a:hover{color:#f3d688}
+.nav-links a.featured{
+    border:1px solid rgba(212,175,55,.85);
+    padding:8px 12px;
+    color:#f3d688;
+    opacity:1;
+}
+
+/* ================= INTRO ================= */
+.store-intro{
+    margin:120px auto 60px;
+    max-width:980px;
+    text-align:center;
+}
+
+.store-intro h1{
+    font-size:1.8rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:#f3d688;
+}
+
+.drop-status{
+    margin-top:14px;
+    font-size:.75rem;
+    letter-spacing:.35em;
+    color:#ff3b3b;
+    text-transform:uppercase;
+}
+
+/* ================= OUTFITS ================= */
+.outfit-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:44px;
+    max-width:1500px;
+    margin:0 auto 140px;
+}
+
+.outfit-card{cursor:pointer}
+.outfit-card img{
+    width:100%;
+    display:block;
+    box-shadow:0 30px 80px rgba(0,0,0,.9);
+}
+
+.outfit-info{margin-top:14px}
+.outfit-info h3{
+    font-size:.8rem;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+}
+.outfit-info span{
+    font-size:.75rem;
+    color:#f3d688;
+}
+
+/* ================= OVERLAY ================= */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.94);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:3000;
+}
+.overlay.active{display:flex}
+
+.overlay-panel{
+    max-width:980px;
+    width:92%;
+    border:1px solid rgba(212,175,55,.45);
+    padding:40px;
+}
+
+.overlay-close{
+    text-align:right;
+    cursor:pointer;
+    color:#f3d688;
+    letter-spacing:.3em;
+    margin-bottom:20px;
+}
+
+/* checklist */
+.checklist div{
+    margin-bottom:10px;
+    font-size:.85rem;
+}
+
+/* actions */
+.overlay-actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:30px;
+}
+.overlay-actions button{
+    padding:14px 28px;
+    background:none;
+    border:1px solid rgba(212,175,55,.85);
+    color:#f3d688;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    cursor:pointer;
+}
+
+/* ================= COMING SOON ================= */
+.category-section{margin-top:140px}
+.category-section h2{
+    text-align:center;
+    font-size:1.4rem;
+    letter-spacing:.3em;
+    color:#f3d688;
+    margin-bottom:60px;
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:30px;
+}
+
+.category-card{
+    border:1px solid rgba(212,175,55,.35);
+    padding:30px;
+    text-align:center;
+    position:relative;
+    opacity:.5;
+}
+.category-card::after{
+    content:"COMING SOON";
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#ff3b3b;
+    letter-spacing:.3em;
+    font-size:.7rem;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .page-frame-inner{padding:0 3vw 160px}
+    .store-intro{margin-top:96px}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="top-nav">
+<div class="nav-scroll">
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="movement.html">Movement</a>
+<a href="patchbaby.html">Patch Baby</a>
+<a href="book.html">The Book</a>
+<a href="store.html">Store</a>
+<a href="checkout.html">Checkout</a>
+<a class="featured" href="signature-apparel-premiere.html">Signature Apparel Premiere</a>
+</div>
+</div>
+</nav>
+
+<div class="page-frame-outer">
+<div class="arabic-border">
+<span>قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك • </span>
+</div>
+
+<div class="page-frame-inner">
+
+<section class="store-intro">
+<h1>Winter Drop — Premiere</h1>
+<div class="drop-status">Available January 15, 2026</div>
+</section>
+
+<section class="outfit-grid">
+
+<div class="outfit-card" onclick="openOverlay('Jogger')">
+<img src="bookart/patchbaby-jogger-set.png">
+<div class="outfit-info">
+<h3>Patch Baby Jogger Set</h3>
+<span>Individual pricing</span>
+</div>
+</div>
+
+<div class="outfit-card" onclick="openOverlay('Street')">
+<img src="bookart/patchbaby-street-set.png">
+<div class="outfit-info">
+<h3>Patch Baby Street Set</h3>
+<span>Individual pricing</span>
+</div>
+</div>
+
+<div class="outfit-card" onclick="openOverlay('Studio')">
+<img src="bookart/patchbaby-studio-set.png">
+<div class="outfit-info">
+<h3>Patch Baby Studio Set</h3>
+<span>Individual pricing</span>
+</div>
+</div>
+
+</section>
+
+<section class="category-section">
+<h2>Collections</h2>
+<div class="category-grid">
+<div class="category-card">Men’s Clothing</div>
+<div class="category-card">Women’s Clothing</div>
+<div class="category-card">Kids & Youth</div>
+<div class="category-card">Hats</div>
+<div class="category-card">Accessories</div>
+<div class="category-card">Footwear</div>
+<div class="category-card">Tech Accessories</div>
+</div>
+</section>
+
+</div>
+</div>
+
+<div class="overlay" id="overlay">
+<div class="overlay-panel">
+<div class="overlay-close" onclick="closeOverlay()">CLOSE</div>
+
+<div class="checklist" id="checklist"></div>
+
+<div class="overlay-actions">
+<button onclick="saveLook()">Save This Look</button>
+<button>Quick Buy</button>
+</div>
+
+<p style="margin-top:16px;font-size:.75rem;color:#999">
+Available at launch. No early access required.
+</p>
+</div>
+</div>
+
+<script>
+const data={
+Jogger:[
+"✔ Beanie — $45",
+"✔ Hoodie — $120",
+"✔ Joggers — $110"
+],
+Street:[
+"✔ Cap — $40",
+"✔ Tee — $85",
+"✔ Pants — $115"
+],
+Studio:[
+"✔ Beanie — $45",
+"✔ Crewneck — $110",
+"✔ Sweatpants — $105"
+]
+};
+
+function openOverlay(type){
+const list=document.getElementById("checklist");
+list.innerHTML="";
+data[type].forEach(i=>{
+const d=document.createElement("div");
+d.textContent=i;
+list.appendChild(d);
+});
+document.getElementById("overlay").classList.add("active");
+}
+
+function closeOverlay(){
+document.getElementById("overlay").classList.remove("active");
+}
+
+function saveLook(){
+localStorage.setItem("savedEPÒKLook","true");
+alert("Look saved for launch.");
+}
+</script>
+
+</body>
+</html>
 
