@@ -1,1 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EPÒK | About</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:#000;
+    color:#f2f2f2;
+    overflow-x:hidden;
+}
+
+/* ============ DOUBLE ROYAL FRAME (FULL PAGE) ============ */
+.page-frame-outer {
+    min-height:100vh;
+    padding:22px;
+    background:#000;
+    border:2px solid rgba(212,175,55,0.65);
+    position:relative;
+    overflow:hidden;
+}
+
+.page-frame-outer::before,
+.page-frame-outer::after {
+    content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
+    position:absolute;
+    top:22px;
+    bottom:22px;
+    width:22px;
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    font-size:0.65rem;
+    letter-spacing:0.35em;
+    color:#ffffff;
+    pointer-events:none;
+    white-space:nowrap;
+}
+
+.page-frame-outer::before {
+    left:1px;
+    animation:leftScroll 45s linear infinite;
+}
+@keyframes leftScroll {
+    from { transform:translateY(100%); }
+    to { transform:translateY(-100%); }
+}
+
+.page-frame-outer::after {
+    right:9px;
+    animation:rightScroll 45s linear infinite;
+}
+@keyframes rightScroll {
+    from { transform:translateY(-100%); }
+    to { transform:translateY(100%); }
+}
+
+/* BOTTOM ARABIC */
+.page-frame-outer .arabic-border {
+    position:absolute;
+    bottom:6px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:0.7rem;
+    letter-spacing:0.45em;
+    color:#ffffff;
+    pointer-events:none;
+    white-space:nowrap;
+}
+
+.page-frame-outer .arabic-border span {
+    display:inline-block;
+    padding-left:100%;
+    animation:arabic-scroll 18s linear infinite;
+}
+@keyframes arabic-scroll {
+    from { transform:translateX(0); }
+    to { transform:translateX(-100%); }
+}
+
+.page-frame-inner {
+    min-height:100vh;
+    padding:0 6vw 140px;
+    border:1px solid rgba(212,175,55,0.35);
+    box-shadow:
+        inset 0 0 0 1px rgba(212,175,55,0.18),
+        0 40px 120px rgba(0,0,0,0.95);
+    background:#000;
+}
+
+/* ================= TOP NAV ================= */
+.top-nav {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:64px;
+    display:flex;
+    align-items:center;
+    background:rgba(0,0,0,0.88);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    border-bottom:1px solid rgba(212,175,55,0.25);
+}
+
+.nav-scroll {
+    width:100%;
+    overflow-x:auto;
+    white-space:nowrap;
+    padding:0 6vw;
+}
+.nav-scroll::-webkit-scrollbar { height:0; }
+
+.nav-links {
+    display:inline-flex;
+    gap:26px;
+    align-items:center;
+}
+
+.nav-links a {
+    text-decoration:none;
+    color:#e8e4d8;
+    font-size:0.82rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    padding:8px 4px;
+    opacity:0.85;
+}
+
+.nav-links a:hover {
+    color:#f3d688;
+    opacity:1;
+}
+
+.nav-links a.featured {
+    opacity:1;
+    border:1px solid rgba(212,175,55,0.85);
+    padding:8px 12px;
+    color:#f3d688;
+}
+
+/* ================= ABOUT CONTENT ================= */
+.about-mission {
+    max-width:980px;
+    margin:0 auto;
+    padding-top:120px;
+    text-align:left;
+}
+
+.about-mission p {
+    font-size:0.98rem;
+    line-height:1.75;
+    margin-bottom:18px;
+    color:#dedad0;
+}
+
+.about-mission .mantra {
+    text-align:center;
+    margin:60px 0 30px;
+    font-size:1.1rem;
+    letter-spacing:0.4em;
+    color:#f3d688;
+    text-transform:uppercase;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:768px) {
+
+    .page-frame-inner {
+        padding:0 3vw 120px;
+    }
+
+    .about-mission {
+        padding-top:96px;
+    }
+
+    .page-frame-outer::before,
+    .page-frame-outer::after {
+        font-size:0.55rem;
+        letter-spacing:0.3em;
+    }
+
+    .page-frame-outer .arabic-border {
+        font-size:0.6rem;
+        letter-spacing:0.3em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="top-nav">
+    <div class="nav-scroll">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="movement.html">Movement</a>
+            <a href="patchbaby.html">Patch Baby</a>
+            <a href="book.html">The Book</a>
+            <a href="store.html">Store</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="about.html">About</a>
+            <a class="featured" href="signature-apparel-premiere.html">Signature Apparel Premiere</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-frame-outer">
+
+<div class="arabic-border">
+<span>قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك • قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك • </span>
+</div>
+
+<div class="page-frame-inner">
+
+<section class="about-mission">
+
+<p>EPÒK was created from a moment most people avoid.</p>
+
+<p>
+A moment of clarity.<br>
+A moment where denial ends.<br>
+A moment where you see yourself honestly — your failures, your responsibility, your potential — and decide that staying the same is no longer an option.
+</p>
+
+<p>EPÒK exists for the decision to change.</p>
+
+<p>
+Not the highlight reel.<br>
+Not the success story.<br>
+The decision.
+</p>
+
+<p>
+It is built on the understanding that falling does not disqualify you from greatness.<br>
+That position is temporary.<br>
+That circumstance is not identity.
+</p>
+
+<p>
+No matter how low someone falls, there is still authority within them — the authority to rise, to lead, and to reclaim their life.
+</p>
+
+<p>EPÒK stands on the belief that leadership begins internally.</p>
+
+<p>
+Men are kings because leadership is responsibility.<br>
+Women are queens because creation is power.<br>
+Children are princes and princesses because legacy matters.
+</p>
+
+<p>
+These are not titles granted by the world.<br>
+They are roles claimed through self-respect, discipline, and truth.
+</p>
+
+<p>EPÒK rejects the culture of shrinking.</p>
+
+<p>
+It rejects voices that profit from doubt.<br>
+Systems that reward insecurity.<br>
+People who speak down on others in moments of weakness.
+</p>
+
+<p>
+No one has the right to define your worth.<br>
+No one has the authority to decide your ceiling.<br>
+No relationship, no label, no past version of you gets to dictate your future.
+</p>
+
+<p>
+Energy never disappears.<br>
+It transforms.
+</p>
+
+<p>
+What is broken is not gone — it is waiting to be rebuilt with intention.<br>
+What was misused can be redirected.<br>
+What was lost can return stronger when aligned correctly.
+</p>
+
+<p>
+This is why EPÒK is not about perfection.<br>
+It is about accountability.<br>
+Not ego — but ownership.
+</p>
+
+<p>
+Owning your mistakes.<br>
+Owning your growth.<br>
+Owning your direction.
+</p>
+
+<p>
+EPÒK is a stand against living beneath your potential.<br>
+A refusal to accept a life defined by shame, fear, or external validation.
+</p>
+
+<p>
+It exists to remind people of who they are when everything unnecessary is stripped away.
+</p>
+
+<div class="mantra">
+Survive &nbsp;•&nbsp; Rise &nbsp;•&nbsp; Become
+</div>
+
+<p>
+This is not a slogan.<br>
+It is a process.
+</p>
+
+<p>
+And when you are ready to stop negotiating with the version of yourself that plays small —
+<br><br>
+you step into your EPÒK.
+</p>
+
+</section>
+
+<footer class="global-footer">
+    <div class="footer-socials">
+        <a href="https://www.instagram.com/epok.official" target="_blank">Instagram</a>
+        <a href="https://www.instagram.com/epok.ceo" target="_blank">Founder</a>
+        <a href="https://www.tiktok.com/@epok.official" target="_blank">TikTok</a>
+        <a href="https://youtube.com/@epokofficial-x2w" target="_blank">YouTube</a>
+        <a href="https://www.facebook.com/profile.php?id=61584503914034" target="_blank">Facebook</a>
+    </div>
+    <div class="footer-mark">© EPÒK</div>
+</footer>
+
+</div>
+</div>
+
+</body>
+</html>
 
