@@ -1,79 +1,33 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPÒK | Store</title>
+
+<title>EPÒK | Patch Baby — Boy World</title>
+
 
 <style>
+
 * { margin:0; padding:0; box-sizing:border-box; }
+
 
 html, body {
     width:100%;
     height:100%;
     background:#000;
-    color:#f2f2f2;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     overflow:hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* ================= TOP NAV (VERBATIM) ================= */
-.top-nav {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:64px;
-    background:rgba(0,0,0,0.85);
-    backdrop-filter:blur(10px);
-    z-index:1000;
-    border-bottom:1px solid rgba(212,175,55,0.25);
-}
 
-.nav-scroll {
-    width:100%;
-    height:100%;
-    overflow-x:auto;
-    overflow-y:hidden;
-    white-space:nowrap;
-    -webkit-overflow-scrolling:touch;
-    padding:0 6vw;
-    display:flex;
-    align-items:center;
-}
+/* ============ DOUBLE ROYAL FRAME (LOCKED) ============ */
 
-.nav-scroll::-webkit-scrollbar { height:0px; }
-.nav-scroll { scrollbar-width:none; }
-
-.nav-links {
-    display:inline-flex;
-    gap:26px;
-    align-items:center;
-}
-
-.nav-links a {
-    text-decoration:none;
-    color:#e8e4d8;
-    font-size:0.82rem;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    padding:8px 4px;
-    opacity:0.85;
-}
-
-.nav-links a:hover {
-    color:#f3d688;
-    opacity:1;
-}
-
-.nav-links a.featured {
-    opacity:1;
-    border:1px solid rgba(212,175,55,0.85);
-    padding:8px 12px;
-    color:#f3d688;
-}
-
-/* ============ DOUBLE ROYAL FRAME (VERBATIM) ============ */
 .page-frame-outer {
     position:fixed;
     inset:0;
@@ -81,8 +35,8 @@ html, body {
     border:2px solid rgba(212,175,55,0.65);
     pointer-events:none;
     z-index:50;
-    overflow:hidden;
 }
+
 
 .page-frame-outer::before,
 .page-frame-outer::after {
@@ -92,32 +46,38 @@ html, body {
     bottom:22px;
     width:22px;
     writing-mode:vertical-rl;
-    text-orientation:mixed;
     font-size:0.65rem;
     letter-spacing:0.35em;
     color:#ffffff;
     white-space:nowrap;
 }
 
+
 .page-frame-outer::before {
     left:1px;
     animation:leftScroll 45s linear infinite;
 }
+
 
 .page-frame-outer::after {
     right:9px;
     animation:rightScroll 45s linear infinite;
 }
 
+
 @keyframes leftScroll {
     from { transform:translateY(100%); }
-    to   { transform:translateY(-100%); }
+    to { transform:translateY(-100%); }
 }
+
 
 @keyframes rightScroll {
     from { transform:translateY(-100%); }
-    to   { transform:translateY(100%); }
+    to { transform:translateY(100%); }
 }
+
+
+/* Bottom Arabic */
 
 .arabic-border {
     position:absolute;
@@ -132,589 +92,84 @@ html, body {
     text-align:center;
 }
 
+
 .arabic-border span {
     display:inline-block;
     padding-left:100%;
     animation:arabic-scroll 18s linear infinite;
 }
 
+
 @keyframes arabic-scroll {
     from { transform:translateX(0); }
     to { transform:translateX(-100%); }
 }
 
-/* ============ PAGE SCROLLER (VERBATIM) ============ */
-.page-scroll {
+
+/* ============ WORLD STAGE ============ */
+
+.world-stage {
     position:fixed;
     inset:0;
-    overflow-y:auto;
-    overflow-x:hidden;
     z-index:1;
-    padding:22px;
 }
 
-.page-inner {
-    min-height:calc(100vh - 44px);
-    border:1px solid rgba(212,175,55,0.35);
-    box-shadow:
-        inset 0 0 0 1px rgba(212,175,55,0.18),
-        0 40px 120px rgba(0,0,0,0.95);
-    background:#000;
-    position:relative;
-    padding:88px 6vw 120px;
+
+.world-base,
+.world-overlay {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
 }
 
-/* ============ HEADER MINIMAL UI (VERBATIM BASE) ============ */
-.model-header {
-    position:sticky;
-    top:64px;
-    z-index:20;
-    padding:14px 0 18px;
-    background:linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.25), rgba(0,0,0,0));
-    backdrop-filter:blur(10px);
-}
 
-.model-header-row {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-}
+/* WORLD NAV (IN-WORLD ONLY) */
 
-.progress {
-    font-size:0.72rem;
-    letter-spacing:0.34em;
-    text-transform:uppercase;
-    color:#e8e4d8;
-    opacity:0.9;
-}
-
-.look-title {
+.world-nav {
+    position:absolute;
+    bottom:12%;
+    width:100%;
     text-align:center;
-    flex:1;
-    font-size:0.92rem;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
-    color:#f3d688;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.nav-arrows {
-    display:flex;
-    gap:10px;
-}
-
-.nav-link {
-    text-decoration:none;
-    color:#e8e4d8;
-    font-size:0.7rem;
-    letter-spacing:0.26em;
-    text-transform:uppercase;
-    padding:10px 12px;
-    border:1px solid rgba(212,175,55,0.25);
-    border-radius:999px;
-    background:rgba(0,0,0,0.55);
-}
-
-.nav-link:hover {
-    color:#f3d688;
-    border-color:rgba(212,175,55,0.55);
-}
-
-/* ============ STORE SECTION TABS (ADDITION) ============ */
-.store-tabs {
-    margin-top:14px;
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    white-space:nowrap;
-    -webkit-overflow-scrolling:touch;
-    padding:6px 0 2px;
-}
-
-.store-tab {
-    text-decoration:none;
-    color:#e8e4d8;
-    font-size:0.7rem;
-    letter-spacing:0.26em;
-    text-transform:uppercase;
-    padding:10px 12px;
-    border:1px solid rgba(212,175,55,0.25);
-    border-radius:999px;
-    background:rgba(0,0,0,0.55);
-    opacity:0.95;
-}
-
-.store-tab:hover {
-    color:#f3d688;
-    border-color:rgba(212,175,55,0.55);
-}
-
-/* ============ STORE SECTIONS (ADDITION) ============ */
-.store-section {
-    margin-top:90px;
-}
-
-.section-banner {
-    width:100%;
-    height:180px;
-    border-radius:22px;
-    overflow:hidden;
-    border:1px solid rgba(212,175,55,0.22);
-    box-shadow:0 40px 120px rgba(0,0,0,0.95);
-    background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#f3d688;
-    font-size:0.86rem;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
-}
-
-.section-bg {
-    margin-top:18px;
-    border:1px dashed rgba(212,175,55,0.25);
-    border-radius:22px;
-    padding:18px;
-}
-
-.product-grid {
-    margin-top:18px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:18px;
-}
-
-.product-tile {
-    border:1px solid rgba(212,175,55,0.18);
-    border-radius:20px;
-    background:rgba(0,0,0,0.65);
-    box-shadow: inset 0 0 0 1px rgba(212,175,55,0.10);
-    overflow:hidden;
-    cursor:pointer;
-}
-
-.product-tile img {
-    width:100%;
-    height:auto;
-    display:block;
-    background:#000;
-}
-
-.product-tile .card-meta {
-    padding:12px 12px 14px;
-}
-
-.product-tile .card-meta h4 {
-    font-size:0.74rem;
-    letter-spacing:0.26em;
-    text-transform:uppercase;
-    color:#e8e4d8;
-    margin-bottom:8px;
-    opacity:0.95;
-}
-
-.product-tile .price-row {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-}
-
-.product-tile .price {
-    font-size:0.92rem;
-    color:#f3d688;
-    letter-spacing:0.04em;
-}
-
-.product-tile.coming-soon {
-    cursor:default;
-    opacity:0.45;
-    position:relative;
-}
-
-.product-tile.coming-soon::after {
-    content:"COMING SOON";
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#ff3b3b;
-    letter-spacing:0.36em;
-    font-size:0.72rem;
-    text-transform:uppercase;
-    background:rgba(0,0,0,0.35);
-}
-
-/* ============ MODAL GALLERY (VERBATIM BASE) ============ */
-.modal {
-    position:fixed;
-    inset:0;
-    z-index:2000;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:22px;
-    pointer-events:auto;
-}
-
-.modal.open {
-    display:flex;
-}
-
-.modal-backdrop {
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.78);
-    backdrop-filter:blur(10px);
-}
-
-.modal-shell {
-    position:relative;
-    width:min(1100px, 100%);
-    max-height:min(88vh, 920px);
-    border-radius:22px;
-    border:1px solid rgba(212,175,55,0.25);
-    background:rgba(0,0,0,0.92);
-    box-shadow:0 50px 140px rgba(0,0,0,0.95);
-    overflow:hidden;
-    z-index:5;
-}
-
-.modal-top {
-    padding:18px 18px 14px;
-    border-bottom:1px solid rgba(212,175,55,0.18);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-}
-
-.modal-title {
-    font-size:0.78rem;
-    letter-spacing:0.34em;
-    text-transform:uppercase;
-    color:#f3d688;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.modal-close {
-    cursor:pointer;
-    border:none;
-    background:transparent;
-    color:#e8e4d8;
-    font-size:0.72rem;
-    letter-spacing:0.26em;
-    text-transform:uppercase;
-    padding:10px 12px;
-    border-radius:999px;
-    border:1px solid rgba(212,175,55,0.22);
-}
-
-.modal-close:hover {
-    color:#f3d688;
-    border-color:rgba(212,175,55,0.55);
-}
-
-/* ===== modal tabs ===== */
-.modal-tabs {
-    padding:14px 18px 0;
-    display:flex;
-    gap:10px;
-}
-
-.tab {
-    cursor:pointer;
-    border:none;
-    background:rgba(0,0,0,0.55);
-    color:#e8e4d8;
-    border:1px solid rgba(212,175,55,0.22);
-    border-radius:999px;
-    padding:10px 12px;
-    font-size:0.7rem;
-    letter-spacing:0.26em;
-    text-transform:uppercase;
-    opacity:0.95;
-}
-
-.tab.active {
-    color:#f3d688;
-    border-color:rgba(212,175,55,0.65);
-    box-shadow:0 0 0 1px rgba(212,175,55,0.18) inset;
-}
-
-.modal-body {
-    padding:16px 18px 18px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.gallery-strip {
-    display:flex;
-    gap:14px;
-    overflow-x:auto;
-    overflow-y:hidden;
-    padding:8px 2px 10px;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-}
-
-.gallery-card {
-    flex:0 0 auto;
-    width: min(360px, 78vw);
-    border-radius:18px;
-    border:1px solid rgba(212,175,55,0.18);
-    background:rgba(0,0,0,0.65);
-    overflow:hidden;
-    scroll-snap-align:start;
-    box-shadow:0 22px 70px rgba(0,0,0,0.85);
-    position:relative;
-}
-
-.badge {
-    position:absolute;
-    top:10px;
-    left:10px;
     z-index:10;
-    padding:8px 10px;
-    border-radius:999px;
-    border:1px solid rgba(212,175,55,0.35);
-    background:rgba(0,0,0,0.65);
-    color:#f3d688;
-    font-size:0.62rem;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
 }
 
-.gallery-card img {
-    width:100%;
-    height:auto;
-    display:block;
-    background:#000;
-}
 
-.card-meta {
-    padding:12px 12px 14px;
-}
-
-.card-meta h4 {
-    font-size:0.74rem;
-    letter-spacing:0.26em;
-    text-transform:uppercase;
-    color:#e8e4d8;
-    margin-bottom:8px;
-    opacity:0.95;
-}
-
-.price-row {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-}
-
-.price {
-    font-size:0.92rem;
-    color:#f3d688;
-    letter-spacing:0.04em;
-}
-
-.disabled-note {
+.world-nav span {
     font-size:0.7rem;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:#e8e4d8;
-    opacity:0.7;
-}
-
-.buy-row {
-    margin-top:10px;
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-
-.buy-btn {
-    appearance:none;
-    border:none;
-    border-radius:999px;
-    padding:12px 14px;
-    font-size:0.72rem;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
-    background:rgba(212,175,55,0.14);
-    color:#f3d688;
-    border:1px solid rgba(212,175,55,0.35);
-    cursor:not-allowed;
+    letter-spacing:0.35em;
+    color:#ffffff;
+    cursor:pointer;
     opacity:0.75;
-    flex:1;
+    transition:opacity .3s ease;
 }
 
-.buy-btn:hover {
-    opacity:0.9;
+
+.world-nav span:hover {
+    opacity:1;
 }
 
-.avail-msg {
-    display:none;
-    font-size:0.68rem;
-    letter-spacing:0.20em;
-    text-transform:uppercase;
-    color:#e8e4d8;
-    opacity:0.85;
-    text-align:center;
-    margin-top:10px;
+
+/* FADE */
+
+.fade-out {
+    animation:fadeOut 1.2s forwards;
 }
 
-.avail-msg.show {
-    display:block;
+
+@keyframes fadeOut {
+    to { opacity:0; }
 }
 
-/* ============ MOBILE OPTIMIZATION (VERBATIM BASE) ============ */
-@media (max-width:768px) {
-
-    .page-scroll { padding:14px; }
-    .page-inner { padding:78px 3vw 110px; }
-
-    .page-frame-outer { padding:14px; }
-
-    .page-frame-outer::before,
-    .page-frame-outer::after {
-        font-size:0.55rem;
-        letter-spacing:0.30em;
-    }
-
-    .arabic-border {
-        font-size:0.6rem;
-        letter-spacing:0.30em;
-    }
-
-    .model-header-row {
-        gap:10px;
-    }
-
-    .look-title {
-        font-size:0.80rem;
-        letter-spacing:0.22em;
-    }
-
-    .nav-link {
-        padding:10px 10px;
-        font-size:0.64rem;
-    }
-
-    .modal {
-        padding:14px;
-    }
-
-    .gallery-card {
-        width:min(330px, 86vw);
-    }
-}
 </style>
+
 </head>
+
 
 <body>
 
-<nav class="top-nav">
-    <div class="nav-scroll">
-        <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="movement.html">Movement</a>
-            <a href="patchbaby.html">Patch Baby</a>
-            <a href="book.html">The Book</a>
-            <a href="store.html">Store</a>
-            <a href="checkout.html">Checkout</a>
-            <a href="about.html">About</a>
-            <a class="featured" href="signature-apparel-premiere.html">Featured Apparel · Premiere</a>
-        </div>
-    </div>
-</nav>
 
-<div class="page-scroll" id="pageScroll">
-    <div class="page-inner">
-
-        <div class="model-header">
-            <div class="model-header-row">
-                <div class="progress">STORE</div>
-
-                <div class="look-title">WINTER DROP — ACTIVE</div>
-
-                <div class="nav-arrows">
-                    <a class="nav-link" href="#winter">WINTER →</a>
-                </div>
-            </div>
-
-            <div class="store-tabs">
-                <a class="store-tab" href="#winter">WINTER DROP</a>
-                <a class="store-tab" href="#saved">SAVED</a>
-                <a class="store-tab" href="#men">MEN</a>
-                <a class="store-tab" href="#women">WOMEN</a>
-                <a class="store-tab" href="#kids">KIDS & YOUTH</a>
-                <a class="store-tab" href="#hats">HATS / BEANIES</a>
-                <a class="store-tab" href="#accessories">ACCESSORIES</a>
-            </div>
-        </div>
-
-        <!-- ================= WINTER DROP ================= -->
-        <section id="winter" class="store-section">
-            <div class="section-banner">WINTER DROP — BANNER PLACEHOLDER</div>
-            <div class="section-bg">BACKGROUND ART PLACEHOLDER</div>
-            <div class="product-grid" id="winterGrid"></div>
-        </section>
-
-        <!-- ================= SAVED ITEMS ================= -->
-        <section id="saved" class="store-section">
-            <div class="section-banner">SAVED ITEMS — BANNER PLACEHOLDER</div>
-            <div class="section-bg">BACKGROUND ART PLACEHOLDER</div>
-            <div class="product-grid" id="savedGrid"></div>
-        </section>
-
-        <!-- ================= MEN ================= -->
-        <section id="men" class="store-section">
-            <div class="section-banner">MEN — BANNER PLACEHOLDER</div>
-            <div class="section-bg">BACKGROUND ART PLACEHOLDER</div>
-            <div class="product-grid" id="menGrid"></div>
-        </section>
-
-        <!-- ================= WOMEN ================= -->
-        <section id="women" class="store-section">
-            <div class="section-banner">WOMEN — BANNER PLACEHOLDER</div>
-            <div class="section-bg">BACKGROUND ART PLACEHOLDER</div>
-            <div class="product-grid" id="womenGrid"></div>
-        </section>
-
-        <!-- ================= KIDS ================= -->
-        <section id="kids" class="store-section">
-            <div class="section-banner">KIDS & YOUTH — BANNER PLACEHOLDER</div>
-            <div class="section-bg">BACKGROUND ART PLACEHOLDER</div>
-            <div class="product-grid" id="kidsGrid"></div>
-        </section>
-
-        <!-- ================= HATS ================= -->
-        <section id="hats" class="store-section">
-            <div class="section-banner">HATS / BEANIES — BANNER PLACEHOLDER</div>
-            <div class="section-bg">BACKGROUND ART PLACEHOLDER</div>
-            <div class="product-grid" id="hatsGrid"></div>
-        </section>
-
-        <!-- ================= ACCESSORIES ================= -->
-        <section id="accessories" class="store-section">
-            <div class="section-banner">ACCESSORIES — BANNER PLACEHOLDER</div>
-            <div class="section-bg">BACKGROUND ART PLACEHOLDER</div>
-            <div class="product-grid" id="accessoriesGrid"></div>
-        </section>
-
-    </div>
-</div>
-
-<!-- BORDER FRAME (VERBATIM) -->
 <div class="page-frame-outer">
     <div class="arabic-border">
         <span>
@@ -724,473 +179,39 @@ html, body {
     </div>
 </div>
 
-<!-- MODAL GALLERY (CONTINUES IN PART 2) -->
-<!-- ================= MODAL GALLERY ================= -->
-<div class="modal" id="mockupModal">
-    <div class="modal-backdrop" id="modalBackdrop"></div>
 
-    <div class="modal-shell" role="dialog" aria-modal="true">
-        <div class="modal-top">
-            <div class="modal-title" id="modalTitle">OUTFIT PREVIEW</div>
-            <button class="modal-close" id="modalClose">CLOSE</button>
-        </div>
+<div class="world-stage" id="worldStage">
 
-        <div class="modal-tabs">
-            <button class="tab active" id="tabGirl">WOMEN</button>
-            <button class="tab" id="tabBoy">MEN</button>
-        </div>
+    <!-- BOY WORLD BASE (AS-IS) -->
+    <img src="images/24.png" class="world-base" alt="Boy World">
 
-        <div class="modal-body">
+    <!-- BOY WORLD OVERLAY (AS-IS) -->
+    <img src="images/24n2.png" class="world-overlay" alt="Boy World Logo">
 
-            <!-- ================= WOMEN STRIP ================= -->
-            <div class="gallery-strip" id="girlStrip">
-
-                <!-- PATCH BABY JOGGER — WOMEN -->
-                <div class="gallery-card">
-                    <div class="badge">WOMEN</div>
-                    <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="">
-                    <div class="card-meta">
-                        <h4>POM POM BEANIE</h4>
-                        <div class="price-row">
-                            <div class="price">$55.00</div>
-                            <div class="disabled-note">PREVIEW</div>
-                        </div>
-                        <div class="buy-row">
-                            <button class="buy-btn" data-save="pompombeanie">SAVE THIS LOOK</button>
-                        </div>
-                        <div class="avail-msg">WINTER DROP</div>
-                    </div>
-                </div>
-
-                <div class="gallery-card">
-                    <div class="badge">WOMEN</div>
-                    <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="">
-                    <div class="card-meta">
-                        <h4>SWEATSHIRT</h4>
-                        <div class="price-row">
-                            <div class="price">$100.00</div>
-                            <div class="disabled-note">PREVIEW</div>
-                        </div>
-                        <div class="buy-row">
-                            <button class="buy-btn" data-save="womens-sweatshirt">SAVE THIS LOOK</button>
-                        </div>
-                        <div class="avail-msg">WINTER DROP</div>
-                    </div>
-                </div>
-
-                <div class="gallery-card">
-                    <div class="badge">WOMEN</div>
-                    <img src="ModelPictures/patchbabysjogger/joggerpantsfront.png" alt="">
-                    <div class="card-meta">
-                        <h4>JOGGER PANTS</h4>
-                        <div class="price-row">
-                            <div class="price">$90.00</div>
-                            <div class="disabled-note">PREVIEW</div>
-                        </div>
-                        <div class="buy-row">
-                            <button class="buy-btn" data-save="womens-joggers">SAVE THIS LOOK</button>
-                        </div>
-                        <div class="avail-msg">WINTER DROP</div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- ================= MEN STRIP ================= -->
-            <div class="gallery-strip" id="boyStrip" style="display:none;">
-
-                <div class="gallery-card">
-                    <div class="badge">MEN</div>
-                    <img src="ModelPictures/patchbabysjogger/beanie.png" alt="">
-                    <div class="card-meta">
-                        <h4>BEANIE</h4>
-                        <div class="price-row">
-                            <div class="price">$45.00</div>
-                            <div class="disabled-note">PREVIEW</div>
-                        </div>
-                        <div class="buy-row">
-                            <button class="buy-btn" data-save="mens-beanie">SAVE THIS LOOK</button>
-                        </div>
-                        <div class="avail-msg">WINTER DROP</div>
-                    </div>
-                </div>
-
-                <div class="gallery-card">
-                    <div class="badge">MEN</div>
-                    <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="">
-                    <div class="card-meta">
-                        <h4>SWEATSHIRT</h4>
-                        <div class="price-row">
-                            <div class="price">$100.00</div>
-                            <div class="disabled-note">PREVIEW</div>
-                        </div>
-                        <div class="buy-row">
-                            <button class="buy-btn" data-save="mens-sweatshirt">SAVE THIS LOOK</button>
-                        </div>
-                        <div class="avail-msg">WINTER DROP</div>
-                    </div>
-                </div>
-
-                <div class="gallery-card">
-                    <div class="badge">MEN</div>
-                    <img src="ModelPictures/patchbabysjogger/joggerpantsfront.png" alt="">
-                    <div class="card-meta">
-                        <h4>JOGGER PANTS</h4>
-                        <div class="price-row">
-                            <div class="price">$90.00</div>
-                            <div class="disabled-note">PREVIEW</div>
-                        </div>
-                        <div class="buy-row">
-                            <button class="buy-btn" data-save="mens-joggers">SAVE THIS LOOK</button>
-                        </div>
-                        <div class="avail-msg">WINTER DROP</div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+    <!-- IN-WORLD NAV (NO TABS) -->
+    <div class="world-nav">
+        <span id="toGirl">← ENTER GIRL WORLD</span>
     </div>
+
 </div>
 
-    <!-- ================= PAGE SECTIONS ================= -->
-
-<!-- ============ SECTION TABS (SCROLL NAV) ============ -->
-<div class="section-tabs">
-    <a href="#winter">WINTER DROP</a>
-    <a href="#saved">SAVED ITEMS</a>
-    <a href="#men">MEN</a>
-    <a href="#women">WOMEN</a>
-    <a href="#kids">KIDS & YOUTH</a>
-    <a href="#hats">HATS / BEANIES</a>
-    <a href="#accessories">ACCESSORIES</a>
-</div>
-
-<!-- ================= WINTER DROP ================= -->
-<section id="winter" class="store-section">
-    <div class="section-banner">WINTER DROP</div>
-    <div class="section-bg"></div>
-
-    <div class="product-grid">
-        <!-- ACTIVE ITEMS INJECTED VIA JS -->
-    </div>
-</section>
-
-<!-- ================= SAVED ITEMS ================= -->
-<section id="saved" class="store-section">
-    <div class="section-banner">SAVED ITEMS</div>
-    <div class="section-bg"></div>
-
-    <div class="product-grid" id="savedGrid">
-        <!-- SAVED LOOKS POPULATE HERE -->
-    </div>
-</section>
-
-<!-- ================= MEN ================= -->
-<section id="men" class="store-section">
-    <div class="section-banner">MEN</div>
-    <div class="section-bg"></div>
-
-    <div class="product-grid">
-        <!-- WINTER DROP MEN + COMING SOON -->
-    </div>
-</section>
-
-<!-- ================= WOMEN ================= -->
-<section id="women" class="store-section">
-    <div class="section-banner">WOMEN</div>
-    <div class="section-bg"></div>
-
-    <div class="product-grid">
-        <!-- WINTER DROP WOMEN + COMING SOON -->
-    </div>
-</section>
-
-<!-- ================= KIDS & YOUTH ================= -->
-<section id="kids" class="store-section">
-    <div class="section-banner">KIDS & YOUTH</div>
-    <div class="section-bg"></div>
-
-    <div class="product-grid">
-        <!-- COMING SOON PLACEHOLDERS -->
-    </div>
-</section>
-
-<!-- ================= HATS / BEANIES ================= -->
-<section id="hats" class="store-section">
-    <div class="section-banner">HATS & BEANIES</div>
-    <div class="section-bg"></div>
-
-    <div class="product-grid">
-        <!-- ACTIVE HATS + COMING SOON -->
-    </div>
-</section>
-
-<!-- ================= ACCESSORIES ================= -->
-<section id="accessories" class="store-section">
-    <div class="section-banner">ACCESSORIES</div>
-    <div class="section-bg"></div>
-
-    <div class="product-grid">
-        <!-- COMING SOON PLACEHOLDERS -->
-    </div>
-</section>
-
-<!-- ================= SECTION STYLES ================= -->
-<style>
-.section-tabs {
-    position:sticky;
-    top:64px;
-    z-index:25;
-    display:flex;
-    gap:18px;
-    padding:16px 6vw;
-    background:rgba(0,0,0,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(212,175,55,0.25);
-    overflow-x:auto;
-}
-
-.section-tabs a {
-    text-decoration:none;
-    font-size:0.7rem;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
-    color:#e8e4d8;
-    white-space:nowrap;
-}
-
-.section-tabs a:hover {
-    color:#f3d688;
-}
-
-.store-section {
-    position:relative;
-    padding:120px 6vw 140px;
-}
-
-.section-banner {
-    font-size:1.4rem;
-    letter-spacing:0.35em;
-    text-transform:uppercase;
-    color:#f3d688;
-    margin-bottom:40px;
-}
-
-.section-bg {
-    position:absolute;
-    inset:0;
-    opacity:0.04;
-    pointer-events:none;
-}
-
-.product-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(240px,1fr));
-    gap:28px;
-}
-
-.product-card {
-    position:relative;
-    border:1px solid rgba(212,175,55,0.18);
-    border-radius:18px;
-    background:rgba(0,0,0,0.65);
-    overflow:hidden;
-    box-shadow:0 22px 70px rgba(0,0,0,0.85);
-}
-
-.product-card img {
-    width:100%;
-    display:block;
-}
-
-.product-meta {
-    padding:14px;
-}
-
-.product-meta h4 {
-    font-size:0.7rem;
-    letter-spacing:0.26em;
-    text-transform:uppercase;
-    color:#e8e4d8;
-    margin-bottom:6px;
-}
-
-.price {
-    color:#f3d688;
-    font-size:0.9rem;
-}
-
-.product-card.coming-soon {
-    background:rgba(0,0,0,0.35);
-    filter:grayscale(1);
-}
-
-.product-card.coming-soon::after {
-    content:"COMING SOON";
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#ff3b3b;
-    font-size:0.75rem;
-    letter-spacing:0.34em;
-    text-transform:uppercase;
-    background:rgba(0,0,0,0.55);
-}
-</style>
-
-    <!-- ================= UNIVERSAL BEHAVIOR ================= -->
 
 <script>
-/* =========================================================
-   SECTION SCROLL BEHAVIOR
-   ========================================================= */
-document.querySelectorAll('.section-tabs a').forEach(tab => {
-    tab.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(tab.getAttribute('href'));
-        if (!target) return;
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+
+const stage = document.getElementById("worldStage");
+const toGirl = document.getElementById("toGirl");
+
+
+toGirl.addEventListener("click", () => {
+    stage.classList.add("fade-out");
+    setTimeout(() => {
+        window.location.href = "patchbabyworld1.html";
+    }, 1200);
 });
 
-/* =========================================================
-   MODAL CONTROLS (VERBATIM BEHAVIOR)
-   ========================================================= */
-const modal = document.getElementById("mockupModal");
-const modalBackdrop = document.getElementById("modalBackdrop");
-const modalClose = document.getElementById("modalClose");
-
-modalBackdrop.addEventListener("click", () => modal.classList.remove("open"));
-modalClose.addEventListener("click", () => modal.classList.remove("open"));
-
-/* =========================================================
-   GENDER TABS
-   ========================================================= */
-const tabGirl = document.getElementById("tabGirl");
-const tabBoy = document.getElementById("tabBoy");
-const girlStrip = document.getElementById("girlStrip");
-const boyStrip = document.getElementById("boyStrip");
-
-tabGirl.addEventListener("click", () => {
-    tabGirl.classList.add("active");
-    tabBoy.classList.remove("active");
-    girlStrip.style.display = "flex";
-    boyStrip.style.display = "none";
-});
-
-tabBoy.addEventListener("click", () => {
-    tabBoy.classList.add("active");
-    tabGirl.classList.remove("active");
-    boyStrip.style.display = "flex";
-    girlStrip.style.display = "none";
-});
-
-/* =========================================================
-   SAVE THIS LOOK → SAVED ITEMS SECTION
-   ========================================================= */
-document.querySelectorAll('.buy-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const card = btn.closest('.gallery-card');
-        if (!card) return;
-
-        const img = card.querySelector('img').src;
-        const title = card.querySelector('h4').innerText;
-        const price = card.querySelector('.price')?.innerText || "";
-
-        const saved = document.createElement('div');
-        saved.className = "product-card active";
-        saved.innerHTML = `
-            <img src="${img}">
-            <div class="product-meta">
-                <h4>${title}</h4>
-                <div class="price">${price}</div>
-            </div>
-        `;
-        document.getElementById("savedGrid").appendChild(saved);
-    });
-});
-
-/* =========================================================
-   DROP STATUS INDICATOR
-   ========================================================= */
-document.querySelectorAll('.product-card.active').forEach(card => {
-    const badge = document.createElement('div');
-    badge.className = "badge";
-    badge.innerText = "WINTER DROP";
-    card.appendChild(badge);
-});
 </script>
 
-    <!-- ================= FINAL JS INJECTION ================= -->
-
-<script>
-/* =========================================================
-   WINTER DROP PRODUCT INJECTION (VERBATIM DATA)
-   ========================================================= */
-
-const winterGrid = document.querySelector("#winter .product-grid");
-const menGrid = document.querySelector("#men .product-grid");
-const womenGrid = document.querySelector("#women .product-grid");
-const hatsGrid = document.querySelector("#hats .product-grid");
-
-/* ---------- HELPER ---------- */
-function addItem(grid, title, img, price) {
-    const card = document.createElement("div");
-    card.className = "product-card active";
-    card.innerHTML = `
-        <img src="${img}">
-        <div class="product-meta">
-            <h4>${title}</h4>
-            <div class="price">${price}</div>
-        </div>
-    `;
-    grid.appendChild(card);
-}
-
-/* =========================================================
-   PATCH BABY JOGGER
-   ========================================================= */
-
-/* WOMEN */
-addItem(winterGrid, "POM POM BEANIE", "ModelPictures/patchbabysjogger/pompombeanie.png", "$55.00");
-addItem(winterGrid, "SWEATSHIRT", "ModelPictures/patchbabysjogger/sweatshirtfront.png", "$100.00");
-addItem(winterGrid, "JOGGER PANTS", "ModelPictures/patchbabysjogger/joggerpantsfront.png", "$90.00");
-
-addItem(womenGrid, "POM POM BEANIE", "ModelPictures/patchbabysjogger/pompombeanie.png", "$55.00");
-addItem(womenGrid, "SWEATSHIRT", "ModelPictures/patchbabysjogger/sweatshirtfront.png", "$100.00");
-addItem(womenGrid, "JOGGER PANTS", "ModelPictures/patchbabysjogger/joggerpantsfront.png", "$90.00");
-
-/* MEN */
-addItem(winterGrid, "BEANIE", "ModelPictures/patchbabysjogger/beanie.png", "$45.00");
-addItem(winterGrid, "SWEATSHIRT", "ModelPictures/patchbabysjogger/sweatshirtfront.png", "$100.00");
-addItem(winterGrid, "JOGGER PANTS", "ModelPictures/patchbabysjogger/joggerpantsfront.png", "$90.00");
-
-addItem(menGrid, "BEANIE", "ModelPictures/patchbabysjogger/beanie.png", "$45.00");
-addItem(menGrid, "SWEATSHIRT", "ModelPictures/patchbabysjogger/sweatshirtfront.png", "$100.00");
-addItem(menGrid, "JOGGER PANTS", "ModelPictures/patchbabysjogger/joggerpantsfront.png", "$90.00");
-
-/* =========================================================
-   HATS / BEANIES (SHARED)
-   ========================================================= */
-addItem(hatsGrid, "POM POM BEANIE", "ModelPictures/patchbabysjogger/pompombeanie.png", "$55.00");
-addItem(hatsGrid, "BEANIE", "ModelPictures/patchbabysjogger/beanie.png", "$45.00");
-
-/* =========================================================
-   COMING SOON PLACEHOLDERS
-   ========================================================= */
-["#men", "#women", "#kids", "#hats", "#accessories"].forEach(id => {
-    const grid = document.querySelector(id + " .product-grid");
-    for (let i = 0; i < 8; i++) {
-        const ph = document.createElement("div");
-        ph.className = "product-card coming-soon";
-        grid.appendChild(ph);
-    }
-});
-</script>
 
 </body>
+
 </html>
