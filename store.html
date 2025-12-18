@@ -221,17 +221,39 @@ html, body {
   color: #f3d688;
 }
 
+
+
+    
+    
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  display: flex;
   gap: 22px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
+.product-grid::-webkit-scrollbar {
+  height: 0;
+}
+.product-grid {
+  scrollbar-width: none;
+}
+
+
+
+    
+
+    
 .product-card {
   border: 1px solid rgba(212,175,55,0.22);
   background: rgba(0,0,0,0.65);
   height: 260px;
   position: relative;
+  flex: 0 0 240px;
+  scroll-snap-align: start;  
 }
 
 .placeholder-img {
