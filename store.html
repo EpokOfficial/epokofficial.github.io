@@ -748,10 +748,9 @@ html, body {
         </div>
 
         <div class="store-modal-body">
-            <img id="storeModalImg" src="" alt="">
+<div class="placeholder-img">IMAGE PLACEHOLDER</div>
             <div class="store-modal-meta">
                 <div class="badge-drop" id="storeModalDropBadge">WINTER DROP</div>
-                <div class="price" id="storeModalPrice">$0.00</div>
 
                 <div class="store-modal-actions">
                     <button class="btn" id="storeModalSave">SAVE</button>
@@ -913,11 +912,11 @@ function createLiveCard(item){
   const card = document.createElement('div');
   card.className = "product-card clickable";
   card.innerHTML = `
-    <img src="${item.img}" alt="">
+    <div class="placeholder-img">IMAGE PLACEHOLDER</div>
     <div class="product-meta">
       <h4>${item.outfit} — ${item.sex}<br>${item.title}</h4>
       <div class="price-row">
-        <div class="price">${item.price}</div>
+<div class="price">—</div>
         <div class="badge-drop">${item.drop}</div>
       </div>
       <div class="actions">
@@ -1072,8 +1071,7 @@ let activeModalItem = null;
 function openStoreModal(item){
   activeModalItem = item;
   storeModalTitle.textContent = `${item.outfit} — ${item.sex} — ${item.title}`;
-  storeModalImg.src = item.img;
-  storeModalPrice.textContent = item.price;
+
   storeModalDropBadge.textContent = item.drop || LIVE_DROP_NAME;
   storeModal.classList.add("open");
 }
