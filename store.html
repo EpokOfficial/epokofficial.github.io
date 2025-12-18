@@ -183,6 +183,8 @@ html, body {
         letter-spacing:0.30em;
     }
 }
+
+    
     /* ================= STORE MODULE ================= */
 
 .store-section {
@@ -324,6 +326,31 @@ html, body {
   text-transform: uppercase;
 }
 
+   .store-tabs {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 30px 0 10px;
+  margin-bottom: 40px;
+}
+
+.store-tab {
+  border: 1px solid rgba(212,175,55,0.35);
+  padding: 10px 16px;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #e8e4d8;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.store-tab:hover {
+  color: #f3d688;
+  border-color: rgba(212,175,55,0.7);
+}
+
+
     
 
     
@@ -402,6 +429,8 @@ html, body {
 </section>
 <!-- ================= END WINTER DROP ================= -->
 
+        
+
         <!-- ================= P&V DROP ================= -->
 <section id="pv-drop" class="store-section">
 
@@ -451,6 +480,24 @@ html, body {
 
 </section>
 
+
+        
+        
+<!-- ================= STORE QUICK NAV ================= -->
+<div class="store-tabs">
+  <a href="#winter-drop" class="store-tab">WINTER DROP</a>
+  <a href="#pv-drop" class="store-tab">P&amp;V DROP</a>
+  <a href="#men" class="store-tab">MEN</a>
+  <a href="#women" class="store-tab">WOMEN</a>
+  <a href="#kids" class="store-tab">KIDS</a>
+  <a href="#hats" class="store-tab">HATS</a>
+  <a href="#accessories" class="store-tab">ACCESSORIES</a>
+  <a href="#footwear" class="store-tab">FOOTWEAR</a>
+</div>
+
+
+
+        
 <!-- ================= SAVED ITEMS ================= -->
 <section id="saved-items" class="store-section">
 
@@ -875,5 +922,18 @@ html, body {
     </div>
 </div>
 
+<script>
+document.querySelectorAll('.store-tab').forEach(tab => {
+  tab.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(tab.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+    
 </body>
 </html>
