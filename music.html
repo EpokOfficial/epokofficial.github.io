@@ -384,21 +384,7 @@ html, body {
     ALBUM COVER PLACEHOLDER
   </div>
 
-  <!-- PLAYER STATE -->
-  <div class="player-ui" id="playerUI">
-    <div class="record spinning">RECORD</div>
 
-    <div class="player-controls">
-      <button id="prevTrack">⏮</button>
-      <button id="playPause">▶</button>
-      <button id="nextTrack">⏭</button>
-    </div>
-
-    <audio id="audioPlayer"></audio>
-  </div>
-
-</div>
-<!-- ===== END ALBUM / PLAYER ===== -->
 
 
         
@@ -457,7 +443,29 @@ html, body {
 
   <!-- ALBUM COVER / PLAYER PLACEHOLDER -->
 
+<!-- ===== ALBUM / PLAYER HYBRID ===== -->
+<div class="album-player" id="albumPlayer">
 
+  <!-- COVER STATE -->
+  <div class="album-cover" id="albumCover">
+    ALBUM COVER PLACEHOLDER
+  </div>
+
+  <!-- PLAYER STATE -->
+  <div class="player-ui" id="playerUI">
+    <div class="record spinning">RECORD</div>
+
+    <div class="player-controls">
+      <button id="prevTrack">⏮</button>
+      <button id="playPause">▶</button>
+      <button id="nextTrack">⏭</button>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+  </div>
+
+</div>
+<!-- ===== END ALBUM / PLAYER ===== -->
     
 
 </section>
