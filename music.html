@@ -545,15 +545,6 @@ html, body {
 
 
     
-  <!-- ALBUM COVER / PLAYER PLACEHOLDER -->
-
-<!-- ===== ALBUM / PLAYER HYBRID ===== -->
-<div class="album-player" id="albumPlayer">
-
-  <!-- COVER STATE -->
-  <div class="album-cover" id="albumCover">
-    ALBUM COVER PLACEHOLDER
-  </div>
 
   <!-- PLAYER STATE -->
   <div class="player-ui" id="playerUI">
@@ -565,7 +556,7 @@ html, body {
       <button id="nextTrack">⏭</button>
     </div>
 
-    <audio id="audioPlayer"></audio>
+    <audio id="audioPlayer" preload="metadata" playsinline></audio>
   </div>
 
 </div>
@@ -1019,12 +1010,33 @@ albumCover.addEventListener('click', () => {
   albumPlayer.classList.add('active');
 });
 
+
+    
 function playTrack(index) {
   tracks.forEach(t => t.classList.remove('active'));
   const track = tracks[index];
 
   audio.src = track.dataset.src;
   audio.play();
+
+  // ✅ MOBILE LOCK-SCREEN / BACKGROUND PLAYER
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track.querySelector('.track-play').innerText,
+      artist: 'Lyrixx6',
+      album: 'VI',
+      artwork: [
+        { src: 'cover.jpg', sizes: '512x512', type: 'image/png' }
+      ]
+    });
+  }
+
+  track.classList.add('active');
+  currentTrackIndex = index;
+}
+
+
+    
 
   track.classList.add('active');
   currentTrackIndex = index;
