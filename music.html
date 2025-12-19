@@ -529,93 +529,10 @@ html, body {
 
 
 <script>
-const albumPlayer = document.getElementById("albumPlayer");
-const albumCover = document.getElementById("albumCover");
 
-albumCover.addEventListener("click", () => {
-  albumPlayer.classList.add("active");
-});
 
-/* AUDIO */
-const tracks = [
-  "epokofficial.github.io/music/track01.mp3",
-  "epokofficial.github.io/music/track02.mp3"
-  // continue to track32.mp3
-];
 
-let currentTrack = 0;
-const audio = document.getElementById("audioPlayer");
-const playPause = document.getElementById("playPause");
-
-audio.src = tracks[currentTrack];
-
-playPause.onclick = () => {
-  if (audio.paused) {
-    audio.play();
-    playPause.textContent = "⏸";
-  } else {
-    audio.pause();
-    playPause.textContent = "▶";
-  }
-};
-
-document.getElementById("nextTrack").onclick = () => {
-  currentTrack = (currentTrack + 1) % tracks.length;
-  audio.src = tracks[currentTrack];
-  audio.play();
-};
-
-document.getElementById("prevTrack").onclick = () => {
-  currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-  audio.src = tracks[currentTrack];
-  audio.play();
-};
-</script>
-
-<script>
-/* ===== MUSIC DATA ===== */
-const tracks = Array.from({ length: 32 }, (_, i) => ({
-  title: `Track ${String(i + 1).padStart(2, '0')}`,
-  src: `https://epokofficial.github.io/music/track${String(i + 1).padStart(2, '0')}.mp3`
-}));
-
-let currentIndex = 0;
-
-const audio = document.getElementById('audio');
-const record = document.querySelector('.record');
-const trackEls = document.querySelectorAll('.track');
-
-/* Load first track */
-audio.src = tracks[0].src;
-
-/* Track click → play */
-trackEls.forEach((el, index) => {
-  el.addEventListener('click', () => {
-    currentIndex = index;
-    audio.src = tracks[index].src;
-    audio.play();
-  });
-
-  /* download link */
-  const link = el.querySelector('a');
-  if (link) {
-    link.href = tracks[index].src;
-    link.setAttribute('download', '');
-  }
-});
-
-/* Next / Prev */
-function nextTrack() {
-  currentIndex = (currentIndex + 1) % tracks.length;
-  audio.src = tracks[currentIndex].src;
-  audio.play();
-}
-
-function prevTrack() {
-  currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
-  audio.src = tracks[currentIndex].src;
-  audio.play();
-}
+    
 
 /* Spin sync */
 audio.addEventListener('play', () => {
