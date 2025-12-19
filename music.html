@@ -228,32 +228,6 @@ html, body {
 }
 
 
-    
-<!-- ===== ALBUM / PLAYER HYBRID ===== -->
-<div class="album-player" id="albumPlayer">
-
-  <!-- COVER STATE -->
-  <div class="album-cover" id="albumCover">
-    ALBUM COVER PLACEHOLDER
-  </div>
-
-  <!-- PLAYER STATE -->
-  <div class="player-ui" id="playerUI">
-    <div class="record spinning">RECORD</div>
-
-    <div class="player-controls">
-      <button id="prevTrack">⏮</button>
-      <button id="playPause">▶</button>
-      <button id="nextTrack">⏭</button>
-    </div>
-
-    <audio id="audioPlayer"></audio>
-  </div>
-
-</div>
-<!-- ===== END ALBUM / PLAYER ===== -->
-
-
 
 
     
@@ -401,6 +375,33 @@ html, body {
     <div class="page-inner">
 
         <!-- PAGE CONTENT START -->
+        
+<!-- ===== ALBUM / PLAYER HYBRID ===== -->
+<div class="album-player" id="albumPlayer">
+
+  <!-- COVER STATE -->
+  <div class="album-cover" id="albumCover">
+    ALBUM COVER PLACEHOLDER
+  </div>
+
+  <!-- PLAYER STATE -->
+  <div class="player-ui" id="playerUI">
+    <div class="record spinning">RECORD</div>
+
+    <div class="player-controls">
+      <button id="prevTrack">⏮</button>
+      <button id="playPause">▶</button>
+      <button id="nextTrack">⏭</button>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+  </div>
+
+</div>
+<!-- ===== END ALBUM / PLAYER ===== -->
+
+
+        
         <!-- ================= MUSIC PAGE ================= -->
 <section class="store-section" id="music">
 
@@ -455,14 +456,9 @@ html, body {
   </div>
 
   <!-- ALBUM COVER / PLAYER PLACEHOLDER -->
-  <div class="album-wrap">
-    <div class="album-cover">
-      ALBUM COVER PLACEHOLDER
-    </div>
-    <small class="album-note">
-      Click to open player (player added next)
-    </small>
-  </div>
+
+
+    
 
 </section>
 <!-- ================= END MUSIC PAGE ================= -->
@@ -530,20 +526,25 @@ html, body {
 
 <script>
 
-
-
     
+const audio = document.getElementById('audioPlayer');
+const record = document.querySelector('.record');
+const albumCover = document.getElementById('albumCover');
+const albumPlayer = document.getElementById('albumPlayer');
 
-/* Spin sync */
-audio.addEventListener('play', () => {
-  record.style.animationPlayState = 'running';
+albumCover.addEventListener('click', () => {
+  albumPlayer.classList.add('active');
 });
+
+audio.addEventListener('play', () => {
+  record.style.animation = 'spin 6s linear infinite';
+});
+
 audio.addEventListener('pause', () => {
   record.style.animationPlayState = 'paused';
 });
 
-/* Auto-next */
-audio.addEventListener('ended', nextTrack);
+    
 </script>
 
 
