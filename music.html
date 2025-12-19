@@ -185,6 +185,197 @@ html, body {
         letter-spacing:0.30em;
     }
 }
+
+/* ================= MUSIC PAGE ================= */
+
+.music-intro {
+  max-width: 760px;
+  margin: 80px auto 100px;
+  line-height: 1.8;
+}
+
+.music-title {
+  font-size: 0.85rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #f3d688;
+  margin-bottom: 24px;
+}
+
+.music-intro p {
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+  color: #e8e4d8;
+}
+
+.music-poetic {
+  margin-top: 30px;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.music-mantra {
+  margin-top: 40px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #f3d688;
+}
+
+.album-wrap {
+  margin: 120px auto;
+  text-align: center;
+}
+
+
+    
+<!-- ===== ALBUM / PLAYER HYBRID ===== -->
+<div class="album-player" id="albumPlayer">
+
+  <!-- COVER STATE -->
+  <div class="album-cover" id="albumCover">
+    ALBUM COVER PLACEHOLDER
+  </div>
+
+  <!-- PLAYER STATE -->
+  <div class="player-ui" id="playerUI">
+    <div class="record spinning">RECORD</div>
+
+    <div class="player-controls">
+      <button id="prevTrack">⏮</button>
+      <button id="playPause">▶</button>
+      <button id="nextTrack">⏭</button>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+  </div>
+
+</div>
+<!-- ===== END ALBUM / PLAYER ===== -->
+
+
+
+
+    
+.album-note {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  color: #999;
+}
+
+/* ================= TRACK LIST ================= */
+
+.tracklist {
+  max-width: 760px;
+  margin: 80px auto 0;
+  border-top: 1px solid rgba(212,175,55,0.25);
+}
+
+.track-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.track-row span {
+  width: 28px;
+  color: #f3d688;
+}
+
+.track-row a {
+  color: #e8e4d8;
+  text-decoration: none;
+}
+
+.track-row a:hover {
+  color: #f3d688;
+}
+
+
+   /* ===== ALBUM → PLAYER TRANSITION ===== */
+.album-player {
+  width: 320px;
+  margin: 80px auto;
+  position: relative;
+  text-align: center;
+}
+
+.album-cover {
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(212,175,55,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.28em;
+  cursor: pointer;
+  transition: opacity 0.6s ease;
+}
+
+.player-ui {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.album-player.active .album-cover {
+  display: none;
+}
+
+.album-player.active .player-ui {
+  display: block;
+  opacity: 1;
+}
+
+/* RECORD */
+.record {
+  width: 260px;
+  height: 260px;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  border: 2px solid rgba(212,175,55,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.28em;
+  color: #f3d688;
+}
+
+.spinning {
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.player-controls button {
+  background: none;
+  border: 1px solid rgba(212,175,55,0.4);
+  color: #f3d688;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+
+
+    
+    
+
+    
 </style>
 </head>
 
@@ -210,8 +401,119 @@ html, body {
     <div class="page-inner">
 
         <!-- PAGE CONTENT START -->
-        <!-- SECTIONS WILL BE INSERTED HERE -->
-        <!-- PAGE CONTENT END -->
+        <!-- ================= MUSIC PAGE ================= -->
+<section class="store-section" id="music">
+
+  <!-- BANNER PLACEHOLDER (ART ADDED BY YOU LATER) -->
+  <div class="section-banner">
+    MUSIC — BANNER PLACEHOLDER
+    <small>Artwork added manually</small>
+  </div>
+
+  <!-- MUSIC INTRO TEXT -->
+  <div class="music-intro">
+
+    <h2 class="music-title">A chapter I’m closing.</h2>
+
+    <p>
+      This music comes from a time when my world was small and loud at the same time.
+      The streets, the studio, the nights that bled into mornings. The pressure to survive,
+      to perform, to numb, to keep moving even when nothing was changing. I lost people in that life—
+      brothers, homies, names that don’t need to be said to be felt. Funerals became familiar.
+      Absence became normal.
+    </p>
+
+    <p>
+      Somewhere in all of that, I lost parts of myself too. I confused loyalty with obligation.
+      Pain with purpose. Motion with progress. I kept telling myself this was just how it was,
+      that this was the path, that this was all there was. But slowly, and then all at once,
+      I realized there was more to life than repeating the same cycles and calling it strength.
+    </p>
+
+    <p>
+      This music isn’t a celebration of that world. It’s a record of it.
+      It’s what I wrote when I didn’t know how else to process grief, anger,
+      addiction, or survival. It’s where I put the thoughts I couldn’t say out loud.
+      In that way, it became my intervention—my diary—my way out.
+    </p>
+
+    <p>
+      I’m giving this to you because I don’t want to carry the weight anymore.
+      What’s here belongs to the past, and I’m leaving it behind.
+    </p>
+
+    <p class="music-poetic">
+      What you’re hearing is my life in fragments—<br>
+      the pain I didn’t know how to speak,<br>
+      the tears I learned to hide,<br>
+      the nights I barely survived,<br>
+      the thoughts that stayed locked in these records like pages in a diary.
+    </p>
+
+    <p class="music-mantra">Survive. Rise. Become.</p>
+
+  </div>
+
+  <!-- ALBUM COVER / PLAYER PLACEHOLDER -->
+  <div class="album-wrap">
+    <div class="album-cover">
+      ALBUM COVER PLACEHOLDER
+    </div>
+    <small class="album-note">
+      Click to open player (player added next)
+    </small>
+  </div>
+
+</section>
+<!-- ================= END MUSIC PAGE ================= -->
+
+<!-- ================= TRACK LIST ================= -->
+<div class="tracklist">
+
+  <div class="track-row"><span>01</span><a href="music/track01.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>02</span><a href="music/track02.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>03</span><a href="music/track03.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>04</span><a href="music/track04.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>05</span><a href="music/track05.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>06</span><a href="music/track06.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>07</span><a href="music/track07.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>08</span><a href="music/track08.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>09</span><a href="music/track09.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>10</span><a href="music/track10.mp3" download>Track Placeholder</a></div>
+
+  <div class="track-row"><span>11</span><a href="music/track11.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>12</span><a href="music/track12.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>13</span><a href="music/track13.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>14</span><a href="music/track14.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>15</span><a href="music/track15.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>16</span><a href="music/track16.mp3" download>Track Placeholder</a></div>
+
+  <div class="track-row"><span>17</span><a href="music/track17.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>18</span><a href="music/track18.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>19</span><a href="music/track19.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>20</span><a href="music/track20.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>21</span><a href="music/track21.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>22</span><a href="music/track22.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>23</span><a href="music/track23.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>24</span><a href="music/track24.mp3" download>Track Placeholder</a></div>
+
+  <div class="track-row"><span>25</span><a href="music/track25.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>26</span><a href="music/track26.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>27</span><a href="music/track27.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>28</span><a href="music/track28.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>29</span><a href="music/track29.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>30</span><a href="music/track30.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>31</span><a href="music/track31.mp3" download>Track Placeholder</a></div>
+  <div class="track-row"><span>32</span><a href="music/track32.mp3" download>Track Placeholder</a></div>
+
+</div>
+<!-- ================= END TRACK LIST ================= -->
+
+
+
+        
+
+        
 
     </div>
 </div>
@@ -225,5 +527,110 @@ html, body {
     </div>
 </div>
 
+
+<script>
+const albumPlayer = document.getElementById("albumPlayer");
+const albumCover = document.getElementById("albumCover");
+
+albumCover.addEventListener("click", () => {
+  albumPlayer.classList.add("active");
+});
+
+/* AUDIO */
+const tracks = [
+  "epokofficial.github.io/music/track01.mp3",
+  "epokofficial.github.io/music/track02.mp3"
+  // continue to track32.mp3
+];
+
+let currentTrack = 0;
+const audio = document.getElementById("audioPlayer");
+const playPause = document.getElementById("playPause");
+
+audio.src = tracks[currentTrack];
+
+playPause.onclick = () => {
+  if (audio.paused) {
+    audio.play();
+    playPause.textContent = "⏸";
+  } else {
+    audio.pause();
+    playPause.textContent = "▶";
+  }
+};
+
+document.getElementById("nextTrack").onclick = () => {
+  currentTrack = (currentTrack + 1) % tracks.length;
+  audio.src = tracks[currentTrack];
+  audio.play();
+};
+
+document.getElementById("prevTrack").onclick = () => {
+  currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+  audio.src = tracks[currentTrack];
+  audio.play();
+};
+</script>
+
+<script>
+/* ===== MUSIC DATA ===== */
+const tracks = Array.from({ length: 32 }, (_, i) => ({
+  title: `Track ${String(i + 1).padStart(2, '0')}`,
+  src: `https://epokofficial.github.io/music/track${String(i + 1).padStart(2, '0')}.mp3`
+}));
+
+let currentIndex = 0;
+
+const audio = document.getElementById('audio');
+const record = document.querySelector('.record');
+const trackEls = document.querySelectorAll('.track');
+
+/* Load first track */
+audio.src = tracks[0].src;
+
+/* Track click → play */
+trackEls.forEach((el, index) => {
+  el.addEventListener('click', () => {
+    currentIndex = index;
+    audio.src = tracks[index].src;
+    audio.play();
+  });
+
+  /* download link */
+  const link = el.querySelector('a');
+  if (link) {
+    link.href = tracks[index].src;
+    link.setAttribute('download', '');
+  }
+});
+
+/* Next / Prev */
+function nextTrack() {
+  currentIndex = (currentIndex + 1) % tracks.length;
+  audio.src = tracks[currentIndex].src;
+  audio.play();
+}
+
+function prevTrack() {
+  currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
+  audio.src = tracks[currentIndex].src;
+  audio.play();
+}
+
+/* Spin sync */
+audio.addEventListener('play', () => {
+  record.style.animationPlayState = 'running';
+});
+audio.addEventListener('pause', () => {
+  record.style.animationPlayState = 'paused';
+});
+
+/* Auto-next */
+audio.addEventListener('ended', nextTrack);
+</script>
+
+
+    
+    
 </body>
 </html>
