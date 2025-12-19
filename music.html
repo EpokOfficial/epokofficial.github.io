@@ -345,6 +345,91 @@ html, body {
 }
 
 
+    
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.track-art {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(212,175,55,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: #999;
+}
+
+.track-play {
+  background: none;
+  border: none;
+  color: #e8e4d8;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.track-play:hover {
+  color: #f3d688;
+}
+
+.track-download {
+  text-decoration: none;
+  color: #777;
+  font-size: 0.75rem;
+}
+
+.track-download:hover {
+  color: #f3d688;
+}
+
+.track-row.active {
+  background: rgba(212,175,55,0.08);
+}
+
+    
+/* ===== SIDE BANNERS ===== */
+
+.side-banners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.side-banner {
+  position: absolute;
+  top: 120px;
+  bottom: 120px;
+  width: 60px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: rgba(212,175,55,0.65);
+}
+
+.side-banner.left {
+  left: -90px;
+}
+
+.side-banner.right {
+  right: -90px;
+}
+
+.side-banner span {
+  writing-mode: vertical-rl;
+}
 
     
     
@@ -373,6 +458,22 @@ html, body {
 
 <div class="page-scroll">
     <div class="page-inner">
+
+        
+<!-- SIDE BANNERS -->
+  <div class="side-banners">
+    <div class="side-banner left">
+      <span>LYRIXX6</span>
+      <span>VI</span>
+    </div>
+    <div class="side-banner right">
+      <span>VI</span>
+      <span>LYRIXX6</span>
+    </div>
+  </div>
+
+
+        
 
         <!-- PAGE CONTENT START -->
         
@@ -469,49 +570,419 @@ html, body {
 
 </div>
 <!-- ===== END ALBUM / PLAYER ===== -->
+
     
 
+<div style="margin-top:40px;">
+  <a href="music/Lyrixx6_VI_Full_Album.zip" download>
+    DOWNLOAD FULL ALBUM
+  </a>
+</div>
+
+
+
+
+    
 </section>
 <!-- ================= END MUSIC PAGE ================= -->
 
 <!-- ================= TRACK LIST ================= -->
 <div class="tracklist">
 
-  <div class="track-row"><span>01</span><a href="music/Lyrixx6.mp3" download>Track lyrixx6</a></div>
-  <div class="track-row"><span>02</span><a href="music/track02.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>03</span><a href="music/track03.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>04</span><a href="music/track04.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>05</span><a href="music/track05.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>06</span><a href="music/track06.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>07</span><a href="music/track07.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>08</span><a href="music/track08.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>09</span><a href="music/track09.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>10</span><a href="music/track10.mp3" download>Track Placeholder</a></div>
+<div class="track-row" data-src="music/Lyrixx6.mp3">
+  <span>01</span>
 
-  <div class="track-row"><span>11</span><a href="music/track11.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>12</span><a href="music/track12.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>13</span><a href="music/track13.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>14</span><a href="music/track14.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>15</span><a href="music/track15.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>16</span><a href="music/track16.mp3" download>Track Placeholder</a></div>
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">Track Lyrixx6</button>
+  </div>
 
-  <div class="track-row"><span>17</span><a href="music/track17.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>18</span><a href="music/track18.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>19</span><a href="music/track19.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>20</span><a href="music/track20.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>21</span><a href="music/track21.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>22</span><a href="music/track22.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>23</span><a href="music/track23.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>24</span><a href="music/track24.mp3" download>Track Placeholder</a></div>
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
 
-  <div class="track-row"><span>25</span><a href="music/track25.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>26</span><a href="music/track26.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>27</span><a href="music/track27.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>28</span><a href="music/track28.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>29</span><a href="music/track29.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>30</span><a href="music/track30.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>31</span><a href="music/track31.mp3" download>Track Placeholder</a></div>
-  <div class="track-row"><span>32</span><a href="music/track32.mp3" download>Track Placeholder</a></div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>02</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+
+    
+    
+    <div class="track-row" data-src="music/name.mp3">
+  <span>03</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>04</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+
+    
+    <div class="track-row" data-src="music/name.mp3">
+  <span>05</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+
+    
+   <div class="track-row" data-src="music/name.mp3">
+  <span>06</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+    <div class="track-row" data-src="music/name.mp3">
+  <span>07</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>08</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>09</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>10</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+
+  <div class="track-row" data-src="music/name.mp3">
+  <span>11</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>12</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>13</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>14</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>15</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>16</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+
+  <div class="track-row" data-src="music/name.mp3">
+  <span>17</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>18</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>19</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>20</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>21</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>22</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>23</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>24</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+
+  <div class="track-row" data-src="music/name.mp3">
+  <span>25</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>26</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>27</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>28</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>29</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>30</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>31</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+    
+    
+  <div class="track-row" data-src="music/name.mp3">
+  <span>32</span>
+
+  <div class="track-info">
+    <div class="track-art">ART</div>
+    <button class="track-play">name</button>
+  </div>
+
+  <a class="track-download" href="music/Lyrixx6.mp3" download>⬇</a>
+</div>
+
+
+    
+
+    
 
 </div>
 <!-- ================= END TRACK LIST ================= -->
@@ -534,29 +1005,53 @@ html, body {
     </div>
 </div>
 
-
-<script>
-
     
+<script>
 const audio = document.getElementById('audioPlayer');
 const record = document.querySelector('.record');
 const albumCover = document.getElementById('albumCover');
 const albumPlayer = document.getElementById('albumPlayer');
+const tracks = document.querySelectorAll('.track-row');
+
+let currentTrackIndex = 0;
 
 albumCover.addEventListener('click', () => {
   albumPlayer.classList.add('active');
 });
 
-audio.addEventListener('play', () => {
-  record.style.animation = 'spin 6s linear infinite';
+function playTrack(index) {
+  tracks.forEach(t => t.classList.remove('active'));
+  const track = tracks[index];
+
+  audio.src = track.dataset.src;
+  audio.play();
+
+  track.classList.add('active');
+  currentTrackIndex = index;
+}
+
+tracks.forEach((track, index) => {
+  track.querySelector('.track-play').addEventListener('click', () => {
+    playTrack(index);
+  });
 });
 
-audio.addEventListener('pause', () => {
-  record.style.animationPlayState = 'paused';
+document.getElementById('playPause').addEventListener('click', () => {
+  audio.paused ? audio.play() : audio.pause();
 });
 
-    
+document.getElementById('nextTrack').addEventListener('click', () => {
+  playTrack((currentTrackIndex + 1) % tracks.length);
+});
+
+document.getElementById('prevTrack').addEventListener('click', () => {
+  playTrack((currentTrackIndex - 1 + tracks.length) % tracks.length);
+});
+
+audio.addEventListener('play', () => record.classList.add('spinning'));
+audio.addEventListener('pause', () => record.classList.remove('spinning'));
 </script>
+
 
 
     
