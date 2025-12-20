@@ -621,50 +621,39 @@ html, body {
 
     
 
- <div class="product-wrap">
+<div class="product-wrap">
 
   <div class="product-card">
     <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="                   ">
+      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png">
     </div>
   </div>
 
-  <div class="product-actions" data-active-variant="">
+  <div class="product-actions">
 
     <div class="product-price">$</div>
 
-    <!-- SIZE POPUP (HIDDEN BY DEFAULT) -->
      <div class="size-popup" style="display:none;">
       <button data-variant="52764324561214">S</button>
       <button data-variant="52764324593982">M</button>
       <button data-variant="52764324626750">L</button>
       <button data-variant="52764324659518">XL</button>
+      <button data-variant="52764431810878">XL</button>
     </div>
 
-    <button class="btn-save">
-      SAVE
-    </button>
+    <button class="btn-save">SAVE</button>
+    <button class="btn-select">SELECT</button>
 
-    <button class="btn-select">
-      SELECT
-    </button>
+    <a class="add-to-cart" style="display:none;"></a>
 
-    <!-- HIDDEN CART LINK (UPDATED DYNAMICALLY) -->
-    <a
-      class="add-to-cart"
-      href=""
-      style="display:none;">
-    </a>
-
-    <a
-      class="btn-checkout"
-      href="https://epok-8204.myshopify.com/cart">
+    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
       CHECKOUT
     </a>
 
   </div>
 
-</div> 
+</div>
+
 
 
  <div class="product-wrap">
@@ -1586,36 +1575,52 @@ document.querySelectorAll('.store-tab').forEach(tab => {
   });
 </script>
 
-
-
-
-    
-</script>
-
-
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  document.querySelectorAll('.btn-save').forEach(button => {
+  /* ===== SELECT BUTTON ===== */
+  document.querySelectorAll(".btn-select").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const actions = btn.closest(".product-actions");
+      if (!actions) return;
 
-    button.addEventListener('click', () => {
+      const sizeBox = actions.querySelector(".size-popup");
+      const cartLink = actions.querySelector(".add-to-cart");
 
-      const productWrap = button.closest('.product-wrap');
-      const savedGrid = document.querySelector('#saved-items .product-grid');
+      // BEANIE (NO SIZES)
+      if (!sizeBox && cartLink && cartLink.href) {
+        window.location.href = cartLink.href;
+        return;
+      }
 
-      if (!productWrap || !savedGrid) return;
-
-      const clone = productWrap.cloneNode(true);
-
-      // remove buttons in saved view
-      clone.querySelectorAll('.product-actions').forEach(el => el.remove());
-
-      savedGrid.appendChild(clone);
-
-      console.log('Product saved');
-
+      // CLOTHING (SHOW SIZES)
+      if (sizeBox) {
+        sizeBox.style.display = "flex";
+      }
     });
+  });
 
+  /* ===== SIZE SELECTION ===== */
+  document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
+    sizeBtn.addEventListener("click", () => {
+      const variantId = sizeBtn.getAttribute("data-variant");
+      if (!variantId) return;
+
+      window.location.href = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
+    });
+  });
+
+  /* ===== SAVE BUTTON ===== */
+  document.querySelectorAll(".btn-save").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const wrap = btn.closest(".product-wrap");
+      const savedGrid = document.querySelector("#saved-items .product-grid");
+      if (!wrap || !savedGrid) return;
+
+      const clone = wrap.cloneNode(true);
+      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout").forEach(b => b.remove());
+      savedGrid.appendChild(clone);
+    });
   });
 
 });
@@ -1623,59 +1628,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-<script>
-document.addEventListener("click", async function (e) {
-
-  // OPEN SIZE POPUP
-  if (e.target.classList.contains("btn-select")) {
-    const actions = e.target.closest(".product-actions");
-    const popup = actions.querySelector(".size-popup");
-    popup.style.display = "flex";
-  }
-
-  // SIZE SELECTED → ADD TO CART (SHOPIFY WAY)
-  if (e.target.matches(".size-popup button")) {
-    const variantId = e.target.dataset.variant;
-
-    try {
-      await fetch("/cart/add.js", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          id: variantId,
-          quantity: 1
-        })
-      });
-        
-
-const toast = document.getElementById("cart-toast");
-toast.style.display = "block";
-
-setTimeout(() => {
-  toast.style.display = "none";
-}, 1800);
-
-        
-      // close popup
-      e.target.closest(".size-popup").style.display = "none";
-
-      console.log("Added to cart:", variantId);
-
-    } catch (err) {
-      console.error("Add to cart failed", err);
-    }
-  }
-
-});
-</script>
-
-
-<div id="cart-toast">
-  ADDED TO CART
-</div>
 
     
     
