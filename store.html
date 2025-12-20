@@ -484,6 +484,26 @@ html, body {
     }
 }
 
+
+<style>
+  /* all your existing CSS stays exactly as-is */
+
+  .size-popup {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .size-popup button {
+    border: 1px solid rgba(212,175,55,0.6);
+    background: transparent;
+    color: #f3d688;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+</style>
+
+    
     
 </style>
 
@@ -559,6 +579,47 @@ html, body {
 
   <div class="product-card">
     <div class="placeholder-img">
+      <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="                   ">
+    </div>
+  </div>
+
+  <div class="product-actions">
+
+    <div class="product-price">$</div>
+
+    <button class="btn-save" data-product-id="gid://shopify/ProductVariant/52764320760126">
+      SAVE
+    </button>
+
+    <button class="btn-select" data-variant-id="gid://shopify/ProductVariant/52764320760126">
+      SELECT
+    </button>
+
+    <!-- THIS STAYS HIDDEN — SELECT USES IT -->
+    <a
+      class="add-to-cart"
+      href="https://epok-8204.myshopify.com/cart/gid://shopify/ProductVariant/52764320760126"
+      style="display:none;">
+    </a>
+
+    <!-- FINAL CHECKOUT -->
+    <a
+      class="btn-checkout"
+      href="https://epok-8204.myshopify.com/cart">
+      CHECKOUT
+    </a>
+
+  </div>
+
+</div>
+
+
+    
+
+ <div class="product-wrap">
+
+  <div class="product-card">
+    <div class="placeholder-img">
       <img src="PLACEHOLDER.png" alt="Streetwear Women Product 1">
     </div>
   </div>
@@ -595,20 +656,6 @@ html, body {
 
 
     
-
-  <div class="product-wrap">
-    <div class="product-card">
-      <div class="placeholder-img">
-        <img src="PLACEHOLDER.png" alt="Streetwear Women Product 3">
-      </div>
-    </div>
-    <div class="product-actions">
-      <div class="product-price">$</div>
-      <button class="btn-save">SAVE</button>
-      <button class="btn-select">SELECT</button>
-      <a class="btn-checkout" href="#">CHECKOUT</a>
-    </div>
-  </div>
 
   <div class="product-wrap">
     <div class="product-card">
@@ -1571,6 +1618,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+<script>
+document.addEventListener("click", function (e) {
+
+  // OPEN SIZE POPUP
+  if (e.target.classList.contains("btn-select")) {
+    const actions = e.target.closest(".product-actions");
+    const popup = actions.querySelector(".size-popup");
+    popup.style.display = "flex";
+  }
+
+  // SIZE CLICKED
+  if (e.target.closest(".size-popup button")) {
+    const sizeBtn = e.target;
+    const variantId = sizeBtn.dataset.variant;
+    const actions = sizeBtn.closest(".product-actions");
+    const cartLink = actions.querySelector(".add-to-cart");
+
+    // Set cart link
+    cartLink.href = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
+
+    // SILENT ADD TO CART
+    fetch(cartLink.href, { mode: "no-cors" });
+
+    // Close popup
+    actions.querySelector(".size-popup").style.display = "none";
+  }
+
+});
+</script>
 
     
     
