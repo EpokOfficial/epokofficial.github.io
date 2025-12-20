@@ -501,14 +501,19 @@ html, body {
     padding: 6px 10px;
     cursor: pointer;
   }
-</style>
 
-    
-    
-</style>
-
-
-
+#cart-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #000;
+  border: 1px solid rgba(212,175,55,0.6);
+  color: #f3d688;
+  padding: 12px 18px;
+  letter-spacing: 0.28em;
+  display: none;
+  z-index: 9999;
+}
 
     
     
@@ -1589,25 +1594,25 @@ document.querySelectorAll('.store-tab').forEach(tab => {
 
 
 <script>
-/* ===== SAVE BUTTON → SAVED ITEMS ===== */
-
 document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.btn-save').forEach(button => {
 
     button.addEventListener('click', () => {
 
-      const productCard = button.closest('.product-card');
+      const productWrap = button.closest('.product-wrap');
       const savedGrid = document.querySelector('#saved-items .product-grid');
 
-      if (!productCard || !savedGrid) return;
+      if (!productWrap || !savedGrid) return;
 
-      const clone = productCard.cloneNode(true);
+      const clone = productWrap.cloneNode(true);
 
-      const saveBtn = clone.querySelector('.btn-save');
-      if (saveBtn) saveBtn.remove();
+      // remove buttons in saved view
+      clone.querySelectorAll('.product-actions').forEach(el => el.remove());
 
       savedGrid.appendChild(clone);
+
+      console.log('Product saved');
 
     });
 
@@ -1620,7 +1625,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <script>
-document.addEventListener("click", function (e) {
+document.addEventListener("click", async function (e) {
 
   // OPEN SIZE POPUP
   if (e.target.classList.contains("btn-select")) {
@@ -1629,25 +1634,48 @@ document.addEventListener("click", function (e) {
     popup.style.display = "flex";
   }
 
-  // SIZE CLICKED
-  if (e.target.closest(".size-popup button")) {
-    const sizeBtn = e.target;
-    const variantId = sizeBtn.dataset.variant;
-    const actions = sizeBtn.closest(".product-actions");
-    const cartLink = actions.querySelector(".add-to-cart");
+  // SIZE SELECTED → ADD TO CART (SHOPIFY WAY)
+  if (e.target.matches(".size-popup button")) {
+    const variantId = e.target.dataset.variant;
 
-    // Set cart link
-    cartLink.href = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
+    try {
+      await fetch("/cart/add.js", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: 1
+        })
+      });
+        
 
-    // SILENT ADD TO CART
-    fetch(cartLink.href, { mode: "no-cors" });
+const toast = document.getElementById("cart-toast");
+toast.style.display = "block";
 
-    // Close popup
-    actions.querySelector(".size-popup").style.display = "none";
+setTimeout(() => {
+  toast.style.display = "none";
+}, 1800);
+
+        
+      // close popup
+      e.target.closest(".size-popup").style.display = "none";
+
+      console.log("Added to cart:", variantId);
+
+    } catch (err) {
+      console.error("Add to cart failed", err);
+    }
   }
 
 });
 </script>
+
+
+<div id="cart-toast">
+  ADDED TO CART
+</div>
 
     
     
