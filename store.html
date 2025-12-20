@@ -587,25 +587,25 @@ html, body {
 
     <div class="product-price">$</div>
 
-    <button class="btn-save" data-product-id="gid://shopify/ProductVariant/52764320760126">
+    <button class="btn-save" data-product-id="https://epok-8204.myshopify.com/cart/52764320760126:1">
       SAVE
     </button>
 
-    <button class="btn-select" data-variant-id="gid://shopify/ProductVariant/52764320760126">
+    <button class="btn-select" data-variant-id="https://epok-8204.myshopify.com/cart/52764320760126:1">
       SELECT
     </button>
 
     <!-- THIS STAYS HIDDEN — SELECT USES IT -->
     <a
       class="add-to-cart"
-      href="https://epok-8204.myshopify.com/cart/gid://shopify/ProductVariant/52764320760126"
+      href="https://epok-8204.myshopify.com/cart/52764320760126:1"
       style="display:none;">
     </a>
 
     <!-- FINAL CHECKOUT -->
     <a
       class="btn-checkout"
-      href="https://epok-8204.myshopify.com/cart">
+      href="https://epok-8204.myshopify.com/cart/52764320760126:1">
       CHECKOUT
     </a>
 
@@ -620,30 +620,37 @@ html, body {
 
   <div class="product-card">
     <div class="placeholder-img">
-      <img src="PLACEHOLDER.png" alt="Streetwear Women Product 1">
+      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="                   ">
     </div>
   </div>
 
-  <div class="product-actions">
+  <div class="product-actions" data-active-variant="">
 
     <div class="product-price">$</div>
 
-    <button class="btn-save" data-product-id="VARIANT_ID">
+    <!-- SIZE POPUP (HIDDEN BY DEFAULT) -->
+     <div class="size-popup" style="display:none;">
+      <button data-variant="52764324561214">S</button>
+      <button data-variant="52764324593982">M</button>
+      <button data-variant="52764324626750">L</button>
+      <button data-variant="52764324659518">XL</button>
+    </div>
+
+    <button class="btn-save">
       SAVE
     </button>
 
-    <button class="btn-select" data-variant-id="VARIANT_ID">
+    <button class="btn-select">
       SELECT
     </button>
 
-    <!-- THIS STAYS HIDDEN — SELECT USES IT -->
+    <!-- HIDDEN CART LINK (UPDATED DYNAMICALLY) -->
     <a
       class="add-to-cart"
-      href="https://epok-8204.myshopify.com/cart/VARIANT_ID:1"
+      href=""
       style="display:none;">
     </a>
 
-    <!-- FINAL CHECKOUT -->
     <a
       class="btn-checkout"
       href="https://epok-8204.myshopify.com/cart">
@@ -652,38 +659,32 @@ html, body {
 
   </div>
 
-</div>
+</div> 
+
+
+ <div class="product-wrap">
+
+  <div class="product-card">
+    <div class="placeholder-img">
+      <img src="ModelPictures/patchbabysjogger/sweatshirtback.png" alt="Back">
+    </div>
+  </div>
+
+</div> 
+
+
+ <div class="product-wrap">
+
+  <div class="product-card">
+    <div class="placeholder-img">
+      <img src="ModelPictures/patchbabysjogger/sweatshirtside.png" alt="side">
+    </div>
+  </div>
+
+</div> 
 
 
     
-
-  <div class="product-wrap">
-    <div class="product-card">
-      <div class="placeholder-img">
-        <img src="PLACEHOLDER.png" alt="Streetwear Women Product 4">
-      </div>
-    </div>
-    <div class="product-actions">
-      <div class="product-price">$</div>
-      <button class="btn-save">SAVE</button>
-      <button class="btn-select">SELECT</button>
-      <a class="btn-checkout" href="#">CHECKOUT</a>
-    </div>
-  </div>
-
-  <div class="product-wrap">
-    <div class="product-card">
-      <div class="placeholder-img">
-        <img src="PLACEHOLDER.png" alt="Streetwear Women Product 5">
-      </div>
-    </div>
-    <div class="product-actions">
-      <div class="product-price">$</div>
-      <button class="btn-save">SAVE</button>
-      <button class="btn-select">SELECT</button>
-      <a class="btn-checkout" href="#">CHECKOUT</a>
-    </div>
-  </div>
 
   <div class="product-wrap">
     <div class="product-card">
