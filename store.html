@@ -508,19 +508,48 @@ html, body {
 
 <div class="horizontal-scroll">
 
+    
+
   <div class="product-wrap">
-    <div class="product-card">
-      <div class="placeholder-img">
-        <img src="PLACEHOLDER.png" alt="Streetwear Women Product 1">
-      </div>
-    </div>
-    <div class="product-actions">
-      <div class="product-price">$</div>
-      <button class="btn-save">SAVE</button>
-      <button class="btn-select">SELECT</button>
-      <a class="btn-checkout" href="#">CHECKOUT</a>
+
+  <div class="product-card">
+    <div class="placeholder-img">
+      <img src="PLACEHOLDER.png" alt="Streetwear Women Product 1">
     </div>
   </div>
+
+  <div class="product-actions">
+
+    <div class="product-price">$</div>
+
+    <button class="btn-save" data-product-id="VARIANT_ID">
+      SAVE
+    </button>
+
+    <button class="btn-select" data-variant-id="VARIANT_ID">
+      SELECT
+    </button>
+
+    <!-- THIS STAYS HIDDEN — SELECT USES IT -->
+    <a
+      class="add-to-cart"
+      href="https://epok-8204.myshopify.com/cart/VARIANT_ID:1"
+      style="display:none;">
+    </a>
+
+    <!-- FINAL CHECKOUT -->
+    <a
+      class="btn-checkout"
+      href="https://epok-8204.myshopify.com/cart">
+      CHECKOUT
+    </a>
+
+  </div>
+
+</div>
+
+
+    
 
   <div class="product-wrap">
     <div class="product-card">
@@ -1449,6 +1478,34 @@ document.querySelectorAll('.store-tab').forEach(tab => {
     }
   });
 });
+
+
+<script>
+  document.addEventListener("click", function (e) {
+
+    if (e.target.classList.contains("btn-select")) {
+      const variantId = e.target.dataset.variantId;
+      const cartLink = e.target
+        .closest(".product-actions")
+        .querySelector(".add-to-cart");
+
+      if (cartLink) {
+        cartLink.click();
+      }
+    }
+
+    if (e.target.classList.contains("btn-save")) {
+      const card = e.target.closest(".product-wrap");
+      document.querySelector("#saved-items")?.appendChild(card.cloneNode(true));
+    }
+
+  });
+</script>
+
+
+
+
+    
 </script>
 
 
