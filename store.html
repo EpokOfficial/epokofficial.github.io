@@ -596,7 +596,7 @@ html, body {
       SAVE
     </button>
 
-   <button class="btn-select" data-variant="52764320760126">SELECT</button>
+    <button class="btn-select" data-variant-id="https://epok-8204.myshopify.com/cart/52764320760126:1">
       SELECT
     </button>
 
@@ -1573,6 +1573,8 @@ document.querySelectorAll('.store-tab').forEach(tab => {
     }
 
   });
+</script>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -1583,27 +1585,28 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!actions) return;
 
       const sizeBox = actions.querySelector(".size-popup");
+      const cartLink = actions.querySelector(".add-to-cart");
 
-      // Clothing → show sizes
-      if (sizeBox) {
-        sizeBox.style.display = "flex";
+      // BEANIE (NO SIZES)
+      if (!sizeBox && cartLink && cartLink.href) {
+        window.location.href = cartLink.href;
         return;
       }
 
-      // Beanie (no sizes) → add directly
-      const variant = btn.dataset.variant;
-      if (variant) addToCart(variant);
+      // CLOTHING (SHOW SIZES)
+      if (sizeBox) {
+        sizeBox.style.display = "flex";
+      }
     });
   });
 
   /* ===== SIZE SELECTION ===== */
   document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
     sizeBtn.addEventListener("click", () => {
-      const variantId = sizeBtn.dataset.variant;
+      const variantId = sizeBtn.getAttribute("data-variant");
       if (!variantId) return;
 
-      addToCart(variantId);
-      sizeBtn.closest(".size-popup").style.display = "none";
+      window.location.href = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
     });
   });
 
@@ -1619,15 +1622,6 @@ document.addEventListener("DOMContentLoaded", () => {
       savedGrid.appendChild(clone);
     });
   });
-
-  /* ===== SHOPIFY AJAX ADD ===== */
-  function addToCart(variantId) {
-    fetch("/cart/add.js", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: variantId, quantity: 1 })
-    });
-  }
 
 });
 </script>
