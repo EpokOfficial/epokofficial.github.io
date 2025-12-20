@@ -217,8 +217,11 @@ html, body {
   position: relative;
   flex: 0 0 240px;
   scroll-snap-align: start;
-  padding: 0;
+  padding: 0;  
 }
+    
+
+
     
 
 .add-to-cart {
@@ -239,6 +242,40 @@ html, body {
   background: rgba(212,175,55,0.15);
 }
 
+.product-actions {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-price {
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  color: #f3d688;
+}
+
+
+    
+.product-actions button,
+.product-actions a {
+  border: 1px solid rgba(212,175,55,0.6);
+  background: transparent;
+  color: #f3d688;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.product-actions button:hover,
+.product-actions a:hover {
+  background: rgba(212,175,55,0.15);
+}
 
 
 
@@ -431,10 +468,24 @@ html, body {
   <img src="ModelPictures/Panthers&vampiresjogger/V&ppompombeanie.png" alt="Product mockup">
 </div>
 
-<a class="add-to-cart"
-   href="https://epok-8204.myshopify.com/cart/52764320760126:1">
-  ADD TO CART
-</a>
+<div class="product-actions">
+
+  <div class="product-price">$120</div>
+
+  <button class="btn-save" data-product-id="52764320760126">
+    SAVE
+  </button>
+
+  <button class="btn-select" data-product-id="52764320760126">
+    SELECT
+  </button>
+
+  <a class="btn-checkout"
+     href="https://epok-8204.myshopify.com/cart/52764320760126:1">
+     CHECKOUT
+  </a>
+
+</div>
 
 
         
@@ -1012,6 +1063,40 @@ document.querySelectorAll('.store-tab').forEach(tab => {
 });
 </script>
 
+
+<script>
+/* ===== SAVE BUTTON → SAVED ITEMS ===== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('.btn-save').forEach(button => {
+
+    button.addEventListener('click', () => {
+
+      const productCard = button.closest('.product-card');
+      const savedGrid = document.querySelector('#saved-items .product-grid');
+
+      if (!productCard || !savedGrid) return;
+
+      const clone = productCard.cloneNode(true);
+
+      const saveBtn = clone.querySelector('.btn-save');
+      if (saveBtn) saveBtn.remove();
+
+      savedGrid.appendChild(clone);
+
+    });
+
+  });
+
+});
+</script>
+
+
+
+
+
+    
     
 </body>
 </html>
