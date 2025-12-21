@@ -420,7 +420,7 @@ html, body {
 
 
 
-
+<style>
   /* all your existing CSS above stays exactly as-is */
 
   .winter-drop-section {
@@ -462,58 +462,10 @@ html, body {
     justify-content: center;
     letter-spacing: 0.32em;
   }
-
- /* ================= ABOUT BANNER CENTERING ================= */
-.about-banner {
-    display:flex;
-    justify-content:center;
-}
-
-.about-banner img {
-    width:100%;
-    max-width:1600px;
-    display:block;
-}
-/* ================= SPACE BETWEEN FIXED NAV AND ABOUT BANNER ================= */
-.about-banner {
-    margin-top: 90px;
-}
-@media (max-width:768px) {
-    .about-banner {
-        margin-top: 80px;
-    }
-}
+</style>
 
 
 
-  /* all your existing CSS stays exactly as-is */
-
-  .size-popup {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .size-popup button {
-    border: 1px solid rgba(212,175,55,0.6);
-    background: transparent;
-    color: #f3d688;
-    padding: 6px 10px;
-    cursor: pointer;
-  }
-
-#cart-toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #000;
-  border: 1px solid rgba(212,175,55,0.6);
-  color: #f3d688;
-  padding: 12px 18px;
-  letter-spacing: 0.28em;
-  display: none;
-  z-index: 9999;
-}
 
     
     
@@ -572,7 +524,7 @@ html, body {
 
   <div class="product-actions">
 
-
+ </a>
   </div>
 
 </div>
@@ -580,14 +532,11 @@ html, body {
 
     
 
- <div class="product-wrap">
+   <div class="product-wrap">
 
   <div class="product-card">
     <div class="placeholder-img">
-      <div class="product">
-  <div>Pom Pom Beanie</div>
-  <button data-variant="52764320760126">ADD TO CART</button>
-</div>
+      <img src="PLACEHOLDER.png" alt="Streetwear Women Product 1">
     </div>
   </div>
 
@@ -595,46 +544,25 @@ html, body {
 
     <div class="product-price">$</div>
 
-  
+    <button class="btn-save" data-product-id="VARIANT_ID">
+      SAVE
+    </button>
 
+    <button class="btn-select" data-variant-id="VARIANT_ID">
+      SELECT
+    </button>
 
-    
+    <!-- THIS STAYS HIDDEN — SELECT USES IT -->
+    <a
+      class="add-to-cart"
+      href="https://epok-8204.myshopify.com/cart/VARIANT_ID:1"
+      style="display:none;">
     </a>
 
-  </div>
-
-</div>
-
-
-    
-
-<div class="product-wrap">
-
-  <div class="product-card">
-    <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="">
-    </div>
-  </div>
-
-  <div class="product-actions">
-
-    <div class="product-price">$</div>
-
-    <!-- SIZE OPTIONS (HIDDEN UNTIL SELECT) -->
-    <div class="size-popup" style="display:none;">
-      <button data-variant="52764324561214">S</button>
-      <button data-variant="52764324593982">M</button>
-      <button data-variant="52764324626750">L</button>
-      <button data-variant="52764324659518">XL</button>
-      <button data-variant="52764431810878">XXL</button>
-    </div>
-
-    <button class="btn-save">SAVE</button>
-
-    <!-- Clothing SELECT opens size popup -->
-    <button class="btn-select">SELECT</button>
-
-    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
+    <!-- FINAL CHECKOUT -->
+    <a
+      class="btn-checkout"
+      href="https://epok-8204.myshopify.com/cart">
       CHECKOUT
     </a>
 
@@ -643,8 +571,49 @@ html, body {
 </div>
 
 
-
     
+
+  <div class="product-wrap">
+    <div class="product-card">
+      <div class="placeholder-img">
+        <img src="PLACEHOLDER.png" alt="Streetwear Women Product 3">
+      </div>
+    </div>
+    <div class="product-actions">
+      <div class="product-price">$</div>
+      <button class="btn-save">SAVE</button>
+      <button class="btn-select">SELECT</button>
+      <a class="btn-checkout" href="#">CHECKOUT</a>
+    </div>
+  </div>
+
+  <div class="product-wrap">
+    <div class="product-card">
+      <div class="placeholder-img">
+        <img src="PLACEHOLDER.png" alt="Streetwear Women Product 4">
+      </div>
+    </div>
+    <div class="product-actions">
+      <div class="product-price">$</div>
+      <button class="btn-save">SAVE</button>
+      <button class="btn-select">SELECT</button>
+      <a class="btn-checkout" href="#">CHECKOUT</a>
+    </div>
+  </div>
+
+  <div class="product-wrap">
+    <div class="product-card">
+      <div class="placeholder-img">
+        <img src="PLACEHOLDER.png" alt="Streetwear Women Product 5">
+      </div>
+    </div>
+    <div class="product-actions">
+      <div class="product-price">$</div>
+      <button class="btn-save">SAVE</button>
+      <button class="btn-select">SELECT</button>
+      <a class="btn-checkout" href="#">CHECKOUT</a>
+    </div>
+  </div>
 
   <div class="product-wrap">
     <div class="product-card">
@@ -1085,19 +1054,30 @@ html, body {
         
 <!-- ================= SAVED ITEMS ================= -->
 <section id="saved-items" class="store-section">
+
   <div class="section-banner">
     SAVED ITEMS
     <small>Products you’ve saved will appear here</small>
   </div>
 
-  <div class="product-grid"></div>
-</section>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="placeholder-img">SAVED PRODUCT</div>
+    </div>
+    <div class="product-card">
+      <div class="placeholder-img">SAVED PRODUCT</div>
+    </div>
+    <div class="product-card">
+      <div class="placeholder-img">SAVED PRODUCT</div>
+    </div>
+    <div class="product-card">
+      <div class="placeholder-img">SAVED PRODUCT</div>
+    </div>
+  </div>
 
 </section>
 <section id="men" class="store-section">
 
-
-    
   <!-- MEN BANNER -->
   <div class="section-banner">
     MEN — BANNER PLACEHOLDER
@@ -1497,31 +1477,79 @@ html, body {
 </div>
 
 <script>
-const SHOP_URL = "https://epok-8204.myshopify.com/cart/";
-let cart = [];
-
-// ADD ITEMS
-document.querySelectorAll("button[data-variant]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const variant = btn.dataset.variant;
-    cart.push(`${variant}:1`);
-    alert("Added to cart");
+document.querySelectorAll('.store-tab').forEach(tab => {
+  tab.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(tab.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
 });
 
-// CHECKOUT
-document.getElementById("checkout").addEventListener("click", () => {
-  if (cart.length === 0) {
-    alert("Cart is empty");
-    return;
-  }
-  const cartUrl = SHOP_URL + cart.join(",");
-  window.location.href = cartUrl;
+
+<script>
+  document.addEventListener("click", function (e) {
+
+    if (e.target.classList.contains("btn-select")) {
+      const variantId = e.target.dataset.variantId;
+      const cartLink = e.target
+        .closest(".product-actions")
+        .querySelector(".add-to-cart");
+
+      if (cartLink) {
+        cartLink.click();
+      }
+    }
+
+    if (e.target.classList.contains("btn-save")) {
+      const card = e.target.closest(".product-wrap");
+      document.querySelector("#saved-items")?.appendChild(card.cloneNode(true));
+    }
+
+  });
+</script>
+
+
+
+
+    
+</script>
+
+
+<script>
+/* ===== SAVE BUTTON → SAVED ITEMS ===== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('.btn-save').forEach(button => {
+
+    button.addEventListener('click', () => {
+
+      const productCard = button.closest('.product-card');
+      const savedGrid = document.querySelector('#saved-items .product-grid');
+
+      if (!productCard || !savedGrid) return;
+
+      const clone = productCard.cloneNode(true);
+
+      const saveBtn = clone.querySelector('.btn-save');
+      if (saveBtn) saveBtn.remove();
+
+      savedGrid.appendChild(clone);
+
+    });
+
+  });
+
 });
 </script>
 
 
 
 
+
+    
+    
 </body>
 </html>
