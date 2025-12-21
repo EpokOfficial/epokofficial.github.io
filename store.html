@@ -580,7 +580,7 @@ html, body {
 
     
 
-   <div class="product-wrap">
+ <div class="product-wrap">
 
   <div class="product-card">
     <div class="placeholder-img">
@@ -588,21 +588,22 @@ html, body {
     </div>
   </div>
 
- <div class="product-actions">
+  <div class="product-actions">
 
-  <div class="product-price">$</div>
+    <div class="product-price">$</div>
 
-  <!-- NO size-popup for beanie -->
+    <button class="btn-save">SAVE</button>
 
-  <button class="btn-save">SAVE</button>
+    <!-- Beanie SELECT goes straight to cart (silent) -->
+    <button class="btn-select" data-variant="52764320760126">
+      SELECT
+    </button>
 
-  <button class="btn-select" data-variant="52764320760126">SELECT</button>
+    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
+      CHECKOUT
+    </a>
 
-  <a class="add-to-cart" style="display:none;"></a>
-
-  <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
-    CHECKOUT
-  </a>
+  </div>
 
 </div>
 
@@ -613,7 +614,7 @@ html, body {
 
   <div class="product-card">
     <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png">
+      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="">
     </div>
   </div>
 
@@ -621,7 +622,7 @@ html, body {
 
     <div class="product-price">$</div>
 
-    <!-- SIZE OPTIONS -->
+    <!-- SIZE OPTIONS (HIDDEN UNTIL SELECT) -->
     <div class="size-popup" style="display:none;">
       <button data-variant="52764324561214">S</button>
       <button data-variant="52764324593982">M</button>
@@ -631,13 +632,18 @@ html, body {
     </div>
 
     <button class="btn-save">SAVE</button>
+
+    <!-- Clothing SELECT opens size popup -->
     <button class="btn-select">SELECT</button>
 
-    <a class="btn-checkout" href="/checkout">CHECKOUT</a>
+    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
+      CHECKOUT
+    </a>
 
   </div>
 
 </div>
+
 
 
     
@@ -1493,14 +1499,11 @@ html, body {
 </div>
 
 <script>
-/* ================= EPÒK SHOPIFY CART (FINAL) ================= */
-
-<script>
 document.addEventListener("DOMContentLoaded", () => {
 
   const cartFrame = document.getElementById("cart-frame");
 
-  // SELECT BUTTON
+  /* ===== SELECT BUTTON ===== */
   document.querySelectorAll(".btn-select").forEach(btn => {
     btn.addEventListener("click", () => {
       const actions = btn.closest(".product-actions");
@@ -1515,14 +1518,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // CLOTHING
+      // CLOTHING (show sizes)
       if (sizeBox) {
         sizeBox.style.display = "flex";
       }
     });
   });
 
-  // SIZE CLICK
+  /* ===== SIZE CLICK ===== */
   document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
     sizeBtn.addEventListener("click", () => {
       const variantId = sizeBtn.dataset.variant;
@@ -1533,7 +1536,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // SAVE BUTTON
+  /* ===== SAVE BUTTON ===== */
   document.querySelectorAll(".btn-save").forEach(btn => {
     btn.addEventListener("click", () => {
       const wrap = btn.closest(".product-wrap");
@@ -1548,6 +1551,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+
+
 
 
 </body>
