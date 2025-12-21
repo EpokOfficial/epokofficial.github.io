@@ -1536,13 +1536,16 @@ document.querySelectorAll('.store-tab').forEach(tab => {
   tab.addEventListener('click', e => {
     e.preventDefault();
     const target = document.querySelector(tab.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
 });
 
-/* ================= SELECT BUTTON ================= */
+/* ================= GLOBAL CLICK HANDLER ================= */
 document.addEventListener("click", function (e) {
 
+  /* ---------- SELECT BUTTON ---------- */
   if (e.target.classList.contains("btn-select")) {
     const actions = e.target.closest(".product-actions");
     if (!actions) return;
@@ -1550,7 +1553,7 @@ document.addEventListener("click", function (e) {
     const sizeBox = actions.querySelector(".size-popup");
     const cartLink = actions.querySelector(".add-to-cart");
 
-    // NO SIZE PRODUCT (BEANIES)
+    // PRODUCT WITH NO SIZES (BEANIES)
     if (!sizeBox && cartLink) {
       const url = new URL(cartLink.href);
       const variantId = url.pathname.split("/").pop().split(":")[0];
@@ -1567,10 +1570,31 @@ document.addEventListener("click", function (e) {
       return;
     }
 
-    // SIZE PRODUCT
+    // PRODUCT WITH SIZES
     if (sizeBox) {
       sizeBox.style.display = "flex";
+      return;
     }
+  }
+
+  /* ---------- SIZE BUTTON ---------- */
+  if (e.target.closest(".size-popup button")) {
+    const sizeBtn = e.target;
+    const variantId = sizeBtn.getAttribute("data-variant");
+    if (!variantId) return;
+
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: 1
+      })
+    });
+
+    const popup = sizeBtn.closest(".size-popup");
+    if (popup) popup.style.display = "none";
+    return;
   }
 
 });
@@ -1578,7 +1602,7 @@ document.addEventListener("click", function (e) {
 /* ================= DOM READY ================= */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ===== SAVE (LOCKED) ===== */
+  /* ===== SAVE (LOCKED — DO NOT TOUCH) ===== */
   document.querySelectorAll(".btn-save").forEach(btn => {
     btn.addEventListener("click", () => {
       const wrap = btn.closest(".product-wrap");
@@ -1586,33 +1610,16 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!wrap || !savedGrid) return;
 
       const clone = wrap.cloneNode(true);
-      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout").forEach(b => b.remove());
+      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout")
+           .forEach(b => b.remove());
+
       savedGrid.appendChild(clone);
-    });
-  });
-
-  /* ===== SIZE SELECTION (AJAX ADD, NO REDIRECT) ===== */
-  document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
-    sizeBtn.addEventListener("click", () => {
-      const variantId = sizeBtn.getAttribute("data-variant");
-      if (!variantId) return;
-
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: variantId,
-          quantity: 1
-        })
-      });
-
-      const popup = sizeBtn.closest(".size-popup");
-      if (popup) popup.style.display = "none";
     });
   });
 
 });
 </script>
+
 
 </body>
 </html>
