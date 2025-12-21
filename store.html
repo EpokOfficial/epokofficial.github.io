@@ -1554,12 +1554,13 @@ async function initCheckout() {
     },
     body: JSON.stringify({
       query: `
-        mutation {
-          checkoutCreate {
-            checkout { id }
-          }
-        }
-      `
+       mutation {
+  checkoutCreate(input: {}) {
+    checkout {
+      id
+    }
+  }
+}
     })
   });
 
@@ -1627,7 +1628,6 @@ document.addEventListener("click", e => {
 
 });
 </script>
-
 
 
 </body>
