@@ -588,20 +588,21 @@ html, body {
     </div>
   </div>
 
-  <div class="product-actions">
+ <div class="product-actions">
 
-    <div class="product-price">$</div>
+  <div class="product-price">$</div>
 
-    <button class="btn-save">SAVE</button>
+  <!-- NO size-popup for beanie -->
 
-    <!-- IMPORTANT: data-variant holds the VARIANT ID ONLY -->
-    <button class="btn-select" data-variant="52764320760126">
-      SELECT
-    </button>
+  <button class="btn-save">SAVE</button>
 
-    <a class="btn-checkout" href="/checkout">CHECKOUT</a>
+  <button class="btn-select" data-variant="52764320760126">SELECT</button>
 
-  </div>
+  <a class="add-to-cart" style="display:none;"></a>
+
+  <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
+    CHECKOUT
+  </a>
 
 </div>
 
@@ -1494,81 +1495,57 @@ html, body {
 <script>
 /* ================= EPÒK SHOPIFY CART (FINAL) ================= */
 
-/* STORE TAB SCROLL (SAFE) */
-document.querySelectorAll('.store-tab').forEach(tab => {
-  tab.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(tab.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const cartFrame = document.getElementById("cart-frame");
+
+  // SELECT BUTTON
+  document.querySelectorAll(".btn-select").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const actions = btn.closest(".product-actions");
+      if (!actions) return;
+
+      const sizeBox = actions.querySelector(".size-popup");
+      const variant = btn.dataset.variant;
+
+      // BEANIE (no sizes)
+      if (!sizeBox && variant) {
+        cartFrame.src = `https://epok-8204.myshopify.com/cart/${variant}:1`;
+        return;
+      }
+
+      // CLOTHING
+      if (sizeBox) {
+        sizeBox.style.display = "flex";
+      }
+    });
   });
-});
 
-/* GLOBAL CLICK HANDLER */
-document.addEventListener("click", function (e) {
+  // SIZE CLICK
+  document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
+    sizeBtn.addEventListener("click", () => {
+      const variantId = sizeBtn.dataset.variant;
+      if (!variantId) return;
 
-  /* ---------- SELECT BUTTON ---------- */
-  if (e.target.classList.contains("btn-select")) {
-    const actions = e.target.closest(".product-actions");
-    if (!actions) return;
-
-    const sizeBox = actions.querySelector(".size-popup");
-    const cartLink = actions.querySelector(".add-to-cart");
-
-    // PRODUCT WITH SIZES
-    if (sizeBox) {
-      sizeBox.style.display = "flex";
-      return;
-    }
-
-    // PRODUCT WITHOUT SIZES (BEANIES, HATS)
-    if (cartLink && cartLink.href) {
-      addToCartFromUrl(cartLink.href);
-      return;
-    }
-  }
-
-  /* ---------- SIZE BUTTON ---------- */
-  if (e.target.closest(".size-popup button")) {
-    const btn = e.target.closest("button");
-    const variantId = btn.getAttribute("data-variant");
-    if (!variantId) return;
-
-    addToCartByVariant(variantId);
-
-    const popup = btn.closest(".size-popup");
-    if (popup) popup.style.display = "none";
-    return;
-  }
-
-});
-
-/* ---------- ADD TO CART (BY VARIANT) ---------- */
-function addToCartByVariant(variantId) {
-  fetch("/cart/add.js", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      id: variantId,
-      quantity: 1
-    })
+      cartFrame.src = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
+      sizeBtn.closest(".size-popup").style.display = "none";
+    });
   });
-}
 
-/* ---------- ADD TO CART (FROM CART URL) ---------- */
-function addToCartFromUrl(url) {
-  const parts = url.split("/cart/")[1];
-  if (!parts) return;
+  // SAVE BUTTON
+  document.querySelectorAll(".btn-save").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const wrap = btn.closest(".product-wrap");
+      const savedGrid = document.querySelector("#saved-items .product-grid");
+      if (!wrap || !savedGrid) return;
 
-  const variantId = parts.split(":")[0];
-  addToCartByVariant(variantId);
-}
-
-/* ---------- CHECKOUT BUTTON ---------- */
-document.querySelectorAll(".btn-checkout").forEach(btn => {
-  btn.addEventListener("click", e => {
-    e.preventDefault();
-    window.location.href = "/checkout";
+      const clone = wrap.cloneNode(true);
+      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout").forEach(b => b.remove());
+      savedGrid.appendChild(clone);
+    });
   });
+
 });
 </script>
 
