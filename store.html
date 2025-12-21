@@ -567,9 +567,15 @@ html, body {
   <div class="product-card">
     <div class="placeholder-img">
       <img src="images/babygirl.png" alt="                          ">
-   </div>
+    </div>
+  </div>
+
+  <div class="product-actions">
 
 
+  </div>
+
+</div>
 
 
     
@@ -578,7 +584,10 @@ html, body {
 
   <div class="product-card">
     <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="">
+      <div class="product">
+  <div>Pom Pom Beanie</div>
+  <button data-variant="52764320760126">ADD TO CART</button>
+</div>
     </div>
   </div>
 
@@ -586,15 +595,10 @@ html, body {
 
     <div class="product-price">$</div>
 
-    <button class="btn-save">SAVE</button>
+  
 
-    <!-- Beanie SELECT goes straight to cart (silent) -->
-    <button class="btn-select" data-variant="52764320760126">
-      SELECT
-    </button>
 
-    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
-      CHECKOUT
+    
     </a>
 
   </div>
@@ -1493,56 +1497,26 @@ html, body {
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+const SHOP_URL = "https://epok-8204.myshopify.com/cart/";
+let cart = [];
 
-  const cartFrame = document.getElementById("cart-frame");
-
-  /* ===== SELECT BUTTON ===== */
-  document.querySelectorAll(".btn-select").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const actions = btn.closest(".product-actions");
-      if (!actions) return;
-
-      const sizeBox = actions.querySelector(".size-popup");
-      const variant = btn.dataset.variant;
-
-      // BEANIE (no sizes)
-      if (!sizeBox && variant) {
-        cartFrame.src = `https://epok-8204.myshopify.com/cart/${variant}:1`;
-        return;
-      }
-
-      // CLOTHING (show sizes)
-      if (sizeBox) {
-        sizeBox.style.display = "flex";
-      }
-    });
+// ADD ITEMS
+document.querySelectorAll("button[data-variant]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const variant = btn.dataset.variant;
+    cart.push(`${variant}:1`);
+    alert("Added to cart");
   });
+});
 
-  /* ===== SIZE CLICK ===== */
-  document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
-    sizeBtn.addEventListener("click", () => {
-      const variantId = sizeBtn.dataset.variant;
-      if (!variantId) return;
-
-      cartFrame.src = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
-      sizeBtn.closest(".size-popup").style.display = "none";
-    });
-  });
-
-  /* ===== SAVE BUTTON ===== */
-  document.querySelectorAll(".btn-save").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const wrap = btn.closest(".product-wrap");
-      const savedGrid = document.querySelector("#saved-items .product-grid");
-      if (!wrap || !savedGrid) return;
-
-      const clone = wrap.cloneNode(true);
-      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout").forEach(b => b.remove());
-      savedGrid.appendChild(clone);
-    });
-  });
-
+// CHECKOUT
+document.getElementById("checkout").addEventListener("click", () => {
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
+  }
+  const cartUrl = SHOP_URL + cart.join(",");
+  window.location.href = cartUrl;
 });
 </script>
 
