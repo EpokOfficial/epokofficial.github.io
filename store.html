@@ -1536,16 +1536,14 @@ document.querySelectorAll('.store-tab').forEach(tab => {
   tab.addEventListener('click', e => {
     e.preventDefault();
     const target = document.querySelector(tab.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
 
 /* ================= GLOBAL CLICK HANDLER ================= */
 document.addEventListener("click", function (e) {
 
-  /* ---------- SELECT BUTTON ---------- */
+  /* ===== SELECT BUTTON ===== */
   if (e.target.classList.contains("btn-select")) {
     const actions = e.target.closest(".product-actions");
     if (!actions) return;
@@ -1553,43 +1551,39 @@ document.addEventListener("click", function (e) {
     const sizeBox = actions.querySelector(".size-popup");
     const cartLink = actions.querySelector(".add-to-cart");
 
-    // PRODUCT WITH NO SIZES (BEANIES)
-    if (!sizeBox && cartLink) {
+    /* NO SIZE PRODUCT (BEANIE, HAT, ETC) */
+    if (!sizeBox && cartLink && cartLink.href) {
       const url = new URL(cartLink.href);
       const variantId = url.pathname.split("/").pop().split(":")[0];
 
-      fetch("/cart/add.js", {
+      fetch("https://epok-8204.myshopify.com/cart/add.js", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: variantId,
-          quantity: 1
-        })
+        body: JSON.stringify({ id: variantId, quantity: 1 })
       });
 
       return;
     }
 
-    // PRODUCT WITH SIZES
+    /* SIZE PRODUCT */
     if (sizeBox) {
       sizeBox.style.display = "flex";
       return;
     }
   }
 
-  /* ---------- SIZE BUTTON ---------- */
+  /* ===== SIZE BUTTON ===== */
   if (e.target.closest(".size-popup button")) {
     const sizeBtn = e.target;
     const variantId = sizeBtn.getAttribute("data-variant");
     if (!variantId) return;
 
-    fetch("/cart/add.js", {
+    fetch("https://epok-8204.myshopify.com/cart/add.js", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: variantId,
-        quantity: 1
-      })
+      body: JSON.stringify({ id: variantId, quantity: 1 })
     });
 
     const popup = sizeBtn.closest(".size-popup");
@@ -1619,6 +1613,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+
 
 
 </body>
