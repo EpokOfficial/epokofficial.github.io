@@ -1536,16 +1536,13 @@ document.querySelectorAll('.store-tab').forEach(tab => {
   tab.addEventListener('click', e => {
     e.preventDefault();
     const target = document.querySelector(tab.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
 
 /* ================= SELECT BUTTON ================= */
 document.addEventListener("click", function (e) {
 
-  // SELECT CLICK
   if (e.target.classList.contains("btn-select")) {
     const actions = e.target.closest(".product-actions");
     if (!actions) return;
@@ -1553,9 +1550,20 @@ document.addEventListener("click", function (e) {
     const sizeBox = actions.querySelector(".size-popup");
     const cartLink = actions.querySelector(".add-to-cart");
 
-    // NO SIZE PRODUCT (ex: beanie)
+    // NO SIZE PRODUCT (BEANIES)
     if (!sizeBox && cartLink) {
-      fetch(cartLink.href + ".js", { method: "POST" });
+      const url = new URL(cartLink.href);
+      const variantId = url.pathname.split("/").pop().split(":")[0];
+
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: 1
+        })
+      });
+
       return;
     }
 
@@ -1570,7 +1578,7 @@ document.addEventListener("click", function (e) {
 /* ================= DOM READY ================= */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ===== SAVE (DO NOT TOUCH) ===== */
+  /* ===== SAVE (LOCKED) ===== */
   document.querySelectorAll(".btn-save").forEach(btn => {
     btn.addEventListener("click", () => {
       const wrap = btn.closest(".product-wrap");
@@ -1583,7 +1591,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ===== SIZE SELECTION (ADD TO CART, NO REDIRECT) ===== */
+  /* ===== SIZE SELECTION (AJAX ADD, NO REDIRECT) ===== */
   document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
     sizeBtn.addEventListener("click", () => {
       const variantId = sizeBtn.getAttribute("data-variant");
@@ -1598,7 +1606,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       });
 
-      // close size popup after add
       const popup = sizeBtn.closest(".size-popup");
       if (popup) popup.style.display = "none";
     });
