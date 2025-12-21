@@ -1530,7 +1530,23 @@ html, body {
     </div>
 </div>
 
+<!-- ================= SHOPIFY BUY BUTTON SDK ================= -->
+<script src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
+
 <script>
+/* ================= INIT SHOPIFY CLIENT ================= */
+const shopifyClient = ShopifyBuy.buildClient({
+  domain: "epok-8204.myshopify.com",
+  storefrontAccessToken: "REPLACE_WITH_YOUR_STOREFRONT_TOKEN"
+});
+
+/* ================= CREATE CART ================= */
+let checkout;
+
+shopifyClient.checkout.create().then(c => {
+  checkout = c;
+});
+
 /* ================= STORE TAB SCROLL ================= */
 document.querySelectorAll('.store-tab').forEach(tab => {
   tab.addEventListener('click', e => {
@@ -1546,22 +1562,19 @@ document.addEventListener("click", function (e) {
   /* ===== SELECT BUTTON ===== */
   if (e.target.classList.contains("btn-select")) {
     const actions = e.target.closest(".product-actions");
-    if (!actions) return;
+    if (!actions || !checkout) return;
 
     const sizeBox = actions.querySelector(".size-popup");
     const cartLink = actions.querySelector(".add-to-cart");
 
-    /* NO SIZE PRODUCT (BEANIE, HAT, ETC) */
+    /* NO SIZE PRODUCT (BEANIES, HATS) */
     if (!sizeBox && cartLink && cartLink.href) {
       const url = new URL(cartLink.href);
       const variantId = url.pathname.split("/").pop().split(":")[0];
 
-      fetch("https://epok-8204.myshopify.com/cart/add.js", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: variantId, quantity: 1 })
-      });
+      shopifyClient.checkout.addLineItems(checkout.id, [
+        { variantId: `gid://shopify/ProductVariant/${variantId}`, quantity: 1 }
+      ]);
 
       return;
     }
@@ -1575,16 +1588,15 @@ document.addEventListener("click", function (e) {
 
   /* ===== SIZE BUTTON ===== */
   if (e.target.closest(".size-popup button")) {
+    if (!checkout) return;
+
     const sizeBtn = e.target;
     const variantId = sizeBtn.getAttribute("data-variant");
     if (!variantId) return;
 
-    fetch("https://epok-8204.myshopify.com/cart/add.js", {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: variantId, quantity: 1 })
-    });
+    shopifyClient.checkout.addLineItems(checkout.id, [
+      { variantId: `gid://shopify/ProductVariant/${variantId}`, quantity: 1 }
+    ]);
 
     const popup = sizeBtn.closest(".size-popup");
     if (popup) popup.style.display = "none";
@@ -1613,6 +1625,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+
 
 
 
