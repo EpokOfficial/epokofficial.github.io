@@ -584,7 +584,7 @@ html, body {
 
   <div class="product-card">
     <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="                   ">
+      <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="">
     </div>
   </div>
 
@@ -592,27 +592,14 @@ html, body {
 
     <div class="product-price">$</div>
 
-    <button class="btn-save" data-product-id="https://epok-8204.myshopify.com/cart/52764320760126:1">
-      SAVE
-    </button>
+    <button class="btn-save">SAVE</button>
 
-    <button class="btn-select" data-variant-id="https://epok-8204.myshopify.com/cart/52764320760126:1">
+    <!-- IMPORTANT: data-variant holds the VARIANT ID ONLY -->
+    <button class="btn-select" data-variant="52764320760126">
       SELECT
     </button>
 
-    <!-- THIS STAYS HIDDEN — SELECT USES IT -->
-    <a
-      class="add-to-cart"
-      href="https://epok-8204.myshopify.com/cart/52764320760126:1"
-      style="display:none;">
-    </a>
-
-    <!-- FINAL CHECKOUT -->
-    <a
-      class="btn-checkout"
-      href="https://epok-8204.myshopify.com/cart/52764320760126:1">
-      CHECKOUT
-    </a>
+    <a class="btn-checkout" href="/checkout">CHECKOUT</a>
 
   </div>
 
@@ -633,49 +620,23 @@ html, body {
 
     <div class="product-price">$</div>
 
-     <div class="size-popup" style="display:none;">
+    <!-- SIZE OPTIONS -->
+    <div class="size-popup" style="display:none;">
       <button data-variant="52764324561214">S</button>
       <button data-variant="52764324593982">M</button>
       <button data-variant="52764324626750">L</button>
       <button data-variant="52764324659518">XL</button>
-      <button data-variant="52764431810878">XL</button>
+      <button data-variant="52764431810878">XXL</button>
     </div>
 
     <button class="btn-save">SAVE</button>
     <button class="btn-select">SELECT</button>
 
-    <a class="add-to-cart" style="display:none;"></a>
-
-    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
-      CHECKOUT
-    </a>
+    <a class="btn-checkout" href="/checkout">CHECKOUT</a>
 
   </div>
 
 </div>
-
-
-
- <div class="product-wrap">
-
-  <div class="product-card">
-    <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/sweatshirtback.png" alt="Back">
-    </div>
-  </div>
-
-</div> 
-
-
- <div class="product-wrap">
-
-  <div class="product-card">
-    <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/sweatshirtside.png" alt="side">
-    </div>
-  </div>
-
-</div> 
 
 
     
@@ -1531,101 +1492,83 @@ html, body {
 </div>
 
 <script>
-/* ================= EPÒK HEADLESS SHOPIFY ================= */
+/* ================= EPÒK SHOPIFY CART (FINAL) ================= */
 
-const SHOP_DOMAIN = "epok-8204.myshopify.com";
-const STOREFRONT_TOKEN = "5b037f774a48b173f8f976ee95cea12b"; // ← your real token
+/* STORE TAB SCROLL (SAFE) */
+document.querySelectorAll('.store-tab').forEach(tab => {
+  tab.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(tab.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
 
-let checkoutId = null;
+/* GLOBAL CLICK HANDLER */
+document.addEventListener("click", function (e) {
 
-/* ---------- CREATE / LOAD CHECKOUT ---------- */
-async function initCheckout() {
-  const stored = localStorage.getItem("epok_checkout");
-  if (stored) {
-    checkoutId = stored;
+  /* ---------- SELECT BUTTON ---------- */
+  if (e.target.classList.contains("btn-select")) {
+    const actions = e.target.closest(".product-actions");
+    if (!actions) return;
+
+    const sizeBox = actions.querySelector(".size-popup");
+    const cartLink = actions.querySelector(".add-to-cart");
+
+    // PRODUCT WITH SIZES
+    if (sizeBox) {
+      sizeBox.style.display = "flex";
+      return;
+    }
+
+    // PRODUCT WITHOUT SIZES (BEANIES, HATS)
+    if (cartLink && cartLink.href) {
+      addToCartFromUrl(cartLink.href);
+      return;
+    }
+  }
+
+  /* ---------- SIZE BUTTON ---------- */
+  if (e.target.closest(".size-popup button")) {
+    const btn = e.target.closest("button");
+    const variantId = btn.getAttribute("data-variant");
+    if (!variantId) return;
+
+    addToCartByVariant(variantId);
+
+    const popup = btn.closest(".size-popup");
+    if (popup) popup.style.display = "none";
     return;
   }
 
-  const res = await fetch(`https://${SHOP_DOMAIN}/api/2023-10/graphql.json`, {
+});
+
+/* ---------- ADD TO CART (BY VARIANT) ---------- */
+function addToCartByVariant(variantId) {
+  fetch("/cart/add.js", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": STOREFRONT_TOKEN
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      query: `
-       mutation {
-  checkoutCreate(input: {}) {
-    checkout {
-      id
-    }
-  }
-}
-    })
-  });
-
-  const json = await res.json();
-  checkoutId = json.data.checkoutCreate.checkout.id;
-  localStorage.setItem("epok_checkout", checkoutId);
-}
-
-initCheckout();
-
-/* ---------- ADD ITEM TO CART ---------- */
-async function addToCart(variantId) {
-  if (!checkoutId) return;
-
-  await fetch(`https://${SHOP_DOMAIN}/api/2023-10/graphql.json`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": STOREFRONT_TOKEN
-    },
-    body: JSON.stringify({
-      query: `
-        mutation addLine($checkoutId: ID!, $variantId: ID!) {
-          checkoutLineItemsAdd(
-            checkoutId: $checkoutId,
-            lineItems: [{ variantId: $variantId, quantity: 1 }]
-          ) {
-            checkout { id }
-          }
-        }
-      `,
-      variables: {
-        checkoutId,
-        variantId: `gid://shopify/ProductVariant/${variantId}`
-      }
+      id: variantId,
+      quantity: 1
     })
   });
 }
 
-/* ---------- GLOBAL CLICK HANDLER ---------- */
-document.addEventListener("click", e => {
+/* ---------- ADD TO CART (FROM CART URL) ---------- */
+function addToCartFromUrl(url) {
+  const parts = url.split("/cart/")[1];
+  if (!parts) return;
 
-  if (e.target.classList.contains("btn-select")) {
-    const actions = e.target.closest(".product-actions");
-    const sizeBox = actions?.querySelector(".size-popup");
-    if (sizeBox) sizeBox.style.display = "flex";
-  }
+  const variantId = parts.split(":")[0];
+  addToCartByVariant(variantId);
+}
 
-  if (e.target.closest(".size-popup button")) {
-    const btn = e.target;
-    const variantId = btn.dataset.variant;
-    if (!variantId) return;
-
-    addToCart(variantId);
-
-    const popup = btn.closest(".size-popup");
-    popup.style.display = "none";
-  }
-
-  if (e.target.classList.contains("btn-checkout")) {
-    if (!checkoutId) return;
-    window.location.href =
-      `https://${SHOP_DOMAIN}/checkout/${checkoutId.split("/").pop()}`;
-  }
-
+/* ---------- CHECKOUT BUTTON ---------- */
+document.querySelectorAll(".btn-checkout").forEach(btn => {
+  btn.addEventListener("click", e => {
+    e.preventDefault();
+    window.location.href = "/checkout";
+  });
 });
 </script>
 
