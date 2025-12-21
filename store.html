@@ -1531,124 +1531,110 @@ html, body {
 </div>
 
 <script>
-/* ================= EPÒK HEADLESS SHOPIFY CART ================= */
+/* ================= EPÒK HEADLESS SHOPIFY ================= */
 
-const SHOPIFY_DOMAIN = "epok-8204.myshopify.com";
+const SHOP_DOMAIN = "epok-8204.myshopify.com";
 const STOREFRONT_TOKEN = "5b037f774a48b173f8f976ee95cea12b";
-const API_URL = `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`;
 
-/* ---------------- CART STATE ---------------- */
-let cartItems = [];
+let checkoutId = null;
 
-/* ---------------- ADD TO CART ---------------- */
-function addToCart(variantId, quantity = 1) {
-  const existing = cartItems.find(i => i.variantId === variantId);
-  if (existing) {
-    existing.quantity += quantity;
-  } else {
-    cartItems.push({ variantId, quantity });
+/* ---------- CREATE / LOAD CHECKOUT ---------- */
+async function initCheckout() {
+  const stored = localStorage.getItem("epok_checkout");
+  if (stored) {
+    checkoutId = stored;
+    return;
   }
-  console.log("Cart:", cartItems);
-}
 
-/* ---------------- CHECKOUT ---------------- */
-async function goToCheckout() {
-  if (!cartItems.length) return alert("Cart is empty");
-
-  const lineItems = cartItems.map(item => ({
-    variantId: `gid://shopify/ProductVariant/${item.variantId}`,
-    quantity: item.quantity
-  }));
-
-  const query = `
-    mutation checkoutCreate($lineItems: [CheckoutLineItemInput!]!) {
-      checkoutCreate(input: { lineItems: $lineItems }) {
-        checkout {
-          webUrl
-        }
-      }
-    }
-  `;
-
-  const res = await fetch(API_URL, {
+  const res = await fetch(`https://${SHOP_DOMAIN}/api/2023-10/graphql.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "X-Shopify-Storefront-Access-Token": STOREFRONT_TOKEN
     },
     body: JSON.stringify({
-      query,
-      variables: { lineItems }
+      query: `
+        mutation {
+          checkoutCreate {
+            checkout {
+              id
+            }
+          }
+        }
+      `
     })
   });
 
-  const data = await res.json();
-  window.location.href = data.data.checkoutCreate.checkout.webUrl;
+  const json = await res.json();
+  checkoutId = json.data.checkoutCreate.checkout.id;
+  localStorage.setItem("epok_checkout", checkoutId);
 }
 
-/* ---------------- GLOBAL CLICK HANDLER ---------------- */
-document.addEventListener("click", function (e) {
+initCheckout();
 
-  /* ===== SELECT BUTTON ===== */
+/* ---------- ADD ITEM TO CART ---------- */
+async function addToCart(variantId) {
+  if (!checkoutId) return;
+
+  await fetch(`https://${SHOP_DOMAIN}/api/2023-10/graphql.json`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Storefront-Access-Token": STOREFRONT_TOKEN
+    },
+    body: JSON.stringify({
+      query: `
+        mutation addLine($checkoutId: ID!, $variantId: ID!) {
+          checkoutLineItemsAdd(
+            checkoutId: $checkoutId,
+            lineItems: [{ variantId: $variantId, quantity: 1 }]
+          ) {
+            checkout { id }
+          }
+        }
+      `,
+      variables: {
+        checkoutId,
+        variantId: `gid://shopify/ProductVariant/${variantId}`
+      }
+    })
+  });
+}
+
+/* ---------- GLOBAL CLICK HANDLER ---------- */
+document.addEventListener("click", e => {
+
+  /* SELECT */
   if (e.target.classList.contains("btn-select")) {
     const actions = e.target.closest(".product-actions");
-    if (!actions) return;
+    const sizeBox = actions?.querySelector(".size-popup");
 
-    const sizeBox = actions.querySelector(".size-popup");
-    const singleVariant = actions.getAttribute("data-variant");
-
-    // PRODUCT WITH SIZES
     if (sizeBox) {
       sizeBox.style.display = "flex";
-      return;
-    }
-
-    // PRODUCT WITHOUT SIZES
-    if (singleVariant) {
-      addToCart(singleVariant);
-      return;
     }
   }
 
-  /* ===== SIZE BUTTON ===== */
+  /* SIZE CLICK */
   if (e.target.closest(".size-popup button")) {
     const btn = e.target;
-    const variantId = btn.getAttribute("data-variant");
+    const variantId = btn.dataset.variant;
     if (!variantId) return;
 
     addToCart(variantId);
 
     const popup = btn.closest(".size-popup");
-    if (popup) popup.style.display = "none";
-    return;
+    popup.style.display = "none";
   }
 
-  /* ===== CHECKOUT BUTTON ===== */
+  /* CHECKOUT */
   if (e.target.classList.contains("btn-checkout")) {
-    e.preventDefault();
-    goToCheckout();
-    return;
+    if (!checkoutId) return;
+    window.location.href = `https://${SHOP_DOMAIN}/checkout/${checkoutId.split("/").pop()}`;
   }
 
-});
-
-/* ================= SAVE SYSTEM (UNCHANGED) ================= */
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".btn-save").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const wrap = btn.closest(".product-wrap");
-      const savedGrid = document.querySelector("#saved-items .product-grid");
-      if (!wrap || !savedGrid) return;
-
-      const clone = wrap.cloneNode(true);
-      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout")
-        .forEach(b => b.remove());
-
-      savedGrid.appendChild(clone);
-    });
-  });
 });
 </script>
+
 
 </body>
 </html>
