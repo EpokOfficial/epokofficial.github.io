@@ -1534,7 +1534,7 @@ html, body {
 /* ================= EPÒK HEADLESS SHOPIFY ================= */
 
 const SHOP_DOMAIN = "epok-8204.myshopify.com";
-const STOREFRONT_TOKEN = "5b037f774a48b173f8f976ee95cea12b";
+const STOREFRONT_TOKEN = "5b037f774a48b173f8f976ee95cea12b"; // ← your real token
 
 let checkoutId = null;
 
@@ -1556,9 +1556,7 @@ async function initCheckout() {
       query: `
         mutation {
           checkoutCreate {
-            checkout {
-              id
-            }
+            checkout { id }
           }
         }
       `
@@ -1604,17 +1602,12 @@ async function addToCart(variantId) {
 /* ---------- GLOBAL CLICK HANDLER ---------- */
 document.addEventListener("click", e => {
 
-  /* SELECT */
   if (e.target.classList.contains("btn-select")) {
     const actions = e.target.closest(".product-actions");
     const sizeBox = actions?.querySelector(".size-popup");
-
-    if (sizeBox) {
-      sizeBox.style.display = "flex";
-    }
+    if (sizeBox) sizeBox.style.display = "flex";
   }
 
-  /* SIZE CLICK */
   if (e.target.closest(".size-popup button")) {
     const btn = e.target;
     const variantId = btn.dataset.variant;
@@ -1626,14 +1619,15 @@ document.addEventListener("click", e => {
     popup.style.display = "none";
   }
 
-  /* CHECKOUT */
   if (e.target.classList.contains("btn-checkout")) {
     if (!checkoutId) return;
-    window.location.href = `https://${SHOP_DOMAIN}/checkout/${checkoutId.split("/").pop()}`;
+    window.location.href =
+      `https://${SHOP_DOMAIN}/checkout/${checkoutId.split("/").pop()}`;
   }
 
 });
 </script>
+
 
 
 </body>
