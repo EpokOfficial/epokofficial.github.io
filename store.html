@@ -1530,29 +1530,15 @@ html, body {
     </div>
 </div>
 
-<!-- ================= SHOPIFY BUY BUTTON SDK ================= -->
-<script src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
-
 <script>
-/* ================= INIT SHOPIFY CLIENT ================= */
-const shopifyClient = ShopifyBuy.buildClient({
-  domain: "epok-8204.myshopify.com",
-  storefrontAccessToken: "REPLACE_WITH_YOUR_STOREFRONT_TOKEN"
-});
-
-/* ================= CREATE CART ================= */
-let checkout;
-
-shopifyClient.checkout.create().then(c => {
-  checkout = c;
-});
-
 /* ================= STORE TAB SCROLL ================= */
 document.querySelectorAll('.store-tab').forEach(tab => {
   tab.addEventListener('click', e => {
     e.preventDefault();
     const target = document.querySelector(tab.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
 });
 
@@ -1562,41 +1548,32 @@ document.addEventListener("click", function (e) {
   /* ===== SELECT BUTTON ===== */
   if (e.target.classList.contains("btn-select")) {
     const actions = e.target.closest(".product-actions");
-    if (!actions || !checkout) return;
+    if (!actions) return;
 
     const sizeBox = actions.querySelector(".size-popup");
     const cartLink = actions.querySelector(".add-to-cart");
 
-    /* NO SIZE PRODUCT (BEANIES, HATS) */
-    if (!sizeBox && cartLink && cartLink.href) {
-      const url = new URL(cartLink.href);
-      const variantId = url.pathname.split("/").pop().split(":")[0];
-
-      shopifyClient.checkout.addLineItems(checkout.id, [
-        { variantId: `gid://shopify/ProductVariant/${variantId}`, quantity: 1 }
-      ]);
-
+    /* PRODUCT WITH SIZES */
+    if (sizeBox) {
+      sizeBox.style.display = "flex";
       return;
     }
 
-    /* SIZE PRODUCT */
-    if (sizeBox) {
-      sizeBox.style.display = "flex";
+    /* PRODUCT WITHOUT SIZES (BEANIES, HATS) */
+    if (cartLink && cartLink.href) {
+      window.open(cartLink.href, "_blank");
       return;
     }
   }
 
   /* ===== SIZE BUTTON ===== */
   if (e.target.closest(".size-popup button")) {
-    if (!checkout) return;
-
     const sizeBtn = e.target;
     const variantId = sizeBtn.getAttribute("data-variant");
     if (!variantId) return;
 
-    shopifyClient.checkout.addLineItems(checkout.id, [
-      { variantId: `gid://shopify/ProductVariant/${variantId}`, quantity: 1 }
-    ]);
+    const cartUrl = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
+    window.open(cartUrl, "_blank");
 
     const popup = sizeBtn.closest(".size-popup");
     if (popup) popup.style.display = "none";
@@ -1617,7 +1594,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const clone = wrap.cloneNode(true);
       clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout")
-           .forEach(b => b.remove());
+        .forEach(b => b.remove());
 
       savedGrid.appendChild(clone);
     });
