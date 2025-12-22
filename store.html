@@ -580,111 +580,70 @@ html, body {
 
     
 
-<div class="custom-product-grid-container" style="display: flex; gap: 20px; flex-wrap: wrap;">
+ <div class="product-wrap">
 
-  {% comment %} PRODUCT 1: BEANIE {% endcomment %}
-  <div class="product-wrap">
-    <div class="product-card">
-      <div class="placeholder-img">
-        <img src="{{ 'pompombeanie.png' | asset_url }}" alt="Beanie" style="width:100%; max-width:200px;">
-      </div>
-    </div>
-    <div class="product-actions">
-      <div class="product-price">$</div>
-      <button class="btn-save">SAVE</button>
-      <button class="btn-select" data-variant="52764320760126">SELECT</button>
-      <a class="btn-checkout" href="/cart">CHECKOUT</a>
+  <div class="product-card">
+    <div class="placeholder-img">
+      <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="">
     </div>
   </div>
 
-  {% comment %} PRODUCT 2: SWEATSHIRT {% endcomment %}
-  <div class="product-wrap">
-    <div class="product-card">
-      <div class="placeholder-img">
-        <img src="{{ 'sweatshirtfront.png' | asset_url }}" alt="Sweatshirt" style="width:100%; max-width:200px;">
-      </div>
-    </div>
-    <div class="product-actions" style="position: relative;">
-      <div class="product-price">$</div>
-      
-      <div class="size-popup" style="display:none; flex-direction: column; position: absolute; bottom: 100%; left: 0; background: #fff; border: 1px solid #000; padding: 10px; z-index: 100;">
-        <button class="size-opt" data-variant="52764324561214">S</button>
-        <button class="size-opt" data-variant="52764324593982">M</button>
-        <button class="size-opt" data-variant="52764324626750">L</button>
-        <button class="size-opt" data-variant="52764324659518">XL</button>
-        <button class="size-opt" data-variant="52764431810878">XXL</button>
-      </div>
+  <div class="product-actions">
 
-      <button class="btn-save">SAVE</button>
-      <button class="btn-select">SELECT</button>
-      <a class="btn-checkout" href="/cart">CHECKOUT</a>
-    </div>
+    <div class="product-price">$</div>
+
+    <button class="btn-save">SAVE</button>
+
+    <!-- Beanie SELECT goes straight to cart (silent) -->
+    <button class="btn-select" data-variant="52764320760126">
+      SELECT
+    </button>
+
+    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
+      CHECKOUT
+    </a>
+
   </div>
+
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Function to add to cart without refreshing
-  async function silentAdd(vId) {
-    let formData = { 'items': [{ 'id': vId, 'quantity': 1 }] };
-    try {
-      const res = await fetch(window.Shopify.routes.root + 'cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      if (res.ok) {
-        alert("Added to cart! Continue shopping.");
-      }
-    } catch (e) { console.error("Cart error:", e); }
-  }
 
-  // Handle Select Clicks
-  document.querySelectorAll(".btn-select").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const actions = btn.closest(".product-actions");
-      const sizeBox = actions.querySelector(".size-popup");
-      const vId = btn.getAttribute("data-variant");
+    
 
-      if (sizeBox) {
-        sizeBox.style.display = (sizeBox.style.display === "flex") ? "none" : "flex";
-      } else if (vId) {
-        silentAdd(vId);
-      }
-    });
-  });
+<div class="product-wrap">
 
-  // Handle Size Selection
-  document.querySelectorAll(".size-opt").forEach(opt => {
-    opt.addEventListener("click", () => {
-      const vId = opt.getAttribute("data-variant");
-      silentAdd(vId);
-      opt.parentElement.style.display = "none";
-    });
-  });
+  <div class="product-card">
+    <div class="placeholder-img">
+      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="">
+    </div>
+  </div>
 
-  // Handle Save (Clone)
-  document.querySelectorAll(".btn-save").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const wrap = btn.closest(".product-wrap");
-      const savedGrid = document.querySelector("#saved-items .product-grid");
-      if (wrap && savedGrid) {
-        const clone = wrap.cloneNode(true);
-        clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout, .size-popup").forEach(el => el.remove());
-        savedGrid.appendChild(clone);
-      }
-    });
-  });
-});
-</script>
+  <div class="product-actions">
 
-{% schema %}
-{
-  "name": "Custom Shop Grid",
-  "settings": [],
-  "presets": [{ "name": "Custom Shop Grid" }]
-}
-{% endschema %}
+    <div class="product-price">$</div>
+
+    <!-- SIZE OPTIONS (HIDDEN UNTIL SELECT) -->
+    <div class="size-popup" style="display:none;">
+      <button data-variant="52764324561214">S</button>
+      <button data-variant="52764324593982">M</button>
+      <button data-variant="52764324626750">L</button>
+      <button data-variant="52764324659518">XL</button>
+      <button data-variant="52764431810878">XXL</button>
+    </div>
+
+    <button class="btn-save">SAVE</button>
+
+    <!-- Clothing SELECT opens size popup -->
+    <button class="btn-select">SELECT</button>
+
+    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
+      CHECKOUT
+    </a>
+
+  </div>
+
+</div>
+
 
 
     
@@ -1537,37 +1496,12 @@ document.addEventListener("DOMContentLoaded", () => {
             قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك •
         </span>
     </div>
+</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Function to handle the actual Shopify Cart Add
-  async function addToShopifyCart(variantId) {
-    let formData = {
-      'items': [{
-        'id': variantId,
-        'quantity': 1
-      }]
-    };
-
-    try {
-      const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Success:', data);
-        alert('Item added to cart! Keep shopping.');
-        
-        // OPTIONAL: If you want to refresh a cart counter or open a drawer, 
-        // you would trigger that event here.
-      }
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-    }
-  }
+  const cartFrame = document.getElementById("cart-frame");
 
   /* ===== SELECT BUTTON ===== */
   document.querySelectorAll(".btn-select").forEach(btn => {
@@ -1576,15 +1510,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!actions) return;
 
       const sizeBox = actions.querySelector(".size-popup");
-      const variant = btn.getAttribute("data-variant");
+      const variant = btn.dataset.variant;
 
-      // BEANIE (No sizes - direct silent add)
+      // BEANIE (no sizes)
       if (!sizeBox && variant) {
-        addToShopifyCart(variant);
+        cartFrame.src = `https://epok-8204.myshopify.com/cart/${variant}:1`;
         return;
       }
 
-      // CLOTHING (Show sizes)
+      // CLOTHING (show sizes)
       if (sizeBox) {
         sizeBox.style.display = "flex";
       }
@@ -1593,15 +1527,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ===== SIZE CLICK ===== */
   document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
-    sizeBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const variantId = sizeBtn.getAttribute("data-variant");
+    sizeBtn.addEventListener("click", () => {
+      const variantId = sizeBtn.dataset.variant;
       if (!variantId) return;
 
-      // Silent Add for the selected size
-      addToShopifyCart(variantId);
-      
-      // Hide the popup after selection
+      cartFrame.src = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
       sizeBtn.closest(".size-popup").style.display = "none";
     });
   });
@@ -1614,8 +1544,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!wrap || !savedGrid) return;
 
       const clone = wrap.cloneNode(true);
-      // Remove buttons from the saved version to avoid double-adding
-      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout, .size-popup").forEach(b => b.remove());
+      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout").forEach(b => b.remove());
       savedGrid.appendChild(clone);
     });
   });
@@ -1628,7 +1557,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
-
-
-
