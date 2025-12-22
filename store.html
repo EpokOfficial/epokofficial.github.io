@@ -581,7 +581,7 @@ html, body {
     
 
 <!-- PRODUCT 1: BEANIE (Added data-handle) -->
-<div class="product-wrap" data-handle="pnv-beanie"> 
+<div class="product-wrap">
   <div class="product-card">
     <div class="placeholder-img">
       <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="Beanie">
@@ -589,28 +589,24 @@ html, body {
   </div>
 
   <div class="product-actions">
-    <!-- The JavaScript will automatically fill this $ with the real price -->
-    <div class="product-price">$</div> 
+    <div class="product-price">$</div>
 
     <button class="btn-save">SAVE</button>
 
-    <!-- Beanie SELECT now has no data-variant attribute; JS handles this -->
-    <button class="btn-select">
+    <!-- HARD-LOCKED VARIANT GID -->
+    <button class="btn-select"
+      data-variant="gid://shopify/ProductVariant/52764320760126">
       SELECT
     </button>
 
-    <a class="btn-checkout" href="#">
-      CHECKOUT <!-- The JS View Cart button handles actual checkout redirect -->
-    </a>
-
+    <button class="btn-checkout">CHECKOUT</button>
   </div>
-
 </div>
 
 
-<!-- PRODUCT 2: SWEATSHIRT (Added data-handle) -->
-<div class="product-wrap" data-handle="patch-baby-jogger-sweatshirt"> 
 
+<!-- PRODUCT 2: SWEATSHIRT (Added data-handle) -->
+<div class="product-wrap">
   <div class="product-card">
     <div class="placeholder-img">
       <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="Sweatshirt">
@@ -618,33 +614,26 @@ html, body {
   </div>
 
   <div class="product-actions">
-
-    <!-- The JavaScript will automatically fill this $ with the real price -->
     <div class="product-price">$</div>
 
-    <!-- SIZE OPTIONS (Still need data-variant IDs for the JS script to grab when clicked) -->
+    <!-- SIZE POPUP -->
     <div class="size-popup" style="display:none;">
-      <button data-variant="52764324561214">S</button>
-      <button data-variant="52764324593982">M</button>
-      <button data-variant="52764324626750">L</button>
-      <button data-variant="52764431810878">XXL</button>
-      <button data-variant="52764324593982">M</button>
-      <button data-variant="52764324626750">L</button>
-      <button data-variant="52764324659518">XL</button>
+      <button data-variant="gid://shopify/ProductVariant/52764324561214">S</button>
+      <button data-variant="gid://shopify/ProductVariant/52764324593982">M</button>
+      <button data-variant="gid://shopify/ProductVariant/52764324626750">L</button>
+      <button data-variant="gid://shopify/ProductVariant/52764324659518">XL</button>
+      <button data-variant="gid://shopify/ProductVariant/52764431810878">XXL</button>
     </div>
 
     <button class="btn-save">SAVE</button>
 
-    <!-- Clothing SELECT opens size popup -->
+    <!-- SELECT JUST OPENS SIZE -->
     <button class="btn-select">SELECT</button>
 
-    <a class="btn-checkout" href="#">
-      CHECKOUT
-    </a>
-
+    <button class="btn-checkout">CHECKOUT</button>
   </div>
-
 </div>
+
 
 
 
@@ -1530,162 +1519,134 @@ html, body {
 </div>
 
 <!-- Use the modern Storefront API client library -->
-<script src="cdn.shopify.com"></script>
 <script>
-  // Initialize the Shopify Storefront API Client (Headless Setup)
-  const client = Shopify.StorefrontAPI.buildClient({
-    domain: 'epok-8204.myshopify.com', // Your Domain
-    storefrontAccessToken: '7cce3413000760b0b43d63e98525bf9c' // Your Public Token
-  });
+const SHOP_DOMAIN = "epok-8204.myshopify.com";
+const TOKEN = "7cce3413000760b0b43d63e98525bf9c";
 
-  let checkoutId = localStorage.getItem('shopify_checkout_id');
-  let cartCountEl = document.getElementById('cart-item-count');
-  const productsOnPage = document.querySelectorAll('[data-handle]');
+let cartId = localStorage.getItem("epok_cart_id");
 
-  // --- 1. Dynamic Data Fetching Function (Uses modern GraphQL) ---
-  async function fetchProductData() {
-    if (productsOnPage.length === 0) return;
+/* CREATE OR LOAD CART */
+async function getCart() {
+  if (cartId) return cartId;
 
-    // Build a GraphQL query fragment to fetch all needed data
-    const handles = Array.from(productsOnPage).map(el => el.getAttribute('data-handle'));
-    const queries = handles.map(handle => `
-      ${handle}: productByHandle(handle: "${handle}") {
-        title
-        variants(first: 20) {
-          edges {
-            node {
-              id
-              title
-              price { amount currencyCode }
+  const res = await fetch(
+    `https://${SHOP_DOMAIN}/api/2024-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": TOKEN
+      },
+      body: JSON.stringify({
+        query: `
+          mutation {
+            cartCreate {
+              cart { id }
             }
           }
-        }
-      }
-    `).join('');
+        `
+      })
+    }
+  );
 
-    const query = `{ ${queries} }`;
+  const data = await res.json();
+  cartId = data.data.cartCreate.cart.id;
+  localStorage.setItem("epok_cart_id", cartId);
+  return cartId;
+}
 
-    try {
-      const response = await client.query({ data: query });
-      
-      // Map the data back to your HTML layout
-      productsOnPage.forEach(wrap => {
-        const handle = wrap.getAttribute('data-handle');
-        const productData = response.body.data[handle];
+/* ADD VARIANT */
+async function addToCart(variantId) {
+  const cart = await getCart();
 
-        if (!productData) {
-            console.error(`Product data missing for handle: ${handle}`);
-            return;
-        }
-
-        const variants = productData.variants.edges;
-        const priceEl = wrap.querySelector('.product-price');
-        
-        // Handle products with single vs multiple variants
-        if (variants.length === 1) {
-            // Set price and attach variant ID to the SELECT button directly
-            priceEl.textContent = `$${variants[0].node.price.amount} ${variants[0].node.price.currencyCode}`;
-            const selectBtn = wrap.querySelector('.btn-select');
-            selectBtn.setAttribute('data-variant-id', variants[0].node.id.split('/').pop()); // Clean ID for API
-        } else {
-            // Set lowest price and populate size popup
-            priceEl.textContent = `$${variants[0].node.price.amount} ${variants[0].node.price.currencyCode} + sizes`;
-            const sizePopup = wrap.querySelector('.size-popup');
-            if (sizePopup) {
-                // Dynamically add variant IDs to buttons in the size popup
-                sizePopup.querySelectorAll('button').forEach(btn => {
-                    const sizeTitle = btn.textContent;
-                    const matchingVariant = variants.find(v => v.node.title === sizeTitle);
-                    if (matchingVariant) {
-                        btn.setAttribute('data-variant-id', matchingVariant.node.id.split('/').pop());
-                    }
-                });
+  await fetch(
+    `https://${SHOP_DOMAIN}/api/2024-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": TOKEN
+      },
+      body: JSON.stringify({
+        query: `
+          mutation {
+            cartLinesAdd(
+              cartId: "${cart}",
+              lines: [{ merchandiseId: "${variantId}", quantity: 1 }]
+            ) {
+              cart { checkoutUrl }
             }
-        }
-      });
-    } catch (error) {
-      console.error("Error fetching product data:", error);
+          }
+        `
+      })
     }
-  }
+  );
 
-  // --- 2. Cart Functions (Uses modern Cart API) ---
-  const updateCartUI = (checkout) => {
-    localStorage.setItem('shopify_checkout_id', checkout.id);
-    if (cartCountEl) cartCountEl.textContent = checkout.lineItems.reduce((total, item) => total + item.quantity, 0);
-  };
+  showToast("ADDED TO CART");
+}
 
-  async function getOrCreateCheckout() {
-    if (checkoutId) {
-        try {
-            const checkout = await client.checkout.fetch(checkoutId);
-            if (checkout && !checkout.completedAt) {
-                updateCartUI(checkout);
-                return checkout;
+/* CHECKOUT */
+async function goToCheckout() {
+  if (!cartId) return alert("Cart empty");
+
+  const res = await fetch(
+    `https://${SHOP_DOMAIN}/api/2024-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": TOKEN
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            cart(id: "${cartId}") {
+              checkoutUrl
             }
-        } catch (e) { console.log("Invalid checkout ID, creating new one."); }
+          }
+        `
+      })
     }
-    const newCheckout = await client.checkout.create();
-    updateCartUI(newCheckout);
-    return newCheckout;
+  );
+
+  const data = await res.json();
+  window.location.href = data.data.cart.checkoutUrl;
+}
+
+/* EVENTS */
+document.addEventListener("click", e => {
+
+  // SELECT (single variant)
+  if (e.target.classList.contains("btn-select") && e.target.dataset.variant) {
+    addToCart(e.target.dataset.variant);
   }
 
-  async function addVariantToCart(variantId) {
-    const checkout = await getOrCreateCheckout();
-    const lineItemsToAdd = [{ variantId: btoa(`gid://shopify/ProductVariant/${variantId}`), quantity: 1 }]; // API needs base64 ID
-
-    try {
-        const updatedCheckout = await client.checkout.addLineItems(checkout.id, lineItemsToAdd);
-        updateCartUI(updatedCheckout);
-        alert("Added to cart! Use 'View Cart' button to checkout.");
-    } catch (e) {
-        console.error("Error adding item:", e);
-    }
+  // OPEN SIZE POPUP
+  if (e.target.classList.contains("btn-select")) {
+    const popup = e.target.closest(".product-actions")?.querySelector(".size-popup");
+    if (popup) popup.style.display = "flex";
   }
-  
-  // --- 3. Event Listeners & Initialization ---
-  document.addEventListener("DOMContentLoaded", async () => {
-    await fetchProductData(); // Get prices first
-    await getOrCreateCheckout(); // Load existing cart
 
-    // ... [Rest of your event listeners for buttons] ...
-    
-    /* ===== SELECT BUTTON (Direct Add & Open Popup Logic) ===== */
-    document.querySelectorAll(".btn-select").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const variantId = btn.getAttribute("data-variant-id");
-        const sizeBox = btn.closest(".product-actions").querySelector(".size-popup");
+  // SIZE CLICK
+  if (e.target.matches(".size-popup button")) {
+    addToCart(e.target.dataset.variant);
+    e.target.closest(".size-popup").style.display = "none";
+  }
 
-        if (sizeBox) {
-           sizeBox.style.display = sizeBox.style.display === 'none' ? 'flex' : 'none';
-        } else if (variantId) {
-          addVariantToCart(variantId);
-        }
-      });
-    });
+  // CHECKOUT
+  if (e.target.classList.contains("btn-checkout")) {
+    goToCheckout();
+  }
+});
 
-    /* ===== SIZE CLICK (Sweatshirt options) ===== */
-    document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
-      sizeBtn.addEventListener("click", () => {
-        const variantId = sizeBtn.getAttribute("data-variant-id");
-        if (variantId) {
-            addVariantToCart(variantId);
-        }
-        sizeBtn.closest(".size-popup").style.display = "none";
-      });
-    });
-    
-    /* ===== VIEW CART BUTTON ACTION (Final Redirect) ===== */
-    document.getElementById('view-cart-btn').addEventListener('click', async () => {
-        const checkout = await getOrCreateCheckout();
-        if (checkout && checkout.webUrl) {
-            window.location.href = checkout.webUrl;
-        } else {
-            alert("Your cart is currently empty.");
-        }
-    });
-
-    /* ===== SAVE BUTTON (Your existing save logic is not included here, add it back in if needed) ===== */
-  });
+/* TOAST */
+function showToast(msg) {
+  let toast = document.getElementById("cart-toast");
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.style.display = "block";
+  setTimeout(() => toast.style.display = "none", 1800);
+}
 </script>
 
 
