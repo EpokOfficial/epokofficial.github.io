@@ -1498,7 +1498,6 @@ html, body {
     </div>
 </div>
 
-<script>
 <script src="sdks.shopifycdn.com"></script>
 <script>
   // Initialize the Shopify Buy Client
@@ -1508,53 +1507,55 @@ html, body {
   });
 
   let cart;
+  const cartCountEl = document.getElementById('cart-item-count');
+  const viewCartBtn = document.getElementById('view-cart-btn');
 
-  // Function to add a variant to the cart
-  const addVariantToCart = (variantId) => {
-    // A simple side-cart implementation is needed here.
-    // For now, this just adds the item and logs it.
-
-    // If no cart exists, create one
-    if (!cart) {
-      client.checkout.create().then(newCart => {
-        cart = newCart;
-        processAdd(variantId);
-      });
-    } else {
-      processAdd(variantId);
+  // Function to update the UI
+  const updateCartUI = (updatedCart) => {
+    cart = updatedCart;
+    const itemCount = updatedCart.lineItemCount;
+    if (cartCountEl) {
+      cartCountEl.textContent = itemCount;
     }
   };
 
-  const processAdd = (variantId) => {
-      const lineItemsToAdd = [{ variantId, quantity: 1 }];
-
-      // Add the item to the existing cart
-      client.checkout.addLineItems(cart.id, lineItemsToAdd).then(updatedCart => {
-        cart = updatedCart;
-        console.log(`Added to cart: ${updatedCart.lineItemCount} items total.`);
-        alert("Item added to cart! A cart drawer would typically open now.");
+  // Function to add a variant to the cart
+  const addVariantToCart = (variantId) => {
+    if (!cart) {
+      // Create a new cart if one doesn't exist
+      client.checkout.create().then(newCart => {
+        const lineItemsToAdd = [{ variantId, quantity: 1 }];
+        client.checkout.addLineItems(newCart.id, lineItemsToAdd).then(cartWithItems => {
+            updateCartUI(cartWithItems);
+            alert("Added to cart! Use 'View Cart' button to checkout.");
+        });
       });
-  }
-
+    } else {
+      // Add to existing cart
+      const lineItemsToAdd = [{ variantId, quantity: 1 }];
+      client.checkout.addLineItems(cart.id, lineItemsToAdd).then(updatedCart => {
+          updateCartUI(updatedCart);
+          alert("Added to cart! Use 'View Cart' button to checkout.");
+      });
+    }
+  };
+  
+  // Event Listeners
   document.addEventListener("DOMContentLoaded", () => {
     /* ===== SELECT BUTTON (Beanie) ===== */
     document.querySelectorAll(".btn-select[data-variant]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        addVariantToCart(btn.dataset.variant);
-      });
+      btn.addEventListener("click", () => addVariantToCart(btn.dataset.variant));
     });
 
     /* ===== SIZE CLICK (Sweatshirt options) ===== */
     document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
       sizeBtn.addEventListener("click", () => {
         addVariantToCart(sizeBtn.dataset.variant);
-        // Hide the popup after selection
         sizeBtn.closest(".size-popup").style.display = "none";
       });
     });
 
     /* ===== Clothing SELECT opens size popup (using previous logic) ===== */
-    // Note: The previous logic for toggling the popup needs to be wired up to your HTML classes
     document.querySelectorAll(".btn-select:not([data-variant])").forEach(btn => {
         btn.addEventListener("click", () => {
             const actions = btn.closest(".product-actions");
@@ -1564,10 +1565,20 @@ html, body {
             }
         });
     });
+    
+    /* ===== VIEW CART BUTTON ACTION (Final Redirect) ===== */
+    if (viewCartBtn) {
+        viewCartBtn.addEventListener('click', () => {
+            if (cart && cart.webUrl) {
+                // Redirects the user to the Shopify-hosted secure checkout link (webUrl)
+                window.location.href = cart.webUrl;
+            } else {
+                alert("Your cart is currently empty.");
+            }
+        });
+    }
   });
 </script>
-
-
 
 
 
