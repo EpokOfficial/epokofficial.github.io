@@ -580,27 +580,27 @@ html, body {
 
     
 
- <div class="product-wrap">
-
+<!-- PRODUCT 1: BEANIE (Added data-handle) -->
+<div class="product-wrap" data-handle="pnv-beanie"> 
   <div class="product-card">
     <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="">
+      <img src="ModelPictures/patchbabysjogger/pompombeanie.png" alt="Beanie">
     </div>
   </div>
 
   <div class="product-actions">
-
-    <div class="product-price">$</div>
+    <!-- The JavaScript will automatically fill this $ with the real price -->
+    <div class="product-price">$</div> 
 
     <button class="btn-save">SAVE</button>
 
-    <!-- Beanie SELECT goes straight to cart (silent) -->
-    <button class="btn-select" data-variant="52764320760126">
+    <!-- Beanie SELECT now has no data-variant attribute; JS handles this -->
+    <button class="btn-select">
       SELECT
     </button>
 
-    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
-      CHECKOUT
+    <a class="btn-checkout" href="#">
+      CHECKOUT <!-- The JS View Cart button handles actual checkout redirect -->
     </a>
 
   </div>
@@ -608,27 +608,29 @@ html, body {
 </div>
 
 
-    
-
-<div class="product-wrap">
+<!-- PRODUCT 2: SWEATSHIRT (Added data-handle) -->
+<div class="product-wrap" data-handle="patch-baby-jogger-sweatshirt"> 
 
   <div class="product-card">
     <div class="placeholder-img">
-      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="">
+      <img src="ModelPictures/patchbabysjogger/sweatshirtfront.png" alt="Sweatshirt">
     </div>
   </div>
 
   <div class="product-actions">
 
+    <!-- The JavaScript will automatically fill this $ with the real price -->
     <div class="product-price">$</div>
 
-    <!-- SIZE OPTIONS (HIDDEN UNTIL SELECT) -->
+    <!-- SIZE OPTIONS (Still need data-variant IDs for the JS script to grab when clicked) -->
     <div class="size-popup" style="display:none;">
       <button data-variant="52764324561214">S</button>
       <button data-variant="52764324593982">M</button>
       <button data-variant="52764324626750">L</button>
-      <button data-variant="52764324659518">XL</button>
       <button data-variant="52764431810878">XXL</button>
+      <button data-variant="52764324593982">M</button>
+      <button data-variant="52764324626750">L</button>
+      <button data-variant="52764324659518">XL</button>
     </div>
 
     <button class="btn-save">SAVE</button>
@@ -636,13 +638,14 @@ html, body {
     <!-- Clothing SELECT opens size popup -->
     <button class="btn-select">SELECT</button>
 
-    <a class="btn-checkout" href="https://epok-8204.myshopify.com/cart">
+    <a class="btn-checkout" href="#">
       CHECKOUT
     </a>
 
   </div>
 
 </div>
+
 
 
 
@@ -1500,7 +1503,7 @@ html, body {
 
 <script src="sdks.shopifycdn.com"></script>
 <script>
-  // Initialize the Shopify Buy Client
+  // Initialize the Shopify Buy Client (Headless Setup)
   const client = Shopify.buy.buildClient({
     domain: 'epok-8204.myshopify.com', // Your Domain
     storefrontAccessToken: '7cce3413000760b0b43d63e98525bf9c' // Your Public Token
@@ -1509,40 +1512,66 @@ html, body {
   let cart;
   const cartCountEl = document.getElementById('cart-item-count');
   const viewCartBtn = document.getElementById('view-cart-btn');
+  const productsOnPage = document.querySelectorAll('[data-handle]');
 
-  // Function to update the UI
+  // --- Dynamic Data Fetching Function ---
+  async function fetchProductData() {
+    if (productsOnPage.length === 0) return;
+
+    // 1. Get all handles from your HTML layout (e.g., ["beanie", "sweatshirt"])
+    const handles = Array.from(productsOnPage).map(el => el.getAttribute('data-handle'));
+    
+    // 2. Fetch all products from Shopify in one request
+    const products = await client.product.fetchByHandle(handles);
+
+    // 3. Loop through your HTML layout and fill in the data dynamically
+    productsOnPage.forEach(wrap => {
+      const handle = wrap.getAttribute('data-handle');
+      const product = products.find(p => p.handle === handle);
+      if (!product) return;
+
+      // Get the default variant ID and Price
+      const defaultVariant = product.variants[0];
+      const priceEl = wrap.querySelector('.product-price');
+      if (priceEl) {
+          priceEl.textContent = `$${defaultVariant.price.amount} ${defaultVariant.price.currencyCode}`;
+      }
+
+      // Automatically add the default variant ID to the SELECT button
+      const selectBtn = wrap.querySelector('.btn-select[data-variant]');
+      if (selectBtn) {
+        selectBtn.setAttribute('data-variant', defaultVariant.id);
+      }
+
+      // If you use size popups, you'd need logic here to set those IDs dynamically too
+      // For now, ensure your HTML size buttons still have data-variant attributes
+    });
+  }
+
+  // --- Cart Functions ---
   const updateCartUI = (updatedCart) => {
     cart = updatedCart;
-    const itemCount = updatedCart.lineItemCount;
-    if (cartCountEl) {
-      cartCountEl.textContent = itemCount;
-    }
+    if (cartCountEl) cartCountEl.textContent = updatedCart.lineItemCount;
   };
 
-  // Function to add a variant to the cart
   const addVariantToCart = (variantId) => {
     if (!cart) {
-      // Create a new cart if one doesn't exist
       client.checkout.create().then(newCart => {
-        const lineItemsToAdd = [{ variantId, quantity: 1 }];
-        client.checkout.addLineItems(newCart.id, lineItemsToAdd).then(cartWithItems => {
-            updateCartUI(cartWithItems);
-            alert("Added to cart! Use 'View Cart' button to checkout.");
-        });
+        client.checkout.addLineItems(newCart.id, [{ variantId, quantity: 1 }]).then(updateCartUI);
       });
     } else {
-      // Add to existing cart
-      const lineItemsToAdd = [{ variantId, quantity: 1 }];
-      client.checkout.addLineItems(cart.id, lineItemsToAdd).then(updatedCart => {
-          updateCartUI(updatedCart);
-          alert("Added to cart! Use 'View Cart' button to checkout.");
-      });
+      client.checkout.addLineItems(cart.id, [{ variantId, quantity: 1 }]).then(updateCartUI);
     }
   };
   
-  // Event Listeners
+  // --- Event Listeners & Initialization ---
   document.addEventListener("DOMContentLoaded", () => {
-    /* ===== SELECT BUTTON (Beanie) ===== */
+    fetchProductData(); // Run this on load to fill prices/IDs
+    
+    // ... [Rest of your event listeners for SELECT, SIZE CLICK, SAVE, VIEW CART] ...
+    // Note: The previous logic for your buttons is preserved here
+    
+    /* ===== SELECT BUTTON (Direct Add) ===== */
     document.querySelectorAll(".btn-select[data-variant]").forEach(btn => {
       btn.addEventListener("click", () => addVariantToCart(btn.dataset.variant));
     });
@@ -1570,7 +1599,6 @@ html, body {
     if (viewCartBtn) {
         viewCartBtn.addEventListener('click', () => {
             if (cart && cart.webUrl) {
-                // Redirects the user to the Shopify-hosted secure checkout link (webUrl)
                 window.location.href = cart.webUrl;
             } else {
                 alert("Your cart is currently empty.");
