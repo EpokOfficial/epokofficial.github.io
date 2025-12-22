@@ -1499,58 +1499,74 @@ html, body {
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const cartFrame = document.getElementById("cart-frame");
-
-  /* ===== SELECT BUTTON ===== */
-  document.querySelectorAll(".btn-select").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const actions = btn.closest(".product-actions");
-      if (!actions) return;
-
-      const sizeBox = actions.querySelector(".size-popup");
-      const variant = btn.dataset.variant;
-
-      // BEANIE (no sizes)
-      if (!sizeBox && variant) {
-        cartFrame.src = `https://epok-8204.myshopify.com/cart/${variant}:1`;
-        return;
-      }
-
-      // CLOTHING (show sizes)
-      if (sizeBox) {
-        sizeBox.style.display = "flex";
-      }
-    });
+<script src="sdks.shopifycdn.com"></script>
+<script>
+  // Initialize the Shopify Buy Client
+  const client = Shopify.buy.buildClient({
+    domain: 'epok-8204.myshopify.com', // Your Domain
+    storefrontAccessToken: '7cce3413000760b0b43d63e98525bf9c' // Your Public Token
   });
 
-  /* ===== SIZE CLICK ===== */
-  document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
-    sizeBtn.addEventListener("click", () => {
-      const variantId = sizeBtn.dataset.variant;
-      if (!variantId) return;
+  let cart;
 
-      cartFrame.src = `https://epok-8204.myshopify.com/cart/${variantId}:1`;
-      sizeBtn.closest(".size-popup").style.display = "none";
+  // Function to add a variant to the cart
+  const addVariantToCart = (variantId) => {
+    // A simple side-cart implementation is needed here.
+    // For now, this just adds the item and logs it.
+
+    // If no cart exists, create one
+    if (!cart) {
+      client.checkout.create().then(newCart => {
+        cart = newCart;
+        processAdd(variantId);
+      });
+    } else {
+      processAdd(variantId);
+    }
+  };
+
+  const processAdd = (variantId) => {
+      const lineItemsToAdd = [{ variantId, quantity: 1 }];
+
+      // Add the item to the existing cart
+      client.checkout.addLineItems(cart.id, lineItemsToAdd).then(updatedCart => {
+        cart = updatedCart;
+        console.log(`Added to cart: ${updatedCart.lineItemCount} items total.`);
+        alert("Item added to cart! A cart drawer would typically open now.");
+      });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    /* ===== SELECT BUTTON (Beanie) ===== */
+    document.querySelectorAll(".btn-select[data-variant]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        addVariantToCart(btn.dataset.variant);
+      });
+    });
+
+    /* ===== SIZE CLICK (Sweatshirt options) ===== */
+    document.querySelectorAll(".size-popup button").forEach(sizeBtn => {
+      sizeBtn.addEventListener("click", () => {
+        addVariantToCart(sizeBtn.dataset.variant);
+        // Hide the popup after selection
+        sizeBtn.closest(".size-popup").style.display = "none";
+      });
+    });
+
+    /* ===== Clothing SELECT opens size popup (using previous logic) ===== */
+    // Note: The previous logic for toggling the popup needs to be wired up to your HTML classes
+    document.querySelectorAll(".btn-select:not([data-variant])").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const actions = btn.closest(".product-actions");
+            const sizeBox = actions.querySelector(".size-popup");
+            if (sizeBox) {
+               sizeBox.style.display = sizeBox.style.display === 'none' ? 'flex' : 'none';
+            }
+        });
     });
   });
-
-  /* ===== SAVE BUTTON ===== */
-  document.querySelectorAll(".btn-save").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const wrap = btn.closest(".product-wrap");
-      const savedGrid = document.querySelector("#saved-items .product-grid");
-      if (!wrap || !savedGrid) return;
-
-      const clone = wrap.cloneNode(true);
-      clone.querySelectorAll(".btn-save, .btn-select, .btn-checkout").forEach(b => b.remove());
-      savedGrid.appendChild(clone);
-    });
-  });
-
-});
 </script>
+
 
 
 
