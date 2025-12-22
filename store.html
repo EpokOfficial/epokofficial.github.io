@@ -1585,6 +1585,7 @@ async function addToCart(variantId) {
   );
 
   showToast("ADDED TO CART");
+renderCart();
 }
 
 /* CHECKOUT */
@@ -1631,6 +1632,128 @@ function showToast(message) {
 }
 
 
+async function renderCart() {
+  if (!cartId) return;
+
+  const res = await fetch(
+    `https://${SHOP_DOMAIN}/api/2024-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": TOKEN
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            cart(id: "${cartId}") {
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    merchandise {
+                      ... on ProductVariant {
+                        product { title }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `
+      })
+    }
+  );
+
+  const data = await res.json();
+  const items = data.data.cart.lines.edges;
+
+  const container = document.getElementById("mini-cart-items");
+  container.innerHTML = "";
+
+  items.forEach(({ node }) => {
+    const row = document.createElement("div");
+    row.style.marginBottom = "10px";
+    row.innerHTML = `
+      <div style="font-size:0.6rem; letter-spacing:0.2em;">
+        ${node.merchandise.product.title}
+      </div>
+      <div style="display:flex; gap:6px; margin-top:4px;">
+        <button type="button" data-line="${node.id}" data-action="decrease">−</button>
+        <span>${node.quantity}</span>
+        <button type="button" data-line="${node.id}" data-action="increase">+</button>
+        <button type="button" data-line="${node.id}" data-action="remove">✕</button>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+
+  document.getElementById("mini-cart").style.display = "block";
+}
+
+
+    
+async function updateLine(lineId, quantity) {
+  await fetch(
+    `https://${SHOP_DOMAIN}/api/2024-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": TOKEN
+      },
+      body: JSON.stringify({
+        query: `
+          mutation {
+            cartLinesUpdate(
+              cartId: "${cartId}",
+              lines: [{ id: "${lineId}", quantity: ${quantity} }]
+            ) {
+              cart { id }
+            }
+          }
+        `
+      })
+    }
+  );
+
+  renderCart();
+}
+
+async function removeLine(lineId) {
+  await fetch(
+    `https://${SHOP_DOMAIN}/api/2024-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": TOKEN
+      },
+      body: JSON.stringify({
+        query: `
+          mutation {
+            cartLinesRemove(
+              cartId: "${cartId}",
+              lineIds: ["${lineId}"]
+            ) {
+              cart { id }
+            }
+          }
+        `
+      })
+    }
+  );
+
+  renderCart();
+}
+
+
+
+    
+
+    
 
 document.addEventListener("click", (e) => {
 
@@ -1656,16 +1779,41 @@ document.addEventListener("click", (e) => {
     return;
   }
 
+if (e.target.dataset.line) {
+  const lineId = e.target.dataset.line;
+  const action = e.target.dataset.action;
+  const qtySpan = e.target.parentElement.querySelector("span");
+  const currentQty = parseInt(qtySpan.textContent);
+
+  if (action === "increase") updateLine(lineId, currentQty + 1);
+  if (action === "decrease" && currentQty > 1) updateLine(lineId, currentQty - 1);
+  if (action === "remove") removeLine(lineId);
+  return; // ← THIS IS THE KEY  
+}
+
   // CHECKOUT
   if (e.target.classList.contains("btn-checkout")) {
     goToCheckout();
+  
   }
-
+    
+    
 });
 
     
 </script>
 
+
+
+
+<div id="mini-cart" style="display:none; position:fixed; top:80px; right:20px; width:320px; background:#000; border:1px solid rgba(212,175,55,0.6); z-index:9999; padding:16px;">
+  <h4 style="letter-spacing:0.28em; font-size:0.7rem;">CART</h4>
+  <div id="mini-cart-items"></div>
+
+  <button type="button" class="btn-checkout" style="margin-top:12px;">CHECKOUT</button>
+</div>
+
+    
 <div id="cart-toast"></div>
 
 
