@@ -1,31 +1,91 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EPÒK | Home</title>
+<title>EPÒK | Universal Page</title>
 
 <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background:#000;
-        color:#f9f9f9;
-        overflow-x:hidden;
-    }
-
-/* ============ DOUBLE ROYAL FRAME (FULL PAGE) ============ */
-.page-frame-outer {
-    min-height:100vh;
-    padding:22px;
+html, body {
+    width:100%;
+    height:100%;
     background:#000;
-    border:2px solid rgba(212,175,55,0.65);
-    position:relative;
-    overflow:hidden; /* CLIPS BORDER TEXT */
+    color:#f2f2f2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow:hidden;
 }
 
-/* LEFT & RIGHT VERTICAL INSCRIPTION */
+/* ================= TOP NAV (VERBATIM) ================= */
+.top-nav {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:64px;
+    background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    border-bottom:1px solid rgba(212,175,55,0.25);
+}
+
+.nav-scroll {
+    width:100%;
+    height:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+    padding:0 6vw;
+    display:flex;
+    align-items:center;
+}
+
+.nav-scroll::-webkit-scrollbar { height:0px; }
+.nav-scroll { scrollbar-width:none; }
+
+.nav-links {
+    display:inline-flex;
+    gap:26px;
+    align-items:center;
+}
+
+.nav-links a {
+    text-decoration:none;
+    color:#e8e4d8;
+    font-size:0.82rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    padding:8px 4px;
+    opacity:0.85;
+}
+
+.nav-links a:hover {
+    color:#f3d688;
+    opacity:1;
+}
+
+.nav-links a.featured {
+    opacity:1;
+    border:1px solid rgba(212,175,55,0.85);
+    padding:8px 12px;
+    color:#f3d688;
+}
+
+/* ============ DOUBLE ROYAL FRAME (LOCKED) ============ */
+.page-frame-outer {
+    position:fixed;
+    inset:0;
+    padding:22px;
+    border:2px solid rgba(212,175,55,0.65);
+    pointer-events:none;
+    z-index:50;
+    overflow:hidden;
+}
+
 .page-frame-outer::before,
 .page-frame-outer::after {
     content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
@@ -38,15 +98,17 @@
     font-size:0.65rem;
     letter-spacing:0.35em;
     color:#ffffff;
-    pointer-events:none;
     white-space:nowrap;
-    overflow:hidden; /* PREVENTS LEAKING */
 }
 
-/* LEFT SIDE — PERFECTLY CENTERED + SLOWER */
 .page-frame-outer::before {
-    left:1px; /* TRUE CENTER OF BORDER CHANNEL */
+    left:1px;
     animation:leftScroll 45s linear infinite;
+}
+
+.page-frame-outer::after {
+    right:9px;
+    animation:rightScroll 45s linear infinite;
 }
 
 @keyframes leftScroll {
@@ -54,33 +116,25 @@
     to   { transform:translateY(-100%); }
 }
 
-/* RIGHT SIDE — PERFECTLY CENTERED + SLOWER */
-.page-frame-outer::after {
-    right:9px; /* TRUE CENTER OF BORDER CHANNEL */
-    animation:rightScroll 45s linear infinite;
-}
-
 @keyframes rightScroll {
     from { transform:translateY(-100%); }
     to   { transform:translateY(100%); }
 }
 
-/* BOTTOM ARABIC INSCRIPTION */
-.page-frame-outer .arabic-border {
+.arabic-border {
     position:absolute;
     bottom:6px;
     left:0;
     right:0;
-    text-align:center;
     font-size:0.7rem;
     letter-spacing:0.45em;
     color:#ffffff;
-    pointer-events:none;
     white-space:nowrap;
     overflow:hidden;
+    text-align:center;
 }
 
-.page-frame-outer .arabic-border span {
+.arabic-border span {
     display:inline-block;
     padding-left:100%;
     animation:arabic-scroll 18s linear infinite;
@@ -91,59 +145,50 @@
     to { transform:translateX(-100%); }
 }
 
-    /* ============= TOP NAVIGATION ============= */
-    .top-nav {
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:64px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        padding:0 6vw;
-        background:rgba(0,0,0,0.6);
-        backdrop-filter:blur(8px);
-        z-index:1000;
+/* ============ PAGE SCROLLER (LOCKED) ============ */
+.page-scroll {
+    position:fixed;
+    inset:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    z-index:1;
+    padding:22px;
+}
+
+.page-inner {
+    min-height:calc(100vh - 44px);
+    border:1px solid rgba(212,175,55,0.35);
+    box-shadow:
+        inset 0 0 0 1px rgba(212,175,55,0.18),
+        0 40px 120px rgba(0,0,0,0.95);
+    background:#000;
+    position:relative;
+    padding:88px 6vw 140px;
+}
+
+/* ============ MOBILE (LOCKED) ============ */
+@media (max-width:768px) {
+
+    .page-scroll { padding:14px; }
+    .page-inner { padding:78px 3vw 120px; }
+
+    .page-frame-outer { padding:14px; }
+
+    .page-frame-outer::before,
+    .page-frame-outer::after {
+        font-size:0.55rem;
+        letter-spacing:0.30em;
     }
 
-    .nav-links {
-        display:flex;
-        gap:28px;
+    .arabic-border {
+        font-size:0.6rem;
+        letter-spacing:0.30em;
     }
+}
 
-    .nav-links a {
-        text-decoration:none;
-        color:#e8e4d8;
-        font-size:0.85rem;
-        letter-spacing:0.22em;
-        text-transform:uppercase;
-        transition:color .2s ease;
-    }
 
-    .nav-links a:hover {
-        color:#f3d688;
-    }
 
-    .page-wrap {
-        min-height:100vh;
-        background:radial-gradient(circle at top, #1a1a22 0%, #050509 55%, #000 100%);
-        padding-top:64px; /* offset for fixed nav */
-    }
-
-    /* ============= GENERAL LAYOUT ============= */
-    section {
-        padding:70px 8vw;
-    }
-
-    .section-title {
-        font-size:1.1rem;
-        letter-spacing:0.25em;
-        text-transform:uppercase;
-        color:#c4a86b;
-        margin-bottom:10px;
-    }
-
+   
     /* ============= 1. EPÒK MOVEMENT INTRO ============= */
     .movement-block {
         max-width:900px;
