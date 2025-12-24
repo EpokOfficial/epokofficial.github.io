@@ -6,7 +6,9 @@
 <title>EPÒK | Universal Page</title>
 
 <style>
-/* ================= 1. CORE RESET & BASE ================= */
+/* =========================================================
+   1. CORE RESET & MOBILE-FIRST BASE
+   ========================================================= */
 * { margin:0; padding:0; box-sizing:border-box; }
 
 html, body {
@@ -15,10 +17,12 @@ html, body {
     background:#000;
     color:#f2f2f2;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    overflow:hidden; /* Locked for internal scroller */
+    overflow:hidden;
 }
 
-/* ================= 2. TOP NAV (VERBATIM) ================= */
+/* =========================================================
+   2. TOP NAV (MOBILE FIRST)
+   ========================================================= */
 .top-nav {
     position:fixed;
     top:0;
@@ -38,47 +42,44 @@ html, body {
     overflow-y:hidden;
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
-    padding:0 6vw;
+    padding:0 4vw;
     display:flex;
     align-items:center;
 }
 
-.nav-scroll::-webkit-scrollbar { height:0px; }
+.nav-scroll::-webkit-scrollbar { height:0; }
 .nav-scroll { scrollbar-width:none; }
 
 .nav-links {
     display:inline-flex;
-    gap:26px;
+    gap:18px;
     align-items:center;
 }
 
 .nav-links a {
     text-decoration:none;
     color:#e8e4d8;
-    font-size:0.82rem;
+    font-size:0.72rem;
     letter-spacing:0.22em;
     text-transform:uppercase;
-    padding:8px 4px;
+    padding:6px 4px;
     opacity:0.85;
-}
-
-.nav-links a:hover {
-    color:#f3d688;
-    opacity:1;
 }
 
 .nav-links a.featured {
     opacity:1;
     border:1px solid rgba(212,175,55,0.85);
-    padding:8px 12px;
+    padding:6px 10px;
     color:#f3d688;
 }
 
-/* ============ 3. DOUBLE ROYAL FRAME (LOCKED) ============ */
+/* =========================================================
+   3. DOUBLE ROYAL FRAME (MOBILE FIRST)
+   ========================================================= */
 .page-frame-outer {
     position:fixed;
     inset:0;
-    padding:22px;
+    padding:14px;
     border:2px solid rgba(212,175,55,0.65);
     pointer-events:none;
     z-index:50;
@@ -87,37 +88,36 @@ html, body {
 
 .page-frame-outer::before,
 .page-frame-outer::after {
-    content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
+    content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
     position:absolute;
-    top:22px;
-    bottom:22px;
-    width:22px;
+    top:14px;
+    bottom:14px;
+    width:18px;
     writing-mode:vertical-rl;
-    text-orientation:mixed;
-    font-size:0.65rem;
-    letter-spacing:0.35em;
+    font-size:0.55rem;
+    letter-spacing:0.3em;
     color:#ffffff;
     white-space:nowrap;
 }
 
 .page-frame-outer::before {
-    left:1px;
+    left:2px;
     animation:leftScroll 45s linear infinite;
 }
 
 .page-frame-outer::after {
-    right:9px;
+    right:6px;
     animation:rightScroll 45s linear infinite;
 }
 
 @keyframes leftScroll {
     from { transform:translateY(100%); }
-    to   { transform:translateY(-100%); }
+    to { transform:translateY(-100%); }
 }
 
 @keyframes rightScroll {
     from { transform:translateY(-100%); }
-    to   { transform:translateY(100%); }
+    to { transform:translateY(100%); }
 }
 
 .arabic-border {
@@ -125,8 +125,8 @@ html, body {
     bottom:6px;
     left:0;
     right:0;
-    font-size:0.7rem;
-    letter-spacing:0.45em;
+    font-size:0.6rem;
+    letter-spacing:0.3em;
     color:#ffffff;
     white-space:nowrap;
     overflow:hidden;
@@ -144,92 +144,76 @@ html, body {
     to { transform:translateX(-100%); }
 }
 
-/* ============ 4. PAGE SCROLLER (FIXED) ============ */
+/* =========================================================
+   4. PAGE SCROLLER (MOBILE FIRST)
+   ========================================================= */
 .page-scroll {
     position:fixed;
     inset:0;
     overflow-y:auto;
     overflow-x:hidden;
     z-index:1;
-    padding:22px;
+    padding:14px;
 }
 
 .page-inner {
-    min-height:calc(100vh - 44px);
+    min-height:calc(100vh - 28px);
     border:1px solid rgba(212,175,55,0.35);
     box-shadow:
         inset 0 0 0 1px rgba(212,175,55,0.18),
-        0 40px 120px rgba(0,0,0,0.95);
+        0 24px 80px rgba(0,0,0,0.95);
     background:#000;
     position:relative;
-    padding:88px 6vw 140px;
+    padding:78px 4vw 120px;
 }
 
-/* ============= 5. EPÒK MOVEMENT SECTION ============= */
+/* =========================================================
+   5. EPÒK MOVEMENT (MOBILE FIRST)
+   ========================================================= */
 .movement-block {
-    max-width:900px;
+    max-width:100%;
     margin:0 auto;
-    border-radius:18px;
-    padding:32px 24px;
+    border-radius:16px;
+    padding:24px 18px;
     background:linear-gradient(135deg, rgba(196,168,107,0.12), rgba(47,93,140,0.14));
     border:1px solid rgba(196,168,107,0.35);
-    box-shadow:0 18px 40px rgba(0,0,0,0.65);
+    box-shadow:0 14px 36px rgba(0,0,0,0.65);
 }
 
 .movement-block h2 {
-    font-size:1.9rem;
-    margin-bottom:18px;
+    font-size:1.4rem;
+    margin-bottom:14px;
     letter-spacing:0.08em;
     text-transform:uppercase;
-    color:#f4f1e6;
 }
 
 .movement-block p {
     line-height:1.6;
-    font-size:0.98rem;
-    color:#e3e1da;
-    margin-bottom:14px;
-}
-
-.movement-block p strong {
-    color:#f9d17c;
-    font-weight:600;
-}
-
-.movement-question {
-    margin-top:18px;
-    font-size:1.05rem;
-    letter-spacing:0.03em;
+    font-size:0.92rem;
+    margin-bottom:12px;
 }
 
 .home-music-link {
-    margin-top:16px;
+    margin-top:14px;
     display:inline-block;
-    font-size:0.8rem;
+    font-size:0.7rem;
     letter-spacing:0.22em;
     text-transform:uppercase;
-    text-decoration:none;
     color:#f3d688;
     border-bottom:1px solid rgba(243,214,136,0.5);
     padding-bottom:6px;
-    transition:opacity .2s ease, border-color .2s ease;
 }
 
-/* ============= 6. STEP INTO YOUR EPÒK BANNER ============= */
-.step-banner-section {
-    padding-top:30px;
-    padding-bottom:40px;
-}
-
+/* =========================================================
+   6. STEP BANNER (MOBILE FIRST)
+   ========================================================= */
 .step-banner-wrapper {
-    position:relative;
-    max-width:1100px;
-    height:65vh;
+    width:100%;
+    height:50vh;
     margin:0 auto;
-    border-radius:22px;
+    border-radius:18px;
     overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,0.85);
-    background:#000;
+    position:relative;
 }
 
 .step-banner-bg {
@@ -238,118 +222,88 @@ html, body {
     background-image:url("./images/12.png");
     background-size:cover;
     background-position:center;
-    opacity:0;
-    animation:bannerFade 1.8s ease-out forwards;
-}
-
-@keyframes bannerFade {
-    from { opacity:0; transform:scale(1.03); }
-    to   { opacity:1; transform:scale(1); }
-}
-
-.step-banner-overlay {
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.0) 100%);
 }
 
 .scroll-indicator {
     position:absolute;
-    bottom:14px;
+    bottom:12px;
     left:50%;
     transform:translateX(-50%);
-    font-size:0.8rem;
+    font-size:0.7rem;
     letter-spacing:0.3em;
-    text-transform:uppercase;
-    color:#b8b5a5;
+}
+
+/* =========================================================
+   7. PATCH BABY PREVIEW (MOBILE FIRST)
+   ========================================================= */
+.pb-preview-inner {
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:3px;
-}
-
-.scroll-indicator span.arrow {
-    font-size:1.2rem;
-    animation:scrollBounce 1.2s ease-in-out infinite;
-}
-
-@keyframes scrollBounce {
-    0% { transform:translateY(0); opacity:0.5; }
-    50% { transform:translateY(4px); opacity:1; }
-    100% { transform:translateY(0); opacity:0.5; }
-}
-
-/* ============= 7. PATCH BABY WORLD PREVIEW ============= */
-.pb-preview-section {
-    padding-top:30px;
-    padding-bottom:80px;
-}
-
-.pb-preview-inner {
-    max-width:900px;
-    margin:0 auto;
-    display:flex;
-    align-items:center;
-    gap:22px;
-    flex-wrap:wrap;
-    justify-content:space-between;
-}
-
-.pb-text-block h3 {
-    font-size:1.1rem;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    color:#f3d688;
-    margin-bottom:10px;
-}
-
-.pb-text-block p {
-    font-size:0.95rem;
-    line-height:1.5;
-    color:#dedad0;
-}
-
-.pb-preview-button {
-    display:inline-block;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid rgba(246,228,150,0.7);
-    background:radial-gradient(circle at top, #1b1b25 0%, #050509 60%);
-    padding:10px;
-    cursor:pointer;
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    gap:18px;
 }
 
 .pb-preview-button img {
-    display:block;
-    width:100%;
-    max-width:230px;
+    max-width:200px;
     height:auto;
 }
 
-.pb-preview-button:hover {
-    transform:translateY(-4px) scale(1.02);
-    box-shadow:0 12px 30px rgba(0,0,0,0.8);
-    border-color:#f6e496;
-}
+/* =========================================================
+   8. DESKTOP ENHANCEMENTS ONLY
+   ========================================================= */
+@media (min-width: 769px) {
 
-.pb-preview-label {
-    margin-top:8px;
-    font-size:0.8rem;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:#f3eddc;
-}
+    .nav-links a {
+        font-size:0.82rem;
+    }
 
-/* ============= 8. RESPONSIVE (LOCKED) ============= */
-@media (max-width:768px) {
-    .page-scroll { padding:14px; }
-    .page-inner { padding:78px 3vw 120px; }
-    .page-frame-outer { padding:14px; }
-    .step-banner-wrapper { height:55vh; }
-    .pb-preview-inner { flex-direction:column; }
+    .page-frame-outer {
+        padding:22px;
+    }
+
+    .page-frame-outer::before,
+    .page-frame-outer::after {
+        font-size:0.65rem;
+        letter-spacing:0.35em;
+        width:22px;
+    }
+
+    .arabic-border {
+        font-size:0.7rem;
+        letter-spacing:0.45em;
+    }
+
+    .page-scroll {
+        padding:22px;
+    }
+
+    .page-inner {
+        padding:88px 6vw 140px;
+    }
+
+    .movement-block {
+        max-width:900px;
+        padding:32px 24px;
+    }
+
+    .movement-block h2 {
+        font-size:1.9rem;
+    }
+
+    .step-banner-wrapper {
+        max-width:1100px;
+        height:65vh;
+    }
+
+    .pb-preview-inner {
+        flex-direction:row;
+        justify-content:space-between;
+        max-width:900px;
+        margin:0 auto;
+    }
 }
 </style>
+
 </head>
 
 <body>
