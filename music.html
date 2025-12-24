@@ -317,13 +317,6 @@ html, body {
   height: 100%;
   object-fit: cover;
 }
-    
-
-.player-ui {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
 
 .album-player.active .album-cover {
   display: none;
@@ -593,25 +586,25 @@ html, body {
 
     
 
-  <!-- PLAYER STATE -->
-  <div class="player-ui" id="playerUI">
-    <div class="record">
- <div class="record-art">
-  <img src="images/spin.png" alt="Record Label">
-</div>
+<!-- PLAYER STATE -->
+<div class="player-ui" id="playerUI">
 
-
-    <div class="player-controls">
-      <button id="prevTrack">⏮</button>
-      <button id="playPause">▶</button>
-      <button id="nextTrack">⏭</button>
+  <div class="record">
+    <div class="record-art">
+      <img src="images/spin.png" alt="Record Label">
     </div>
-
-    <audio id="audioPlayer" preload="metadata" playsinline></audio>
   </div>
 
+  <div class="player-controls">
+    <button id="prevTrack">⏮</button>
+    <button id="playPause">▶</button>
+    <button id="nextTrack">⏭</button>
+  </div>
+
+  <audio id="audioPlayer" preload="metadata" playsinline></audio>
+
 </div>
-<!-- ===== END ALBUM / PLAYER ===== -->
+
 
 
 
