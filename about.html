@@ -6,228 +6,289 @@
 <title>EPÒK | About</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
 
-body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background:#000;
-    color:#f2f2f2;
-    overflow-x:hidden;
+/* ======================================================
+   MOBILE-FIRST RESET & BASE
+====================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ============ DOUBLE ROYAL FRAME (FULL PAGE) ============ */
+html, body {
+  width: 100%;
+  background: #000;
+  color: #f2f2f2;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ======================================================
+   VARIABLES
+====================================================== */
+
+:root {
+  --gold: rgba(212,175,55,1);
+  --goldSoft: rgba(212,175,55,0.55);
+  --goldFaint: rgba(212,175,55,0.25);
+  --navHeight: 64px;
+}
+
+/* ======================================================
+   FRAME SYSTEM (MOBILE FIRST)
+====================================================== */
+
 .page-frame-outer {
-    min-height:100vh;
-    padding:22px;
-    background:#000;
-    border:2px solid rgba(212,175,55,0.65);
-    position:relative;
-    overflow:hidden;
-}
-
-.page-frame-outer::before,
-.page-frame-outer::after {
-    content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
-    position:absolute;
-    top:22px;
-    bottom:22px;
-    width:22px;
-    writing-mode:vertical-rl;
-    text-orientation:mixed;
-    font-size:0.65rem;
-    letter-spacing:0.35em;
-    color:#ffffff;
-    pointer-events:none;
-    white-space:nowrap;
-}
-
-.page-frame-outer::before {
-    left:1px;
-    animation:leftScroll 45s linear infinite;
-}
-@keyframes leftScroll {
-    from { transform:translateY(100%); }
-    to { transform:translateY(-100%); }
-}
-
-.page-frame-outer::after {
-    right:9px;
-    animation:rightScroll 45s linear infinite;
-}
-@keyframes rightScroll {
-    from { transform:translateY(-100%); }
-    to { transform:translateY(100%); }
-}
-
-/* BOTTOM ARABIC */
-.page-frame-outer .arabic-border {
-    position:absolute;
-    bottom:6px;
-    left:0;
-    right:0;
-    text-align:center;
-    font-size:0.7rem;
-    letter-spacing:0.45em;
-    color:#ffffff;
-    pointer-events:none;
-    white-space:nowrap;
-}
-
-.page-frame-outer .arabic-border span {
-    display:inline-block;
-    padding-left:100%;
-    animation:arabic-scroll 18s linear infinite;
-}
-@keyframes arabic-scroll {
-    from { transform:translateX(0); }
-    to { transform:translateX(-100%); }
+  min-height: 100vh;
+  padding: 12px;
+  border: 1px solid var(--goldSoft);
+  position: relative;
+  background: #000;
+  overflow: hidden;
 }
 
 .page-frame-inner {
-    min-height:100vh;
-    padding:0 6vw 140px;
-    border:1px solid rgba(212,175,55,0.35);
-    box-shadow:
-        inset 0 0 0 1px rgba(212,175,55,0.18),
-        0 40px 120px rgba(0,0,0,0.95);
-    background:#000;
+  min-height: 100vh;
+  padding: calc(var(--navHeight) + 16px) 4vw 120px;
+  border: 1px solid rgba(212,175,55,0.35);
+  background: #000;
+  box-shadow:
+    inset 0 0 0 1px rgba(212,175,55,0.18),
+    0 40px 120px rgba(0,0,0,0.95);
 }
 
-/* ================= TOP NAV ================= */
+/* ======================================================
+   VERTICAL BORDER TEXT
+====================================================== */
+
+.page-frame-outer::before,
+.page-frame-outer::after {
+  content: "SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  width: 20px;
+  writing-mode: vertical-rl;
+  font-size: 0.5rem;
+  letter-spacing: 0.25em;
+  color: #fff;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.page-frame-outer::before {
+  left: 2px;
+  animation: leftScroll 45s linear infinite;
+}
+
+.page-frame-outer::after {
+  right: 6px;
+  animation: rightScroll 45s linear infinite;
+}
+
+@keyframes leftScroll {
+  from { transform: translateY(100%); }
+  to { transform: translateY(-100%); }
+}
+
+@keyframes rightScroll {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+/* ======================================================
+   ARABIC BORDER
+====================================================== */
+
+.arabic-border {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+  color: #fff;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.arabic-border span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: arabic-scroll 18s linear infinite;
+}
+
+@keyframes arabic-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* ======================================================
+   TOP NAV (MOBILE FIRST)
+====================================================== */
+
 .top-nav {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:64px;
-    display:flex;
-    align-items:center;
-    background:rgba(0,0,0,0.88);
-    backdrop-filter:blur(10px);
-    z-index:1000;
-    border-bottom:1px solid rgba(212,175,55,0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navHeight);
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212,175,55,0.25);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
 }
 
 .nav-scroll {
-    width:100%;
-    overflow-x:auto;
-    white-space:nowrap;
-    padding:0 6vw;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0 4vw;
 }
-.nav-scroll::-webkit-scrollbar { height:0; }
+
+.nav-scroll::-webkit-scrollbar { height: 0; }
 
 .nav-links {
-    display:inline-flex;
-    gap:26px;
-    align-items:center;
+  display: inline-flex;
+  gap: 20px;
+  align-items: center;
 }
 
 .nav-links a {
-    text-decoration:none;
-    color:#e8e4d8;
-    font-size:0.82rem;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    padding:8px 4px;
-    opacity:0.85;
-}
-
-.nav-links a:hover {
-    color:#f3d688;
-    opacity:1;
+  text-decoration: none;
+  color: #e8e4d8;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
 .nav-links a.featured {
-    opacity:1;
-    border:1px solid rgba(212,175,55,0.85);
-    padding:8px 12px;
-    color:#f3d688;
+  border: 1px solid var(--gold);
+  padding: 6px 10px;
+  color: #f3d688;
+  opacity: 1;
 }
 
-/* ================= ABOUT CONTENT ================= */
-.about-mission {
-    max-width:980px;
-    margin:0 auto;
-    padding-top:120px;
-    text-align:left;
-}
+/* ======================================================
+   ABOUT BANNER
+====================================================== */
 
-.about-mission p {
-    font-size:0.98rem;
-    line-height:1.75;
-    margin-bottom:18px;
-    color:#dedad0;
-}
-
-.about-mission .mantra {
-    text-align:center;
-    margin:60px 0 30px;
-    font-size:1.1rem;
-    letter-spacing:0.4em;
-    color:#f3d688;
-    text-transform:uppercase;
-}
-
-/* ================= MOBILE ================= */
-@media (max-width:768px) {
-
-    .page-frame-inner {
-        padding:0 3vw 120px;
-    }
-
-    .about-mission {
-        padding-top:96px;
-    }
-
-    .page-frame-outer::before,
-    .page-frame-outer::after {
-        font-size:0.55rem;
-        letter-spacing:0.3em;
-    }
-
-    .page-frame-outer .arabic-border {
-        font-size:0.6rem;
-        letter-spacing:0.3em;
-    }
-}
-  /* ================= FOOTER SOCIAL TABS ================= */
-.footer-socials a {
-    display:inline-block;
-    padding:14px 22px;
-    border:1px solid rgba(212,175,55,0.55);
-    border-radius:6px;
-    background:rgba(0,0,0,0.6);
-    color:#e8e4d8;
-    font-size:0.75rem;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
-    transition:all 0.25s ease;
-}
-
-.footer-socials a:hover {
-    background:rgba(212,175,55,0.12);
-    color:#f3d688;
-    border-color:rgba(212,175,55,0.9);
-}
- /* ================= ABOUT BANNER CENTERING ================= */
 .about-banner {
-    display:flex;
-    justify-content:center;
+  display: flex;
+  justify-content: center;
 }
 
 .about-banner img {
-    width:100%;
-    max-width:1600px;
-    display:block;
+  max-width: 1600px;
 }
-/* ================= SPACE BETWEEN FIXED NAV AND ABOUT BANNER ================= */
-.about-banner {
-    margin-top: 90px;
+
+/* ======================================================
+   ABOUT CONTENT
+====================================================== */
+
+.about-mission {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
-@media (max-width:768px) {
-    .about-banner {
-        margin-top: 80px;
-    }
+
+.about-mission p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #dedad0;
+}
+
+.about-mission .mantra {
+  text-align: center;
+  margin: 48px 0 24px;
+  font-size: 1rem;
+  letter-spacing: 0.35em;
+  color: #f3d688;
+  text-transform: uppercase;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 60px;
+}
+
+.footer-socials a {
+  padding: 12px 18px;
+  border: 1px solid var(--goldSoft);
+  border-radius: 6px;
+  background: rgba(0,0,0,0.6);
+  color: #e8e4d8;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.footer-socials a:hover {
+  background: rgba(212,175,55,0.12);
+  color: #f3d688;
+  border-color: var(--gold);
+}
+
+.footer-mark {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  opacity: 0.75;
+}
+
+/* ======================================================
+   DESKTOP ENHANCEMENTS ONLY
+====================================================== */
+
+@media (min-width: 769px) {
+
+  .page-frame-outer {
+    padding: 22px;
+    border-width: 2px;
+  }
+
+  .page-frame-outer::before,
+  .page-frame-outer::after {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+  }
+
+  .arabic-border {
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
+  }
+
+  .page-frame-inner {
+    padding: calc(var(--navHeight) + 24px) 6vw 140px;
+  }
+
+  .about-mission p {
+    font-size: 0.98rem;
+  }
+
 }
 
 </style>
