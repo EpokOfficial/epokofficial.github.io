@@ -1190,9 +1190,7 @@ tracks.forEach((track, index) => {
   });
 });
 
-document.getElementById('playPause').addEventListener('click', () => {
-  audio.paused ? audio.play() : audio.pause();
-});
+
 
 document.getElementById('nextTrack').addEventListener('click', () => {
   playTrack((currentTrackIndex + 1) % tracks.length);
@@ -1206,6 +1204,15 @@ audio.addEventListener('play', () => record.classList.add('spinning'));
 audio.addEventListener('pause', () => record.classList.remove('spinning'));
 
 
+document.getElementById('Play').addEventListener('click', () => {
+  audio.play();
+});
+
+document.getElementById('Pause').addEventListener('click', () => {
+  audio.pause();
+});
+
+    
 if ('mediaSession' in navigator) {
   navigator.mediaSession.setActionHandler('previoustrack', () => {
     playTrack((currentTrackIndex - 1 + tracks.length) % tracks.length);
