@@ -253,6 +253,31 @@ img {
 }
 
 
+/* ================= MOBILE IMAGE FORCE FIX ================= */
+@media (max-width: 768px) {
+
+  img,
+  video {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .step-banner-wrapper,
+  .step-banner-bg {
+    height: auto !important;
+    min-height: unset !important;
+    aspect-ratio: auto !important;
+  }
+
+  .step-banner-bg {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+
+}
 
 </head>
 
