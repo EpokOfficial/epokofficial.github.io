@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPÒK | Universal Page</title>
 
-
-</style>
+<style>
 /* =========================================================
    1. CORE RESET & MOBILE-FIRST BASE
    ========================================================= */
@@ -19,13 +18,6 @@ html, body {
     color:#f2f2f2;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     overflow:hidden;
-}
-
-/* 🔒 MOBILE IMAGE SAFETY (GLOBAL – DO NOT REMOVE) */
-img {
-    max-width:100%;
-    height:auto;
-    object-fit:contain;
 }
 
 /* =========================================================
@@ -47,6 +39,7 @@ img {
     width:100%;
     height:100%;
     overflow-x:auto;
+    overflow-y:hidden;
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
     padding:0 4vw;
@@ -175,44 +168,90 @@ img {
 }
 
 /* =========================================================
-   5. STEP BANNER – FULL IMAGE ON MOBILE (KEY FIX)
+   5. EPÒK MOVEMENT (MOBILE FIRST)
+   ========================================================= */
+.movement-block {
+    max-width:100%;
+    margin:0 auto;
+    border-radius:16px;
+    padding:24px 18px;
+    background:linear-gradient(135deg, rgba(196,168,107,0.12), rgba(47,93,140,0.14));
+    border:1px solid rgba(196,168,107,0.35);
+    box-shadow:0 14px 36px rgba(0,0,0,0.65);
+}
+
+.movement-block h2 {
+    font-size:1.4rem;
+    margin-bottom:14px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+}
+
+.movement-block p {
+    line-height:1.6;
+    font-size:0.92rem;
+    margin-bottom:12px;
+}
+
+.home-music-link {
+    margin-top:14px;
+    display:inline-block;
+    font-size:0.7rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:#f3d688;
+    border-bottom:1px solid rgba(243,214,136,0.5);
+    padding-bottom:6px;
+}
+
+/* =========================================================
+   6. STEP BANNER (MOBILE FIRST)
    ========================================================= */
 .step-banner-wrapper {
     width:100%;
+    height:50vh;
     margin:0 auto;
     border-radius:18px;
     overflow:hidden;
     position:relative;
-
-    /* 🔑 MOBILE: no cropping */
-    height:auto;
-    aspect-ratio:9 / 16;
 }
 
 .step-banner-bg {
     position:absolute;
     inset:0;
     background-image:url("./images/12.png");
-
-    /* 🔑 MOBILE: SHOW FULL IMAGE */
-    background-size:contain;
-    background-repeat:no-repeat;
+    background-size:cover;
     background-position:center;
 }
 
-/* =========================================================
-   6. PATCH BABY / OTHER IMAGES (MOBILE FIRST)
-   ========================================================= */
-.pb-preview-button img {
-    max-width:200px;
-    height:auto;
-    object-fit:contain;
+.scroll-indicator {
+    position:absolute;
+    bottom:12px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:0.7rem;
+    letter-spacing:0.3em;
 }
 
 /* =========================================================
-   7. DESKTOP ENHANCEMENTS ONLY
+   7. PATCH BABY PREVIEW (MOBILE FIRST)
    ========================================================= */
-@media (min-width:769px) {
+.pb-preview-inner {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+}
+
+.pb-preview-button img {
+    max-width:200px;
+    height:auto;
+}
+
+/* =========================================================
+   8. DESKTOP ENHANCEMENTS ONLY
+   ========================================================= */
+@media (min-width: 769px) {
 
     .nav-links a {
         font-size:0.82rem;
@@ -242,46 +281,31 @@ img {
         padding:88px 6vw 140px;
     }
 
-    /* DESKTOP: cinematic crop allowed */
+    .movement-block {
+        max-width:900px;
+        padding:32px 24px;
+    }
+
+    .movement-block h2 {
+        font-size:1.9rem;
+    }
+
     .step-banner-wrapper {
         max-width:1100px;
         height:65vh;
-        aspect-ratio:auto;
     }
 
-    .step-banner-bg {
-        background-size:cover;
+    .pb-preview-inner {
+        flex-direction:row;
+        justify-content:space-between;
+        max-width:900px;
+        margin:0 auto;
     }
-}
-
-
-/* ================= MOBILE IMAGE FORCE FIX ================= */
-@media (max-width: 768px) {
-
-  img,
-  video {
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
-    object-fit: contain !important;
-  }
-
-  .step-banner-wrapper,
-  .step-banner-bg {
-    height: auto !important;
-    min-height: unset !important;
-    aspect-ratio: auto !important;
-  }
-
-  .step-banner-bg {
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-  }
-
 }
 </style>
+
 </head>
+
 <body>
 
     <!-- TOP NAV -->
