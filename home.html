@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPÒK | Universal Page</title>
 
-<style>
 /* =========================================================
    1. CORE RESET & MOBILE-FIRST BASE
    ========================================================= */
@@ -17,11 +16,18 @@ html, body {
     background:#000;
     color:#f2f2f2;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    overflow:hidden; /* internal scroller controls scroll */
+    overflow:hidden;
+}
+
+/* 🔒 MOBILE IMAGE SAFETY (GLOBAL – DO NOT REMOVE) */
+img {
+    max-width:100%;
+    height:auto;
+    object-fit:contain;
 }
 
 /* =========================================================
-   2. TOP NAV — MOBILE FIRST
+   2. TOP NAV (MOBILE FIRST)
    ========================================================= */
 .top-nav {
     position:fixed;
@@ -39,7 +45,6 @@ html, body {
     width:100%;
     height:100%;
     overflow-x:auto;
-    overflow-y:hidden;
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
     padding:0 4vw;
@@ -66,8 +71,6 @@ html, body {
     opacity:0.85;
 }
 
-.nav-links a:hover { opacity:1; color:#f3d688; }
-
 .nav-links a.featured {
     opacity:1;
     border:1px solid rgba(212,175,55,0.85);
@@ -76,7 +79,7 @@ html, body {
 }
 
 /* =========================================================
-   3. DOUBLE ROYAL FRAME — MOBILE FIRST
+   3. DOUBLE ROYAL FRAME (MOBILE FIRST)
    ========================================================= */
 .page-frame-outer {
     position:fixed;
@@ -114,12 +117,12 @@ html, body {
 
 @keyframes leftScroll {
     from { transform:translateY(100%); }
-    to   { transform:translateY(-100%); }
+    to { transform:translateY(-100%); }
 }
 
 @keyframes rightScroll {
     from { transform:translateY(-100%); }
-    to   { transform:translateY(100%); }
+    to { transform:translateY(100%); }
 }
 
 .arabic-border {
@@ -143,11 +146,11 @@ html, body {
 
 @keyframes arabic-scroll {
     from { transform:translateX(0); }
-    to   { transform:translateX(-100%); }
+    to { transform:translateX(-100%); }
 }
 
 /* =========================================================
-   4. PAGE SCROLLER — MOBILE FIRST
+   4. PAGE SCROLLER (MOBILE FIRST)
    ========================================================= */
 .page-scroll {
     position:fixed;
@@ -170,82 +173,48 @@ html, body {
 }
 
 /* =========================================================
-   5. MOVEMENT BLOCK — MOBILE FIRST
-   ========================================================= */
-.movement-block {
-    width:100%;
-    border-radius:16px;
-    padding:24px 18px;
-    background:linear-gradient(135deg, rgba(196,168,107,0.12), rgba(47,93,140,0.14));
-    border:1px solid rgba(196,168,107,0.35);
-    box-shadow:0 14px 36px rgba(0,0,0,0.65);
-}
-
-.movement-block h2 {
-    font-size:1.4rem;
-    margin-bottom:14px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-}
-
-.movement-block p {
-    font-size:0.92rem;
-    line-height:1.6;
-    margin-bottom:12px;
-}
-
-/* =========================================================
-   6. STEP BANNER — MOBILE FIRST (FULL IMAGE SAFE)
+   5. STEP BANNER – FULL IMAGE ON MOBILE (KEY FIX)
    ========================================================= */
 .step-banner-wrapper {
     width:100%;
-    height:50vh;
+    margin:0 auto;
     border-radius:18px;
     overflow:hidden;
     position:relative;
+
+    /* 🔑 MOBILE: no cropping */
+    height:auto;
+    aspect-ratio:9 / 16;
 }
 
 .step-banner-bg {
     position:absolute;
     inset:0;
     background-image:url("./images/12.png");
-    background-size:contain;     /* 🔒 FULL IMAGE VISIBLE */
+
+    /* 🔑 MOBILE: SHOW FULL IMAGE */
+    background-size:contain;
     background-repeat:no-repeat;
     background-position:center;
 }
 
-.scroll-indicator {
-    position:absolute;
-    bottom:12px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:0.7rem;
-    letter-spacing:0.3em;
-}
-
 /* =========================================================
-   7. PATCH BABY PREVIEW — MOBILE FIRST
+   6. PATCH BABY / OTHER IMAGES (MOBILE FIRST)
    ========================================================= */
-.pb-preview-inner {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:18px;
-}
-
 .pb-preview-button img {
     max-width:200px;
-    width:100%;
     height:auto;
     object-fit:contain;
 }
 
 /* =========================================================
-   8. DESKTOP ENHANCEMENTS ONLY
+   7. DESKTOP ENHANCEMENTS ONLY
    ========================================================= */
 @media (min-width:769px) {
 
-    .nav-links a { font-size:0.82rem; }
+    .nav-links a {
+        font-size:0.82rem;
+    }
 
     .page-frame-outer {
         padding:22px;
@@ -263,36 +232,26 @@ html, body {
         letter-spacing:0.45em;
     }
 
-    .page-scroll { padding:22px; }
-
-    .page-inner { padding:88px 6vw 140px; }
-
-    .movement-block {
-        max-width:900px;
-        margin:0 auto;
-        padding:32px 24px;
+    .page-scroll {
+        padding:22px;
     }
 
-    .movement-block h2 { font-size:1.9rem; }
+    .page-inner {
+        padding:88px 6vw 140px;
+    }
 
+    /* DESKTOP: cinematic crop allowed */
     .step-banner-wrapper {
         max-width:1100px;
         height:65vh;
-        margin:0 auto;
+        aspect-ratio:auto;
     }
 
     .step-banner-bg {
-        background-size:cover; /* desktop enhancement */
-    }
-
-    .pb-preview-inner {
-        flex-direction:row;
-        justify-content:space-between;
-        max-width:900px;
-        margin:0 auto;
+        background-size:cover;
     }
 }
-</style>
+
 
 
 </head>
