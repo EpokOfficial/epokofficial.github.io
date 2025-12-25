@@ -6,30 +6,23 @@
 <title>EPòꓘ | Enter Your Era</title>
 
 <style>
-
 /* ======================================================
-   MOBILE-FIRST RESET
+   MOBILE-FIRST RESET (LOCKED)
 ====================================================== */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 html, body {
-  width: 100%;
-  background: #000;
-  color: #f2f2f2;
+  width:100%;
+  background:#000;
+  color:#f2f2f2;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  overflow-x: hidden;
+  overflow-x:hidden;
 }
 
 /* ======================================================
-   VARIABLES
+   VARIABLES (LOCKED)
 ====================================================== */
-
-:root {
+:root{
   --gold: rgba(212,175,55,1);
   --goldSoft: rgba(212,175,55,0.55);
   --goldFaint: rgba(212,175,55,0.25);
@@ -37,245 +30,295 @@ html, body {
 }
 
 /* ======================================================
-   FRAME SYSTEM (MOBILE FIRST)
+   🔒 GLOBAL DEFAULT = READING-FRAME SYSTEM (LOCKED)
+   (Text/content sections wrap in .reading-frame by default)
 ====================================================== */
+.reading-frame{
+  max-width:760px;
+  margin:0 auto;
+  padding:0 22px; /* px only */
+}
 
-.page-frame-outer {
-  position: fixed;
-  inset: 0;
-  padding: 12px;
-  border: 1px solid var(--goldSoft);
-  pointer-events: none;
-  z-index: 50;
-  overflow: hidden;
+/* ======================================================
+   🔒 VISUAL OPT-OUT = FULL BLEED (LOCKED)
+   (Cinematic/hero/model sections explicitly opt-out)
+====================================================== */
+.full-bleed{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+}
+
+/* ======================================================
+   🔒 MOBILE-FIRST PERFORMANCE LOCKS (ACTIVE)
+====================================================== */
+.cv-auto{
+  content-visibility:auto;
+  contain-intrinsic-size: 1000px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* ======================================================
+   FRAME SYSTEM (MOBILE FIRST) (LOCKED)
+====================================================== */
+.page-frame-outer{
+  position:fixed;
+  inset:0;
+  padding:12px;
+  border:1px solid var(--goldSoft);
+  pointer-events:none;
+  z-index:50;
+  overflow:hidden;
 }
 
 /* VERTICAL TEXT */
 .page-frame-outer::before,
-.page-frame-outer::after {
-  content: "SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
-  position: absolute;
-  top: 12px;
-  bottom: 12px;
-  width: 20px;
-  writing-mode: vertical-rl;
-  font-size: 0.5rem;
-  letter-spacing: 0.25em;
-  color: #fff;
-  white-space: nowrap;
+.page-frame-outer::after{
+  content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
+  position:absolute;
+  top:12px;
+  bottom:12px;
+  width:20px;
+  writing-mode:vertical-rl;
+  font-size:0.5rem;
+  letter-spacing:0.25em;
+  color:#fff;
+  white-space:nowrap;
 }
 
-.page-frame-outer::before {
-  left: 2px;
-  animation: leftScroll 45s linear infinite;
+.page-frame-outer::before{
+  left:2px;
+  animation:leftScroll 45s linear infinite;
 }
 
-.page-frame-outer::after {
-  right: 6px;
-  animation: rightScroll 45s linear infinite;
+.page-frame-outer::after{
+  right:6px;
+  animation:rightScroll 45s linear infinite;
 }
 
-@keyframes leftScroll {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(-100%); }
+@keyframes leftScroll{
+  from{ transform:translateY(100%); }
+  to  { transform:translateY(-100%); }
 }
 
-@keyframes rightScroll {
-  from { transform: translateY(-100%); }
-  to   { transform: translateY(100%); }
-}
-
-/* ======================================================
-   ARABIC BORDER
-====================================================== */
-
-.arabic-border {
-  position: absolute;
-  bottom: 6px;
-  left: 0;
-  right: 0;
-  font-size: 0.55rem;
-  letter-spacing: 0.28em;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.arabic-border span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: arabic-scroll 18s linear infinite;
-}
-
-@keyframes arabic-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
+@keyframes rightScroll{
+  from{ transform:translateY(-100%); }
+  to  { transform:translateY(100%); }
 }
 
 /* ======================================================
-   TOP NAV (MOBILE FIRST)
+   ARABIC BORDER (LOCKED)
 ====================================================== */
-
-.top-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--navHeight);
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--goldFaint);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
+.arabic-border{
+  position:absolute;
+  bottom:6px;
+  left:0;
+  right:0;
+  font-size:0.55rem;
+  letter-spacing:0.28em;
+  color:#fff;
+  white-space:nowrap;
+  overflow:hidden;
 }
 
-.nav-scroll {
-  width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 0 4vw;
+.arabic-border span{
+  display:inline-block;
+  padding-left:100%;
+  animation:arabic-scroll 18s linear infinite;
 }
 
-.nav-scroll::-webkit-scrollbar { height: 0; }
-
-.nav-links {
-  display: inline-flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #e8e4d8;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  opacity: 0.85;
-}
-
-.nav-links a.featured {
-  border: 1px solid var(--gold);
-  padding: 6px 10px;
-  color: #f3d688;
-  opacity: 1;
+@keyframes arabic-scroll{
+  from{ transform:translateX(0); }
+  to  { transform:translateX(-100%); }
 }
 
 /* ======================================================
-   HERO BACKGROUND & CHARACTER (MOBILE FIRST)
+   TOP NAV (MOBILE FIRST) (LOCKED)
 ====================================================== */
-
-#hero-bg {
-  position: fixed;
-  inset: 0;
-  background: url("./images/9378.png") center / cover no-repeat;
-  opacity: 0;
-  transition: opacity 1.4s ease;
-  z-index: 1;
+.top-nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:var(--navHeight);
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--goldFaint);
+  z-index:1000;
+  display:flex;
+  align-items:center;
 }
 
-#hero-character {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.4s ease;
-  z-index: 2;
-  pointer-events: none;
-  animation: cameraMove 14s ease-in-out infinite alternate;
+.nav-scroll{
+  width:100%;
+  overflow-x:auto;
+  white-space:nowrap;
+  padding:0 4vw;
 }
 
-@keyframes cameraMove {
-  0%   { transform: translate(0,0) scale(1); }
-  50%  { transform: translate(-8px,-6px) scale(1.03); }
-  100% { transform: translate(6px,4px) scale(1.01); }
+.nav-scroll::-webkit-scrollbar{ height:0; }
+
+.nav-links{
+  display:inline-flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#e8e4d8;
+  font-size:0.72rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  opacity:0.85;
+}
+
+.nav-links a.featured{
+  border:1px solid var(--gold);
+  padding:6px 10px;
+  color:#f3d688;
+  opacity:1;
 }
 
 /* ======================================================
-   CREST + CTA
+   HERO BACKGROUND & CHARACTER (VISUAL = FULL BLEED BY NATURE)
+   (LOCKED — unchanged behavior)
 ====================================================== */
-
-#intro-crest {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 170px;
-  transform: translate(-50%,-50%);
-  filter: drop-shadow(0 0 20px #ffda44);
-  z-index: 10;
-  cursor: pointer;
+#hero-bg{
+  position:fixed;
+  inset:0;
+  background:url("./images/9378.png") center / cover no-repeat;
+  opacity:0;
+  transition:opacity 1.4s ease;
+  z-index:1;
 }
 
-#click-here {
-  position: fixed;
-  top: calc(50% + 120px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
-  color: #fff;
-  z-index: 10;
-  cursor: pointer;
+#hero-character{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 1.4s ease;
+  z-index:2;
+  pointer-events:none;
+  animation:cameraMove 14s ease-in-out infinite alternate;
+  will-change: transform, opacity; /* performance lock */
+}
+
+@keyframes cameraMove{
+  0%   { transform:translate(0,0) scale(1); }
+  50%  { transform:translate(-8px,-6px) scale(1.03); }
+  100% { transform:translate(6px,4px) scale(1.01); }
 }
 
 /* ======================================================
-   ANIMATIONS
+   CREST + CTA (LOCKED)
 ====================================================== */
-
-.heartbeat {
-  animation: beat 1s ease-in-out infinite;
+#intro-crest{
+  position:fixed;
+  top:50%;
+  left:50%;
+  width:170px;
+  transform:translate(-50%,-50%);
+  filter:drop-shadow(0 0 20px #ffda44);
+  z-index:10;
+  cursor:pointer;
 }
 
-@keyframes beat {
-  0%   { transform: translate(-50%,-50%) scale(1); }
-  30%  { transform: translate(-50%,-50%) scale(1.22); }
-  60%  { transform: translate(-50%,-50%) scale(1.05); }
-  100% { transform: translate(-50%,-50%) scale(1); }
-}
-
-.fade-out {
-  animation: fadeOut .9s forwards;
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+#click-here{
+  position:fixed;
+  top:calc(50% + 120px);
+  left:50%;
+  transform:translateX(-50%);
+  font-size:0.85rem;
+  letter-spacing:0.18em;
+  color:#fff;
+  z-index:10;
+  cursor:pointer;
 }
 
 /* ======================================================
-   DESKTOP ENHANCEMENTS ONLY
+   ANIMATIONS (LOCKED)
 ====================================================== */
+.heartbeat{ animation:beat 1s ease-in-out infinite; }
 
-@media (min-width: 769px) {
+@keyframes beat{
+  0%   { transform:translate(-50%,-50%) scale(1); }
+  30%  { transform:translate(-50%,-50%) scale(1.22); }
+  60%  { transform:translate(-50%,-50%) scale(1.05); }
+  100% { transform:translate(-50%,-50%) scale(1); }
+}
 
-  .page-frame-outer {
-    padding: 22px;
-    border-width: 2px;
+.fade-out{ animation:fadeOut .9s forwards; }
+
+@keyframes fadeOut{
+  from{ opacity:1; }
+  to  { opacity:0; }
+}
+
+/* ======================================================
+   DESKTOP ENHANCEMENTS ONLY (LOCKED)
+====================================================== */
+@media (min-width:769px){
+
+  .page-frame-outer{
+    padding:22px;
+    border-width:2px;
   }
 
   .page-frame-outer::before,
-  .page-frame-outer::after {
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
+  .page-frame-outer::after{
+    font-size:0.65rem;
+    letter-spacing:0.35em;
   }
 
-  .arabic-border {
-    font-size: 0.7rem;
-    letter-spacing: 0.45em;
+  .arabic-border{
+    font-size:0.7rem;
+    letter-spacing:0.45em;
   }
 
-  #intro-crest {
-    width: 220px;
-  }
+  #intro-crest{ width:220px; }
 
-  #click-here {
-    top: calc(50% + 150px);
-    font-size: 0.9rem;
-    letter-spacing: 0.22em;
+  #click-here{
+    top:calc(50% + 150px);
+    font-size:0.9rem;
+    letter-spacing:0.22em;
   }
+}
 
+/* ======================================================
+   🔒 GLOBAL BANNER FIT ENFORCEMENT (COMMAND — ALL PAGES)
+   CSS-only, no HTML changes required.
+====================================================== */
+img{
+  max-width:100%;
+  height:auto;
+}
+
+/* Banner defined as first direct image inside .page-inner */
+.page-inner > img:first-child,
+.page-inner > a:first-child > img{
+  width:100%;
+  height:clamp(140px, 24vh, 220px);
+  object-fit:cover;
+  display:block;
+}
+
+@media (max-width:768px){
+  .page-inner > img:first-child,
+  .page-inner > a:first-child > img{
+    height:clamp(110px, 20vh, 170px);
+  }
 }
 
 </style>
