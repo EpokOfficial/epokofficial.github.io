@@ -54,14 +54,14 @@ body {
     animation:leftScroll 45s linear infinite;
 }
 
-@keyframes leftScroll {
-    from { transform:translateY(100%); }
-    to   { transform:translateY(-100%); }
-}
-
 .page-frame-outer::after {
     right:9px;
     animation:rightScroll 45s linear infinite;
+}
+
+@keyframes leftScroll {
+    from { transform:translateY(100%); }
+    to   { transform:translateY(-100%); }
 }
 
 @keyframes rightScroll {
@@ -101,12 +101,28 @@ body {
    ========================================================= */
 .page-frame-inner {
     min-height:100vh;
-    padding:0 4vw 100px;
+    padding:0 0 100px; /* vw REMOVED FOR MOBILE */
     border:1px solid rgba(212,175,55,0.35);
     box-shadow:
         inset 0 0 0 1px rgba(212,175,55,0.18),
         0 40px 120px rgba(0,0,0,0.95);
     background:#000;
+}
+
+/* =========================================================
+   GLOBAL READING FRAME — LOCKED
+   THIS IS WHAT MAKES IT MATCH THE PERFECT PAGE
+   ========================================================= */
+.reading-frame,
+.page-frame-inner > section,
+.page-frame-inner > .epok-panel,
+.page-frame-inner > .philosophy,
+.page-frame-inner > .album-section {
+    max-width:720px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:16px;
+    padding-right:16px;
 }
 
 /* =========================================================
@@ -133,10 +149,9 @@ body {
     overflow-y:hidden;
     -webkit-overflow-scrolling:touch;
     white-space:nowrap;
-    padding:0 4vw;
+    padding:0 16px;
 }
 
-/* Hide scrollbar */
 .nav-scroll::-webkit-scrollbar { height:0px; }
 .nav-scroll { scrollbar-width:none; }
 
@@ -161,7 +176,6 @@ body {
     opacity:1;
 }
 
-/* FEATURED TAB */
 .nav-links a.featured {
     opacity:1;
     border:1px solid rgba(212,175,55,0.85);
@@ -170,10 +184,9 @@ body {
 }
 
 /* =========================================================
-   EPÒK MESSAGE PANELS — MOBILE FIRST
+   EPÒK MESSAGE PANELS
    ========================================================= */
 .epok-panel {
-    max-width:100%;
     margin:0 auto;
     padding-top:24px;
     content-visibility:auto;
@@ -189,15 +202,13 @@ body {
     height:auto;
     display:block;
     object-fit:contain;
-    image-rendering:auto;
     will-change:transform;
 }
 
 /* =========================================================
-   PHILOSOPHY — MOBILE FIRST
+   PHILOSOPHY
    ========================================================= */
 .philosophy {
-    max-width:92%;
     margin:96px auto 0;
     text-align:center;
     content-visibility:auto;
@@ -220,10 +231,9 @@ body {
 }
 
 /* =========================================================
-   ALBUM SECTION — MOBILE FIRST
+   ALBUM SECTION
    ========================================================= */
 .album-section {
-    max-width:92%;
     margin:96px auto 0;
     text-align:center;
     content-visibility:auto;
@@ -252,18 +262,6 @@ body {
     will-change:transform;
 }
 
-.album-download {
-    display:inline-block;
-    margin-top:12px;
-    font-size:0.8rem;
-    letter-spacing:0.25em;
-    text-transform:uppercase;
-    color:#f3d688;
-    text-decoration:none;
-    border-bottom:1px solid rgba(243,214,136,0.6);
-    padding-bottom:6px;
-}
-
 /* =========================================================
    ACCESSIBILITY & PERFORMANCE — LOCKED
    ========================================================= */
@@ -288,6 +286,16 @@ body {
         padding:0 6vw 120px;
     }
 
+    .reading-frame,
+    .page-frame-inner > section,
+    .page-frame-inner > .epok-panel,
+    .page-frame-inner > .philosophy,
+    .page-frame-inner > .album-section {
+        max-width:900px;
+        padding-left:0;
+        padding-right:0;
+    }
+
     .epok-panel {
         max-width:1600px;
         padding-top:32px;
@@ -308,22 +316,12 @@ body {
         letter-spacing:0.45em;
     }
 
-    .philosophy {
-        max-width:900px;
-        margin:120px auto 0;
-    }
-
     .philosophy h2 {
         font-size:2rem;
     }
 
     .philosophy p {
         font-size:0.96rem;
-    }
-
-    .album-section {
-        max-width:900px;
-        margin:120px auto 0;
     }
 
     .album-section h3 {
@@ -335,6 +333,7 @@ body {
     }
 }
 </style>
+
 
 
 </head>
