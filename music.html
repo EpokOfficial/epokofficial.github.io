@@ -116,6 +116,7 @@ html, body {
   to { transform:translateY(100%); }
 }
 
+/* ================= ARABIC BORDER ================= */
 .arabic-border {
   position:absolute;
   bottom:6px;
@@ -150,6 +151,7 @@ html, body {
   z-index:1;
 }
 
+/* ================= PAGE INNER ================= */
 .page-inner {
   min-height:calc(100vh - 44px);
   padding:88px 6vw 140px;
@@ -161,58 +163,39 @@ html, body {
     0 40px 120px rgba(0,0,0,0.95);
 }
 
-/* ===== PANEL / INSET CONTAINER SYSTEM ===== */
+/* ================= PANEL SYSTEM ================= */
 .panel {
-  border: 1px solid rgba(212,175,55,0.25);
-  border-radius: 16px;
-  background: rgba(8,8,10,0.55);
-  padding: 34px 22px;
-  max-width: 980px;
-  margin: 0 auto 80px;
+  border:1px solid rgba(212,175,55,0.25);
+  border-radius:16px;
+  background:rgba(8,8,10,0.55);
+  padding:34px 22px;
+  max-width:980px;
+  margin:0 auto 80px;
 }
 
-.panel--compact {
-  padding: 22px 18px;
-}
+.panel--compact { padding:22px 18px; }
+.panel--wide { max-width:1180px; }
 
-.panel--wide {
-  max-width: 1180px;
-}
-
-@media (max-width:560px){
-  .panel {
-    padding: 26px 16px;
-  }
-}
-
-  
-
-/* ================= SECTION BANNER (LOCKED & PRESERVED) ================= */
+/* ================= SECTION BANNER ================= */
 .section-banner {
-  position: relative;
-  z-index: 2;
-
+  position:relative;
+  z-index:2;
   width:100%;
   min-height:160px;
   margin:40px 0 80px;
-
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
   border:1px solid rgba(212,175,55,0.35);
   background:rgba(0,0,0,0.55);
-
   color:#f3d688;
   font-size:0.8rem;
   letter-spacing:0.32em;
   text-transform:uppercase;
 }
 
-
-
-/* ================= READING SYSTEM (TEXT ONLY) ================= */
+/* ================= READING SYSTEM (OPTION A — LOCKED) ================= */
 .reading {
   max-width:72ch;
   margin:80px auto 100px;
@@ -239,7 +222,7 @@ html, body {
   all:unset;
 }
 
-/* ================= MUSIC PAGE TEXT ================= */
+/* ================= MUSIC TEXT ================= */
 .music-intro {
   max-width:72ch;
   margin:80px auto 100px;
@@ -249,30 +232,7 @@ html, body {
   color:#e8e4d8;
 }
 
-.music-intro p { margin-bottom:18px; }
-
-.music-title {
-  font-size:0.85rem;
-  letter-spacing:0.32em;
-  text-transform:uppercase;
-  color:#f3d688;
-  margin-bottom:24px;
-}
-
-.music-poetic {
-  margin-top:30px;
-  font-style:italic;
-  opacity:0.9;
-}
-
-.music-mantra {
-  margin-top:40px;
-  letter-spacing:0.34em;
-  text-transform:uppercase;
-  color:#f3d688;
-}
-
-/* ================= ALBUM / PLAYER (UNCHANGED SCALE) ================= */
+/* ================= ALBUM / PLAYER ================= */
 .album-player {
   width:320px;
   margin:80px auto;
@@ -280,135 +240,11 @@ html, body {
   text-align:center;
 }
 
-.album-cover {
-  width:320px;
-  height:320px;
-  border:1px solid rgba(212,175,55,0.35);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  letter-spacing:0.28em;
-  cursor:pointer;
-}
-
-.album-cover img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.player-ui {
-  display:none;
-  opacity:0;
-  transition:opacity 0.6s ease;
-  flex-direction:column;
-  align-items:center;
-}
-
-.album-player.active .album-cover { display:none; }
-.album-player.active .player-ui {
-  display:flex;
-  opacity:1;
-}
-
-.record {
-  width:260px;
-  height:260px;
-  margin:0 auto 30px;
-  border-radius:50%;
-  border:2px solid rgba(212,175,55,0.4);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.record-art {
-  width:160px;
-  height:160px;
-  border-radius:50%;
-  border:1px solid rgba(212,175,55,0.35);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.record-art img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:50%;
-}
-
-.spinning {
-  animation:spin 6s linear infinite;
-}
-
-@keyframes spin {
-  from { transform:rotate(0deg); }
-  to { transform:rotate(360deg); }
-}
-
-.player-controls {
-  display:flex;
-  justify-content:center;
-  gap:18px;
-}
-
-.player-controls button {
-  background:none;
-  border:1px solid rgba(212,175,55,0.4);
-  color:#f3d688;
-  padding:12px 16px;
-  cursor:pointer;
-}
-
 /* ================= TRACK LIST ================= */
 .tracklist {
   max-width:760px;
   margin:80px auto 0;
   border-top:1px solid rgba(212,175,55,0.25);
-}
-
-.track-row {
-  display:flex;
-  align-items:center;
-  gap:18px;
-  padding:14px 0;
-  border-bottom:1px solid rgba(212,175,55,0.12);
-  font-size:0.7rem;
-  letter-spacing:0.12em;
-}
-
-.track-row span { width:28px; color:#f3d688; }
-
-.track-info {
-  display:flex;
-  align-items:center;
-  gap:14px;
-  flex:1;
-}
-
-.track-play {
-  background:none;
-  border:none;
-  color:#e8e4d8;
-  cursor:pointer;
-  font-size:0.7rem;
-  letter-spacing:0.12em;
-}
-
-.track-play:hover { color:#f3d688; }
-
-.track-download {
-  text-decoration:none;
-  color:#777;
-  font-size:0.75rem;
-}
-
-.track-download:hover { color:#f3d688; }
-
-.track-row.active {
-  background:rgba(212,175,55,0.08);
 }
 
 /* ================= SIDE BANNERS ================= */
@@ -437,36 +273,40 @@ html, body {
 
 .side-banner span { writing-mode:vertical-rl; }
 
-/* ================= MOBILE (LOCKED) ================= */
+/* ================= MOBILE FIX (THE ACTUAL FIX) ================= */
 @media (max-width:768px) {
-  .page-scroll { padding:14px; }
-  .page-inner { padding:78px 3vw 120px; }
 
-  .page-frame-outer { padding:14px; }
+  /* FRAME MUST SHRINK */
+  .page-frame-outer {
+    padding:10px;
+  }
 
-  .page-frame-outer::before,
-  .page-frame-outer::after {
-    font-size:0.55rem;
-    letter-spacing:0.30em;
+  /* REMOVE STACKED PADDING */
+  .page-scroll {
+    padding:0;
+  }
+
+  /* INNER CONTENT FITS SCREEN */
+  .page-inner {
+    padding:72px 4vw 110px;
+    border-width:1px;
+  }
+
+  /* BANNER VISUAL BALANCE */
+  .section-banner {
+    min-height:96px;
+    margin:24px 0 48px;
+    font-size:0.65rem;
+    letter-spacing:0.22em;
+    padding:12px 10px;
   }
 
   .arabic-border {
     font-size:0.6rem;
     letter-spacing:0.30em;
   }
-
-  .section-banner {
-    min-height: 96px;
-    margin: 24px 0 48px;
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    padding: 12px 10px;
-  }
 }
-
-
-
-    
+</style>
 
     
 </style>
