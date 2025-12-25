@@ -161,6 +161,32 @@ html, body {
     0 40px 120px rgba(0,0,0,0.95);
 }
 
+/* ===== PANEL / INSET CONTAINER SYSTEM ===== */
+.panel {
+  border: 1px solid rgba(212,175,55,0.25);
+  border-radius: 16px;
+  background: rgba(8,8,10,0.55);
+  padding: 34px 22px;
+  max-width: 980px;
+  margin: 0 auto 80px;
+}
+
+.panel--compact {
+  padding: 22px 18px;
+}
+
+.panel--wide {
+  max-width: 1180px;
+}
+
+@media (max-width:560px){
+  .panel {
+    padding: 26px 16px;
+  }
+}
+
+  
+
 /* ================= SECTION BANNER (LOCKED & PRESERVED) ================= */
 .section-banner {
   position: relative;
@@ -428,7 +454,16 @@ html, body {
     font-size:0.6rem;
     letter-spacing:0.30em;
   }
+
+  .section-banner {
+    min-height: 96px;
+    margin: 24px 0 48px;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    padding: 12px 10px;
+  }
 }
+
 
 
     
