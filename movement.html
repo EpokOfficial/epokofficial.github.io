@@ -344,7 +344,23 @@ img{
   .page-inner > a:first-child > img{
     height:clamp(110px, 20vh, 170px);
   }
+
+/* =========================================================
+   EPÒK PANELS — ZOOM IN A LITTLE (LOCKED, PANEL-ONLY)
+   ========================================================= */
+.epok-panel { overflow:hidden; } /* allows safe crop when zoomed */
+
+.epok-panel img{
+  transform: scale(1.10);
+  transform-origin: center center;
 }
+
+/* Mobile: slightly stronger zoom */
+@media (max-width:768px){
+  .epok-panel img{ transform: scale(1.16); }
+}
+
+ }  
 </style>
 </head>
 
