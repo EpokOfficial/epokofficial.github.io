@@ -485,6 +485,35 @@ html, body {
   }
 }
     
+/* ================= SECTION BANNER (STYLE-ONLY FIX) ================= */
+
+.section-banner {
+  width: 100%;
+  min-height: 240px;              /* ← THIS is what was missing */
+  margin-bottom: 60px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,0.04);   /* visible placeholder */
+  border: 1px solid rgba(212,175,55,0.35);
+
+  color: #f3d688;
+  letter-spacing: 0.32em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .section-banner {
+    min-height: 200px;
+    margin-bottom: 48px;
+  }
+}
 
     
 </style>
