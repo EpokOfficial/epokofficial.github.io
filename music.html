@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,307 +8,472 @@
 <title>EPÒK | Universal Page</title>
 
 <style>
-/* ================= CORE RESET ================= */
 * { margin:0; padding:0; box-sizing:border-box; }
 
 html, body {
-  width:100%;
-  height:100%;
-  background:#000;
-  color:#f2f2f2;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  overflow:hidden;
+    width:100%;
+    height:100%;
+    background:#000;
+    color:#f2f2f2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow:hidden;
 }
 
-/* ================= TOP NAV (LOCKED) ================= */
+/* ================= TOP NAV (VERBATIM) ================= */
 .top-nav {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:64px;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(10px);
-  z-index:1000;
-  border-bottom:1px solid rgba(212,175,55,0.25);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:64px;
+    background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    border-bottom:1px solid rgba(212,175,55,0.25);
 }
 
 .nav-scroll {
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  padding:0 6vw;
-  overflow-x:auto;
-  white-space:nowrap;
-  -webkit-overflow-scrolling:touch;
+    width:100%;
+    height:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+    padding:0 6vw;
+    display:flex;
+    align-items:center;
 }
 
-.nav-scroll::-webkit-scrollbar { height:0; }
+.nav-scroll::-webkit-scrollbar { height:0px; }
 .nav-scroll { scrollbar-width:none; }
 
 .nav-links {
-  display:inline-flex;
-  gap:26px;
-  align-items:center;
+    display:inline-flex;
+    gap:26px;
+    align-items:center;
 }
 
 .nav-links a {
-  text-decoration:none;
-  color:#e8e4d8;
-  font-size:0.82rem;
-  letter-spacing:0.22em;
-  text-transform:uppercase;
-  padding:8px 4px;
-  opacity:0.85;
+    text-decoration:none;
+    color:#e8e4d8;
+    font-size:0.82rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    padding:8px 4px;
+    opacity:0.85;
 }
 
-.nav-links a:hover { color:#f3d688; opacity:1; }
+.nav-links a:hover {
+    color:#f3d688;
+    opacity:1;
+}
 
 .nav-links a.featured {
-  opacity:1;
-  border:1px solid rgba(212,175,55,0.85);
-  padding:8px 12px;
-  color:#f3d688;
+    opacity:1;
+    border:1px solid rgba(212,175,55,0.85);
+    padding:8px 12px;
+    color:#f3d688;
 }
 
-/* ================= DOUBLE ROYAL FRAME (LOCKED) ================= */
+/* ============ DOUBLE ROYAL FRAME (LOCKED) ============ */
 .page-frame-outer {
-  position:fixed;
-  inset:0;
-  padding:22px;
-  border:2px solid rgba(212,175,55,0.65);
-  pointer-events:none;
-  z-index:50;
-  overflow:hidden;
+    position:fixed;
+    inset:0;
+    padding:22px;
+    border:2px solid rgba(212,175,55,0.65);
+    pointer-events:none;
+    z-index:50;
+    overflow:hidden;
 }
 
 .page-frame-outer::before,
 .page-frame-outer::after {
-  content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
-  position:absolute;
-  top:22px;
-  bottom:22px;
-  width:22px;
-  writing-mode:vertical-rl;
-  text-orientation:mixed;
-  font-size:0.65rem;
-  letter-spacing:0.35em;
-  color:#ffffff;
-  white-space:nowrap;
+    content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
+    position:absolute;
+    top:22px;
+    bottom:22px;
+    width:22px;
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    font-size:0.65rem;
+    letter-spacing:0.35em;
+    color:#ffffff;
+    white-space:nowrap;
 }
 
 .page-frame-outer::before {
-  left:1px;
-  animation:leftScroll 45s linear infinite;
+    left:1px;
+    animation:leftScroll 45s linear infinite;
 }
 
 .page-frame-outer::after {
-  right:9px;
-  animation:rightScroll 45s linear infinite;
+    right:9px;
+    animation:rightScroll 45s linear infinite;
 }
 
 @keyframes leftScroll {
-  from { transform:translateY(100%); }
-  to { transform:translateY(-100%); }
+    from { transform:translateY(100%); }
+    to   { transform:translateY(-100%); }
 }
 
 @keyframes rightScroll {
-  from { transform:translateY(-100%); }
-  to { transform:translateY(100%); }
+    from { transform:translateY(-100%); }
+    to   { transform:translateY(100%); }
 }
 
-/* ================= ARABIC BORDER ================= */
 .arabic-border {
-  position:absolute;
-  bottom:6px;
-  left:0;
-  right:0;
-  text-align:center;
-  font-size:0.7rem;
-  letter-spacing:0.45em;
-  color:#ffffff;
-  white-space:nowrap;
-  overflow:hidden;
+    position:absolute;
+    bottom:6px;
+    left:0;
+    right:0;
+    font-size:0.7rem;
+    letter-spacing:0.45em;
+    color:#ffffff;
+    white-space:nowrap;
+    overflow:hidden;
+    text-align:center;
 }
 
 .arabic-border span {
-  display:inline-block;
-  padding-left:100%;
-  animation:arabic-scroll 18s linear infinite;
+    display:inline-block;
+    padding-left:100%;
+    animation:arabic-scroll 18s linear infinite;
 }
 
 @keyframes arabic-scroll {
-  from { transform:translateX(0); }
-  to { transform:translateX(-100%); }
+    from { transform:translateX(0); }
+    to { transform:translateX(-100%); }
 }
 
-/* ================= PAGE SCROLLER (LOCKED) ================= */
+/* ============ PAGE SCROLLER (LOCKED) ============ */
 .page-scroll {
-  position:fixed;
-  inset:0;
-  padding:22px;
-  overflow-y:auto;
-  overflow-x:hidden;
-  z-index:1;
+    position:fixed;
+    inset:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    z-index:1;
+    padding:22px;
 }
 
-/* ================= PAGE INNER ================= */
 .page-inner {
-  min-height:calc(100vh - 44px);
-  padding:88px 6vw 140px;
-  border:1px solid rgba(212,175,55,0.35);
-  background:#000;
-  position:relative;
-  box-shadow:
-    inset 0 0 0 1px rgba(212,175,55,0.18),
-    0 40px 120px rgba(0,0,0,0.95);
+    min-height:calc(100vh - 44px);
+    border:1px solid rgba(212,175,55,0.35);
+    box-shadow:
+        inset 0 0 0 1px rgba(212,175,55,0.18),
+        0 40px 120px rgba(0,0,0,0.95);
+    background:#000;
+    position:relative;
+    padding:88px 6vw 140px;
 }
 
-/* ================= PANEL SYSTEM ================= */
-.panel {
-  border:1px solid rgba(212,175,55,0.25);
-  border-radius:16px;
-  background:rgba(8,8,10,0.55);
-  padding:34px 22px;
-  max-width:980px;
-  margin:0 auto 80px;
+/* ============ MOBILE (LOCKED) ============ */
+@media (max-width:768px) {
+
+    .page-scroll { padding:14px; }
+    .page-inner { padding:78px 3vw 120px; }
+
+    .page-frame-outer { padding:14px; }
+
+    .page-frame-outer::before,
+    .page-frame-outer::after {
+        font-size:0.55rem;
+        letter-spacing:0.30em;
+    }
+
+    .arabic-border {
+        font-size:0.6rem;
+        letter-spacing:0.30em;
+    }
 }
 
-.panel--compact { padding:22px 18px; }
-.panel--wide { max-width:1180px; }
+/* ================= MUSIC PAGE ================= */
 
-/* ================= SECTION BANNER ================= */
-.section-banner {
-  position:relative;
-  z-index:2;
-  width:100%;
-  min-height:160px;
-  margin:40px 0 80px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  border:1px solid rgba(212,175,55,0.35);
-  background:rgba(0,0,0,0.55);
-  color:#f3d688;
-  font-size:0.8rem;
-  letter-spacing:0.32em;
-  text-transform:uppercase;
-}
-
-/* ================= READING SYSTEM (OPTION A — LOCKED) ================= */
-.reading {
-  max-width:72ch;
-  margin:80px auto 100px;
-  font-size:0.95rem;
-  line-height:1.75;
-  letter-spacing:0.01em;
-}
-
-.reading p { margin-bottom:1.4em; }
-
-.reading h1,
-.reading h2,
-.reading h3,
-.reading h4 {
-  line-height:1.25;
-  margin:2.2em 0 0.8em;
-}
-
-/* SAFETY — NEVER TOUCH MEDIA */
-.reading img,
-.reading video,
-.reading canvas,
-.reading svg {
-  all:unset;
-}
-
-/* ================= MUSIC TEXT ================= */
 .music-intro {
-  max-width:72ch;
-  margin:80px auto 100px;
-  font-size:0.72rem;
-  line-height:1.8;
-  letter-spacing:0.02em;
-  color:#e8e4d8;
+  max-width: 760px;
+  margin: 80px auto 100px;
+  line-height: 1.8;
 }
 
-/* ================= ALBUM / PLAYER ================= */
-.album-player {
-  width:320px;
-  margin:80px auto;
-  position:relative;
-  text-align:center;
+.music-title {
+  font-size: 0.85rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #f3d688;
+  margin-bottom: 24px;
+}
+
+.music-intro p {
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+  color: #e8e4d8;
+}
+
+.music-poetic {
+  margin-top: 30px;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.music-mantra {
+  margin-top: 40px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #f3d688;
+}
+
+.album-wrap {
+  margin: 120px auto;
+  text-align: center;
+}
+
+
+
+
+    
+.album-note {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  color: #999;
 }
 
 /* ================= TRACK LIST ================= */
+
 .tracklist {
-  max-width:760px;
-  margin:80px auto 0;
-  border-top:1px solid rgba(212,175,55,0.25);
+  max-width: 760px;
+  margin: 80px auto 0;
+  border-top: 1px solid rgba(212,175,55,0.25);
 }
 
-/* ================= SIDE BANNERS ================= */
+.track-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.track-row span {
+  width: 28px;
+  color: #f3d688;
+}
+
+.track-row a {
+  color: #e8e4d8;
+  text-decoration: none;
+}
+
+.track-row a:hover {
+  color: #f3d688;
+}
+
+
+   /* ===== ALBUM → PLAYER TRANSITION ===== */
+.album-player {
+  width: 320px;
+  margin: 80px auto;
+  position: relative;
+  text-align: center;
+}
+
+.player-ui {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+
+  flex-direction: column;
+  align-items: center;
+}
+
+.record {
+  margin-bottom: 24px;
+}
+
+.player-controls {
+  margin-top: 12px;
+}
+
+    
+
+.album-cover {
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(212,175,55,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.28em;
+  cursor: pointer;
+  transition: opacity 1.4s ease;
+}
+
+
+.album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.album-player.active .album-cover {
+  display: none;
+}
+
+.album-player.active .player-ui {
+  display: flex;
+  opacity: 1;
+}
+
+/* RECORD */
+.record {
+  width: 260px;
+  height: 260px;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  border: 2px solid rgba(212,175,55,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.28em;
+  color: #f3d688;
+}
+
+.record-art {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,175,55,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  color: #999;
+}
+
+    .record-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+    
+.spinning {
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.player-controls button {
+  background: none;
+  border: 1px solid rgba(212,175,55,0.4);
+  color: #f3d688;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+
+    
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.track-art {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(212,175,55,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: #999;
+}
+
+.track-play {
+  background: none;
+  border: none;
+  color: #e8e4d8;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.track-play:hover {
+  color: #f3d688;
+}
+
+.track-download {
+  text-decoration: none;
+  color: #777;
+  font-size: 0.75rem;
+}
+
+.track-download:hover {
+  color: #f3d688;
+}
+
+.track-row.active {
+  background: rgba(212,175,55,0.08);
+}
+
+    
+/* ===== SIDE BANNERS ===== */
+
 .side-banners {
-  position:absolute;
-  inset:0;
-  pointer-events:none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .side-banner {
-  position:absolute;
-  top:120px;
-  bottom:120px;
-  width:60px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:center;
-  font-size:0.65rem;
-  letter-spacing:0.4em;
-  color:rgba(212,175,55,0.65);
+  position: absolute;
+  top: 120px;
+  bottom: 120px;
+  width: 60px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: rgba(212,175,55,0.65);
 }
 
-.side-banner.left { left:-90px; }
-.side-banner.right { right:-90px; }
-
-.side-banner span { writing-mode:vertical-rl; }
-
-/* ================= MOBILE FIX (THE ACTUAL FIX) ================= */
-@media (max-width:768px) {
-
-  /* FRAME MUST SHRINK */
-  .page-frame-outer {
-    padding:10px;
-  }
-
-  /* REMOVE STACKED PADDING */
-  .page-scroll {
-    padding:0;
-  }
-
-  /* INNER CONTENT FITS SCREEN */
-  .page-inner {
-    padding:72px 4vw 110px;
-    border-width:1px;
-  }
-
-  /* BANNER VISUAL BALANCE */
-  .section-banner {
-    min-height:96px;
-    margin:24px 0 48px;
-    font-size:0.65rem;
-    letter-spacing:0.22em;
-    padding:12px 10px;
-  }
-
-  .arabic-border {
-    font-size:0.6rem;
-    letter-spacing:0.30em;
-  }
+.side-banner.left {
+  left: -90px;
 }
-</style>
+
+.side-banner.right {
+  right: -90px;
+}
+
+.side-banner span {
+  writing-mode: vertical-rl;
+}
+
+
+    
 
     
 </style>
@@ -359,10 +526,10 @@ html, body {
 <section class="store-section" id="music">
 
   <!-- BANNER PLACEHOLDER (ART ADDED BY YOU LATER) -->
- <section class="about-banner">
-    <img src="images/survivebanner.png" alt="EPÒK — Survive. Rise. Become.">
-</section>
-
+  <div class="section-banner">
+    MUSIC — BANNER PLACEHOLDER
+    <small>Artwork added manually</small>
+  </div>
 
   <!-- MUSIC INTRO TEXT -->
   <div class="music-intro">
