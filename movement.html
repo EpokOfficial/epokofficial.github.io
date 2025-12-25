@@ -40,21 +40,24 @@ body {
     color:#ffffff;
     pointer-events:none;
     white-space:nowrap;
+    overflow:hidden;
 }
 
 .page-frame-outer::before {
     left:1px;
     animation:leftScroll 45s linear infinite;
 }
-.page-frame-outer::after {
-    right:9px;
-    animation:rightScroll 45s linear infinite;
-}
 
 @keyframes leftScroll {
     from { transform:translateY(100%); }
     to   { transform:translateY(-100%); }
 }
+
+.page-frame-outer::after {
+    right:9px;
+    animation:rightScroll 45s linear infinite;
+}
+
 @keyframes rightScroll {
     from { transform:translateY(-100%); }
     to   { transform:translateY(100%); }
@@ -96,7 +99,7 @@ body {
     background:#000;
 }
 
-/* ================= TOP NAV ================= */
+/* ================= TOP NAV (UPDATED) ================= */
 .top-nav {
     position:fixed;
     top:0;
@@ -111,12 +114,19 @@ body {
     border-bottom:1px solid rgba(212,175,55,0.25);
 }
 
+/* SCROLL CONTAINER */
 .nav-scroll {
     width:100%;
     overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
     white-space:nowrap;
     padding:0 6vw;
 }
+
+/* Hide scrollbar */
+.nav-scroll::-webkit-scrollbar { height:0px; }
+.nav-scroll { scrollbar-width:none; }
 
 .nav-links {
     display:inline-flex;
@@ -130,39 +140,128 @@ body {
     font-size:0.82rem;
     letter-spacing:0.22em;
     text-transform:uppercase;
+    padding:8px 4px;
+    opacity:0.85;
 }
 
-/* ================= OPTION A — READING (LOCKED) ================= */
-.reading {
-    max-width:720px;
-    margin-left:auto;
-    margin-right:auto;
-    padding-left:16px;
-    padding-right:16px;
+.nav-links a:hover {
+    color:#f3d688;
+    opacity:1;
 }
 
-/* ================= FULL-BLEED BANNERS (LOCKED) ================= */
-.full-bleed {
+/* FEATURED TAB */
+.nav-links a.featured {
+    opacity:1;
+    border:1px solid rgba(212,175,55,0.85);
+    padding:8px 12px;
+    color:#f3d688;
+}
+
+/* ================= EPÒK MESSAGE PANELS ================= */
+.epok-panel {
+    max-width:1600px;
+    margin:0 auto;
+    padding-top:32px;
+}
+
+.epok-panel:first-of-type {
+    padding-top:120px;
+}
+
+.epok-panel img {
     width:100%;
-    margin-left:calc(-50vw + 50%);
-    margin-right:calc(-50vw + 50%);
+    height:auto;
+    display:block;
 }
 
-/* ================= DESKTOP ENHANCEMENTS ONLY ================= */
-@media (min-width:769px) {
+/* ================= PHILOSOPHY ================= */
+.philosophy {
+    max-width:900px;
+    margin:120px auto 0;
+    text-align:center;
+}
 
-    .reading {
-        max-width:900px;
-        padding-left:0;
-        padding-right:0;
-    }
+.philosophy h2 {
+    font-size:2rem;
+    letter-spacing:0.26em;
+    text-transform:uppercase;
+    margin-bottom:30px;
+    color:#f3d688;
+}
+
+.philosophy p {
+    font-size:0.96rem;
+    line-height:1.7;
+    margin-bottom:16px;
+    color:#dedad0;
+}
+
+/* ================= ALBUM ================= */
+.album-section {
+    max-width:900px;
+    margin:120px auto 0;
+    text-align:center;
+}
+
+.album-section h3 {
+    font-size:1.6rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    margin-bottom:28px;
+    color:#f3d688;
+}
+
+.album-cover {
+    max-width:320px;
+    margin:0 auto 30px;
+}
+
+.album-cover img {
+    width:100%;
+    border-radius:18px;
+    box-shadow:0 28px 70px rgba(0,0,0,0.95);
+}
+
+.album-download {
+    display:inline-block;
+    margin-top:12px;
+    font-size:0.85rem;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:#f3d688;
+    text-decoration:none;
+    border-bottom:1px solid rgba(243,214,136,0.6);
+    padding-bottom:6px;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:768px) {
 
     .page-frame-inner {
-        padding:0 6vw 140px;
+        padding:0 3vw 100px;
+    }
+
+    .epok-panel {
+        max-width:100%;
+        padding-top:24px;
+    }
+
+    .epok-panel:first-of-type {
+        padding-top:96px;
+    }
+
+    .page-frame-outer::before,
+    .page-frame-outer::after {
+        font-size:0.55rem;
+        letter-spacing:0.3em;
+    }
+
+    .page-frame-outer .arabic-border {
+        font-size:0.6rem;
+        letter-spacing:0.3em;
     }
 }
 </style>
-
 </head>
 
 <body>
@@ -222,6 +321,3 @@ body {
 </body>
 </html>
 
-
-</body>
-</html>
