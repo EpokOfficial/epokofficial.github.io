@@ -6,6 +6,9 @@
 <title>EPÒK | Movement</title>
 
 <style>
+/* =========================================================
+   GLOBAL RESET — MOBILE FIRST BASE
+   ========================================================= */
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
@@ -15,10 +18,13 @@ body {
     overflow-x:hidden;
 }
 
-/* ============ DOUBLE ROYAL FRAME (FULL PAGE) ============ */
+/* =========================================================
+   DOUBLE ROYAL FRAME (FULL PAGE)
+   MOBILE FIRST
+   ========================================================= */
 .page-frame-outer {
     min-height:100vh;
-    padding:22px;
+    padding:18px;
     background:#000;
     border:2px solid rgba(212,175,55,0.65);
     position:relative;
@@ -30,13 +36,13 @@ body {
 .page-frame-outer::after {
     content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
     position:absolute;
-    top:22px;
-    bottom:22px;
+    top:18px;
+    bottom:18px;
     width:22px;
     writing-mode:vertical-rl;
     text-orientation:mixed;
-    font-size:0.65rem;
-    letter-spacing:0.35em;
+    font-size:0.55rem;
+    letter-spacing:0.3em;
     color:#ffffff;
     pointer-events:none;
     white-space:nowrap;
@@ -70,8 +76,8 @@ body {
     left:0;
     right:0;
     text-align:center;
-    font-size:0.7rem;
-    letter-spacing:0.45em;
+    font-size:0.6rem;
+    letter-spacing:0.3em;
     color:#ffffff;
     pointer-events:none;
     white-space:nowrap;
@@ -89,9 +95,12 @@ body {
     to { transform:translateX(-100%); }
 }
 
+/* =========================================================
+   INNER FRAME — MOBILE FIRST
+   ========================================================= */
 .page-frame-inner {
     min-height:100vh;
-    padding:0 6vw 120px;
+    padding:0 4vw 100px;
     border:1px solid rgba(212,175,55,0.35);
     box-shadow:
         inset 0 0 0 1px rgba(212,175,55,0.18),
@@ -99,7 +108,9 @@ body {
     background:#000;
 }
 
-/* ================= TOP NAV (UPDATED) ================= */
+/* =========================================================
+   TOP NAV — MOBILE FIRST
+   ========================================================= */
 .top-nav {
     position:fixed;
     top:0;
@@ -121,7 +132,7 @@ body {
     overflow-y:hidden;
     -webkit-overflow-scrolling:touch;
     white-space:nowrap;
-    padding:0 6vw;
+    padding:0 4vw;
 }
 
 /* Hide scrollbar */
@@ -130,14 +141,14 @@ body {
 
 .nav-links {
     display:inline-flex;
-    gap:26px;
+    gap:22px;
     align-items:center;
 }
 
 .nav-links a {
     text-decoration:none;
     color:#e8e4d8;
-    font-size:0.82rem;
+    font-size:0.78rem;
     letter-spacing:0.22em;
     text-transform:uppercase;
     padding:8px 4px;
@@ -157,75 +168,84 @@ body {
     color:#f3d688;
 }
 
-/* ================= EPÒK MESSAGE PANELS ================= */
+/* =========================================================
+   EPÒK MESSAGE PANELS — MOBILE FIRST
+   ========================================================= */
 .epok-panel {
-    max-width:1600px;
+    max-width:100%;
     margin:0 auto;
-    padding-top:32px;
+    padding-top:24px;
 }
 
 .epok-panel:first-of-type {
-    padding-top:120px;
+    padding-top:96px;
 }
 
 .epok-panel img {
     width:100%;
     height:auto;
     display:block;
+    object-fit:contain;
 }
 
-/* ================= PHILOSOPHY ================= */
+/* =========================================================
+   PHILOSOPHY — MOBILE FIRST
+   ========================================================= */
 .philosophy {
-    max-width:900px;
-    margin:120px auto 0;
+    max-width:92%;
+    margin:96px auto 0;
     text-align:center;
 }
 
 .philosophy h2 {
-    font-size:2rem;
-    letter-spacing:0.26em;
+    font-size:1.6rem;
+    letter-spacing:0.24em;
     text-transform:uppercase;
-    margin-bottom:30px;
+    margin-bottom:26px;
     color:#f3d688;
 }
 
 .philosophy p {
-    font-size:0.96rem;
+    font-size:0.92rem;
     line-height:1.7;
     margin-bottom:16px;
     color:#dedad0;
 }
 
-/* ================= ALBUM ================= */
+/* =========================================================
+   ALBUM SECTION — MOBILE FIRST
+   ========================================================= */
 .album-section {
-    max-width:900px;
-    margin:120px auto 0;
+    max-width:92%;
+    margin:96px auto 0;
     text-align:center;
 }
 
 .album-section h3 {
-    font-size:1.6rem;
-    letter-spacing:0.24em;
+    font-size:1.4rem;
+    letter-spacing:0.22em;
     text-transform:uppercase;
-    margin-bottom:28px;
+    margin-bottom:24px;
     color:#f3d688;
 }
 
 .album-cover {
-    max-width:320px;
-    margin:0 auto 30px;
+    max-width:260px;
+    margin:0 auto 26px;
 }
 
 .album-cover img {
     width:100%;
+    height:auto;
     border-radius:18px;
     box-shadow:0 28px 70px rgba(0,0,0,0.95);
+    object-fit:contain;
 }
 
 .album-download {
     display:inline-block;
     margin-top:12px;
-    font-size:0.85rem;
+    font-size:0.8rem;
     letter-spacing:0.25em;
     text-transform:uppercase;
     color:#f3d688;
@@ -234,34 +254,67 @@ body {
     padding-bottom:6px;
 }
 
-/* ================= MOBILE ================= */
-@media (max-width:768px) {
+/* =========================================================
+   DESKTOP & LARGE SCREENS — ENHANCEMENTS ONLY
+   ========================================================= */
+@media (min-width:769px) {
+
+    .page-frame-outer {
+        padding:22px;
+    }
 
     .page-frame-inner {
-        padding:0 3vw 100px;
+        padding:0 6vw 120px;
     }
 
     .epok-panel {
-        max-width:100%;
-        padding-top:24px;
+        max-width:1600px;
+        padding-top:32px;
     }
 
     .epok-panel:first-of-type {
-        padding-top:96px;
+        padding-top:120px;
     }
 
     .page-frame-outer::before,
     .page-frame-outer::after {
-        font-size:0.55rem;
-        letter-spacing:0.3em;
+        font-size:0.65rem;
+        letter-spacing:0.35em;
     }
 
     .page-frame-outer .arabic-border {
-        font-size:0.6rem;
-        letter-spacing:0.3em;
+        font-size:0.7rem;
+        letter-spacing:0.45em;
+    }
+
+    .philosophy {
+        max-width:900px;
+        margin:120px auto 0;
+    }
+
+    .philosophy h2 {
+        font-size:2rem;
+    }
+
+    .philosophy p {
+        font-size:0.96rem;
+    }
+
+    .album-section {
+        max-width:900px;
+        margin:120px auto 0;
+    }
+
+    .album-section h3 {
+        font-size:1.6rem;
+    }
+
+    .album-cover {
+        max-width:320px;
     }
 }
 </style>
+
 </head>
 
 <body>
