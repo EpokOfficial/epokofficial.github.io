@@ -63,7 +63,6 @@ html, body {
   letter-spacing: 0.25em;
   color: #fff;
   white-space: nowrap;
-  will-change: transform;
 }
 
 .page-frame-outer::before {
@@ -100,14 +99,12 @@ html, body {
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
-  pointer-events: none;
 }
 
 .arabic-border span {
   display: inline-block;
   padding-left: 100%;
   animation: arabic-scroll 18s linear infinite;
-  will-change: transform;
 }
 
 @keyframes arabic-scroll {
@@ -137,8 +134,7 @@ html, body {
   width: 100%;
   overflow-x: auto;
   white-space: nowrap;
-  padding: 0 16px; /* FIXED PX FOR MOBILE DENSITY */
-  -webkit-overflow-scrolling: touch;
+  padding: 0 4vw;
 }
 
 .nav-scroll::-webkit-scrollbar { height: 0; }
@@ -166,7 +162,7 @@ html, body {
 }
 
 /* ======================================================
-   HERO BACKGROUND & CHARACTER (FULL BLEED — INTENTIONAL)
+   HERO BACKGROUND & CHARACTER (MOBILE FIRST)
 ====================================================== */
 
 #hero-bg {
@@ -189,7 +185,6 @@ html, body {
   z-index: 2;
   pointer-events: none;
   animation: cameraMove 14s ease-in-out infinite alternate;
-  will-change: transform;
 }
 
 @keyframes cameraMove {
@@ -226,22 +221,6 @@ html, body {
 }
 
 /* ======================================================
-   GLOBAL READING FRAME — LOCKED (FOR ALL OTHER PAGES)
-====================================================== */
-
-.reading-frame,
-.page-inner > section,
-.page-inner > .reading-section {
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-  content-visibility: auto;
-  contain-intrinsic-size: 600px;
-}
-
-/* ======================================================
    ANIMATIONS
 ====================================================== */
 
@@ -263,18 +242,6 @@ html, body {
 @keyframes fadeOut {
   from { opacity: 1; }
   to   { opacity: 0; }
-}
-
-/* ======================================================
-   PERFORMANCE & ACCESSIBILITY — LOCKED
-====================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }
 
 /* ======================================================
@@ -309,17 +276,9 @@ html, body {
     letter-spacing: 0.22em;
   }
 
-  .reading-frame,
-  .page-inner > section,
-  .page-inner > .reading-section {
-    max-width: 900px;
-    padding-left: 0;
-    padding-right: 0;
-  }
 }
 
 </style>
-
 
 </head>
 
