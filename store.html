@@ -42,7 +42,7 @@ html, body {
     overflow-y:hidden;
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
-    padding:0 4vw;
+    padding:0 16px; /* FIXED PX FOR READING DENSITY */
     display:flex;
     align-items:center;
 }
@@ -172,7 +172,21 @@ html, body {
         0 40px 120px rgba(0,0,0,0.95);
     background:#000;
     position:relative;
-    padding:78px 3vw 120px;
+    padding:78px 0 120px; /* vw REMOVED */
+}
+
+/* =========================================================
+   GLOBAL READING FRAME — LOCKED (THE FIX)
+   ========================================================= */
+.reading-frame,
+.page-inner > section,
+.page-inner > .editorial,
+.page-inner > .product-grid {
+    max-width:720px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:16px;
+    padding-right:16px;
 }
 
 /* =========================================================
@@ -307,6 +321,15 @@ html, body {
 
     .page-inner { padding:88px 6vw 140px; }
 
+    .reading-frame,
+    .page-inner > section,
+    .page-inner > .editorial,
+    .page-inner > .product-grid {
+        max-width:900px;
+        padding-left:0;
+        padding-right:0;
+    }
+
     .page-frame-outer::before,
     .page-frame-outer::after {
         font-size:0.65rem;
@@ -323,6 +346,7 @@ html, body {
     }
 }
 </style>
+
 
 </head>
 
