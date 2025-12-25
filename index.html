@@ -321,6 +321,31 @@ img{
   }
 }
 
+/* ======================================================
+   MOBILE HERO FIT FIX (LOCKED)
+   - Stops “zoomed / too big” on mobile
+   - No stretching
+   - Removes mobile scale animation
+====================================================== */
+@media (max-width:768px){
+
+  /* HERO BG: stop cropping on mobile */
+  #hero-bg{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* HERO CHARACTER: fit fully on mobile (no crop), no camera zoom */
+  #hero-character{
+    object-fit: contain;
+    object-position: center;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+   
 </style>
 
 </head>
