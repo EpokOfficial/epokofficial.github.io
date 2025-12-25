@@ -501,6 +501,39 @@ html, body {
   .album-player { width: 320px; }
 }
 
+/* =========================================================
+   GLOBAL MEDIA FIT (CSS-ONLY) — STOPS OVERSIZED BANNERS ON MOBILE
+   - No HTML changes
+   - Prevents images from exceeding their container
+   ========================================================= */
+img { 
+  max-width:100%;
+  height:auto;
+}
+
+/* =========================================================
+   BANNER AUTO-CAP (CSS-ONLY)
+   Targets the most common real banner placement:
+   the FIRST image inside .page-inner (or first linked image)
+   - Condenses height on mobile
+   - Keeps full width
+   - Crops (object-fit:cover) so it NEVER becomes tall
+   ========================================================= */
+.page-inner > img:first-child,
+.page-inner > a:first-child > img {
+  width:100%;
+  height: clamp(140px, 24vh, 220px);   /* desktop/tablet cap */
+  object-fit: cover;
+  display:block;
+}
+
+/* MOBILE: tighter cap so it fits screen and stops being huge */
+@media (max-width:768px){
+  .page-inner > img:first-child,
+  .page-inner > a:first-child > img {
+    height: clamp(110px, 20vh, 170px); /* MOBILE cap = FIX */
+  }
+}
 
     
 </style>
