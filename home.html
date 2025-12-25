@@ -7,7 +7,7 @@
 
 <style>
 /* =========================================================
-   1. CORE RESET & MOBILE-FIRST BASE
+   1. CORE RESET & MOBILE-FIRST BASE (LOCKED)
    ========================================================= */
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -21,7 +21,40 @@ html, body {
 }
 
 /* =========================================================
-   2. TOP NAV (MOBILE FIRST)
+   🔒 GLOBAL DEFAULT = READING-FRAME SYSTEM (LOCKED)
+   ========================================================= */
+.reading-frame{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 22px; /* px only */
+}
+
+/* 🔒 VISUAL OPT-OUT = FULL BLEED (LOCKED) */
+.full-bleed{
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:0;
+}
+
+/* =========================================================
+   🔒 MOBILE-FIRST PERFORMANCE LOCKS (ACTIVE)
+   ========================================================= */
+.cv-auto{
+    content-visibility:auto;
+    contain-intrinsic-size: 900px;
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{
+        animation:none !important;
+        transition:none !important;
+        scroll-behavior:auto !important;
+    }
+}
+
+/* =========================================================
+   2. TOP NAV (MOBILE FIRST) (LOCKED)
    ========================================================= */
 .top-nav {
     position:fixed;
@@ -74,7 +107,7 @@ html, body {
 }
 
 /* =========================================================
-   3. DOUBLE ROYAL FRAME (MOBILE FIRST)
+   3. DOUBLE ROYAL FRAME (MOBILE FIRST) (LOCKED)
    ========================================================= */
 .page-frame-outer {
     position:fixed;
@@ -145,7 +178,8 @@ html, body {
 }
 
 /* =========================================================
-   4. PAGE SCROLLER (MOBILE FIRST)
+   4. PAGE SCROLLER (MOBILE FIRST) (LOCKED + UPDATED)
+   - Reading width/padding is handled by .reading-frame
    ========================================================= */
 .page-scroll {
     position:fixed;
@@ -164,20 +198,26 @@ html, body {
         0 24px 80px rgba(0,0,0,0.95);
     background:#000;
     position:relative;
-    padding:78px 4vw 120px;
+
+    /* 🔒 remove vw reading padding */
+    padding:78px 0 120px;
 }
 
 /* =========================================================
-   5. EPÒK MOVEMENT (MOBILE FIRST)
+   5. EPÒK MOVEMENT (MOBILE FIRST) (READING RHYTHM LOCKED)
    ========================================================= */
 .movement-block {
-    max-width:100%;
+    max-width:760px;
     margin:0 auto;
     border-radius:16px;
     padding:24px 18px;
     background:linear-gradient(135deg, rgba(196,168,107,0.12), rgba(47,93,140,0.14));
     border:1px solid rgba(196,168,107,0.35);
     box-shadow:0 14px 36px rgba(0,0,0,0.65);
+
+    /* perf */
+    content-visibility:auto;
+    contain-intrinsic-size: 700px;
 }
 
 .movement-block h2 {
@@ -205,15 +245,23 @@ html, body {
 }
 
 /* =========================================================
-   6. STEP BANNER (MOBILE FIRST)
+   6. STEP BANNER (MOBILE FIRST) (FIXED: CONDENSED ON MOBILE)
+   - Your banner here is a BACKGROUND, not an <img>
+   - So it MUST be capped here (CSS-only)
    ========================================================= */
 .step-banner-wrapper {
     width:100%;
-    height:50vh;
     margin:0 auto;
     border-radius:18px;
     overflow:hidden;
     position:relative;
+
+    /* 🔒 mobile cap — stops “extra large” banner */
+    height:clamp(140px, 26vh, 190px);
+
+    /* perf */
+    content-visibility:auto;
+    contain-intrinsic-size: 520px;
 }
 
 .step-banner-bg {
@@ -241,6 +289,10 @@ html, body {
     flex-direction:column;
     align-items:center;
     gap:18px;
+
+    /* perf */
+    content-visibility:auto;
+    contain-intrinsic-size: 700px;
 }
 
 .pb-preview-button img {
@@ -249,7 +301,7 @@ html, body {
 }
 
 /* =========================================================
-   8. DESKTOP ENHANCEMENTS ONLY
+   8. DESKTOP ENHANCEMENTS ONLY (LOCKED)
    ========================================================= */
 @media (min-width: 769px) {
 
@@ -278,7 +330,7 @@ html, body {
     }
 
     .page-inner {
-        padding:88px 6vw 140px;
+        padding:88px 0 140px; /* no vw */
     }
 
     .movement-block {
@@ -292,7 +344,9 @@ html, body {
 
     .step-banner-wrapper {
         max-width:1100px;
-        height:65vh;
+
+        /* desktop can breathe without exploding */
+        height:clamp(220px, 46vh, 520px);
     }
 
     .pb-preview-inner {
@@ -302,6 +356,28 @@ html, body {
         margin:0 auto;
     }
 }
+
+/* =========================================================
+   🔒 GLOBAL BANNER FIT ENFORCEMENT (COMMAND — ALL PAGES)
+   NOTE: This affects <img> banners only (not CSS backgrounds)
+   ========================================================= */
+img { max-width:100%; height:auto; }
+
+.page-inner > img:first-child,
+.page-inner > a:first-child > img {
+    width:100%;
+    height:clamp(140px, 24vh, 220px);
+    object-fit:cover;
+    display:block;
+}
+
+@media (max-width:768px){
+    .page-inner > img:first-child,
+    .page-inner > a:first-child > img {
+        height:clamp(110px, 20vh, 170px);
+    }
+}
+
 </style>
 
 </head>
@@ -316,10 +392,10 @@ html, body {
                 <a href="movement.html">Movement</a>
                 <a href="patchbaby.html">Patch Baby</a>
                 <a class="featured" href="signature-apparel-premiere.html">Signature Apparel Premiere</a>
-                <a href="book.html">The Book</a>
+                <a class="featured" href="book.html">The Book</a>
                 <a href="store.html">Store</a>
-                <a href="music.html">MUSIC</a>
                 <a href="about.html">About</a>
+                <a class="featured" href="music.html">MUSIC</a>
             </div>
         </div>
     </nav>
