@@ -6,18 +6,23 @@
 <title>EPÒK | Universal Page</title>
 
 <style>
+/* =========================================================
+   GLOBAL RESET — MOBILE FIRST
+   ========================================================= */
 * { margin:0; padding:0; box-sizing:border-box; }
 
 html, body {
     width:100%;
-    height:100%;
+    min-height:100%;
     background:#000;
     color:#f2f2f2;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
-/* ================= TOP NAV (VERBATIM) ================= */
+/* =========================================================
+   TOP NAV — MOBILE FIRST
+   ========================================================= */
 .top-nav {
     position:fixed;
     top:0;
@@ -37,7 +42,7 @@ html, body {
     overflow-y:hidden;
     white-space:nowrap;
     -webkit-overflow-scrolling:touch;
-    padding:0 6vw;
+    padding:0 4vw;
     display:flex;
     align-items:center;
 }
@@ -47,14 +52,14 @@ html, body {
 
 .nav-links {
     display:inline-flex;
-    gap:26px;
+    gap:22px;
     align-items:center;
 }
 
 .nav-links a {
     text-decoration:none;
     color:#e8e4d8;
-    font-size:0.82rem;
+    font-size:0.78rem;
     letter-spacing:0.22em;
     text-transform:uppercase;
     padding:8px 4px;
@@ -73,11 +78,13 @@ html, body {
     color:#f3d688;
 }
 
-/* ============ DOUBLE ROYAL FRAME (LOCKED) ============ */
+/* =========================================================
+   DOUBLE ROYAL FRAME — MOBILE FIRST
+   ========================================================= */
 .page-frame-outer {
     position:fixed;
     inset:0;
-    padding:22px;
+    padding:14px;
     border:2px solid rgba(212,175,55,0.65);
     pointer-events:none;
     z-index:50;
@@ -88,15 +95,16 @@ html, body {
 .page-frame-outer::after {
     content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
     position:absolute;
-    top:22px;
-    bottom:22px;
+    top:14px;
+    bottom:14px;
     width:22px;
     writing-mode:vertical-rl;
     text-orientation:mixed;
-    font-size:0.65rem;
-    letter-spacing:0.35em;
+    font-size:0.55rem;
+    letter-spacing:0.30em;
     color:#ffffff;
     white-space:nowrap;
+    will-change:transform;
 }
 
 .page-frame-outer::before {
@@ -124,8 +132,8 @@ html, body {
     bottom:6px;
     left:0;
     right:0;
-    font-size:0.7rem;
-    letter-spacing:0.45em;
+    font-size:0.6rem;
+    letter-spacing:0.30em;
     color:#ffffff;
     white-space:nowrap;
     overflow:hidden;
@@ -136,6 +144,7 @@ html, body {
     display:inline-block;
     padding-left:100%;
     animation:arabic-scroll 18s linear infinite;
+    will-change:transform;
 }
 
 @keyframes arabic-scroll {
@@ -143,14 +152,16 @@ html, body {
     to { transform:translateX(-100%); }
 }
 
-/* ============ PAGE SCROLLER (LOCKED) ============ */
+/* =========================================================
+   PAGE SCROLLER — MOBILE FIRST
+   ========================================================= */
 .page-scroll {
     position:fixed;
     inset:0;
     overflow-y:auto;
     overflow-x:hidden;
     z-index:1;
-    padding:22px;
+    padding:14px;
 }
 
 .page-inner {
@@ -161,379 +172,158 @@ html, body {
         0 40px 120px rgba(0,0,0,0.95);
     background:#000;
     position:relative;
-    padding:88px 6vw 140px;
+    padding:78px 3vw 120px;
 }
 
-/* ============ MOBILE (LOCKED) ============ */
-@media (max-width:768px) {
-
-    .page-scroll { padding:14px; }
-    .page-inner { padding:78px 3vw 120px; }
-
-    .page-frame-outer { padding:14px; }
-
-    .page-frame-outer::before,
-    .page-frame-outer::after {
-        font-size:0.55rem;
-        letter-spacing:0.30em;
-    }
-
-    .arabic-border {
-        font-size:0.6rem;
-        letter-spacing:0.30em;
-    }
-}
-
-
-
-    
-    
+/* =========================================================
+   PRODUCT GRID — MOBILE FIRST
+   ========================================================= */
 .product-grid {
-  display: flex;
-  gap: 22px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 8px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-
-.product-grid::-webkit-scrollbar {
-  height: 0;
-}
-.product-grid {
-  scrollbar-width: none;
-}
-
-
-
-    
-
-    
-.product-card {
-  border: 1px solid rgba(212,175,55,0.22);
-  background: #000;              /* PURE BLACK */
-  height: 260px;
-  position: relative;
-  flex: 0 0 240px;
-  scroll-snap-align: start;
-  padding: 0;  
-}
-    
-
-
-    
-
-.add-to-cart {
-  position: static;
-  margin-top: 14px;
-  display: block;
-  text-align: center;
-  border: 1px solid rgba(212,175,55,0.6);
-  padding: 10px 0;
-  font-size: 0.65rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #f3d688;
-  text-decoration: none;
-}
-
-.add-to-cart:hover {
-  background: rgba(212,175,55,0.15);
-}
-
-.product-actions {
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.product-price {
-  text-align: center;
-  font-size: 0.7rem;
-  letter-spacing: 0.28em;
-  color: #f3d688;
-}
-
-
-    
-.product-actions button,
-.product-actions a {
-  border: 1px solid rgba(212,175,55,0.6);
-  background: transparent;
-  color: #f3d688;
-  font-size: 0.65rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  padding: 10px 0;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.product-actions button:hover,
-.product-actions a:hover {
-  background: rgba(212,175,55,0.15);
-}
-
-
-
-    
-.placeholder-img {
-  width: 100%;
-  height: 200px;
-  background: #000;              /* PURE BLACK */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.placeholder-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-
-    
-.view-label {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-size: 0.55rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #f3d688;
-  background: rgba(0,0,0,0.65);
-  border: 1px solid rgba(212,175,55,0.6);
-  padding: 4px 6px;
-  pointer-events: none;
-}
-
-    
-
-.editorial {
-  margin: 80px 0;
-  border: 1px solid rgba(212,175,55,0.22);
-}
-
-.editorial-img {
-  height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #f3d688;
-}
-
-.editorial-caption {
-  padding: 18px;
-  font-size: 0.65rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #e8e4d8;
-}
-
-.coming-soon::after {
-  content: "COMING SOON";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ff3b3b;
-  letter-spacing: 0.36em;
-  font-size: 0.7rem;
-  background: rgba(0,0,0,0.45);
-}
-.men-section { margin-top: 40px; }
-
-.men-row {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 40px;
-  margin-bottom: 60px;
-}
-
-.men-category {
-  font-size: 0.7rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #e8e4d8;
-  padding-top: 10px;
-}
-
-.men-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 22px;
-}
-
-.box {
-  height: 260px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(212,175,55,0.25);
-  position: relative;
-}
-
-.box span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #000000;
-  color: #000000;
-  font-size: 0.6rem;
-  letter-spacing: 0.32em;
-  text-align: center;
-  padding: 8px 0;
-  text-transform: uppercase;
-}
-
-   .store-tabs {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 30px 0 10px;
-  margin-bottom: 40px;
-}
-
-.store-tab {
-  border: 1px solid rgba(212,175,55,0.35);
-  padding: 10px 16px;
-  font-size: 0.65rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #e8e4d8;
-  white-space: nowrap;
-  text-decoration: none;
-}
-
-.store-tab:hover {
-  color: #f3d688;
-  border-color: rgba(212,175,55,0.7);
-}
-
-
-   /* === DEBUG MOCKUP VISIBILITY (SAFE) === */
-.product-card {
-  position: relative;
-}
-
-.placeholder-img {
-  position: relative;
-  min-height: 100%;
- background: #000000;
-}
-
-
-.checkout-section {
-  margin-bottom: -100px;
-}
- 
-
-
-
-
-  /* all your existing CSS above stays exactly as-is */
-
-  .winter-drop-section {
-    margin-top: 60px;
-  }
-
-  .drop-title {
-    margin: 48px 0 20px;
-    font-size: 0.9rem;
-    letter-spacing: 0.28em;
-  }
-
-  .horizontal-scroll {
-    display: flex;
-    gap: 22px;
-    overflow-x: auto;
-    padding-bottom: 14px;
-    scroll-snap-type: x mandatory;
-  }
-
-  .horizontal-scroll::-webkit-scrollbar {
-    height: 0;
-  }
-
-  .product-wrap {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-  }
-
-  .drop-banner {
-    margin-bottom: 60px;
-  }
-
-  .banner-placeholder {
-    height: 260px;
-    border: 1px solid rgba(212,175,55,0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.32em;
-  }
-
- /* ================= ABOUT BANNER CENTERING ================= */
-.about-banner {
     display:flex;
+    gap:22px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding-bottom:8px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+}
+
+.product-grid::-webkit-scrollbar { height:0; }
+.product-grid { scrollbar-width:none; }
+
+.product-card {
+    border:1px solid rgba(212,175,55,0.22);
+    background:#000;
+    height:260px;
+    position:relative;
+    flex:0 0 240px;
+    scroll-snap-align:start;
+    padding:0;
+}
+
+.placeholder-img {
+    width:100%;
+    height:200px;
+    background:#000;
+    display:flex;
+    align-items:center;
     justify-content:center;
 }
 
-.about-banner img {
+.placeholder-img img {
     width:100%;
-    max-width:1600px;
-    display:block;
+    height:100%;
+    object-fit:contain;
+    will-change:transform;
 }
-/* ================= SPACE BETWEEN FIXED NAV AND ABOUT BANNER ================= */
-.about-banner {
-    margin-top: 90px;
+
+/* =========================================================
+   PRODUCT ACTIONS
+   ========================================================= */
+.product-actions {
+    padding:12px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
 }
-@media (max-width:768px) {
-    .about-banner {
-        margin-top: 80px;
+
+.product-price {
+    text-align:center;
+    font-size:0.7rem;
+    letter-spacing:0.28em;
+    color:#f3d688;
+}
+
+.product-actions button,
+.product-actions a,
+.add-to-cart {
+    border:1px solid rgba(212,175,55,0.6);
+    background:transparent;
+    color:#f3d688;
+    font-size:0.65rem;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    padding:10px 0;
+    text-align:center;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.product-actions button:hover,
+.product-actions a:hover,
+.add-to-cart:hover {
+    background:rgba(212,175,55,0.15);
+}
+
+/* =========================================================
+   EDITORIAL
+   ========================================================= */
+.editorial {
+    margin:80px 0;
+    border:1px solid rgba(212,175,55,0.22);
+    content-visibility:auto;
+    contain-intrinsic-size:600px;
+}
+
+.editorial-img {
+    height:320px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:#f3d688;
+}
+
+.editorial-caption {
+    padding:18px;
+    font-size:0.65rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:#e8e4d8;
+}
+
+/* =========================================================
+   PERFORMANCE & ACCESSIBILITY — LOCKED
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration:0.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:0.01ms !important;
     }
 }
 
+/* =========================================================
+   DESKTOP ENHANCEMENTS ONLY
+   ========================================================= */
+@media (min-width:769px) {
 
+    .nav-scroll { padding:0 6vw; }
 
-  /* all your existing CSS stays exactly as-is */
+    .page-frame-outer { padding:22px; }
 
-  .size-popup {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
+    .page-scroll { padding:22px; }
 
-  .size-popup button {
-    border: 1px solid rgba(212,175,55,0.6);
-    background: transparent;
-    color: #f3d688;
-    padding: 6px 10px;
-    cursor: pointer;
-  }
+    .page-inner { padding:88px 6vw 140px; }
 
-#cart-toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #000;
-  border: 1px solid rgba(212,175,55,0.6);
-  color: #f3d688;
-  padding: 12px 18px;
-  letter-spacing: 0.28em;
-  display: none;
-  z-index: 9999;
+    .page-frame-outer::before,
+    .page-frame-outer::after {
+        font-size:0.65rem;
+        letter-spacing:0.35em;
+    }
+
+    .arabic-border {
+        font-size:0.7rem;
+        letter-spacing:0.45em;
+    }
+
+    .nav-links a {
+        font-size:0.82rem;
+    }
 }
-
-    
-    
 </style>
+
 </head>
 
 <body>
