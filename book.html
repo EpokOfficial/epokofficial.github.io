@@ -791,41 +791,6 @@
 .reader.popup .reader-exit-hint::before{
   content: "CLICK OUTSIDE OR ESC TO CLOSE";
 }
-   /* =========================================================
-   EPÒK SURGICAL FIXES — DO NOT REMOVE
-   (Overrides only, no system deletion)
-   ========================================================= */
-
-/* 1️⃣ FRAME WAS TOO BIG — FORCE IT TO FIT VIEWPORT */
-.page-frame-outer {
-  inset: 14px !important;
-}
-
-/* 2️⃣ MOBILE FRAME SHRINK */
-@media (max-width: 768px) {
-  .page-frame-outer {
-    inset: 8px !important;
-  }
-}
-
-/* 3️⃣ STOP PADDING STACKING INSIDE FRAME */
-.page-scroll {
-  padding: 0 !important;
-}
-
-/* 4️⃣ KEEP CONTENT COMFORTABLE INSIDE FRAME */
-@media (max-width: 768px) {
-  .page-inner {
-    padding-left: 4vw !important;
-    padding-right: 4vw !important;
-  }
-}
-
-/* 5️⃣ ENSURE SECTION BANNERS NEVER OVERFLOW */
-.section-banner {
-  max-width: 100%;
-  box-sizing: border-box;
-}
 
   </style>
 </head>
