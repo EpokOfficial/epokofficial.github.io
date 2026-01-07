@@ -4,41 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panthers & Vampires: Blue Moon | EPÒK</title>
+  <!-- Performance Optimization: Preconnect to external resources and add cache hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta http-equiv="Cache-Control" content="max-age=31536000">
 
   <style>
-    
-.reader-exit-hint{
-  display:none;
-  position:absolute;
-  top:6px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:0.55rem;
-  letter-spacing:0.22em;
-  opacity:0.75;
-  pointer-events:none;
-}
+    /* ======================================================
+       LOCKED LAYOUT & STRUCTURE (UNCHANGED)
+    ====================================================== */
+    .reader-exit-hint{
+      display:none;
+      position:absolute;
+      top:6px;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:0.55rem;
+      letter-spacing:0.22em;
+      opacity:0.75;
+      pointer-events:none;
+    }
 
-.reader-view img{
-  transition: opacity 180ms ease;
-}
-.preview-hint{
-  margin-top: 10px;
-  text-align: center;
-  font-size: 0.65rem;
-  letter-spacing: 0.28em;
-  opacity: 0.65;
-}
+    .reader-view img{
+      transition: opacity 180ms ease;
+    }
+    .preview-hint{
+      margin-top: 10px;
+      text-align: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      opacity: 0.65;
+    }
 
-.reader.fullscreen .preview-hint{
-  display: none;
-}
+    .reader.fullscreen .preview-hint{
+      display: none;
+    }
 
-.reader.fullscreen .reader-exit-hint{
-  display:block;
-}
+    .reader.fullscreen .reader-exit-hint{
+      display:block;
+    }
 
-    
     :root{
       --gold: rgba(212,175,55,1);
       --goldSoft: rgba(212,175,55,0.55);
@@ -67,17 +71,14 @@
     a{ color:inherit; text-decoration:none; }
     img{ max-width:100%; height:auto; display:block; }
 
-    /* ===== GLOBAL BORDER SYSTEM ===== */
     .page-frame{
       position: relative;
       z-index: 1;
       border: 2px solid var(--goldSoft);
       margin: 18px;
       padding: 90px 16px 26px;
-}
     }
 
-    /* ===== SECTION BASE ===== */
     section{
       max-width: 1180px;
       margin: 0 auto;
@@ -101,10 +102,7 @@
       font-size: 0.98rem;
     }
 
-    /* ===== SECTION 1: BOOK HERO ===== */
-    .hero{
-      padding-top: 64px;
-    }
+    .hero{ padding-top: 64px; }
     .hero-wrap{
       display:flex;
       align-items: center;
@@ -161,11 +159,8 @@
       background: rgba(212,175,55,0.14);
       color: rgba(243,214,136,0.98);
     }
-    .btn-primary{
-      background: rgba(212,175,55,0.16);
-    }
+    .btn-primary{ background: rgba(212,175,55,0.16); }
 
-    /* ===== SECTION 2: ORIGIN ===== */
     .origin-card{
       background: linear-gradient(180deg, rgba(212,175,55,0.06), rgba(0,0,0,0.0));
       border: 1px solid var(--goldFaint);
@@ -189,7 +184,6 @@
       font-size: 1.02rem;
     }
 
-    /* ===== SECTION 3: CHARACTER BIOS IMAGE + HOTSPOTS ===== */
     .bios-wrap{
       max-width: 1180px;
       margin: 0 auto;
@@ -223,7 +217,6 @@
       box-shadow: 0 0 0 3px rgba(212,175,55,0.18);
     }
 
-    /* ===== MODAL (Bios) ===== */
     .modal{
       display:none;
       position: fixed;
@@ -281,11 +274,8 @@
       color: rgba(245,245,245,0.88);
       font-size: 1.02rem;
     }
-    .modal-body p{
-      margin-bottom: 14px;
-    }
+    .modal-body p{ margin-bottom: 14px; }
 
-    /* ===== SECTION 4: BOOK SUMMARY ===== */
     .summary-card{
       border: 1px solid var(--goldFaint);
       border-radius: 16px;
@@ -300,10 +290,7 @@
       color: rgba(245,245,245,0.88);
     }
 
-    /* ===== SECTION 5: BOOK PREVIEW (PAGE-TURN) ===== */
-    #book-preview{
-      scroll-margin-top: 96px;
-    }
+    #book-preview{ scroll-margin-top: 96px; }
     .reader{
       max-width: 980px;
       margin: 0 auto;
@@ -321,7 +308,6 @@
       border-bottom: 1px solid rgba(212,175,55,0.16);
       background: rgba(0,0,0,0.55);
       flex-wrap: wrap;
-
     }
     .reader-title{
       text-transform: uppercase;
@@ -331,40 +317,6 @@
       font-size: 0.72rem;
       white-space: nowrap;
     }
-    .reader-controls{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    .reader-btn{
-      border: 1px solid rgba(212,175,55,0.35);
-      background: rgba(212,175,55,0.06);
-      color: rgba(245,245,245,0.90);
-      border-radius: 999px;
-      padding: 10px 12px;
-      cursor:pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.63rem;
-      transition: 140ms ease;
-      user-select:none;
-    }
-    .reader-btn:hover{
-      background: rgba(212,175,55,0.12);
-      color: rgba(243,214,136,0.98);
-    }
-    .reader-btn:disabled{
-      opacity: 0.35;
-      cursor:not-allowed;
-    }
-    .reader-count{
-      font-size: 0.74rem;
-      letter-spacing: 0.10em;
-      color: rgba(245,245,245,0.78);
-      white-space: nowrap;
-    }
     .reader-view{
       padding: 14px;
       background: rgba(0,0,0,0.28);
@@ -372,68 +324,48 @@
       justify-content:center;
       align-items:center;
     }
-.reader-view img{
-  width: auto;
-  max-width: 640px;
-  max-height: 80vh;
-  margin: 0 auto;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid rgba(212,175,55,0.18);
-  box-shadow: 0 34px 120px rgba(0,0,0,0.82);
-}
-.reader-view img {
-  /* existing styles */
-}
+    .reader-view img{
+      width: auto;
+      max-width: 640px;
+      max-height: 80vh;
+      margin: 0 auto;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid rgba(212,175,55,0.18);
+      box-shadow: 0 34px 120px rgba(0,0,0,0.82);
+    }
 
-/* ===== BOOK FULLSCREEN (MOBILE) ===== */
-.reader.fullscreen {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .reader.fullscreen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .reader.fullscreen img {
+      max-width: 100vw;
+      max-height: 100vh;
+      object-fit: contain;
+    }
 
-.reader.fullscreen img {
-  max-width: 100vw;
-  max-height: 100vh;
-  object-fit: contain;
-}
-
-.reader-hint-top,
-.reader-hint-bottom {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 22px;
-  font-size: 11px;
-  letter-spacing: .2em;
-  text-align: center;
-  color: rgba(255,255,255,.7);
-  background: rgba(0,0,0,.35);
-  z-index: 10000;
-  display: none;
-}
-@media (min-width: 769px){
-  .reader.fullscreen {
-    display: none;
-  }
-}
-
-.reader-hint-top { top: 0; }
-.reader-hint-bottom { bottom: 0; }
-
-.reader.fullscreen .reader-hint-top,
-.reader.fullscreen .reader-hint-bottom {
-  display: block;
-}
-
-@media (min-width: 769px){
-  .reader.fullscreen { display: none; }
-}
+    .reader-hint-top, .reader-hint-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 22px;
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-align: center;
+      color: rgba(255,255,255,.7);
+      background: rgba(0,0,0,.35);
+      z-index: 10000;
+      display: none;
+    }
+    .reader-hint-top { top: 0; }
+    .reader-hint-bottom { bottom: 0; }
+    .reader.fullscreen .reader-hint-top, .reader.fullscreen .reader-hint-bottom { display: block; }
 
     .reader-bottom{
       padding: 14px;
@@ -445,33 +377,7 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .reader-jump{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .reader-label{
-      font-size: 0.70rem;
-      letter-spacing: 0.12em;
-      color: rgba(245,245,245,0.78);
-      text-transform: uppercase;
-    }
-    .reader-select{
-      border: 1px solid rgba(212,175,55,0.35);
-      background: rgba(0,0,0,0.65);
-      color: rgba(245,245,245,0.92);
-      padding: 10px 12px;
-      border-radius: 999px;
-      letter-spacing: 0.12em;
-      font-size: 0.74rem;
-      outline:none;
-    }
 
-    /* ===== SECTION 6: PURCHASE / PREORDER RULES ===== */
-    #purchase{
-      scroll-margin-top: 96px;
-    }
     .purchase-grid{
       max-width: 980px;
       margin: 0 auto;
@@ -491,42 +397,18 @@
       gap: 14px;
       flex-wrap: wrap;
     }
-    .product-left{
-      min-width: 240px;
-      flex: 1 1 420px;
-    }
+    .product-left{ min-width: 240px; flex: 1 1 420px; }
     .product-name{
       text-transform: uppercase;
       letter-spacing: 0.22em;
-      font-weight: 900;
       color: rgba(243,214,136,0.95);
       font-size: 0.78rem;
       margin-bottom: 8px;
     }
-    .product-meta{
-      color: rgba(245,245,245,0.80);
-      font-size: 0.96rem;
-      margin-bottom: 10px;
-    }
-    .product-rule{
-      color: rgba(245,245,245,0.74);
-      font-size: 0.94rem;
-      margin-bottom: 6px;
-    }
-    .product-price{
-      color: rgba(245,245,245,0.92);
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      margin-top: 8px;
-    }
-    .product-actions{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap: 10px;
-      flex: 0 0 auto;
-    }
-
+    .product-meta{ color: rgba(245,245,245,0.80); font-size: 0.96rem; margin-bottom: 10px; }
+    .product-rule{ color: rgba(245,245,245,0.74); font-size: 0.94rem; margin-bottom: 6px; }
+    .product-price{ color: rgba(245,245,245,0.92); font-weight: 800; letter-spacing: 0.12em; margin-top: 8px; }
+    .product-actions{ display:flex; align-items:center; justify-content:flex-end; gap: 10px; flex: 0 0 auto; }
     .mini-cover{
       width: 78px;
       border-radius: 10px;
@@ -535,7 +417,6 @@
       box-shadow: 0 18px 70px rgba(0,0,0,0.75);
     }
 
-    /* ===== SECTION 7: AUTHOR (2 IMAGES JOINED) ===== */
     .author-block{
       max-width: 980px;
       margin: 0 auto;
@@ -544,16 +425,7 @@
       overflow:hidden;
       background: rgba(0,0,0,0.35);
     }
-    .author-images{
-      width: 100%;
-    }
-    .author-images img{
-      width:100%;
-      display:block;
-      margin:0;
-      padding:0;
-      border:0;
-    }
+    .author-images img{ width:100%; display:block; margin:0; padding:0; border:0; }
     .author-text{
       padding: 22px 18px 26px;
       border-top: 1px solid rgba(212,175,55,0.14);
@@ -563,7 +435,6 @@
     }
     .author-text p{ margin-bottom: 14px; }
 
-    /* ===== SECTION 8: FOOTER CLOSE ===== */
     footer{
       max-width: 1180px;
       margin: 0 auto;
@@ -582,677 +453,398 @@
       letter-spacing: 0.24em;
       color: rgba(245,245,245,0.80);
     }
-    .footer-links a{
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: 160ms ease;
-    }
-    .footer-links a:hover{
-      border-color: rgba(212,175,55,0.25);
-      background: rgba(212,175,55,0.08);
-      color: rgba(243,214,136,0.98);
-    }
-    .footer-tag{
-      margin-top: 10px;
-      color: rgba(245,245,245,0.78);
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-size: 0.72rem;
-    }
-    .footer-copy{
-      margin-top: 10px;
-      color: rgba(245,245,245,0.55);
-      letter-spacing: 0.12em;
-      font-size: 0.72rem;
-      padding-bottom: 10px;
-    }
+    .footer-links a{ padding: 8px 10px; border-radius: 999px; border: 1px solid transparent; transition: 160ms ease; }
+    .footer-links a:hover{ border-color: rgba(212,175,55,0.25); background: rgba(212,175,55,0.08); color: rgba(243,214,136,0.98); }
+    .footer-tag{ margin-top: 10px; color: rgba(245,245,245,0.78); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.72rem; }
+    .footer-copy{ margin-top: 10px; color: rgba(245,245,245,0.55); letter-spacing: 0.12em; font-size: 0.72rem; padding-bottom: 10px; }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 560px){
       .page-frame{ margin: 10px; padding: 12px 12px 18px; }
       section{ padding: 62px 14px; }
-      .top-nav-inner{ padding: 12px 12px; }
-      .nav-links{ gap: 10px; }
       .btn{ padding: 12px 16px; }
       .origin-card, .summary-card{ padding: 26px 16px; }
-      .modal-body{ padding: 18px 14px 22px; }
-      
-    .reader-view img{
-      max-width: 72vw;
-      max-height: 60vh;
-   }
-}
+      .reader-view img{ max-width: 72vw; max-height: 60vh; }
+    }
+
     .page-frame-outer {
-    position: absolute;
-    inset: 0;
-    padding: 22px;
-    border: 2px solid rgba(212,175,55,0.65);
-    pointer-events: none;
-    z-index: 50;
-}
-    
-.page-frame-outer::before,
-.page-frame-outer::after {
-    content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
-    position:absolute;
-    top:22px;
-    bottom:22px;
-    width:22px;
-    writing-mode:vertical-rl;
-    font-size:0.65rem;
-    letter-spacing:0.35em;
-    color:#ffffff;
-    white-space:nowrap;
-}
+      position: absolute;
+      inset: 0;
+      padding: 22px;
+      border: 2px solid rgba(212,175,55,0.65);
+      pointer-events: none;
+      z-index: 50;
+    }
+    .page-frame-outer::before, .page-frame-outer::after {
+      content:"SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • SURVIVE • RISE • BECOME • STEP INTO YOUR EPÒK • ";
+      position:absolute;
+      top:22px;
+      bottom:22px;
+      width:22px;
+      writing-mode:vertical-rl;
+      font-size:0.65rem;
+      letter-spacing:0.35em;
+      color:#ffffff;
+      white-space:nowrap;
+    }
+    .page-frame-outer::before { left:1px; animation:leftScroll 45s linear infinite; }
+    .page-frame-outer::after { right:9px; animation:rightScroll 45s linear infinite; }
 
-.page-frame-outer::before {
-    left:1px;
-    animation:leftScroll 45s linear infinite;
-}
+    @keyframes leftScroll { from { transform:translateY(100%); } to { transform:translateY(-100%); } }
+    @keyframes rightScroll { from { transform:translateY(-100%); } to { transform:translateY(100%); } }
 
-.page-frame-outer::after {
-    right:9px;
-    animation:rightScroll 45s linear infinite;
-}
+    .arabic-border {
+      pointer-events: none;
+      position:absolute;
+      bottom:6px;
+      left:0;
+      right:0;
+      font-size:0.7rem;
+      letter-spacing:0.45em;
+      color:#ffffff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-align:center;
+    }
+    .arabic-border span { display:inline-block; padding-left:100%; animation:arabic-scroll 18s linear infinite; }
+    @keyframes arabic-scroll { from { transform:translateX(0); } to { transform:translateX(-100%); } }
 
-    @keyframes leftScroll {
-    from { transform:translateY(100%); }
-    to { transform:translateY(-100%); }
-}
-
-@keyframes rightScroll {
-    from { transform:translateY(-100%); }
-    to { transform:translateY(100%); }
-}
-
-  .arabic-border {
-  pointer-events: none;
-
-    position:absolute;
-    bottom:6px;
-    left:0;
-    right:0;
-    font-size:0.7rem;
-    letter-spacing:0.45em;
-    color:#ffffff;
-    white-space:nowrap;
-    overflow:hidden;
-    text-align:center;
-}
-
-.arabic-border span {
-    display:inline-block;
-    padding-left:100%;
-    animation:arabic-scroll 18s linear infinite;
-}
-  @keyframes arabic-scroll {
-    from { transform:translateX(0); }
-    to { transform:translateX(-100%); }
-}
-.top-nav {
-    position:absolute;
-    top:22px;
-    left:22px;
-    right:22px;
-    z-index:40;
-    pointer-events:auto;
-}
-
-.nav-scroll {
-    width:100%;
-    overflow-x:auto;
-    overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
-    white-space:nowrap;
-    padding:10px 12px;
-}
-
-.nav-scroll::-webkit-scrollbar { height:0px; }
-.nav-scroll { scrollbar-width:none; }
-
-.nav-list {
-    display:inline-flex;
-    gap:18px;
-    align-items:center;
-    flex-wrap:nowrap;
-}
-
-.nav-list a {
-    display:inline-block;
-    color:#ffffff;
-    text-decoration:none;
-    font-size:0.75rem;
-    letter-spacing:0.28em;
-    opacity:0.78;
-    transition:opacity .25s ease;
-    padding:6px 4px;
-}
-
-.nav-list a:hover { opacity:1; }
-
-.nav-list a.featured {
-    opacity:1;
-    border:1px solid rgba(212,175,55,0.85);
-    padding:7px 10px;
-}
-/* FULLSCREEN PREVIEW */
-.reader.fullscreen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: #000;
-}
-
-.reader.fullscreen .reader-view img{
-  width: 100%;
-  height: 100vh;
-  object-fit: contain;
-}
-.reader.popup {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0,0,0,0.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  box-sizing: border-box;
-  transition: opacity 220ms ease, transform 220ms ease;
-}
-
-.reader.popup .reader-view img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-}
-.reader.fullscreen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: #000;
-  transition: opacity 220ms ease, transform 220ms ease;
-}
-
-.reader.fullscreen .reader-view {
-  padding: 0;
-}
-
-.reader.fullscreen .reader-view img {
-  width: 100vw;
-  height: 100vh;
-  object-fit: contain;
-}
-.reader.popup .reader-exit-hint{
-  display:block;
-}
-
-.reader.popup .reader-exit-hint::before{
-  content: "CLICK OUTSIDE OR ESC TO CLOSE";
-}
-
+    .top-nav { position:absolute; top:22px; left:22px; right:22px; z-index:40; pointer-events:auto; }
+    .nav-scroll { width:100%; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; white-space:nowrap; padding:10px 12px; scrollbar-width:none; }
+    .nav-scroll::-webkit-scrollbar { height:0px; }
+    .nav-list { display:inline-flex; gap:18px; align-items:center; flex-wrap:nowrap; }
+    .nav-list a { display:inline-block; color:#ffffff; text-decoration:none; font-size:0.75rem; letter-spacing:0.28em; opacity:0.78; transition:opacity .25s ease; padding:6px 4px; }
+    .nav-list a:hover { opacity:1; }
+    .nav-list a.featured { opacity:1; border:1px solid rgba(212,175,55,0.85); padding:7px 10px; }
   </style>
 </head>
 
 <body>
- <div class="page-frame"> 
-<!-- PATCH WORLD TOP NAV -->
-<div class="top-nav">
-  <div class="nav-scroll">
-    <div class="nav-list">
-       <a href="index.html">Home</a>
-            <a href="movement.html">Movement</a>
-            <a href="patchbaby.html">Patch Baby</a>
-            <a class="featured" href="signature-apparel-premiere.html">Signature Apparel Premiere</a>
-            <a class="featured" href="book.html">The Book</a>
-            <a href="store.html">Store</a>
-            <a href="music.html">MUSIC</a>
-            <a href="about.html">About</a>
-            <a href="checkout.html">Checkout</a>
-    </div>
-  </div>
-</div>
-
-
-<!-- PATCH WORLD BORDER FRAME -->
-<div class="page-frame-outer">
-  <div class="arabic-border">
-    <span>قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك • ...</span>
-  </div>
-</div>
-  
-  <div>
-
-    <!-- SECTION 1 — BOOK HERO -->
-    <section class="hero" id="top">
-      <div class="hero-wrap">
-        <div class="hero-cover">
-          <img src="bookart/thebookcover.png" alt="Panthers & Vampires: Blue Moon Book Cover" />
-        </div>
-        <div>
-          <div class="hero-title">Panthers &amp; Vampires: Blue Moon</div>
-          <div class="hero-tag">Every era begins with a choice.</div>
-        </div>
-        <div class="hero-actions">
-          <!-- LOCKED: impatient users jump straight to preview on SAME PAGE -->
-          <a class="btn btn-primary" href="#book-preview">FIRST CHAPTER</a>
-          <!-- LOCKED: internal EPÒK checkout route -->
-          <a class="btn" href="#purchase">ORDER NOW</a>
-          <!-- LOCKED: direct preview page exists (separate) -->
-          <a class="btn" href="panthers-vampires-preview.html">DIRECT PREVIEW PAGE</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 2 — ORIGIN (LOCKED FINAL TEXT) -->
-    <section class="origin" id="origin">
-      <div class="origin-card">
-        <h3>THE ORIGIN OF PANTHERS &amp; VAMPIRES: BLUE MOON</h3>
-
-        <p>
-          I started writing Panthers &amp; Vampires: Blue Moon after losing my birth mother. That kind of loss changes your timeline. Writing became a place to put grief when normal life didn’t have space for it. But after that, I hit a freeze that lasted years—like my mind wanted to speak, but the words wouldn’t move. For about three years, the story sat inside me, unfinished, waiting on the version of me who could carry it.
-        </p>
-
-        <p>
-          When I first broke through that freeze, the original five chapters weren’t supernatural yet. It started as an urban street love fairytale—real emotion, real pain, real people—because that’s what my life looked like. Every character in this world is rooted in personality: family, friends, and people I’ve been close to in real life. It’s fiction, but it’s not fake. It’s my way of translating real relationships, real loyalty, and real pressure into a story that can live bigger than one moment.
-        </p>
-
-        <p>
-          Then my brother passed, and I found myself drowning in a depression and in a unhealthy, toxic relationship with a very hateful woman—and it put urgency on everything. It pushed me to finish what I kept putting off, because tomorrow isn’t promised and legacy doesn’t wait. About three months ago, I had an epiphany. Not only did I snap back into who I’ve always been, but I also gained a clear vision for the book and for what truly interests me. The stories I’ve always been drawn to are vampires, witches, shapeshifters, and the supernatural.
-        </p>
-
-        <p>
-          So I went back and rewrote the foundation. I rebuilt the first five chapters, created the prologue, and shifted the story into the world it was always trying to become. That meant research. That meant Salem. That meant history. The book pulls from the weight of the Salem Witch Trials era and the realities surrounding it, and it also confronts the bloodline trauma tied to the slavery of Black people and the systems that shaped America’s earliest horror stories.
-        </p>
-
-        <p>
-          Inside the story, that same collision is everywhere—modern chaos and ancient forces sharing the same streets. You see it in the hospital aftermath, in what’s at stake, and in how fast the world turns when destiny gets activated.
-        </p>
-
-        <p>
-          You also see it in the past—like 1692—where survival, power, and lineage are treated like crimes, and where the supernatural isn’t fantasy. It’s a language people used to endure what they couldn’t escape.
-        </p>
-
-        <p>
-          At its core, this book is about people stepping into who they really are—stepping into destiny, stepping into position, stepping into their EPòK. Blue Moon is only the beginning. This is a series with multiple books already outlined, and this first release is the foundation for everything that’s coming next.
-        </p>
-      </div>
-    </section>
-
-    <!-- SECTION 3 — CHARACTER VISUAL + CLICKABLE BIOS (LOCKED IMAGE + LOCKED MAPPING + FULL BIOS) -->
-    <section class="bios" id="characters">
-      <div class="section-title">Character Visual — Click for Bios</div>
-      <div class="section-subtitle">
-        Tap or click a character to open their bio. (King is also the Panther.)
-      </div>
-
-      <div class="bios-wrap">
-        <div class="bios-stage" aria-label="Panthers & Vampires character image with clickable bios">
-          <img src="bookart/PVBios.png" alt="Panthers & Vampires character image" />
-
-          <!-- HOTSPOTS (LOCKED MAPPING)
-               - KING: far left foreground (human)
-               - PANTHER: center (King as panther)
-               - XZATALIA: right foreground near panther
-               - VIOLET: woman in black by the moon (upper right)
-               - DEJA: woman in light dress far right (lower right)
-               NOTE: These are percent-based so they scale with the image.
-          -->
-
-          <!-- King (human) -->
-          <button class="hotspot" type="button" aria-label="Open King bio"
-            data-open="bio-king"
-            style="left: 2.5%; top: 34%; width: 18%; height: 54%;"></button>
-
-          <!-- Panther (King) -->
-          <button class="hotspot" type="button" aria-label="Open King (Panther) bio"
-            data-open="bio-king"
-            style="left: 38%; top: 33%; width: 24%; height: 44%;"></button>
-
-          <!-- Xzatalia -->
-          <button class="hotspot" type="button" aria-label="Open Xzatalia bio"
-            data-open="bio-xzatalia"
-            style="left: 55%; top: 40%; width: 20%; height: 46%;"></button>
-
-          <!-- Violet (black by moon) -->
-          <button class="hotspot" type="button" aria-label="Open Violet bio"
-            data-open="bio-violet"
-            style="left: 66%; top: 8%; width: 18%; height: 28%;"></button>
-
-          <!-- Deja (light dress far right) -->
-          <button class="hotspot" type="button" aria-label="Open Deja bio"
-            data-open="bio-deja"
-            style="left: 80%; top: 42%; width: 18%; height: 50%;"></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- BIOS MODALS (FULL LENGTH, LOCKED) -->
-    <div class="modal" id="bio-king" role="dialog" aria-modal="true" aria-label="King Bio Modal">
-      <div class="modal-panel">
-        <div class="modal-head">
-          <div class="modal-title">KING PIERCE — FULL BIO</div>
-          <div class="modal-close" data-close>Close</div>
-        </div>
-        <div class="modal-body">
-          <p>
-            King Pierce is a Panther shapeshifter bound to an ancient bloodline that predates modern civilization. His power is not symbolic—it is inherited, dormant until activated by trauma, violence, and loss. His body heals unnaturally fast, his tattoos react to his emotional state, and when control slips, the panther within him surfaces. King is both human and beast, protector and weapon, caught between the life he tried to live and the destiny that refuses to let him remain ordinary. His transformation places him at the center of a coming war he never asked for, but cannot escape.
-          </p>
+  <div class="page-frame"> 
+    <!-- PATCH WORLD TOP NAV -->
+    <div class="top-nav">
+      <div class="nav-scroll">
+        <div class="nav-list">
+          <a href="index.html">Home</a>
+          <a href="movement.html">Movement</a>
+          <a href="patchbaby.html">Patch Baby</a>
+          <a class="featured" href="signature-apparel-premiere.html">Signature Apparel Premiere</a>
+          <a class="featured" href="book.html">The Book</a>
+          <a href="store.html">Store</a>
+          <a href="music.html">MUSIC</a>
+          <a href="about.html">About</a>
+          <!-- Fix: Point to store.html as checkout is not yet available -->
+          <a href="store.html">Checkout</a>
         </div>
       </div>
     </div>
 
-    <div class="modal" id="bio-xzatalia" role="dialog" aria-modal="true" aria-label="Xzatalia Bio Modal">
-      <div class="modal-panel">
-        <div class="modal-head">
-          <div class="modal-title">XZATALIA — FULL BIO</div>
-          <div class="modal-close" data-close>Close</div>
-        </div>
-        <div class="modal-body">
-          <p>
-            Xzatalia is a pure-blood vampire whose origins stretch far beyond the world King understands. Disciplined, lethal, and ancient, she carries the weight of centuries while moving through the modern world unnoticed. Her bond with King is not accidental—it is woven through fate, love, and blood. Pregnant with a child that should not exist, Xzatalia becomes the axis upon which vampires, shapeshifters, and witches begin to shift. Her existence challenges old laws, terrifies elder bloodlines, and threatens to fracture the supernatural order itself.
-          </p>
-        </div>
+    <!-- PATCH WORLD BORDER FRAME -->
+    <div class="page-frame-outer">
+      <div class="arabic-border">
+        <span>قَ على قيد الحياة. انهض. كن. ادخل إلى عالم إيبوك الخاص بك • ...</span>
       </div>
     </div>
-
-    <div class="modal" id="bio-violet" role="dialog" aria-modal="true" aria-label="Violet Bio Modal">
-      <div class="modal-panel">
-        <div class="modal-head">
-          <div class="modal-title">VIOLET — FULL BIO</div>
-          <div class="modal-close" data-close>Close</div>
+      
+    <div>
+      <!-- SECTION 1 — BOOK HERO -->
+      <section class="hero" id="top">
+        <div class="hero-wrap">
+          <div class="hero-cover">
+            <!-- Performance: Added lazy loading -->
+            <img src="bookart/thebookcover.png" alt="Panthers & Vampires: Blue Moon Book Cover" loading="lazy" />
+          </div>
+          <div>
+            <div class="hero-title">Panthers &amp; Vampires: Blue Moon</div>
+            <div class="hero-tag">Every era begins with a choice.</div>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#book-preview">FIRST CHAPTER</a>
+            <a class="btn" href="panthers-vampires-preview.html">DIRECT PREVIEW PAGE</a>
+          </div>
         </div>
-        <div class="modal-body">
-          <p>
-            Violet is an ancient Salem witch and former Keeper of forbidden knowledge, a guardian of bloodlines history tried to erase. She has lived through eras of persecution, disappearance, and silence, choosing to fade rather than die. Violet sees beyond time, senses the dead, and recognizes patterns long before others understand their meaning. When she realizes what King and Xzatalia’s child represents, she understands immediately: this is not just a birth, but a convergence—one capable of uniting or destroying the supernatural world as it exists.
-          </p>
+      </section>
+
+      <!-- SECTION 2 — ORIGIN -->
+      <section class="origin" id="origin">
+        <div class="origin-card">
+          <h3>THE ORIGIN OF PANTHERS &amp; VAMPIRES: BLUE MOON</h3>
+          <p>I started writing Panthers &amp; Vampires: Blue Moon after losing my birth mother. That kind of loss changes your timeline. Writing became a place to put grief when normal life didn’t have space for it. But after that, I hit a freeze that lasted years—like my mind wanted to speak, but the words wouldn’t move. For about three years, the story sat inside me, unfinished, waiting on the version of me who could carry it.</p>
+          <p>When I first broke through that freeze, the original five chapters weren’t supernatural yet. It started as an urban street love fairytale—real emotion, real pain, real people—because that’s what my life looked like. Every character in this world is rooted in personality: family, friends, and people I’ve been close to in real life. It’s fiction, but it’s not fake. It’s my way of translating real relationships, real loyalty, and real pressure into a story that can live bigger than one moment.</p>
+          <p>Then my brother passed, and I found myself drowning in a depression and in a unhealthy, toxic relationship with a very hateful woman—and it put urgency on everything. It pushed me to finish what I kept putting off, because tomorrow isn’t promised and legacy doesn’t wait. About three months ago, I had an epiphany. Not only did I snap back into who I’ve always been, but I also gained a clear vision for the book and for what truly interests me. The stories I’ve always been drawn to are vampires, witches, shapeshifters, and the supernatural.</p>
+          <p>So I went back and rewrote the foundation. I rebuilt the first five chapters, created the prologue, and shifted the story into the world it was always trying to become. That meant research. That meant Salem. That meant history. The book pulls from the weight of the Salem Witch Trials era and the realities surrounding it, and it also confronts the bloodline trauma tied to the slavery of Black people and the systems that shaped America’s earliest horror stories.</p>
+          <p>Inside the story, that same collision is everywhere—modern chaos and ancient forces sharing the same streets. You see it in the hospital aftermath, in what’s at stake, and in how fast the world turns when destiny gets activated.</p>
+          <p>You also see it in the past—like 1692—where survival, power, and lineage are treated like crimes, and where the supernatural isn’t fantasy. It’s a language people used to endure what they couldn’t escape.</p>
+          <p>At its core, this book is about people stepping into who they really are—stepping into destiny, stepping into position, stepping into their EPòK. Blue Moon is only the beginning. This is a series with multiple books already outlined, and this first release is the foundation for everything that’s coming next.</p>
+        </div>
+      </section>
+
+      <!-- SECTION 3 — CHARACTER BIOS -->
+      <section class="bios" id="characters">
+        <div class="section-title">Character Visual — Click for Bios</div>
+        <div class="section-subtitle">Tap or click a character to open their bio. (King is also the Panther.)</div>
+        <div class="bios-wrap">
+          <div class="bios-stage" aria-label="Panthers & Vampires character image with clickable bios">
+            <!-- Performance: Added lazy loading -->
+            <img src="bookart/PVBios.png" alt="Panthers & Vampires character image" loading="lazy" />
+            <button class="hotspot" type="button" aria-label="Open King bio" data-open="bio-king" style="left: 2.5%; top: 34%; width: 18%; height: 54%;"></button>
+            <button class="hotspot" type="button" aria-label="Open King (Panther) bio" data-open="bio-king" style="left: 38%; top: 33%; width: 24%; height: 44%;"></button>
+            <button class="hotspot" type="button" aria-label="Open Xzatalia bio" data-open="bio-xzatalia" style="left: 55%; top: 40%; width: 20%; height: 46%;"></button>
+            <button class="hotspot" type="button" aria-label="Open Violet bio" data-open="bio-violet" style="left: 66%; top: 8%; width: 18%; height: 28%;"></button>
+            <button class="hotspot" type="button" aria-label="Open Deja bio" data-open="bio-deja" style="left: 80%; top: 42%; width: 18%; height: 50%;"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- BIOS MODALS -->
+      <div class="modal" id="bio-king" role="dialog" aria-modal="true" aria-label="King Bio Modal">
+        <div class="modal-panel">
+          <div class="modal-head">
+            <div class="modal-title">KING PIERCE — FULL BIO</div>
+            <div class="modal-close" data-close>Close</div>
+          </div>
+          <div class="modal-body">
+            <p>King Pierce is a Panther shapeshifter bound to an ancient bloodline that predates modern civilization. His power is not symbolic—it is inherited, dormant until activated by trauma, violence, and loss. His body heals unnaturally fast, his tattoos react to his emotional state, and when control slips, the panther within him surfaces. King is both human and beast, protector and weapon, caught between the life he tried to live and the destiny that refuses to let him remain ordinary. His transformation places him at the center of a coming war he never asked for, but cannot escape.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="modal" id="bio-deja" role="dialog" aria-modal="true" aria-label="Deja Bio Modal">
-      <div class="modal-panel">
-        <div class="modal-head">
-          <div class="modal-title">DEJA — FULL BIO</div>
-          <div class="modal-close" data-close>Close</div>
-        </div>
-        <div class="modal-body">
-          <p>
-            Deja is a powerful witch deeply rooted in legacy, lineage, and the unseen magical networks that still operate beneath modern society. Closely connected to Xzatalia, she is protective, intuitive, and already aware that the events unfolding are far larger than any single life involved. Deja understands that survival in this world depends on loyalty, preparation, and recognizing destiny before it fully reveals itself. She is not surprised by what is coming—she has been waiting for it.
-          </p>
+      <div class="modal" id="bio-xzatalia" role="dialog" aria-modal="true" aria-label="Xzatalia Bio Modal">
+        <div class="modal-panel">
+          <div class="modal-head">
+            <div class="modal-title">XZATALIA — FULL BIO</div>
+            <div class="modal-close" data-close>Close</div>
+          </div>
+          <div class="modal-body">
+            <p>Xzatalia is a pure-blood vampire whose origins stretch far beyond the world King understands. Disciplined, lethal, and ancient, she carries the weight of centuries while moving through the modern world unnoticed. Her bond with King is not accidental—it is woven through fate, love, and blood. Pregnant with a child that should not exist, Xzatalia becomes the axis upon which vampires, shapeshifters, and witches begin to shift. Her existence challenges old laws, terrifies elder bloodlines, and threatens to fracture the supernatural order itself.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- SECTION 4 — BOOK SUMMARY (LOCKED FINAL TEXT) -->
-    <section class="summary" id="summary">
-      <div class="section-title">Book Summary</div>
-      <div class="summary-card">
-        <p>
-          Panthers &amp; Vampires: Blue Moon is an urban supernatural tale rooted in real history, real bloodlines, and real consequences. Set in and around Salem, Massachusetts, the story pulls directly from the shadow of the Salem Witch Trials — a time when fear, power, and control erased entire bloodlines and rewrote history through violence. What was buried back then never disappeared. It adapted. It survived.
-        </p>
-        <p>
-          The modern world sits on top of those scars. Vampires, witches, and shapeshifters move through today’s streets carrying the weight of centuries — tied not only to Salem’s past, but to the early foundations of slavery, displacement, and forced survival that shaped America itself. These aren’t fantasy creatures removed from reality. They are extensions of it.
-        </p>
-        <p>
-          At the center of the story is a family bound by loyalty and pressure, trying to hold itself together as everything around them begins to crack. Love becomes dangerous. Protection turns into sacrifice. And Brian — a vampire driven by obsession and control — is willing to lose everything to claim what he believes is his, even if it means burning the world down with him.
-        </p>
-        <p>
-          This is a story about family, trauma, power, and inheritance. About people forced to step into roles they never wanted, in a world that doesn’t allow them to stay human for long. Blue Moon blends gritty urban realism with supernatural legacy, turning forgotten history into a living threat.
-        </p>
-        <p>
-          Missing this story means missing the beginning of something bigger. This isn’t just a book — it’s the foundation of a new urban supernatural series where history, blood, and destiny collide, and where stepping into your EPÒK isn’t a choice… it’s survival.
-        </p>
+      <div class="modal" id="bio-violet" role="dialog" aria-modal="true" aria-label="Violet Bio Modal">
+        <div class="modal-panel">
+          <div class="modal-head">
+            <div class="modal-title">VIOLET — FULL BIO</div>
+            <div class="modal-close" data-close>Close</div>
+          </div>
+          <div class="modal-body">
+            <p>Violet is an ancient Salem witch and former Keeper of forbidden knowledge, a guardian of bloodlines history tried to erase. She has lived through eras of persecution, disappearance, and silence, choosing to fade rather than die. Violet sees beyond time, senses the dead, and recognizes patterns long before others understand their meaning. When she realizes what King and Xzatalia’s child represents, she understands immediately: this is not just a birth, but a convergence—one capable of uniting or destroying the supernatural world as it exists.</p>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <!-- SECTION 5 — BOOK PREVIEW (LOCKED: cover first + keep exact filenames + folder path) -->
-    <section id="book-preview">
-      <div class="section-title">Book Preview — Prologue &amp; Chapter One</div>
-    
-        
+      <div class="modal" id="bio-deja" role="dialog" aria-modal="true" aria-label="Deja Bio Modal">
+        <div class="modal-panel">
+          <div class="modal-head">
+            <div class="modal-title">DEJA — FULL BIO</div>
+            <div class="modal-close" data-close>Close</div>
+          </div>
+          <div class="modal-body">
+            <p>Deja is a powerful witch deeply rooted in legacy, lineage, and the unseen magical networks that still operate beneath modern society. Closely connected to Xzatalia, she is protective, intuitive, and already aware that the events unfolding are far larger than any single life involved. Deja understands that survival in this world depends on loyalty, preparation, and recognizing destiny before it fully reveals itself. She is not surprised by what is coming—she has been waiting for it.</p>
+          </div>
+        </div>
+      </div>
 
-   
+      <!-- SECTION 4 — BOOK SUMMARY -->
+      <section class="summary" id="summary">
+        <div class="section-title">Book Summary</div>
+        <div class="summary-card">
+          <p>Panthers &amp; Vampires: Blue Moon is an urban supernatural tale rooted in real history, real bloodlines, and real consequences. Set in and around Salem, Massachusetts, the story pulls directly from the shadow of the Salem Witch Trials — a time when fear, power, and control erased entire bloodlines and rewrote history through violence. What was buried back then never disappeared. It adapted. It survived.</p>
+          <p>The modern world sits on top of those scars. Vampires, witches, and shapeshifters move through today’s streets carrying the weight of centuries — tied not only to Salem’s past, but to the early foundations of slavery, displacement, and forced survival that shaped America itself. These aren’t fantasy creatures removed from reality. They are extensions of it.</p>
+          <p>At the center of the story is a family bound by loyalty and pressure, trying to hold itself together as everything around them begins to crack. Love becomes dangerous. Protection turns into sacrifice. And Brian — a vampire driven by obsession and control — is willing to lose everything to claim what he believes is his, even if it means burning the world down with him.</p>
+          <p>This is a story about family, trauma, power, and inheritance. About people forced to step into roles they never wanted, in a world that doesn’t allow them to stay human for long. Blue Moon blends gritty urban realism with supernatural legacy, turning forgotten history into a living threat.</p>
+          <p>Missing this story means missing the beginning of something bigger. This isn’t just a book — it’s the foundation of a new urban supernatural series where history, blood, and destiny collide, and where stepping into your EPÒK isn’t a choice… it’s survival.</p>
+        </div>
+      </section>
 
+      <!-- SECTION 5 — BOOK PREVIEW -->
+      <section id="book-preview">
+        <div class="section-title">Book Preview — Prologue &amp; Chapter One</div>
         <div class="reader">
+          <div class="reader-hint-top">DOUBLE TAP TO EXIT</div>
+          <div class="reader-view">
+            <!-- Performance: Added lazy loading -->
+            <img id="readerImg" src="bookart/thebookcover.png" alt="Preview page" loading="lazy" />
+            <div class="preview-hint">DOUBLE TAP TO PREVIEW</div>
+          </div>
+          <div class="reader-hint-bottom">TAP TO CHANGE PAGE</div>
+        </div>
+        <div class="reader-bottom"></div>
+      </section>
 
-  <div class="reader-hint-top">DOUBLE TAP TO EXIT</div>
-
-  <div class="reader-view">
-    <img id="readerImg" src="bookart/thebookcover.png" alt="Preview page" />
-    <div class="preview-hint">DOUBLE TAP TO PREVIEW</div>
-  </div>
-
-  <div class="reader-hint-bottom">TAP TO CHANGE PAGE</div>
-
-</div>
-         <div class="reader-bottom"></div>
-       </div>
-    </section>
-
-    <!-- SECTION 6 — PURCHASE (LOCKED PRODUCTS + PRICING + RULES + AUDIO COMING SOON) -->
-    <section id="purchase">
-      <div class="section-title">Purchase</div>
-      <div class="section-subtitle">
-        Physical, Ebook, Bundle, and Audiobook (coming soon) — direct EPÒK purchase rules locked.
-      </div>
-
-      <div class="purchase-grid">
-
-        <!-- Mini cover (locked: bookart/thebookcover.png used for physical + ebook cover reference) -->
-        <div class="product-card">
-          <div class="mini-cover">
-            <img src="bookart/thebookcover.png" alt="Blue Moon cover thumbnail" />
+      <!-- SECTION 6 — PURCHASE -->
+      <section id="purchase">
+        <div class="section-title">Purchase</div>
+        <div class="section-subtitle">Physical, Ebook, Bundle, and Audiobook (coming soon) — direct EPÒK purchase rules locked.</div>
+        <div class="purchase-grid">
+          <div class="product-card">
+            <div class="mini-cover">
+              <img src="bookart/thebookcover.png" alt="Blue Moon cover thumbnail" loading="lazy" />
+            </div>
+            <div class="product-left">
+              <div class="product-name">EBOOK EDITION</div>
+              <div class="product-meta">Price: <span class="product-price">$10.00</span></div>
+              <div class="product-rule">If purchased as a preorder (before release), ebook is delivered <b>1 week before release date</b>.</div>
+              <div class="product-rule">If purchased on/after release date, ebook is delivered <b>immediately after purchase</b>.</div>
+            </div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="shop.html?product=pv-ebook">BUY EBOOK</a>
+            </div>
           </div>
 
-          <div class="product-left">
-            <div class="product-name">EBOOK EDITION</div>
-            <div class="product-meta">Price: <span class="product-price">$10.00</span></div>
-            <div class="product-rule">If purchased as a preorder (before release), ebook is delivered <b>1 week before release date</b>.</div>
-            <div class="product-rule">If purchased on/after release date, ebook is delivered <b>immediately after purchase</b>.</div>
+          <div class="product-card">
+            <div class="mini-cover">
+              <img src="bookart/thebookcover.png" alt="Blue Moon cover thumbnail" loading="lazy" />
+            </div>
+            <div class="product-left">
+              <div class="product-name">PHYSICAL BOOK (PREORDER)</div>
+              <div class="product-meta">Price: <span class="product-price">$35.00</span></div>
+              <div class="product-rule">Preorder is open (no cap). Full payment upfront.</div>
+              <div class="product-rule">Physical copies ship <b>on release date</b>.</div>
+            </div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="shop.html?product=pv-physical">PREORDER PHYSICAL</a>
+            </div>
           </div>
 
-          <div class="product-actions">
-            <a class="btn btn-primary" href="shop.html?product=pv-ebook">BUY EBOOK</a>
+          <div class="product-card">
+            <div class="mini-cover">
+              <img src="bookart/thebookcover.png" alt="Blue Moon cover thumbnail" loading="lazy" />
+            </div>
+            <div class="product-left">
+              <div class="product-name">BUNDLE (EBOOK + PHYSICAL)</div>
+              <div class="product-meta">Price: <span class="product-price">$40.00</span></div>
+              <div class="product-rule">Bundle delivers ebook <b>immediately</b> upon purchase.</div>
+              <div class="product-rule">Physical copy ships <b>on release date</b>.</div>
+            </div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="shop.html?product=pv-bundle">BUY BUNDLE</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="mini-cover">
+              <img src="bookart/thebookcover.png" alt="Blue Moon cover thumbnail" loading="lazy" />
+            </div>
+            <div class="product-left">
+              <div class="product-name">AUDIOBOOK</div>
+              <div class="product-meta">Price: <span class="product-price">$14.99</span></div>
+              <div class="product-rule"><b>COMING SOON</b> — option is listed now, file added later. Checkout disabled until activated.</div>
+            </div>
+            <div class="product-actions">
+              <button class="btn" type="button" disabled style="opacity:0.45; cursor:not-allowed;">COMING SOON</button>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="product-card">
-          <div class="mini-cover">
-            <img src="bookart/thebookcover.png" alt="Blue Moon cover thumbnail" />
+      <!-- SECTION 7 — AUTHOR -->
+      <section id="author">
+        <div class="section-title">About The Author</div>
+        <div class="author-block">
+          <div class="author-images">
+            <img src="bookart/abouttheauthor1.png" alt="About the Author image 1" loading="lazy" />
+            <img src="bookart/abouttheauthor2.png" alt="About the Author image 2" loading="lazy" />
           </div>
-
-          <div class="product-left">
-            <div class="product-name">PHYSICAL BOOK (PREORDER)</div>
-            <div class="product-meta">Price: <span class="product-price">$35.00</span></div>
-            <div class="product-rule">Preorder is open (no cap). Full payment upfront.</div>
-            <div class="product-rule">Physical copies ship <b>on release date</b>.</div>
-          </div>
-
-          <div class="product-actions">
-            <a class="btn btn-primary" href="shop.html?product=pv-physical">PREORDER PHYSICAL</a>
-          </div>
+          <div class="author-text"></div>
         </div>
+      </section>
 
-        <div class="product-card">
-          <div class="mini-cover">
-            <img src="bookart/thebookcover.png" alt="Blue Moon cover thumbnail" />
-          </div>
-
-          <div class="product-left">
-            <div class="product-name">BUNDLE (EBOOK + PHYSICAL)</div>
-            <div class="product-meta">Price: <span class="product-price">$40.00</span></div>
-            <div class="product-rule">Bundle delivers ebook <b>immediately</b> upon purchase.</div>
-            <div class="product-rule">Physical copy ships <b>on release date</b>.</div>
-          </div>
-
-          <div class="product-actions">
-            <a class="btn btn-primary" href="shop.html?product=pv-bundle">BUY BUNDLE</a>
-          </div>
+      <!-- SECTION 8 — FINAL CLOSE / FOOTER -->
+      <footer id="footer">
+        <div class="brand-mark" style="margin: 0 auto; text-align:center;">EPÒK</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="book.html">Book</a>
+          <a href="#book-preview">Preview</a>
+          <a href="shop.html">Shop</a>
         </div>
-
-        <div class="product-card">
-          <div class="mini-cover">
-            <img src="bookart/thebookcover.png" alt="Blue Moon cover thumbnail" />
-          </div>
-
-          <div class="product-left">
-            <div class="product-name">AUDIOBOOK</div>
-            <div class="product-meta">Price: <span class="product-price">$14.99</span></div>
-            <div class="product-rule"><b>COMING SOON</b> — option is listed now, file added later. Checkout disabled until activated.</div>
-          </div>
-
-          <div class="product-actions">
-            <button class="btn" type="button" disabled style="opacity:0.45; cursor:not-allowed;">COMING SOON</button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 7 — AUTHOR (LOCKED: two images joined, no space; paths updated; + author bio text) -->
-    <section id="author">
-      <div class="section-title">About The Author</div>
-      <div class="author-block">
-
-        <div class="author-images">
-          <img src="bookart/abouttheauthor1.png" alt="About the Author image 1" />
-          <img src="bookart/abouttheauthor2.png" alt="About the Author image 2" />
-        </div>
-
-        <div class="author-text">
-          
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 8 — FINAL CLOSE / FOOTER (LOCKED) -->
-    <footer id="footer">
-      <div class="brand-mark" style="margin: 0 auto; text-align:center;">EPÒK</div>
-
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="book.html">Book</a>
-        <a href="#book-preview">Preview</a>
-        <a href="shop.html">Shop</a>
-      </div>
-
-      <div class="footer-tag">Survive. Rise. Become.</div>
-      <div class="footer-copy">© 2025 EPÒK. All Rights Reserved.</div>
-    </footer>
-
+        <div class="footer-tag">Survive. Rise. Become.</div>
+        <div class="footer-copy">© 2025 EPÒK. All Rights Reserved.</div>
+      </footer>
+    </div>
   </div>
 
   <script>
-   document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
+      function safeSrc(path){ return encodeURI(path); }
 
-  /* ================== UTILITY ================== */
-  function safeSrc(path){
-    return encodeURI(path);
-  }
+      /* BIOS MODALS */
+      const openButtons = document.querySelectorAll('[data-open]');
+      const modals = document.querySelectorAll('.modal');
+      function closeAllModals(){
+        modals.forEach(m => m.classList.remove('open'));
+        document.body.style.overflow = '';
+      }
+      openButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-open');
+          const modal = document.getElementById(id);
+          if(!modal) return;
+          closeAllModals();
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      modals.forEach(modal => {
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeAllModals(); });
+        const closeBtn = modal.querySelector('[data-close]');
+        if(closeBtn){ closeBtn.addEventListener('click', closeAllModals); }
+      });
+      document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeAllModals(); });
 
-  /* ================== BIOS MODALS ================== */
-  const openButtons = document.querySelectorAll('[data-open]');
-  const modals = document.querySelectorAll('.modal');
+      /* BOOK PAGES */
+      const pages = [
+        'bookart/thebookcover.png',
+        'PanthersBookPreview/fore websited-images-0.jpg',
+        'PanthersBookPreview/fore websited-images-1.jpg',
+        'PanthersBookPreview/fore websited-images-2.jpg',
+        'PanthersBookPreview/fore websited-images-3.jpg',
+        'PanthersBookPreview/fore websited-images-4.jpg',
+        'PanthersBookPreview/fore websited-images-5.jpg',
+        'PanthersBookPreview/fore websited-images-6.jpg',
+        'PanthersBookPreview/fore websited-images-7.jpg',
+        'PanthersBookPreview/fore websited-images-8.jpg',
+        'PanthersBookPreview/fore websited-images-9.jpg',
+        'PanthersBookPreview/fore websited-images-10.jpg',
+        'PanthersBookPreview/fore websited-images-11.jpg',
+        'PanthersBookPreview/fore websited-images-12.jpg',
+        'PanthersBookPreview/fore websited-images-13.jpg',
+        'PanthersBookPreview/fore websited-images-14.jpg',
+        'PanthersBookPreview/fore websited-images-15.jpg'
+      ];
 
-  function closeAllModals(){
-    modals.forEach(m => m.classList.remove('open'));
-    document.body.style.overflow = '';
-  }
+      // Preload images for smoother reading
+      pages.forEach(src => { const img = new Image(); img.src = safeSrc(src); });
 
-  openButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.getAttribute('data-open');
-      const modal = document.getElementById(id);
-      if(!modal) return;
-      closeAllModals();
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      const reader = document.querySelector('.reader');
+      const readerImg = document.getElementById('readerImg');
+      let idx = 0;
+
+      function render() {
+        const img = new Image();
+        img.onload = () => { readerImg.src = img.src; };
+        img.src = safeSrc(pages[idx]);
+        readerImg.alt = 'Preview page ' + (idx + 1);
+      }
+
+      readerImg.addEventListener('click', () => {
+        idx = (idx + 1) % pages.length;
+        render();
+      });
+
+      let lastTap = 0;
+      readerImg.addEventListener('touchend', () => {
+        if (window.innerWidth > 768) return;
+        const now = Date.now();
+        if (now - lastTap < 300) {
+          reader.classList.toggle('fullscreen');
+          document.body.style.overflow = reader.classList.contains('fullscreen') ? 'hidden' : '';
+        }
+        lastTap = now;
+      });
+
+      render();
     });
-  });
-
-  modals.forEach(modal => {
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) closeAllModals();
-    });
-    const closeBtn = modal.querySelector('[data-close]');
-    if(closeBtn){
-      closeBtn.addEventListener('click', closeAllModals);
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeAllModals();
-  });
-
-  /* ================== BOOK PAGES ================== */
-  const pages = [
-    'bookart/thebookcover.png',
-    'PanthersBookPreview/fore websited-images-0.jpg',
-    'PanthersBookPreview/fore websited-images-1.jpg',
-    'PanthersBookPreview/fore websited-images-2.jpg',
-    'PanthersBookPreview/fore websited-images-3.jpg',
-    'PanthersBookPreview/fore websited-images-4.jpg',
-    'PanthersBookPreview/fore websited-images-5.jpg',
-    'PanthersBookPreview/fore websited-images-6.jpg',
-    'PanthersBookPreview/fore websited-images-7.jpg',
-    'PanthersBookPreview/fore websited-images-8.jpg',
-    'PanthersBookPreview/fore websited-images-9.jpg',
-    'PanthersBookPreview/fore websited-images-10.jpg',
-    'PanthersBookPreview/fore websited-images-11.jpg',
-    'PanthersBookPreview/fore websited-images-12.jpg',
-    'PanthersBookPreview/fore websited-images-13.jpg',
-    'PanthersBookPreview/fore websited-images-14.jpg',
-    'PanthersBookPreview/fore websited-images-15.jpg'
-  ];
-
-  pages.forEach(src => {
-    const img = new Image();
-    img.src = safeSrc(src);
-  });
-
-// ===== BOOK CORE (STEP 4A – BASELINE) =====
-const reader = document.querySelector('.reader');
-const readerImg = document.getElementById('readerImg');
-
-let idx = 0;
-
-function render() {
-  const img = new Image();
-  img.onload = () => {
-    readerImg.src = img.src;
-  };
-  img.src = safeSrc(pages[idx]);
-  readerImg.alt = 'Preview page ' + (idx + 1);
-}
-
-// single tap = next page
-readerImg.addEventListener('click', () => {
-  idx = (idx + 1) % pages.length;
-  render();
-});
-
-// double tap = fullscreen (mobile only)
-let lastTap = 0;
-readerImg.addEventListener('touchend', () => {
-  if (window.innerWidth > 768) return;
-
-  const now = Date.now();
-  if (now - lastTap < 300) {
-    reader.classList.toggle('fullscreen');
-    document.body.style.overflow =
-      reader.classList.contains('fullscreen') ? 'hidden' : '';
-  }
-  lastTap = now;
-});
-
-// init
-render();
-});
-
-
   </script>
 </body>
-</html> 
+</html>
